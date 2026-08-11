@@ -4,9 +4,8 @@ Aligned thresholds across both ML and statistical methods.
 """
 
 # Updated thresholds - more conservative and aligned
-CRITICAL_THRESHOLD_M = -5.0  # Decline > 5m over 12 months
-WATCH_THRESHOLD_M = -2.0     # Decline 2–5m over 12 months
-STABLE_THRESHOLD_M = 2.0     # Rise > 2m over 12 months = improving
+CRITICAL_THRESHOLD_M = -4.0  # Decline > 4m over 12 months
+WATCH_THRESHOLD_M = -1.0     # Decline 1–4m over 12 months
 
 
 def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
@@ -15,7 +14,7 @@ def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
 
     if change <= CRITICAL_THRESHOLD_M:
         return "Critical", (
-            f"Hydraulic head projected to drop {abs(change):.1f}m over the next 12 months. "
+            f"Water level projected to drop {abs(change):.1f}m over the next 12 months. "
             "Immediate action required: prioritize recharge structures, reduce abstraction, "
             "and increase monitoring frequency."
         )
@@ -24,16 +23,17 @@ def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
             f"Moderate decline projected ({abs(change):.1f}m over 12 months). "
             "Monitor closely and review local abstraction patterns."
         )
-    elif change >= STABLE_THRESHOLD_M:
-        return "Stable", (
-            f"Water levels improving (+{change:.1f}m projected over 12 months). "
-            "Continue current management practices."
-        )
     else:
-        return "Stable", (
-            f"No significant change projected ({change:+.1f}m over 12 months). "
-            "Continue regular monitoring."
-        )
+        if change > 0:
+            return "Stable", (
+                f"Water levels improving (+{change:.1f}m projected over 12 months). "
+                "Continue current management practices."
+            )
+        else:
+            return "Stable", (
+                f"No significant change projected ({change:+.1f}m over 12 months). "
+                "Continue regular monitoring."
+            )
 
 
 def caveat_for_zone(aquifer_zone: str) -> str | None:

@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+ENV/
+
+# Node.js
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env*.local
+
+# Database
+*.db
+*.sqlite
+*.mdb
+pgdata/
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large data files (optional - keep if needed for deployment)
+# GW_Data/
+# data/*.csv
+
+# Virtual environments
+etl_venv/
+
+# Build artifacts
+frontend/.next/
+frontend/out/
+backend/ml/artifacts/
+*.pyc

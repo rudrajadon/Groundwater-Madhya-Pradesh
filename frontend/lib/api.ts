@@ -7,8 +7,8 @@ export interface WellSummary {
   block?: string;
   aquifer_zone?: string;
   trend_label?: "Stable" | "Watch" | "Critical" | null;
-  geology_type?: "Basalt" | "Granite" | "Vindhyan" | "Unknown" | null;
-  aquifer_classification?: "Weathered" | "Fractured" | "Massive" | null;
+  geology_type?: "Basalt" | "Granite" | "Vindhyan" | "Unknown" | string | null;
+  aquifer_classification?: "Weathered" | "Fractured" | "Massive" | "Unknown" | string | null;
 }
 
 export interface ForecastPoint {

@@ -4,8 +4,9 @@ Aligned thresholds across both ML and statistical methods.
 """
 
 # Updated thresholds - more conservative and aligned
-CRITICAL_THRESHOLD_M = -5.0  # Decline of 5+ meters over 12 months
-WATCH_THRESHOLD_M = -1.0     # Decline of 1-5 meters over 12 months
+CRITICAL_THRESHOLD_M = -5.0  # Decline > 5m over 12 months
+WATCH_THRESHOLD_M = -2.0     # Decline 2–5m over 12 months
+STABLE_THRESHOLD_M = 2.0     # Rise > 2m over 12 months = improving
 
 
 def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
@@ -23,11 +24,16 @@ def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
             f"Moderate decline projected ({abs(change):.1f}m over 12 months). "
             "Monitor closely and review local abstraction patterns."
         )
+    elif change >= STABLE_THRESHOLD_M:
+        return "Stable", (
+            f"Water levels improving (+{change:.1f}m projected over 12 months). "
+            "Continue current management practices."
+        )
     else:
-        if change > 0.5:
-            return "Stable", f"Water levels improving (+{change:.1f}m projected). Continue current management."
-        else:
-            return "Stable", "No significant decline projected over the next 12 months."
+        return "Stable", (
+            f"No significant change projected ({change:+.1f}m over 12 months). "
+            "Continue regular monitoring."
+        )
 
 
 def caveat_for_zone(aquifer_zone: str) -> str | None:

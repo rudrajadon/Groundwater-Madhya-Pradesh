@@ -4,8 +4,8 @@ Aligned thresholds across both ML and statistical methods.
 """
 
 # Updated thresholds - more conservative and aligned
-CRITICAL_THRESHOLD_M = -2.0  # Decline of 2+ meters over 12 months
-WATCH_THRESHOLD_M = -0.5     # Decline of 0.5-2 meters over 12 months
+CRITICAL_THRESHOLD_M = -5.0  # Decline of 5+ meters over 12 months
+WATCH_THRESHOLD_M = -1.0     # Decline of 1-5 meters over 12 months
 
 
 def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:

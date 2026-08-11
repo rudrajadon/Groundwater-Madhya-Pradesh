@@ -69,3 +69,20 @@ frontend/.next/
 frontend/out/
 backend/ml/artifacts/
 *.pyc
+
+# ML artifacts — large binaries and data files
+ml/artifacts/*.pt
+ml/artifacts/*.pkl
+ml/artifacts/graph_cache.pkl
+data/*.pkl
+data/*.bak.csv
+data/training_data_prepared.csv
+data/rainfall_features.csv
+data/train_sequences.pkl
+data/test_sequences.pkl
+
+# Notebooks (large)
+*.ipynb
+
+# macOS
+.DS_Store

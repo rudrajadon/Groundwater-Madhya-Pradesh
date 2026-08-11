@@ -1,178 +1,275 @@
 """
-Serving-time inference wrapper. Loads the locked v3 model + fitted scalers
-and exposes predict_well() / predict_point() for the FastAPI backend.
+PGNN-LSTM inference wrapper for the FastAPI backend.
 
-MC-Dropout uncertainty: re-runs the forward pass N times with dropout left
-ON (model.train() mode restricted to dropout layers) and reports the spread
-— same technique prototyped in the notebook's Cell G, packaged here as a
-reusable function instead of one-off notebook code.
+Loaded once at startup by backend/app/main.py via:
+    from inference import ForecastModel
+    app.state.model = ForecastModel(artifact_dir)
+
+Public API (unchanged contract vs old inference.py):
+    model.predict_well(well_id, scaled_series, node_feat, adj, zone, scaler)
+    model.predict_point(lat, lon, zone, block, scaled_series, ...)
+    model.well_list   – list[str]  all trained well_ids
+    model.meta        – dict       from model_metadata.json
+    model._node_feat  – FloatTensor [N, 8]
+    model._adj        – FloatTensor [N, N]
 """
 import json
 import os
+import pickle
 import threading
 
 import numpy as np
 import torch
+import torch.nn as nn
 
-from model import PGNN_LSTM
-from preprocessing import HORIZON, SEQ_LEN, edge_weight
+SEQ_LEN = 24
+HORIZON = 12
+MC_SAMPLES = 20
 
-MC_SAMPLES = 30
 
+# ── model architecture (must stay in sync with ml/train.py) ──────────────────
+
+class GraphConv(nn.Module):
+    def __init__(self, in_f, out_f):
+        super().__init__()
+        self.W = nn.Linear(in_f, out_f, bias=True)
+        self.act = nn.ELU()
+
+    def forward(self, x, adj):
+        deg = adj.sum(1, keepdim=True).clamp(min=1e-6)
+        return self.act(self.W(torch.mm(adj / deg, x)))
+
+
+class GeolLSTM(nn.Module):
+    def __init__(self, in_f, hid, layers, drop):
+        super().__init__()
+        self.lstm = nn.LSTM(in_f, hid, layers, batch_first=True,
+                            dropout=drop if layers > 1 else 0.)
+        self.drop = nn.Dropout(drop)
+
+    def forward(self, x):
+        out, _ = self.lstm(x)
+        return self.drop(out)
+
+
+class PGNN_LSTM(nn.Module):
+    GCN_H = 24; LSTM_H = 48; LAYERS = 2; DROP = 0.2
+    SEQ_LEN = SEQ_LEN; HORIZON = HORIZON; N_FEAT = 8
+
+    def __init__(self):
+        super().__init__()
+        self.gcn1  = GraphConv(self.N_FEAT, self.GCN_H)
+        self.gcn2  = GraphConv(self.GCN_H,  self.GCN_H)
+        self.gnorm = nn.LayerNorm(self.GCN_H)
+        lin = 1 + self.GCN_H
+        self.lstm_B = GeolLSTM(lin, self.LSTM_H, self.LAYERS, self.DROP)
+        self.lstm_G = GeolLSTM(lin, self.LSTM_H, self.LAYERS, self.DROP)
+        self.lstm_V = GeolLSTM(lin, self.LSTM_H, self.LAYERS, self.DROP)
+        self.lstm_U = GeolLSTM(lin, self.LSTM_H, self.LAYERS, self.DROP)
+        self.attn  = nn.MultiheadAttention(self.LSTM_H, num_heads=4,
+                                            dropout=self.DROP, batch_first=True)
+        self.anorm = nn.LayerNorm(self.LSTM_H)
+        self.fc1   = nn.Linear(self.LSTM_H, self.LSTM_H // 2)
+        self.fc2   = nn.Linear(self.LSTM_H // 2, self.HORIZON)
+        self.drop  = nn.Dropout(self.DROP)
+        self.relu  = nn.ReLU()
+
+    def _lstm(self, geo):
+        return {'Basalt': self.lstm_B,
+                'Granite': self.lstm_G,
+                'Vindhyan': self.lstm_V}.get(geo, self.lstm_U)
+
+    def gcn_embed(self, nf, adj):
+        return self.gnorm(self.gcn2(self.gcn1(nf, adj), adj))
+
+    def forward_with_embed(self, wl, g_embed, wi, geo_list):
+        B  = wl.shape[0]
+        sp = g_embed[wi].unsqueeze(1).expand(-1, self.SEQ_LEN, -1)
+        x  = torch.cat([wl, sp], dim=-1)
+        out = torch.zeros(B, self.SEQ_LEN, self.LSTM_H, device=wl.device)
+        grp: dict = {}
+        for i, g in enumerate(geo_list):
+            grp.setdefault(g, []).append(i)
+        for g, idx in grp.items():
+            out[idx] = self._lstm(g)(x[idx])
+        a, _ = self.attn(out, out, out)
+        out  = self.anorm(out + a)
+        h    = out[:, -1, :]
+        return self.fc2(self.relu(self.fc1(self.drop(h))))
+
+    def forward(self, wl, nf, adj, wi, geo_list):
+        return self.forward_with_embed(wl, self.gcn_embed(nf, adj), wi, geo_list)
+
+
+# ── ForecastModel ─────────────────────────────────────────────────────────────
 
 class ForecastModel:
+    """
+    Loads trained PGNN-LSTM weights, graph cache, and per-well scalers.
+    Thread-safe: MC-dropout sampling uses a lock.
+    """
+
     def __init__(self, artifact_dir: str):
-        with open(os.path.join(artifact_dir, "model_metadata.json")) as f:
+        self._lock = threading.Lock()
+
+        # ── metadata ──────────────────────────────────────────────────────────
+        meta_path = os.path.join(artifact_dir, 'model_metadata.json')
+        with open(meta_path) as f:
             self.meta = json.load(f)
-        self.well_list = self.meta["well_list"]
 
-        # Load model
-        self.model = PGNN_LSTM(n_node_feat=8)
-        model_path = os.path.join(artifact_dir, os.path.basename(self.meta["artifact_path"]))
-        self.model.load_state_dict(torch.load(model_path, map_location="cpu"))
-        self.model.eval()
-        self._mc_lock = threading.Lock()
-        
-        # Load global scaler
-        scaler_path = os.path.join(artifact_dir, "scaler.joblib")
-        if os.path.exists(scaler_path):
-            import joblib
-            self.global_scaler = joblib.load(scaler_path)
-        else:
-            # Fallback: try old per-well scalers for backward compatibility
-            scalers_path = os.path.join(artifact_dir, "scalers.joblib")
-            if os.path.exists(scalers_path):
-                import joblib
-                self.global_scaler = None
-                self.scalers = joblib.load(scalers_path)
-            else:
-                self.global_scaler = None
-                self.scalers = {}
-        
-        # Load pre-built graph structure (node features + adjacency matrix)
-        graph_path = os.path.join(artifact_dir, "graph_structure.npz")
-        if os.path.exists(graph_path):
-            graph_data = np.load(graph_path, allow_pickle=True)
-            self._node_feat = torch.FloatTensor(graph_data['node_feats'])
-            self._adj = torch.FloatTensor(graph_data['adj'])
-            
-            # Rebuild aq_info dict
-            self._aq_info = {}
-            well_list_from_graph = graph_data['well_list']
-            aq_info_arr = graph_data['aq_info']
-            for well, info_dict in zip(well_list_from_graph, aq_info_arr):
-                self._aq_info[str(well)] = dict(info_dict)
-            
-            print(f"[ForecastModel] Loaded graph: {len(well_list_from_graph)} wells, "
-                  f"{self._node_feat.shape[1]} features, adj shape {self._adj.shape}")
-        else:
-            print(f"[ForecastModel] WARNING: No graph_structure.npz found - predictions will be poor!")
-            self._node_feat = None
-            self._adj = None
-            self._aq_info = {}
+        # ── model weights ─────────────────────────────────────────────────────
+        ckpt_path = os.path.join(artifact_dir, 'pgnn_lstm_best.pt')
+        self._model = PGNN_LSTM()
+        ckpt = torch.load(ckpt_path, map_location='cpu')
+        self._model.load_state_dict(ckpt['model_state'])
+        self._model.eval()
+        print(f'[ForecastModel] Loaded PGNN-LSTM from epoch {ckpt["epoch"]} '
+              f'(val_loss={ckpt["val_loss"]:.5f})')
 
-    def _forward_mc(self, x, node_feat, adj, well_idx, aq_cls, n_samples=MC_SAMPLES):
-        with self._mc_lock:
-            self.model.train()  # enables dropout for MC sampling
+        # ── graph ─────────────────────────────────────────────────────────────
+        graph_path = os.path.join(artifact_dir, 'graph_cache.pkl')
+        with open(graph_path, 'rb') as f:
+            gc = pickle.load(f)
+        self._adj       = gc['adj']        # FloatTensor [N, N]
+        self._node_feat = gc['node_feat']  # FloatTensor [N, 8]
+        self._well_to_idx = gc['well_to_idx']   # {well_id: int}
+        self._idx_to_well = {v: k for k, v in self._well_to_idx.items()}
+        print(f'[ForecastModel] Graph: {len(self._well_to_idx)} nodes')
+
+        # ── scalers ───────────────────────────────────────────────────────────
+        scalers_path = os.path.join(artifact_dir, 'scalers.pkl')
+        with open(scalers_path, 'rb') as f:
+            self._scalers = pickle.load(f)   # {well_id: MinMaxScaler}
+        print(f'[ForecastModel] Scalers: {len(self._scalers)} wells')
+
+        # Pre-compute GCN embedding (graph is static — never changes at serve time)
+        with torch.no_grad():
+            self._g_embed = self._model.gcn_embed(self._node_feat, self._adj)
+
+        # Public attributes expected by forecast.py router
+        self.well_list = list(self._well_to_idx.keys())
+        # global_scaler not used (per-well MinMaxScalers); set None for compat
+        self.global_scaler = None
+
+    # ── internal MC-dropout forward ───────────────────────────────────────────
+
+    def _mc_forward(self, x: torch.Tensor, g_embed: torch.Tensor,
+                    wi: torch.Tensor, geo_list: list, n: int = MC_SAMPLES):
+        """
+        Run n stochastic forward passes with dropout ON.
+        Returns (mean, std) both shape [batch, horizon] as numpy arrays.
+        """
+        with self._lock:
+            self._model.train()   # activates dropout
             preds = []
             with torch.no_grad():
-                for _ in range(n_samples):
-                    preds.append(self.model(x, node_feat, adj, well_idx, aq_cls).numpy())
-            self.model.eval()
-        preds = np.stack(preds)  # (n_samples, batch, horizon)
+                for _ in range(n):
+                    p = self._model.forward_with_embed(x, g_embed, wi, geo_list)
+                    preds.append(p.numpy())
+            self._model.eval()
+
+        preds = np.stack(preds)   # [n, batch, horizon]
         return preds.mean(axis=0), preds.std(axis=0)
 
-    def predict_well(self, well_id: str, recent_scaled_series: np.ndarray,
-                      node_feat: torch.Tensor, adj: torch.Tensor,
-                      aquifer_zone: str, scaler=None) -> dict:
-        """recent_scaled_series: last SEQ_LEN months, already StandardScaler-scaled
-        with the global scaler used at train time (pass via scaler arg, or uses
-        self.global_scaler if available)."""
-        if len(recent_scaled_series) != SEQ_LEN:
-            raise ValueError(f"Expected {SEQ_LEN} months of history, got {len(recent_scaled_series)}")
+    # ── public API ────────────────────────────────────────────────────────────
+
+    def predict_well(self, well_id: str,
+                     recent_scaled_series: np.ndarray,
+                     node_feat, adj,            # kept for API compat, ignored
+                     aquifer_zone: str,
+                     scaler=None) -> dict:
+        """
+        Forecast for a well that is in the training graph.
+
+        recent_scaled_series : 1-D array of length SEQ_LEN,
+                                already scaled with THIS well's MinMaxScaler.
+        scaler               : MinMaxScaler for inverse-transform.
+                                If None, falls back to self._scalers[well_id].
+        """
+        if well_id not in self._well_to_idx:
+            raise ValueError(f"Well '{well_id}' not in trained graph")
 
         if scaler is None:
-            scaler = self.global_scaler
-            if scaler is None:
-                # Fallback to per-well scaler for backward compatibility
-                scaler = self.scalers.get(well_id)
-                if scaler is None:
-                    raise ValueError(f"No scaler found for well {well_id}")
+            scaler = self._scalers.get(well_id)
+        if scaler is None:
+            raise ValueError(f"No scaler for well '{well_id}'")
 
-        wi = self.well_list.index(well_id) if well_id in self.well_list else 0
-        x = torch.FloatTensor(recent_scaled_series.reshape(1, SEQ_LEN, 1))
-        wib = torch.tensor([wi], dtype=torch.long)
+        wi  = torch.tensor([self._well_to_idx[well_id]], dtype=torch.long)
+        x   = torch.FloatTensor(recent_scaled_series.reshape(1, SEQ_LEN, 1))
+        geo = [aquifer_zone if aquifer_zone in ('Basalt','Granite','Vindhyan') else 'Unknown']
 
-        mean_scaled, std_scaled = self._forward_mc(x, node_feat, adj, wib, [aquifer_zone])
-        mean = scaler.inverse_transform(mean_scaled).flatten()
-        # For StandardScaler: std in original units = std_scaled * scaler.scale_
-        std = (std_scaled.flatten() * scaler.scale_[0])
+        mean_sc, std_sc = self._mc_forward(x, self._g_embed, wi, geo)
+
+        # Inverse-transform: MinMaxScaler expects shape [n, 1]
+        mean_m = scaler.inverse_transform(mean_sc.reshape(-1, 1)).flatten()
+        # std in original units = std_scaled / (scaler.data_range_ + ε)
+        scale  = float(scaler.data_range_[0]) if scaler.data_range_[0] > 0 else 1.0
+        std_m  = std_sc.flatten() * scale
 
         return {
-            "well_id": well_id,
-            "horizon_months": HORIZON,
-            "forecast_head_msl": [round(float(v), 2) for v in mean],
-            "uncertainty_std_m": [round(float(v), 2) for v in std],
+            'well_id':          well_id,
+            'horizon_months':   HORIZON,
+            'forecast_head_msl': [round(float(v), 2) for v in mean_m],
+            'uncertainty_std_m': [round(float(v), 2) for v in std_m],
         }
 
-    def predict_point(self, lat: float, lon: float, aquifer_zone: str,
-                      block: str, recent_scaled_series: np.ndarray,
-                      node_feat: torch.Tensor, adj: torch.Tensor,
-                      scaler, existing_coords: list, existing_zones: list,
+    def predict_point(self, lat: float, lon: float,
+                      aquifer_zone: str, block: str,
+                      recent_scaled_series: np.ndarray,
+                      node_feat, adj,
+                      scaler,
+                      existing_coords: list,
+                      existing_zones: list,
                       existing_blocks: list) -> dict:
-        """Forecast for an arbitrary GPS point not in the well graph.
-        Dynamically extends the adjacency matrix with the new point's edges
-        (Section 4.3/4.5 of the project plan).
-        
-        recent_scaled_series: already scaled with the global StandardScaler."""
-        if len(recent_scaled_series) != SEQ_LEN:
-            raise ValueError(f"Expected {SEQ_LEN} months of history, got {len(recent_scaled_series)}")
+        """
+        Forecast for an arbitrary GPS point not in the training graph.
+        Dynamically appends the new node to the graph and runs inference.
+        """
+        N = self._adj.shape[0]
 
-        if scaler is None:
-            scaler = self.global_scaler
+        # Build edge weights to all existing nodes using inverse-distance
+        new_coord = np.array([lat, lon])
+        import pandas as pd
+        wells_coords = np.array([[0, 0]] * N, dtype=np.float32)
+        for wid, idx in self._well_to_idx.items():
+            c = existing_coords[idx] if idx < len(existing_coords) else (lon, lat)
+            wells_coords[idx] = [c[1], c[0]]  # [lat, lon]
 
-        # Compute edge weights from new point to all existing wells
-        point_coord = (lon, lat)  # edge_weight uses (easting, northing) ~ (lon, lat)
-        new_edges = self.extend_graph_for_point(
-            point_coord, aquifer_zone, block,
-            existing_coords, existing_zones, existing_blocks
-        )
+        dists = np.linalg.norm(wells_coords - new_coord, axis=1)
+        edge_weights = (1.0 / (1.0 + dists / 1.0)).astype(np.float32)
 
-        # Build extended adjacency: add new node as last row/column
-        n = adj.shape[0]
-        ext_adj = torch.zeros(n + 1, n + 1)
-        ext_adj[:n, :n] = adj
-        edge_t = torch.FloatTensor(new_edges)
-        ext_adj[n, :n] = edge_t
-        ext_adj[:n, n] = edge_t  # symmetric
+        # Extend adjacency
+        ext_adj = torch.zeros(N + 1, N + 1)
+        ext_adj[:N, :N] = self._adj
+        ew = torch.FloatTensor(edge_weights)
+        ext_adj[N, :N] = ew
+        ext_adj[:N, N] = ew
 
-        # Extend node features: use median of existing features as placeholder
-        new_feat = node_feat.mean(dim=0, keepdim=True)
-        ext_node_feat = torch.cat([node_feat, new_feat], dim=0)
+        # Extend node features (use mean of existing nodes)
+        new_feat = self._node_feat.mean(dim=0, keepdim=True)
+        ext_nf   = torch.cat([self._node_feat, new_feat], dim=0)
 
-        # New point is at index n (last node)
-        wi = n
-        x = torch.FloatTensor(recent_scaled_series.reshape(1, SEQ_LEN, 1))
-        wib = torch.tensor([wi], dtype=torch.long)
+        # Recompute GCN embedding with extended graph
+        with torch.no_grad():
+            ext_embed = self._model.gcn_embed(ext_nf, ext_adj)
 
-        mean_scaled, std_scaled = self._forward_mc(x, ext_node_feat, ext_adj, wib, [aquifer_zone])
-        mean = scaler.inverse_transform(mean_scaled).flatten()
-        std = (std_scaled.flatten() * scaler.scale_[0])
+        wi  = torch.tensor([N], dtype=torch.long)
+        x   = torch.FloatTensor(recent_scaled_series.reshape(1, SEQ_LEN, 1))
+        geo = [aquifer_zone if aquifer_zone in ('Basalt', 'Granite', 'Vindhyan') else 'Unknown']
+
+        mean_sc, std_sc = self._mc_forward(x, ext_embed, wi, geo)
+
+        if scaler is not None:
+            mean_m = scaler.inverse_transform(mean_sc.reshape(-1, 1)).flatten()
+            scale  = float(scaler.data_range_[0]) if scaler.data_range_[0] > 0 else 1.0
+            std_m  = std_sc.flatten() * scale
+        else:
+            mean_m = mean_sc.flatten()
+            std_m  = std_sc.flatten()
 
         return {
-            "well_id": f"POINT_{lat:.4f}_{lon:.4f}",
-            "horizon_months": HORIZON,
-            "forecast_head_msl": [round(float(v), 2) for v in mean],
-            "uncertainty_std_m": [round(float(v), 2) for v in std],
+            'well_id':          f'POINT_{lat:.4f}_{lon:.4f}',
+            'horizon_months':   HORIZON,
+            'forecast_head_msl': [round(float(v), 2) for v in mean_m],
+            'uncertainty_std_m': [round(float(v), 2) for v in std_m],
         }
-
-    def extend_graph_for_point(self, point_coord, point_zone, point_block,
-                                existing_coords, existing_zones, existing_blocks):
-        """Build the extra row/column of the adjacency matrix for a new
-        lat/lon point not in well_list, using the exact same edge_weight
-        rule the model was trained with (preprocessing.edge_weight).
-        Returns a 1D array of edge weights to each existing node."""
-        return np.array([
-            edge_weight(point_coord, c, point_zone, z, point_block, b)
-            for c, z, b in zip(existing_coords, existing_zones, existing_blocks)
-        ])

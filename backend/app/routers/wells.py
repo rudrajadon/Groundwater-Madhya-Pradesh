@@ -14,14 +14,16 @@ def list_wells(db: Session = Depends(get_db)):
     and updated periodically by a background job. See docs/API_CONTRACT.md."""
     rows = db.execute(text("""
         SELECT well_id, ST_Y(geom::geometry) AS lat, ST_X(geom::geometry) AS lon,
-               block, aquifer_zone, trend_label
+               block, aquifer_zone, trend_label, geology_type, aquifer_classification
         FROM wells
         WHERE geom IS NOT NULL
     """)).mappings().all()
     return [
         WellSummary(well_id=r["well_id"], lat=r["lat"], lon=r["lon"],
                     block=r["block"], aquifer_zone=r["aquifer_zone"], 
-                    trend_label=r["trend_label"])
+                    trend_label=r["trend_label"],
+                    geology_type=r["geology_type"],
+                    aquifer_classification=r["aquifer_classification"])
         for r in rows
     ]
 

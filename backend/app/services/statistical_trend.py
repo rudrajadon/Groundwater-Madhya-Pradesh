@@ -28,18 +28,18 @@ def compute_statistical_trend(well_id: str, db: Session, months_lookback: int = 
     """
     # Get recent readings
     query = text("""
-        SELECT 
+        SELECT
             date,
             head_msl_m,
-            EXTRACT(EPOCH FROM date) / (365.25 * 24 * 3600) as year_decimal
+            EXTRACT(EPOCH FROM date::timestamp) / (365.25 * 24 * 3600) AS year_decimal
         FROM readings
         WHERE well_id = :wid
           AND head_msl_m IS NOT NULL
-          AND date >= CURRENT_DATE - INTERVAL ':months months'
+          AND date >= CURRENT_DATE - (:months * INTERVAL '1 month')
         ORDER BY date ASC
     """)
-    
-    rows = db.execute(query.bindparams(months=months_lookback), {"wid": well_id}).mappings().all()
+
+    rows = db.execute(query, {"wid": well_id, "months": months_lookback}).mappings().all()
     
     if len(rows) < 3:
         # Not enough data for trend analysis

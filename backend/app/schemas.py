@@ -8,6 +8,8 @@ class WellSummary(BaseModel):
     block: str | None = None
     aquifer_zone: str | None = None
     trend_label: str | None = None   # 'Stable' | 'Watch' | 'Critical'
+    geology_type: str | None = None  # 'Basalt' | 'Granite' | 'Vindhyan' | 'Unknown'
+    aquifer_classification: str | None = None  # 'Weathered' | 'Fractured' | 'Massive'
 
 
 class ForecastPoint(BaseModel):

@@ -16,7 +16,11 @@ async def lifespan(app: FastAPI):
     model_meta_path = os.path.join(model_dir, "model_metadata.json")
     if os.path.exists(model_meta_path):
         import sys
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "ml"))
+        # Resolve the ml/ directory relative to the artifact dir, not __file__,
+        # so this works both inside Docker (/app/ml) and locally (../ml).
+        ml_dir = os.path.abspath(os.path.join(model_dir, ".."))
+        if ml_dir not in sys.path:
+            sys.path.insert(0, ml_dir)
         from inference import ForecastModel
         
         app.state.model = ForecastModel(model_dir)

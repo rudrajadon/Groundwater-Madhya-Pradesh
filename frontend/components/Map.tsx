@@ -67,22 +67,57 @@ export default function GroundwaterMap({
             }}
           >
           <Popup>
-              <strong>{w.well_id}</strong>
-              <br />
-              {w.block}
-              {w.geology_type && w.geology_type !== 'Unknown' && (
-                <>
-                  <br />
-                  <span style={{ color: '#059669', fontWeight: 600 }}>
-                    🪨 {w.geology_type}
-                  </span>
-                  {w.aquifer_classification && w.aquifer_classification !== 'Unknown' && (
-                    <span style={{ color: '#6b7280', fontSize: '0.9em', marginLeft: '4px' }}>
-                      ({w.aquifer_classification})
+              <div style={{ minWidth: "160px", fontFamily: "system-ui, sans-serif" }}>
+                {/* Well ID */}
+                <div style={{ fontWeight: 700, fontSize: "14px", color: "#111827", marginBottom: "4px" }}>
+                  {w.well_id}
+                </div>
+
+                {/* Block */}
+                {w.block && (
+                  <div style={{ fontSize: "12px", color: "#6b7280", marginBottom: "8px" }}>
+                    📍 {w.block}
+                  </div>
+                )}
+
+                <hr style={{ border: "none", borderTop: "1px solid #e5e7eb", margin: "6px 0" }} />
+
+                {/* Geology */}
+                {w.geology_type && w.geology_type !== "Unknown" && (
+                  <div style={{ fontSize: "12px", marginBottom: "4px" }}>
+                    <span style={{ color: "#6b7280" }}>🪨 Rock: </span>
+                    <span style={{ fontWeight: 600, color: "#1d4ed8" }}>{w.geology_type}</span>
+                  </div>
+                )}
+
+                {/* Aquifer */}
+                {w.aquifer_classification && w.aquifer_classification !== "Unknown" && (
+                  <div style={{ fontSize: "12px", marginBottom: "4px" }}>
+                    <span style={{ color: "#6b7280" }}>💧 Aquifer: </span>
+                    <span style={{ fontWeight: 600, color: "#0369a1" }}>{w.aquifer_classification}</span>
+                  </div>
+                )}
+
+                {/* Trend */}
+                {w.trend_label && w.trend_label !== "Unknown" && (
+                  <div style={{ fontSize: "12px", marginTop: "6px" }}>
+                    <span style={{ color: "#6b7280" }}>📊 Trend: </span>
+                    <span style={{
+                      fontWeight: 700,
+                      color: w.trend_label === "Critical" ? "#dc2626"
+                           : w.trend_label === "Watch"    ? "#d97706"
+                           : "#16a34a"
+                    }}>
+                      {w.trend_label}
                     </span>
-                  )}
-                </>
-              )}
+                  </div>
+                )}
+
+                {/* Click hint */}
+                <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "8px", fontStyle: "italic" }}>
+                  Click marker for 12-month forecast
+                </div>
+              </div>
             </Popup>
           </CircleMarker>
         ))}

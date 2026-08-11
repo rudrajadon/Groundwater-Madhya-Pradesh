@@ -1139,27 +1139,6 @@ TKM099-OW,13.3,Granite fractured,grey,hard
 TKM100-OW,2.5,Topsoil,black,fine
 TKM100-OW,7.8,Granite highly weathered,greyish black,coarse
 TKM100-OW,9.45,Granite fractured,grey,hard
-PANNA-PZ-01,3.04,Clay,yellow,fine to medium
-PANNA-PZ-01,6.08,Clay with interbeds of sand,yellow,fine to medium
-PANNA-PZ-01,13.8,Sandstone,red,fine
-PANNA-PZ-01,30.0,Shale,red,fine
-PANNA-PZ-02,6.0,Clay,yellow,fine
-PANNA-PZ-02,9.0,Clay with interbeds of sand,yellow,medium
-PANNA-PZ-02,18.0,Clay,yellow,fine
-PANNA-PZ-02,23.5,Clay with interbeds of sand,yellow,medium
-PANNA-PZ-02,26.5,Sand,yellow,fine to medium
-PANNA-PZ-02,29.0,Sand,yellow,medium
-PANNA-PZ-03,1.5,Clay,yellow,fine
-PANNA-PZ-03,3.0,Shale,red,fine
-PANNA-PZ-03,4.5,Shale,grey,fine to medium
-PANNA-PZ-03,7.5,Sandstone,brown,fine to medium
-PANNA-PZ-03,9.0,Gravel,dull brown,medium to coarse
-PANNA-PZ-03,10.5,Shale,greyish black,fine to medium
-PANNA-PZ-03,15.0,Shale,brown,fine
-PANNA-PZ-03,16.5,Shale,light brown,fine
-PANNA-PZ-03,22.5,Shale,grey,fine
-PANNA-PZ-03,25.5,Shale,reddish brown,fine
-PANNA-PZ-03,30.0,Quartzite,dull brown,fine to medium
 SIND-001-PZ,2.664,B.C.soil,black,coarse to very coarse
 SIND-001-PZ,4.9,Clay with interbeds of sand,yellow,fine
 SIND-001-PZ,8.25,Basalt weathered,greyish black,hard
@@ -4441,3 +4420,235 @@ SJBP085-OW,6.0,Clay hard,greyish black,medium
 SJBP085-OW,8.0,Clay hard,greyish black,fine to medium
 SJBP085-OW,10.0,Clay with interbeds of sand,greyish black,fine to medium
 SJBP085-OW,11.35,Clay with interbeds of sand,greyish black,fine to medium
+PANNA003-OW,5.0,Granite highly weathered,brown,coarse
+PANNA004-OW,8.0,Topsoil,dull brown,coarse
+PANNA005-OW,10.7,Topsoil,brown,coarse to very coarse
+PANNA007-OW,13.75,Granite fractured,reddish brown,hard
+PANNA008-OW,9.0,Topsoil,dull brown,coarse to very coarse
+PANNA009-OW,12.0,Topsoil,dull brown,coarse to very coarse
+PANNA010-OW,21.8,Granite fractured,reddish brown,hard
+PANNA011-OW,13.35,Sandstone fractured,light brown,hard
+PANNA012-OW,6.0,Topsoil,dull brown,coarse to very coarse
+PANNA013-OW,4.0,Topsoil,brown,coarse to very coarse
+PANNA013-OW,10.45,Sandstone,light brown,hard
+PANNA014-OW,10.35,Sandstone,reddish brown,hard
+PANNA015-OW,9.0,Sandstone,reddish brown,hard
+PANNA016-OW,9.0,Topsoil,brown,coarse to very coarse
+PANNA018-OW,10.65,Sandstone fractured,reddish brown,hard
+PANNA019-OW,11.0,Sand,brown,coarse
+PANNA104-OW,3.0,Topsoil,dull brown,fine
+PANNA104-OW,9.35,Sandstone weathered/fractured,greyish black,fine to medium
+PANNA022-OW,6.5,Clay with thin gravel layer,black,fine to medium
+PANNA022-OW,8.7,Limestone cavernous,greyish black,fine
+PANNA023-OW,11.3,Shale fractured,grey,fine
+PANNA024-OW,6.0,Clay with interbeds of sand,dull brown,fine to medium
+PANNA024-OW,10.05,Limestone weathered,greyish black,fine
+PANNA025-OW,13.4,Shale,red,fine
+PANNA026-OW,3.0,Shale highly weathered,brown,fine
+PANNA026-OW,8.55,Shale weathered,red,fine
+PANNA028-OW,4.0,Shale highly weathered,brown,fine
+PANNA028-OW,18.5,Shale weathered/fractured,red,fine
+PANNA029-OW,13.6,Limestone,grey,fine
+PANNA030-OW,6.0,Topsoil,dull brown,fine
+PANNA030-OW,8.9,Limestone,grey,fine
+PANNA031-OW,12.55,Limestone,grey,fine
+PANNA033-OW,10.7,Shale,grey,fine
+PANNA034-OW,7.0,Topsoil,greyish black,fine
+PANNA034-OW,8.6,Limestone,grey,fine to medium
+PANNA037-OW,10.0,Topsoil,brown,fine
+PANNA037-OW,12.0,Shale,red,fine to medium
+PANNA038-OW,9.3,Shale,red,fine to medium
+PANNA039-OW,6.0,Topsoil,brown,fine
+PANNA040-OW,6.0,Topsoil,brown,fine
+PANNA040-OW,15.65,Shale,red,fine to medium
+PANNA045-OW,11.75,Shale fractured,red,fine to medium
+PANNA048-OW,4.0,Topsoil,dull brown,fine to medium
+PANNA048-OW,11.9,Sandstone,reddish brown,coarse
+PANNA049-OW,9.0,Sandstone,reddish brown,coarse
+PANNA050-OW,8.0,Topsoil,dull brown,fine to medium
+PANNA051-OW,17.0,Shale weathered/fractured,brown,fine
+PANNA051-OW,18.4,Shale,red,fine to medium
+PANNA052-OW,7.0,Topsoil,dull brown,fine to medium
+PANNA053-OW,10.0,Topsoil,black,coarse
+PANNA053-OW,11.4,Granite fractured,greyish black,hard
+PANNA054-OW,9.0,Topsoil,brown,coarse
+PANNA055-OW,9.0,Topsoil,dull brown,fine to medium
+PANNA055-OW,11.75,Granite,reddish brown,hard
+PANNA058-OW,9.0,Topsoil,greyish black,fine
+PANNA061-OW,6.0,Topsoil,light brown,fine
+PANNA064-OW,7.0,Topsoil,brown,fine to medium
+PANNA064-OW,7.85,Sandstone,light brown,medium to coarse
+PANNA066-OW,6.0,Topsoil,brown,fine to medium
+PANNA068-OW,13.0,Topsoil,dull brown,fine to medium
+PANNA068-OW,13.5,Sandstone fractured,light brown,medium to coarse
+PANNA069-OW,6.0,Topsoil,brown,coarse to very coarse
+PANNA077-OW,6.0,Topsoil,dull brown,fine
+PANNA081-OW,10.0,Topsoil,dull brown,fine to medium
+PANNA081-OW,11.4,Shale fractured,reddish brown,fine
+PANNA088-OW,4.0,Topsoil,light brown,
+PANNA088-OW,5.4,Sandstone,light brown,
+PANNA090-OW,4.0,Topsoil,brown,
+PANNA090-OW,11.45,Sandstone fractured,light brown,
+PANNA095-OW,2.0,Topsoil,dull brown,
+PANNA095-OW,8.0,Sandstone weathered,reddish brown,
+PANNA097-OW,3.0,Topsoil,dull brown,
+PANNA097-OW,9.35,Sandstone weathered/fractured,reddish brown,
+PANNA003-OW,10.2,Granite fractured,reddish brown,hard
+PANNA004-OW,9.8,Granite fractured,light brown,hard
+PANNA005-OW,11.7,Granite fractured,reddish brown,hard
+PANNA007-OW,13.0,Topsoil,dull brown,coarse to very coarse
+PANNA008-OW,10.4,Granite fractured,light brown,hard
+PANNA009-OW,12.9,Granite fractured,reddish brown,hard
+PANNA010-OW,20.0,Gravel with sand,light brown,coarse to very coarse
+PANNA011-OW,10.0,Topsoil,brown,coarse to very coarse
+PANNA012-OW,8.35,Sandstone fractured,light brown,hard
+PANNA014-OW,8.0,Topsoil,dull brown,coarse to very coarse
+PANNA015-OW,8.0,Topsoil,brown,coarse
+PANNA016-OW,11.6,Sandstone weathered,reddish brown,hard
+PANNA018-OW,9.0,Sand,dull brown,coarse
+PANNA019-OW,12.3,Sandstone,reddish brown,hard
+PANNA021-OW,9.0,Topsoil,greyish black,fine to medium
+PANNA021-OW,12.45,Shale weathered/fractured,dull brown,fine
+PANNA023-OW,4.0,Clay with thin gravel layer,greyish black,fine
+PANNA025-OW,11.0,Shale highly weathered,light brown,fine to medium
+PANNA029-OW,6.0,Topsoil,greyish black,fine to medium
+PANNA031-OW,5.0,Topsoil,greyish black,fine
+PANNA033-OW,8.0,Topsoil,greyish black,fine
+PANNA038-OW,3.0,Topsoil,brown,fine
+PANNA039-OW,10.3,Shale,red,fine to medium
+PANNA045-OW,2.0,Topsoil,brown,fine
+PANNA049-OW,3.0,Topsoil,dull brown,fine to medium
+PANNA050-OW,9.3,Sandstone,reddish brown,coarse
+PANNA052-OW,7.6,Gneiss weathered/fractured,greyish black,gravel
+PANNA054-OW,10.25,Granite,greyish black,hard
+PANNA058-OW,11.8,Shale,grey,fine to medium
+PANNA061-OW,12.45,Limestone,greyish black,fine to medium
+PANNA066-OW,8.7,Sandstone,dull brown,medium to coarse
+PANNA069-OW,13.2,Granite fractured,greyish black,hard
+PANNA077-OW,9.9,Limestone,greyish black,fine
+PANNA102-OW,6.0,Topsoil,dull brown,fine
+PANNA102-OW,7.0,Limestone,greyish black,fine to medium
+PANNA103-OW,6.0,Topsoil,dull brown,fine
+PANNA103-OW,8.0,Sandstone,greyish black,fine to medium
+PANNA103-OW,11.1,Granite fractured,light brown,fine to medium
+PANNA001A-OW,10.0,Topsoil,yellow,fine
+PANNA001A-OW,16.7,Granite weathered/fractured,light brown,fine to medium
+PANNA002A-OW,16.0,Topsoil,yellow,fine
+PANNA002A-OW,17.2,Granite highly weathered,light brown,fine to medium
+PANNA006A-OW,5.0,Topsoil,yellow,fine
+PANNA006A-OW,10.25,Shale weathered,grey,fine
+PANNA017A-OW,6.0,Topsoil,yellow,fine
+PANNA017A-OW,10.1,Quartzite weathered,light brown,fine
+PANNA022A-OW,5.0,Topsoil,yellow,fine
+PANNA022A-OW,9.0,Limestone weathered,grey,fine
+PANNA023A-OW,3.0,Topsoil,yellow,fine
+PANNA023A-OW,11.25,Shale weathered,grey,fine
+PANNA027A-OW,5.0,Topsoil,yellow,fine
+PANNA027A-OW,10.25,Sandstone fractured,light brown,fine
+PANNA032A-OW,7.5,Topsoil,yellow,fine
+PANNA032A-OW,16.15,Shale weathered,grey,fine to medium
+PANNA035A-OW,2.5,Topsoil,yellow,fine
+PANNA035A-OW,8.3,Shale weathered/fractured,reddish brown,fine to medium
+PANNA036A-OW,5.0,Topsoil,yellow,fine
+PANNA036A-OW,12.0,Shale weathered/fractured,brown,fine to medium
+PANNA037A-OW,9.0,Topsoil,yellow,fine
+PANNA037A-OW,11.1,Shale weathered/fractured,grey,fine to medium
+PANNA039A-OW,4.0,Topsoil,yellow,fine
+PANNA039A-OW,7.0,Shale weathered/fractured,grey,fine to medium
+PANNA020A-OW,7.0,Topsoil,yellow,fine
+PANNA020A-OW,8.4,Shale weathered,grey,fine to medium
+PANNA041A-OW,5.0,Topsoil,yellow,fine
+PANNA041A-OW,12.3,Shale weathered,grey,fine to medium
+PANNA042A-OW,3.5,Topsoil,yellow,fine
+PANNA042A-OW,9.8,Shale fractured,grey,fine to medium
+PANNA043A-OW,6.0,Topsoil,yellow,fine
+PANNA043A-OW,8.95,Shale weathered/fractured,brown,fine to medium
+PANNA044A-OW,5.0,Topsoil,yellow,fine
+PANNA044A-OW,5.6,Shale fractured,brown,fine to medium
+PANNA046A-OW,5.0,Topsoil,yellow,fine
+PANNA046A-OW,6.25,Sandstone fractured,brown,fine to medium
+PANNA047A-OW,4.0,Topsoil,yellow,fine
+PANNA047A-OW,7.05,Sandstone weathered,brown,fine to medium
+PANNA057A-OW,1.0,Topsoil,yellow,fine
+PANNA057A-OW,6.8,Limestone weathered,grey,fine to medium
+PANNA059A-OW,1.0,Topsoil,yellow,fine
+PANNA059A-OW,13.9,Limestone weathered,grey,fine to medium
+PANNA060A-OW,6.0,Topsoil,yellow,fine
+PANNA060A-OW,9.5,Shale weathered,grey,fine to medium
+PANNA062A-OW,4.5,Topsoil,yellow,fine
+PANNA062A-OW,7.75,Sandstone weathered,brown,fine to medium
+PANNA063A-OW,7.0,Topsoil,yellow,fine
+PANNA063A-OW,8.25,Sandstone weathered,brown,fine to medium
+PANNA065A-OW,4.0,Topsoil,yellow,fine
+PANNA065A-OW,8.2,Sandstone weathered,brown,fine to medium
+PANNA067A-OW,4.5,Topsoil,yellow,fine
+PANNA067A-OW,7.65,Sandstone weathered,brown,fine to medium
+PANNA071A-OW,8.0,Topsoil,yellow,fine
+PANNA071A-OW,9.0,Granite weathered,brown,fine to medium
+PANNA072A-OW,3.0,Topsoil,yellow,fine
+PANNA072A-OW,9.55,Granite weathered,Pink,fine to medium
+PANNA073A-OW,9.0,Topsoil,yellow,fine
+PANNA073A-OW,17.2,Granite weathered,Pink,fine to medium
+PANNA074A-OW,5.0,Topsoil,yellow,fine
+PANNA074A-OW,7.1,Granite weathered,Pink,fine to medium
+PANNA075A-OW,3.0,Topsoil,yellow,fine
+PANNA075A-OW,11.45,Sandstone weathered,brown,fine to medium
+PANNA076A-OW,9.0,Topsoil,yellow,fine
+PANNA076A-OW,10.55,Sandstone weathered,brown,fine to medium
+PANNA078A-OW,1.0,Topsoil,yellow,fine
+PANNA078A-OW,6.1,Shale weathered,brown,fine to medium
+PANNA079A-OW,12.0,Topsoil,yellow,fine
+PANNA079A-OW,16.6,Shale weathered,grey,fine to medium
+PANNA080A-OW,4.0,Topsoil,yellow,fine
+PANNA080A-OW,8.3,Shale weathered,grey,fine to medium
+PANNA083A-OW,7.0,Topsoil,yellow,fine
+PANNA083A-OW,9.6,Shale weathered,grey,fine to medium
+PANNA084A-OW,3.0,Topsoil,yellow,fine
+PANNA084A-OW,9.6,Shale weathered,grey,fine to medium
+PANNA085A-OW,5.0,Topsoil,yellow,fine
+PANNA085A-OW,6.3,Shale weathered,grey,fine to medium
+PANNA086A-OW,4.5,Sandstone weathered,brown,fine to medium
+PANNA086A-OW,2.0,Topsoil,yellow,fine
+PANNA087A-OW,3.0,Topsoil,yellow,fine
+PANNA087A-OW,10.0,Shale weathered,grey,fine to medium
+PANNA089A-OW,6.0,Topsoil,yellow,fine
+PANNA089A-OW,7.0,Shale weathered,brown,fine to medium
+PANNA091A-OW,1.0,Topsoil,yellow,fine
+PANNA091A-OW,7.8,Shale weathered,grey,fine to medium
+PANNA092A-OW,3.0,Topsoil,yellow,fine
+PANNA092A-OW,9.0,Shale weathered,grey,fine to medium
+PANNA093A-OW,2.0,Topsoil,yellow,fine
+PANNA093A-OW,4.85,Sandstone weathered,brown,fine to medium
+PANNA094A-OW,4.0,Topsoil,yellow,fine
+PANNA094A-OW,8.0,Sandstone weathered,light brown,fine to medium
+PANNA096A-OW,8.0,Topsoil,yellow,fine
+PANNA096A-OW,11.8,Shale weathered,light brown,fine to medium
+PANNA098A-OW,3.0,Topsoil,yellow,fine
+PANNA098A-OW,7.15,Sandstone weathered,grey,fine to medium
+PANNA099A-OW,7.0,Topsoil,yellow,fine
+PANNA099A-OW,8.9,Sandstone weathered,grey,fine to medium
+PANNA100A-OW,5.0,Topsoil,yellow,fine
+PANNA100A-OW,10.3,Shale weathered,grey,fine to medium
+PANNA082A-OW,3.0,Topsoil,yellow,fine
+PANNA082A-OW,10.1,Shale weathered,dull brown,fine to medium
+PANNA-PZ-01,3.04,Clay,yellow,fine to medium
+PANNA-PZ-01,6.08,Clay with interbeds of sand,yellow,fine to medium
+PANNA-PZ-01,13.8,Sandstone,red,fine
+PANNA-PZ-01,30.0,Shale,red,fine
+PANNA-PZ-02,6.0,Clay,yellow,fine
+PANNA-PZ-02,9.0,Clay with interbeds of sand,yellow,medium
+PANNA-PZ-02,18.0,Clay,yellow,fine
+PANNA-PZ-02,23.5,Clay with interbeds of sand,yellow,medium
+PANNA-PZ-02,26.5,Sand,yellow,fine to medium
+PANNA-PZ-02,29.0,Sand,yellow,medium
+PANNA-PZ-03,1.5,Clay,yellow,fine
+PANNA-PZ-03,3.0,Shale,red,fine
+PANNA-PZ-03,4.5,Shale,grey,fine to medium
+PANNA-PZ-03,7.5,Sandstone,brown,fine to medium
+PANNA-PZ-03,9.0,Gravel,dull brown,medium to coarse
+PANNA-PZ-03,10.5,Shale,greyish black,fine to medium
+PANNA-PZ-03,15.0,Shale,brown,fine
+PANNA-PZ-03,16.5,Shale,light brown,fine
+PANNA-PZ-03,22.5,Shale,grey,fine
+PANNA-PZ-03,25.5,Shale,reddish brown,fine
+PANNA-PZ-03,30.0,Quartzite,dull brown,fine to medium

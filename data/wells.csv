@@ -219,109 +219,109 @@ CHHAT09-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Sarwai,24.703333,79.5494
 CHHAT100-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Mankari,25.025833,79.791944,245.8,,,False,Granite,Unknown
 CHHAT101-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Niwari,24.9875,79.656389,278.48,,,False,Granite,Weathered
 CHHATO31-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Toriya,24.740556,79.994722,213.66,,,False,Granite,Weathered
-PANNA001A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Khora-sarvansi,25.018889,80.426111,157.0,,,False,Unknown,Unknown
-PANNA002A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Shahpura,24.951944,80.33,167.0,,,False,Unknown,Unknown
-PANNA003-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Harseni,24.975278,80.276389,165.06,,,False,Unknown,Unknown
-PANNA004-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Nayagaon,24.960556,80.382778,157.88,,,False,Unknown,Unknown
-PANNA005-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Dharmpur,24.9725,80.431944,145.3,,,False,Unknown,Unknown
-PANNA006A-OW,Observation Well,Panna,Gunour,Gunour,Shankargarh,24.384444,80.223333,336.0,,,False,Unknown,Unknown
-PANNA007-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Singhpur,24.881389,80.295,140.4,,,False,Unknown,Unknown
-PANNA008-OW,Observation Well,Panna,Panna,Panna,Ajaigarh,24.9,80.245278,152.47,,,False,Unknown,Unknown
-PANNA009-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Madhoganj,24.911111,80.266111,156.3,,,False,Unknown,Unknown
-PANNA010-OW,Observation Well,Panna,Panna,Panna,Hardi,24.93,80.354444,130.4,,,False,Unknown,Unknown
-PANNA011-OW,Observation Well,Panna,Panna,Panna,Jaruapur,24.703611,80.125833,363.99,,,False,Unknown,Unknown
-PANNA012-OW,Observation Well,Panna,Panna,Panna,Kaliyanpur,24.745556,80.244444,382.21,,,False,Unknown,Unknown
-PANNA013-OW,Observation Well,Panna,Panna,Panna,Udaki,24.764444,80.316944,356.67,,,False,Unknown,Unknown
-PANNA014-OW,Observation Well,Panna,Panna,Panna,Itwa Khas,24.786944,80.379444,342.0,,,False,Unknown,Unknown
-PANNA015-OW,Observation Well,Panna,Panna,Panna,Brijpur,24.811667,80.439167,345.41,,,False,Unknown,Unknown
-PANNA016-OW,Observation Well,Panna,Panna,Panna,Pahadi kheda,24.858889,80.523889,343.08,,,False,Unknown,Unknown
-PANNA017A-OW,Observation Well,Panna,Gunour,Gunour,Jaswantpura,24.506944,80.038889,328.0,,,False,Unknown,Unknown
-PANNA018-OW,Observation Well,Panna,Panna,Panna,Tara,24.522778,80.083333,324.07,,,False,Unknown,Unknown
-PANNA019-OW,Observation Well,Panna,Panna,Panna,Barach,24.543333,80.173056,318.2,,,False,Unknown,Unknown
-PANNA020A-OW,Observation Well,Panna,Panna,Panna,Kakrahati,24.561389,80.264167,331.0,,,False,Unknown,Unknown
-PANNA021-OW,Observation Well,Panna,Panna,Panna,Devndra nagar,24.615278,80.388333,326.9,,,False,Unknown,Unknown
-PANNA022A-OW,Observation Well,Panna,Panna,Panna,Jigdaha,24.591389,80.383333,346.0,,,False,Unknown,Unknown
-PANNA023A-OW,Observation Well,Panna,Panna,Panna,Phulwari,24.599444,80.4375,344.0,,,False,Unknown,Unknown
-PANNA024-OW,Observation Well,Panna,Panna,Panna,Tindunhai,24.529167,80.376389,342.94,,,False,Unknown,Unknown
-PANNA025-OW,Observation Well,Panna,Panna,Panna,Panna,24.707222,80.180556,349.99,,,False,Unknown,Unknown
-PANNA026-OW,Observation Well,Panna,Panna,Panna,Amanganj,24.926389,80.031667,306.22,,,False,Unknown,Unknown
-PANNA027A-OW,Observation Well,Panna,Gunour,Gunour,Siri,24.46,80.010833,319.0,,,False,Unknown,Unknown
-PANNA028-OW,Observation Well,Panna,Gunour,Gunour,Gunnour,24.461389,80.248889,362.02,,,False,Unknown,Unknown
-PANNA029-OW,Observation Well,Panna,Gunour,Gunour,Lohargaon,24.492778,80.319444,355.94,,,False,Unknown,Unknown
-PANNA030-OW,Observation Well,Panna,Gunour,Gunour,Jharkua,24.353889,88.044722,365.84,,,False,Unknown,Unknown
-PANNA031-OW,Observation Well,Panna,Gunour,Gunour,Mahewa,24.401389,80.131111,328.38,,,False,Unknown,Unknown
-PANNA032A-OW,Observation Well,Panna,Gunour,Gunour,Sathaniya,24.37,80.273611,333.0,,,False,Unknown,Unknown
-PANNA033-OW,Observation Well,Panna,Gunour,Gunour,Saleha,24.413056,80.400556,362.04,,,False,Unknown,Unknown
-PANNA034-OW,Observation Well,Panna,Pawai,Pawai,Deora,24.344444,79.971944,306.42,,,False,Unknown,Unknown
-PANNA035A-OW,Observation Well,Panna,Pawai,Pawai,Simariya,24.266944,79.896667,322.0,,,False,Unknown,Unknown
-PANNA036A-OW,Observation Well,Panna,Pawai,Pawai,Mudwari,24.341111,80.290833,334.0,,,False,Unknown,Unknown
-PANNA037A-OW,Observation Well,Panna,Pawai,Pawai,Padariya Kala,24.341111,80.194167,322.0,,,False,Unknown,Unknown
-PANNA037-OW,Observation Well,Panna,Shahnagar,Shahnagar,Maharajganj,34.133333,79.833333,319.43,,,False,Unknown,Unknown
-PANNA038-OW,Observation Well,Panna,Pawai,Pawai,Mohendra,24.190833,79.9575,336.0,,,False,Unknown,Unknown
-PANNA039A-OW,Observation Well,Panna,Pawai,Pawai,Rehuta,24.260556,80.052222,324.0,,,False,Unknown,Unknown
-PANNA039-OW,Observation Well,Panna,Pawai,Pawai,Hatkuri,24.238889,80.067222,320.8,,,False,Unknown,Unknown
-PANNA040-OW,Observation Well,Panna,Pawai,Pawai,Chomukha,24.323056,80.084167,312.29,,,False,Unknown,Unknown
-PANNA041A-OW,Observation Well,Panna,Pawai,Pawai,Karhi,24.285556,80.2025,332.0,,,False,Unknown,Unknown
-PANNA042A-OW,Observation Well,Panna,Pawai,Pawai,Itay,24.294444,80.267778,334.0,,,False,Unknown,Unknown
-PANNA043A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Baghwarkala,23.974722,79.918056,414.0,,,False,Unknown,Unknown
-PANNA044A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Takhori,23.988889,79.948889,420.0,,,False,Unknown,Unknown
-PANNA045-OW,Observation Well,Panna,Shahnagar,Shahnagar,Repura,23.899444,79.964722,412.02,,,False,Unknown,Unknown
-PANNA046A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Malghan,24.026389,80.060278,413.0,,,False,Unknown,Unknown
-PANNA047A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bori,24.039722,80.138889,410.0,,,False,Unknown,Unknown
-PANNA048-OW,Observation Well,Panna,Shahnagar,Shahnagar,Imliya,24.109722,80.218889,380.49,,,False,Unknown,Unknown
-PANNA049-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bisani,24.125278,80.285278,387.15,,,False,Unknown,Unknown
-PANNA050-OW,Observation Well,Panna,Shahnagar,Shahnagar,Shahnagar,23.989167,80.308889,370.79,,,False,Unknown,Unknown
-PANNA051-OW,Observation Well,Panna,Pawai,Pawai,Pawai,24.27,80.163333,316.4,,,False,Unknown,Unknown
-PANNA052-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Krishnpur,24.742778,80.258333,112.7,,,False,Unknown,Unknown
-PANNA053-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Deogaon,24.934722,80.313611,102.6,,,False,Unknown,Unknown
-PANNA054-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Kunwarpur,24.886667,80.190556,140.6,,,False,Unknown,Unknown
-PANNA055-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Bariyarpur,24.854444,80.1,155.6,,,False,Unknown,Unknown
-PANNA057A-OW,Observation Well,Panna,Gunour,Gunour,Pagra,24.561389,80.264167,331.0,,,False,Unknown,Unknown
-PANNA058-OW,Observation Well,Panna,Gunour,Gunour,Garokhar,24.418056,79.833333,306.1,,,False,Unknown,Unknown
-PANNA059A-OW,Observation Well,Panna,Gunour,Gunour,Ghatari,24.416667,80.076944,323.0,,,False,Unknown,Unknown
-PANNA060A-OW,Observation Well,Panna,Gunour,Gunour,Sahilwara,24.403056,80.281111,345.0,,,False,Unknown,Unknown
-PANNA061-OW,Observation Well,Panna,Gunour,Gunour,Bilgari,24.491111,80.213611,362.0,,,False,Unknown,Unknown
-PANNA062A-OW,Observation Well,Panna,Panna,Panna,Chopara-sakariya,24.604444,80.275,353.0,,,False,Unknown,Unknown
-PANNA063A-OW,Observation Well,Panna,Panna,Panna,Itwa Kala,24.544722,80.141389,324.0,,,False,Unknown,Unknown
-PANNA064-OW,Observation Well,Panna,Gunour,Gunour,Duwari,24.487222,80.056111,318.6,,,False,Unknown,Unknown
-PANNA065A-OW,Observation Well,Panna,Panna,Panna,Majhguon,24.647778,80.029722,382.0,,,False,Unknown,Unknown
-PANNA066-OW,Observation Well,Panna,Panna,Panna,Akola,24.630833,80.140556,460.8,,,False,Unknown,Unknown
-PANNA067A-OW,Observation Well,Panna,Panna,Panna,Janwar,24.654722,80.2025,432.0,,,False,Unknown,Unknown
-PANNA068-OW,Observation Well,Panna,Panna,Panna,Garipadriya,24.59,80.287222,230.4,,,False,Unknown,Unknown
-PANNA069-OW,Observation Well,Panna,Panna,Panna,Marla,24.735556,80.018056,216.0,,,False,Unknown,Unknown
-PANNA071A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Salaiya,24.103889,80.299722,202.0,,,False,Unknown,Unknown
-PANNA072A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Bhapatpur Deora,24.827222,80.1075,180.0,,,False,Unknown,Unknown
-PANNA073A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Chhateni,24.894167,80.35,394.0,,,False,Unknown,Unknown
-PANNA074A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Sinhai Aama Moad,24.913056,80.213611,172.0,,,False,Unknown,Unknown
-PANNA075A-OW,Observation Well,Panna,Pawai,Pawai,Sirsi Patna,24.385278,79.905556,307.0,,,False,Unknown,Unknown
-PANNA076A-OW,Observation Well,Panna,Panna,Panna,Jamunhai Khas,24.799444,80.314444,405.0,,,False,Unknown,Unknown
-PANNA077-OW,Observation Well,Panna,Gunour,Gunour,Kushedar,24.460833,80.325278,362.1,,,False,Unknown,Unknown
-PANNA078A-OW,Observation Well,Panna,Gunour,Gunour,Bandhur,24.398889,80.342778,334.0,,,False,Unknown,Unknown
-PANNA079A-OW,Observation Well,Panna,Gunour,Gunour,Patna Tamoli,24.385556,80.391667,349.0,,,False,Unknown,Unknown
-PANNA080A-OW,Observation Well,Panna,Pawai,Pawai,Danwara,24.200556,79.913889,334.0,,,False,Unknown,Unknown
-PANNA081-OW,Observation Well,Panna,Pawai,Pawai,Deori,24.2625,79.840833,310.28,,,False,Unknown,Unknown
-PANNA082A-OW,Observation Well,Panna,Pawai,Pawai,Tighra,24.289444,79.961667,312.0,,,False,Unknown,Unknown
-PANNA083A-OW,Observation Well,Panna,Pawai,Pawai,Semra Kala,24.218889,80.044722,343.0,,,False,Unknown,Unknown
-PANNA084A-OW,Observation Well,Panna,Pawai,Pawai,Banouli,24.166389,79.876389,332.0,,,False,Unknown,Unknown
-PANNA085A-OW,Observation Well,Panna,Pawai,Pawai,Patoree,24.253611,80.090556,336.0,,,False,Unknown,Unknown
-PANNA086A-OW,Observation Well,Panna,Pawai,Pawai,Jhanjhar,24.215,80.283333,414.0,,,False,Unknown,Unknown
-PANNA087A-OW,Observation Well,Panna,Pawai,Pawai,Krishangarh,24.308056,80.244444,338.0,,,False,Unknown,Unknown
-PANNA088-OW,Observation Well,Panna,Pawai,Pawai,Shikarpur,24.186111,80.251667,382.3,,,False,Unknown,Unknown
-PANNA089A-OW,Observation Well,Panna,Pawai,Pawai,Sunehi-jagdispura,24.291111,80.233056,334.0,,,False,Unknown,Unknown
-PANNA090-OW,Observation Well,Panna,Pawai,Pawai,Tikriya,24.143611,80.251667,383.6,,,False,Unknown,Unknown
-PANNA091A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Raiguan,24.097222,80.188056,409.0,,,False,Unknown,Unknown
-PANNA092A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bagrod,23.980833,79.969722,417.0,,,False,Unknown,Unknown
-PANNA093A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Hardua Sahasbahu,24.028611,79.991389,405.0,,,False,Unknown,Unknown
-PANNA094A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bilpura Siharan,24.079167,79.963889,406.0,,,False,Unknown,Unknown
-PANNA095-OW,Observation Well,Panna,Shahnagar,Shahnagar,Banjari  Chopra,24.103889,80.269722,384.15,,,False,Unknown,Unknown
-PANNA096A-OW,Observation Well,Panna,Pawai,Pawai,Sijahati,24.18,80.258333,375.0,,,False,Unknown,Unknown
-PANNA097-OW,Observation Well,Panna,Shahnagar,Shahnagar,Kachori,23.979444,80.333889,369.65,,,False,Unknown,Unknown
-PANNA098A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Thepa,24.0275,80.163056,405.0,,,False,Unknown,Unknown
-PANNA099A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Rohaniya,24.0425,80.333889,360.0,,,False,Unknown,Unknown
-PANNA100A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Shahpur Khurd,24.168889,80.308889,354.0,,,False,Unknown,Unknown
-PANNA102-OW,Observation Well,Panna,Panna,Panna,Piparwah,24.458611,80.042222,316.0,,,False,Unknown,Unknown
-PANNA103-OW,Observation Well,Panna,Gunour,Gunour,Bhamarha,24.451944,80.39,352.0,,,False,Unknown,Unknown
-PANNA104-OW,Observation Well,Panna,Shahnagar,Shahnagar,Kachori-new,23.979444,80.333889,369.65,,,False,Unknown,Unknown
+PANNA001A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Khora-sarvansi,25.018889,80.426111,157.0,,,False,Granite,Weathered
+PANNA002A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Shahpura,24.951944,80.33,167.0,,,False,Granite,Weathered
+PANNA003-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Harseni,24.975278,80.276389,165.06,,,False,Granite,Weathered
+PANNA004-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Nayagaon,24.960556,80.382778,157.88,,,False,Granite,Unknown
+PANNA005-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Dharmpur,24.9725,80.431944,145.3,,,False,Granite,Unknown
+PANNA006A-OW,Observation Well,Panna,Gunour,Gunour,Shankargarh,24.384444,80.223333,336.0,,,False,Vindhyan,Weathered
+PANNA007-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Singhpur,24.881389,80.295,140.4,,,False,Granite,Unknown
+PANNA008-OW,Observation Well,Panna,Panna,Panna,Ajaigarh,24.9,80.245278,152.47,,,False,Granite,Unknown
+PANNA009-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Madhoganj,24.911111,80.266111,156.3,,,False,Granite,Unknown
+PANNA010-OW,Observation Well,Panna,Panna,Panna,Hardi,24.93,80.354444,130.4,,,False,Granite,Unknown
+PANNA011-OW,Observation Well,Panna,Panna,Panna,Jaruapur,24.703611,80.125833,363.99,,,False,Vindhyan,Unknown
+PANNA012-OW,Observation Well,Panna,Panna,Panna,Kaliyanpur,24.745556,80.244444,382.21,,,False,Vindhyan,Unknown
+PANNA013-OW,Observation Well,Panna,Panna,Panna,Udaki,24.764444,80.316944,356.67,,,False,Vindhyan,Unknown
+PANNA014-OW,Observation Well,Panna,Panna,Panna,Itwa Khas,24.786944,80.379444,342.0,,,False,Vindhyan,Unknown
+PANNA015-OW,Observation Well,Panna,Panna,Panna,Brijpur,24.811667,80.439167,345.41,,,False,Vindhyan,Unknown
+PANNA016-OW,Observation Well,Panna,Panna,Panna,Pahadi kheda,24.858889,80.523889,343.08,,,False,Vindhyan,Weathered
+PANNA017A-OW,Observation Well,Panna,Gunour,Gunour,Jaswantpura,24.506944,80.038889,328.0,,,False,Granite,Weathered
+PANNA018-OW,Observation Well,Panna,Panna,Panna,Tara,24.522778,80.083333,324.07,,,False,Vindhyan,Unknown
+PANNA019-OW,Observation Well,Panna,Panna,Panna,Barach,24.543333,80.173056,318.2,,,False,Vindhyan,Unknown
+PANNA020A-OW,Observation Well,Panna,Panna,Panna,Kakrahati,24.561389,80.264167,331.0,,,False,Vindhyan,Weathered
+PANNA021-OW,Observation Well,Panna,Panna,Panna,Devndra nagar,24.615278,80.388333,326.9,,,False,Vindhyan,Weathered
+PANNA022A-OW,Observation Well,Panna,Panna,Panna,Jigdaha,24.591389,80.383333,346.0,,,False,Vindhyan,Weathered
+PANNA023A-OW,Observation Well,Panna,Panna,Panna,Phulwari,24.599444,80.4375,344.0,,,False,Vindhyan,Weathered
+PANNA024-OW,Observation Well,Panna,Panna,Panna,Tindunhai,24.529167,80.376389,342.94,,,False,Vindhyan,Weathered
+PANNA025-OW,Observation Well,Panna,Panna,Panna,Panna,24.707222,80.180556,349.99,,,False,Vindhyan,Weathered
+PANNA026-OW,Observation Well,Panna,Panna,Panna,Amanganj,24.926389,80.031667,306.22,,,False,Vindhyan,Weathered
+PANNA027A-OW,Observation Well,Panna,Gunour,Gunour,Siri,24.46,80.010833,319.0,,,False,Vindhyan,Unknown
+PANNA028-OW,Observation Well,Panna,Gunour,Gunour,Gunnour,24.461389,80.248889,362.02,,,False,Vindhyan,Weathered
+PANNA029-OW,Observation Well,Panna,Gunour,Gunour,Lohargaon,24.492778,80.319444,355.94,,,False,Vindhyan,Unknown
+PANNA030-OW,Observation Well,Panna,Gunour,Gunour,Jharkua,24.353889,88.044722,365.84,,,False,Vindhyan,Unknown
+PANNA031-OW,Observation Well,Panna,Gunour,Gunour,Mahewa,24.401389,80.131111,328.38,,,False,Vindhyan,Unknown
+PANNA032A-OW,Observation Well,Panna,Gunour,Gunour,Sathaniya,24.37,80.273611,333.0,,,False,Vindhyan,Weathered
+PANNA033-OW,Observation Well,Panna,Gunour,Gunour,Saleha,24.413056,80.400556,362.04,,,False,Vindhyan,Unknown
+PANNA034-OW,Observation Well,Panna,Pawai,Pawai,Deora,24.344444,79.971944,306.42,,,False,Vindhyan,Unknown
+PANNA035A-OW,Observation Well,Panna,Pawai,Pawai,Simariya,24.266944,79.896667,322.0,,,False,Vindhyan,Weathered
+PANNA036A-OW,Observation Well,Panna,Pawai,Pawai,Mudwari,24.341111,80.290833,334.0,,,False,Vindhyan,Weathered
+PANNA037A-OW,Observation Well,Panna,Pawai,Pawai,Padariya Kala,24.341111,80.194167,322.0,,,False,Vindhyan,Weathered
+PANNA037-OW,Observation Well,Panna,Shahnagar,Shahnagar,Maharajganj,34.133333,79.833333,319.43,,,False,Vindhyan,Unknown
+PANNA038-OW,Observation Well,Panna,Pawai,Pawai,Mohendra,24.190833,79.9575,336.0,,,False,Vindhyan,Unknown
+PANNA039A-OW,Observation Well,Panna,Pawai,Pawai,Rehuta,24.260556,80.052222,324.0,,,False,Vindhyan,Weathered
+PANNA039-OW,Observation Well,Panna,Pawai,Pawai,Hatkuri,24.238889,80.067222,320.8,,,False,Vindhyan,Unknown
+PANNA040-OW,Observation Well,Panna,Pawai,Pawai,Chomukha,24.323056,80.084167,312.29,,,False,Vindhyan,Unknown
+PANNA041A-OW,Observation Well,Panna,Pawai,Pawai,Karhi,24.285556,80.2025,332.0,,,False,Vindhyan,Weathered
+PANNA042A-OW,Observation Well,Panna,Pawai,Pawai,Itay,24.294444,80.267778,334.0,,,False,Vindhyan,Unknown
+PANNA043A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Baghwarkala,23.974722,79.918056,414.0,,,False,Vindhyan,Weathered
+PANNA044A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Takhori,23.988889,79.948889,420.0,,,False,Vindhyan,Unknown
+PANNA045-OW,Observation Well,Panna,Shahnagar,Shahnagar,Repura,23.899444,79.964722,412.02,,,False,Vindhyan,Unknown
+PANNA046A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Malghan,24.026389,80.060278,413.0,,,False,Vindhyan,Unknown
+PANNA047A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bori,24.039722,80.138889,410.0,,,False,Vindhyan,Weathered
+PANNA048-OW,Observation Well,Panna,Shahnagar,Shahnagar,Imliya,24.109722,80.218889,380.49,,,False,Vindhyan,Unknown
+PANNA049-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bisani,24.125278,80.285278,387.15,,,False,Vindhyan,Unknown
+PANNA050-OW,Observation Well,Panna,Shahnagar,Shahnagar,Shahnagar,23.989167,80.308889,370.79,,,False,Vindhyan,Unknown
+PANNA051-OW,Observation Well,Panna,Pawai,Pawai,Pawai,24.27,80.163333,316.4,,,False,Vindhyan,Weathered
+PANNA052-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Krishnpur,24.742778,80.258333,112.7,,,False,Granite,Weathered
+PANNA053-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Deogaon,24.934722,80.313611,102.6,,,False,Granite,Unknown
+PANNA054-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Kunwarpur,24.886667,80.190556,140.6,,,False,Granite,Unknown
+PANNA055-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Bariyarpur,24.854444,80.1,155.6,,,False,Granite,Unknown
+PANNA057A-OW,Observation Well,Panna,Gunour,Gunour,Pagra,24.561389,80.264167,331.0,,,False,Vindhyan,Weathered
+PANNA058-OW,Observation Well,Panna,Gunour,Gunour,Garokhar,24.418056,79.833333,306.1,,,False,Vindhyan,Unknown
+PANNA059A-OW,Observation Well,Panna,Gunour,Gunour,Ghatari,24.416667,80.076944,323.0,,,False,Vindhyan,Weathered
+PANNA060A-OW,Observation Well,Panna,Gunour,Gunour,Sahilwara,24.403056,80.281111,345.0,,,False,Vindhyan,Weathered
+PANNA061-OW,Observation Well,Panna,Gunour,Gunour,Bilgari,24.491111,80.213611,362.0,,,False,Vindhyan,Unknown
+PANNA062A-OW,Observation Well,Panna,Panna,Panna,Chopara-sakariya,24.604444,80.275,353.0,,,False,Vindhyan,Weathered
+PANNA063A-OW,Observation Well,Panna,Panna,Panna,Itwa Kala,24.544722,80.141389,324.0,,,False,Vindhyan,Weathered
+PANNA064-OW,Observation Well,Panna,Gunour,Gunour,Duwari,24.487222,80.056111,318.6,,,False,Vindhyan,Unknown
+PANNA065A-OW,Observation Well,Panna,Panna,Panna,Majhguon,24.647778,80.029722,382.0,,,False,Vindhyan,Weathered
+PANNA066-OW,Observation Well,Panna,Panna,Panna,Akola,24.630833,80.140556,460.8,,,False,Vindhyan,Unknown
+PANNA067A-OW,Observation Well,Panna,Panna,Panna,Janwar,24.654722,80.2025,432.0,,,False,Vindhyan,Weathered
+PANNA068-OW,Observation Well,Panna,Panna,Panna,Garipadriya,24.59,80.287222,230.4,,,False,Vindhyan,Unknown
+PANNA069-OW,Observation Well,Panna,Panna,Panna,Marla,24.735556,80.018056,216.0,,,False,Granite,Unknown
+PANNA071A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Salaiya,24.103889,80.299722,202.0,,,False,Granite,Weathered
+PANNA072A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Bhapatpur Deora,24.827222,80.1075,180.0,,,False,Granite,Weathered
+PANNA073A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Chhateni,24.894167,80.35,394.0,,,False,Granite,Weathered
+PANNA074A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Sinhai Aama Moad,24.913056,80.213611,172.0,,,False,Granite,Weathered
+PANNA075A-OW,Observation Well,Panna,Pawai,Pawai,Sirsi Patna,24.385278,79.905556,307.0,,,False,Vindhyan,Weathered
+PANNA076A-OW,Observation Well,Panna,Panna,Panna,Jamunhai Khas,24.799444,80.314444,405.0,,,False,Vindhyan,Weathered
+PANNA077-OW,Observation Well,Panna,Gunour,Gunour,Kushedar,24.460833,80.325278,362.1,,,False,Vindhyan,Unknown
+PANNA078A-OW,Observation Well,Panna,Gunour,Gunour,Bandhur,24.398889,80.342778,334.0,,,False,Vindhyan,Weathered
+PANNA079A-OW,Observation Well,Panna,Gunour,Gunour,Patna Tamoli,24.385556,80.391667,349.0,,,False,Vindhyan,Weathered
+PANNA080A-OW,Observation Well,Panna,Pawai,Pawai,Danwara,24.200556,79.913889,334.0,,,False,Vindhyan,Weathered
+PANNA081-OW,Observation Well,Panna,Pawai,Pawai,Deori,24.2625,79.840833,310.28,,,False,Vindhyan,Unknown
+PANNA082A-OW,Observation Well,Panna,Pawai,Pawai,Tighra,24.289444,79.961667,312.0,,,False,Vindhyan,Weathered
+PANNA083A-OW,Observation Well,Panna,Pawai,Pawai,Semra Kala,24.218889,80.044722,343.0,,,False,Vindhyan,Weathered
+PANNA084A-OW,Observation Well,Panna,Pawai,Pawai,Banouli,24.166389,79.876389,332.0,,,False,Vindhyan,Weathered
+PANNA085A-OW,Observation Well,Panna,Pawai,Pawai,Patoree,24.253611,80.090556,336.0,,,False,Vindhyan,Weathered
+PANNA086A-OW,Observation Well,Panna,Pawai,Pawai,Jhanjhar,24.215,80.283333,414.0,,,False,Vindhyan,Weathered
+PANNA087A-OW,Observation Well,Panna,Pawai,Pawai,Krishangarh,24.308056,80.244444,338.0,,,False,Vindhyan,Weathered
+PANNA088-OW,Observation Well,Panna,Pawai,Pawai,Shikarpur,24.186111,80.251667,382.3,,,False,Vindhyan,Unknown
+PANNA089A-OW,Observation Well,Panna,Pawai,Pawai,Sunehi-jagdispura,24.291111,80.233056,334.0,,,False,Vindhyan,Weathered
+PANNA090-OW,Observation Well,Panna,Pawai,Pawai,Tikriya,24.143611,80.251667,383.6,,,False,Vindhyan,Unknown
+PANNA091A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Raiguan,24.097222,80.188056,409.0,,,False,Vindhyan,Weathered
+PANNA092A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bagrod,23.980833,79.969722,417.0,,,False,Vindhyan,Weathered
+PANNA093A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Hardua Sahasbahu,24.028611,79.991389,405.0,,,False,Vindhyan,Weathered
+PANNA094A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bilpura Siharan,24.079167,79.963889,406.0,,,False,Vindhyan,Weathered
+PANNA095-OW,Observation Well,Panna,Shahnagar,Shahnagar,Banjari  Chopra,24.103889,80.269722,384.15,,,False,Vindhyan,Weathered
+PANNA096A-OW,Observation Well,Panna,Pawai,Pawai,Sijahati,24.18,80.258333,375.0,,,False,Vindhyan,Weathered
+PANNA097-OW,Observation Well,Panna,Shahnagar,Shahnagar,Kachori,23.979444,80.333889,369.65,,,False,Vindhyan,Weathered
+PANNA098A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Thepa,24.0275,80.163056,405.0,,,False,Vindhyan,Weathered
+PANNA099A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Rohaniya,24.0425,80.333889,360.0,,,False,Vindhyan,Weathered
+PANNA100A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Shahpur Khurd,24.168889,80.308889,354.0,,,False,Vindhyan,Weathered
+PANNA102-OW,Observation Well,Panna,Panna,Panna,Piparwah,24.458611,80.042222,316.0,,,False,Vindhyan,Unknown
+PANNA103-OW,Observation Well,Panna,Gunour,Gunour,Bhamarha,24.451944,80.39,352.0,,,False,Granite,Unknown
+PANNA104-OW,Observation Well,Panna,Shahnagar,Shahnagar,Kachori-new,23.979444,80.333889,369.65,,,False,Vindhyan,Weathered
 PANNA-PZ-01,Piezometer,Panna,Gunour,Gunour,Amangang,24.419167,80.039167,415.034,,,False,Vindhyan,Weathered
 PANNA-PZ-02,Piezometer,Panna,Panna,Panna,Devendranagar,24.623333,80.368889,344.94,,,False,Vindhyan,Weathered
 PANNA-PZ-03,Piezometer,Panna,Panna,Panna,janakpur,24.741111,80.229444,309.005,,,False,Vindhyan,Weathered

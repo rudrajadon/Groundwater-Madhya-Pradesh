@@ -10,6 +10,7 @@ class WellSummary(BaseModel):
     trend_label: str | None = None   # 'Stable' | 'Watch' | 'Critical'
     geology_type: str | None = None  # 'Basalt' | 'Granite' | 'Vindhyan' | 'Unknown'
     aquifer_classification: str | None = None  # 'Weathered' | 'Fractured' | 'Massive'
+    district: str | None = None  # District name
 
 
 class ForecastPoint(BaseModel):

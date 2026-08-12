@@ -13,7 +13,7 @@ def list_wells(db: Session = Depends(get_db)):
     """All wells for the map view. trend_label is now cached in the database
     and updated periodically by a background job. See docs/API_CONTRACT.md."""
     rows = db.execute(text("""
-        SELECT well_id, ST_Y(geom::geometry) AS lat, ST_X(geom::geometry) AS lon,
+        SELECT well_id, district, ST_Y(geom::geometry) AS lat, ST_X(geom::geometry) AS lon,
                block, aquifer_zone, trend_label, geology_type, aquifer_classification
         FROM wells
         WHERE geom IS NOT NULL
@@ -23,7 +23,8 @@ def list_wells(db: Session = Depends(get_db)):
                     block=r["block"], aquifer_zone=r["aquifer_zone"], 
                     trend_label=r["trend_label"],
                     geology_type=r["geology_type"],
-                    aquifer_classification=r["aquifer_classification"])
+                    aquifer_classification=r["aquifer_classification"],
+                    district=r["district"])
         for r in rows
     ]
 

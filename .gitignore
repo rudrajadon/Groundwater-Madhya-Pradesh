@@ -4,39 +4,50 @@ __pycache__/
 *$py.class
 *.so
 .Python
-*.egg-info/
-dist/
-build/
-*.egg
-.venv/
-venv/
 env/
+venv/
+.venv/
 ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+etl_venv/
+.venv/
 
 # Node.js
 node_modules/
-.next/
-out/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Environment variables
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# Environment files
 .env
 .env.local
-.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Database
-*.db
-*.sqlite
-*.mdb
-pgdata/
-
-# Docker
-.docker/
-
-# IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
@@ -44,45 +55,31 @@ pgdata/
 *~
 .DS_Store
 
+# Docker
+docker-compose.override.yml
+
 # Logs
 *.log
 logs/
 
-# Temporary files
-tmp/
-temp/
-*.tmp
+# Database
+*.db
+*.sqlite
+*.mdb
 
-# OS files
-.DS_Store
+# ML artifacts (keep structure, ignore large files if needed)
+# ml/artifacts/*.pth (uncomment if models are too large)
+
+# OS
 Thumbs.db
-
-# Large data files (optional - keep if needed for deployment)
-# GW_Data/
-# data/*.csv
-
-# Virtual environments
-etl_venv/
-
-# Build artifacts
-frontend/.next/
-frontend/out/
-backend/ml/artifacts/
-*.pyc
-
-# ML artifacts — large binaries and data files
-ml/artifacts/*.pt
-ml/artifacts/*.pkl
-ml/artifacts/graph_cache.pkl
-data/*.pkl
-data/*.bak.csv
-data/training_data_prepared.csv
-data/rainfall_features.csv
-data/train_sequences.pkl
-data/test_sequences.pkl
-
-# Notebooks (large)
-*.ipynb
-
-# macOS
 .DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/

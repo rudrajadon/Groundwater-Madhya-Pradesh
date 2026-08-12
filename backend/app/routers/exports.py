@@ -1,0 +1,379 @@
+"""
+Policy PDF/CSV Export Router
+Generate official groundwater reports for CGWB and state boards.
+"""
+import io
+import uuid
+from typing import List, Optional
+from datetime import datetime
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi.responses import StreamingResponse
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+from pydantic import BaseModel
+
+from ..db import get_db
+from ..services.report_generator import (
+    generate_well_forecast_pdf,
+    generate_wells_forecast_csv,
+    generate_district_summary_pdf
+)
+
+router = APIRouter(prefix="/api/v1/exports", tags=["exports"])
+
+
+class ExportRequest(BaseModel):
+    """Request model for generating exports"""
+    well_ids: Optional[List[str]] = None  # Specific wells, or None for all
+    district: Optional[str] = None  # Filter by district
+    format: str = "pdf"  # "pdf" or "csv"
+    include_charts: bool = True  # Include visualizations in PDF
+    report_type: str = "well"  # "well" or "district_summary"
+
+
+def _require_model(request: Request):
+    """Ensure ML model is loaded."""
+    model = getattr(request.app.state, "model", None)
+    if model is None:
+        raise HTTPException(
+            503,
+            "Model not loaded. Run 'python ml/train.py' first, then restart the backend.",
+        )
+    return model
+
+
+def _get_well_metadata(well_id: str, db: Session) -> dict:
+    """Fetch well metadata from database."""
+    query = text("""
+        SELECT 
+            well_id,
+            district,
+            block,
+            ST_Y(geom::geometry) AS lat,
+            ST_X(geom::geometry) AS lon,
+            geology_type,
+            aquifer_classification,
+            trend_label
+        FROM wells
+        WHERE well_id = :well_id
+    """)
+    
+    result = db.execute(query, {"well_id": well_id}).mappings().fetchone()
+    
+    if not result:
+        raise HTTPException(404, f"Well {well_id} not found")
+    
+    return dict(result)
+
+
+def _get_wells_by_district(district: str, db: Session) -> List[dict]:
+    """Fetch all wells in a district."""
+    query = text("""
+        SELECT 
+            well_id,
+            district,
+            block,
+            ST_Y(geom::geometry) AS lat,
+            ST_X(geom::geometry) AS lon,
+            geology_type,
+            aquifer_classification,
+            trend_label
+        FROM wells
+        WHERE district = :district
+        AND geom IS NOT NULL
+        ORDER BY well_id
+    """)
+    
+    results = db.execute(query, {"district": district}).mappings().all()
+    return [dict(r) for r in results]
+
+
+def _get_all_wells(db: Session, limit: int = 1000) -> List[dict]:
+    """Fetch all wells (up to limit)."""
+    query = text("""
+        SELECT 
+            well_id,
+            district,
+            block,
+            ST_Y(geom::geometry) AS lat,
+            ST_X(geom::geometry) AS lon,
+            geology_type,
+            aquifer_classification,
+            trend_label
+        FROM wells
+        WHERE geom IS NOT NULL
+        ORDER BY district, well_id
+        LIMIT :limit
+    """)
+    
+    results = db.execute(query, {"limit": limit}).mappings().all()
+    return [dict(r) for r in results]
+
+
+def _get_forecast_for_well(well_id: str, model, db: Session) -> tuple:
+    """
+    Get forecast for a single well.
+    Returns (forecast_points, recommendation, model_version, caveat)
+    """
+    from ..services.recommendation import classify_trend
+    import numpy as np
+    
+    # Get last 24 readings
+    readings_query = text("""
+        SELECT depth_bgl_m
+        FROM readings
+        WHERE well_id = :well_id AND depth_bgl_m IS NOT NULL
+        ORDER BY date DESC
+        LIMIT 24
+    """)
+    
+    readings = db.execute(readings_query, {"well_id": well_id}).mappings().all()
+    
+    if len(readings) < 24:
+        return [], "Insufficient data for forecast", "insufficient_data", "Less than 24 historical readings available"
+    
+    readings_list = [float(r["depth_bgl_m"]) for r in reversed(readings)]
+    
+    # Get scaler
+    scaler = model._scalers.get(well_id)
+    if not scaler:
+        return [], "Well not in training set", "not_trained", "This well was not included in model training"
+    
+    # Scale readings
+    scaled = scaler.transform(np.array(readings_list).reshape(-1, 1)).flatten()
+    
+    # Get well metadata for zone
+    well_meta = _get_well_metadata(well_id, db)
+    zone = well_meta.get('geology_type', 'Unknown')
+    
+    # Get forecast
+    if well_id in model.well_list:
+        result = model.predict_well(well_id, scaled, None, None, zone, scaler)
+    else:
+        return [], "Well not in model", "not_in_model", "Well not found in trained model"
+    
+    forecast_head = result['forecast_head_msl']
+    
+    # Convert to forecast points
+    forecast_points = []
+    for i in range(min(12, len(forecast_head))):
+        # Estimate uncertainty (simplified)
+        uncertainty = 1.0 + (i * 0.1)  # Increases with forecast horizon
+        forecast_points.append({
+            "month_index": i + 1,
+            "head_msl_m": round(forecast_head[i], 2),
+            "lower_m": round(forecast_head[i] - 1.96 * uncertainty, 2),
+            "upper_m": round(forecast_head[i] + 1.96 * uncertainty, 2),
+        })
+    
+    # Classify trend
+    trend_label, recommendation = classify_trend(forecast_head[:12])
+    
+    return forecast_points, recommendation, "PGNN-LSTM v1.0", None
+
+
+@router.post("/generate")
+async def generate_export(
+    request: Request,
+    export_req: ExportRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Generate groundwater forecast export (PDF or CSV).
+    
+    **Request Body:**
+    ```json
+    {
+        "well_ids": ["BPL002-OW", "BPL003-OW"],  // Optional: specific wells
+        "district": "Bhopal",                     // Optional: filter by district
+        "format": "pdf",                          // "pdf" or "csv"
+        "include_charts": true,                   // Include visualizations (PDF only)
+        "report_type": "well"                     // "well" or "district_summary"
+    }
+    ```
+    
+    **Returns:** PDF or CSV file as streaming response
+    
+    **Examples:**
+    - Single well PDF: `{"well_ids": ["BPL002-OW"], "format": "pdf"}`
+    - District CSV: `{"district": "Bhopal", "format": "csv"}`
+    - All wells CSV: `{"format": "csv"}`
+    """
+    model = _require_model(request)
+    
+    # Determine which wells to export
+    if export_req.well_ids:
+        wells = [_get_well_metadata(wid, db) for wid in export_req.well_ids]
+        print(f"[EXPORT] Using {len(wells)} wells from well_ids list")
+    elif export_req.district:
+        wells = _get_wells_by_district(export_req.district, db)
+        print(f"[EXPORT] Using {len(wells)} wells from district: {export_req.district}")
+        if not wells:
+            raise HTTPException(404, f"No wells found in district: {export_req.district}")
+    else:
+        wells = _get_all_wells(db, limit=1000)
+        print(f"[EXPORT] Using {len(wells)} wells from _get_all_wells (no district specified)")
+        if not wells:
+            raise HTTPException(404, "No wells found in database")
+    
+    if not wells:
+        raise HTTPException(400, "No wells selected for export")
+    
+    print(f"[EXPORT] Total wells to process: {len(wells)}")
+    print(f"[EXPORT] Request params: district={export_req.district}, format={export_req.format}, report_type={export_req.report_type}")
+    
+    # Generate export based on format and type
+    # Auto-detect report type: if multiple wells selected, use district summary for PDF
+    if export_req.format == "pdf" and export_req.report_type == "well" and len(wells) > 1:
+        export_req.report_type = "district_summary"
+    
+    if export_req.format == "pdf":
+        if export_req.report_type == "well" and len(wells) == 1:
+            # Single well detailed report
+            well = wells[0]
+            forecast_points, recommendation, model_version, caveat = _get_forecast_for_well(
+                well['well_id'], model, db
+            )
+            
+            well_data = {
+                **well,
+                'recommendation': recommendation,
+                'model_version': model_version,
+                'caveat': caveat,
+                'confidence': 'High' if len(forecast_points) == 12 else 'Low'
+            }
+            
+            buffer = io.BytesIO()
+            generate_well_forecast_pdf(well_data, forecast_points, buffer, export_req.include_charts)
+            buffer.seek(0)
+            
+            filename = f"groundwater_forecast_{well['well_id']}_{datetime.now().strftime('%Y%m%d')}.pdf"
+            
+            return StreamingResponse(
+                buffer,
+                media_type="application/pdf",
+                headers={"Content-Disposition": f"attachment; filename={filename}"}
+            )
+        
+        elif export_req.report_type == "district_summary":
+            # District summary report
+            district_name = export_req.district or "Multiple Districts"
+            
+            # Calculate statistics
+            total_wells = len(wells)
+            critical_count = sum(1 for w in wells if w.get('trend_label') == 'Critical')
+            watch_count = sum(1 for w in wells if w.get('trend_label') == 'Watch')
+            stable_count = sum(1 for w in wells if w.get('trend_label') == 'Stable')
+            
+            statistics = {
+                'total_wells': total_wells,
+                'critical_count': critical_count,
+                'critical_pct': (critical_count / total_wells * 100) if total_wells > 0 else 0,
+                'watch_count': watch_count,
+                'watch_pct': (watch_count / total_wells * 100) if total_wells > 0 else 0,
+                'stable_count': stable_count,
+                'stable_pct': (stable_count / total_wells * 100) if total_wells > 0 else 0,
+                'avg_decline_m': 0.0  # TODO: Calculate from forecasts
+            }
+            
+            # Add forecast change to each well
+            for well in wells:
+                forecast_points, _, _, _ = _get_forecast_for_well(well['well_id'], model, db)
+                if forecast_points:
+                    well['forecast_change'] = forecast_points[-1]['head_msl_m'] - forecast_points[0]['head_msl_m']
+                else:
+                    well['forecast_change'] = 0.0
+            
+            buffer = io.BytesIO()
+            generate_district_summary_pdf(district_name, wells, statistics, buffer)
+            buffer.seek(0)
+            
+            filename = f"groundwater_summary_{district_name.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.pdf"
+            
+            return StreamingResponse(
+                buffer,
+                media_type="application/pdf",
+                headers={"Content-Disposition": f"attachment; filename={filename}"}
+            )
+        
+        else:
+            raise HTTPException(400, "PDF format only supports single well or district_summary report types")
+    
+    elif export_req.format == "csv":
+        # CSV export for multiple wells
+        forecasts_data = {}
+        
+        for well in wells:
+            forecast_points, recommendation, model_version, caveat = _get_forecast_for_well(
+                well['well_id'], model, db
+            )
+            forecasts_data[well['well_id']] = forecast_points
+            well['recommendation'] = recommendation
+            well['model_version'] = model_version
+        
+        buffer = io.StringIO()
+        generate_wells_forecast_csv(wells, forecasts_data, buffer)
+        buffer.seek(0)
+        
+        filename = f"groundwater_forecasts_{datetime.now().strftime('%Y%m%d')}.csv"
+        
+        return StreamingResponse(
+            iter([buffer.getvalue()]),
+            media_type="text/csv",
+            headers={"Content-Disposition": f"attachment; filename={filename}"}
+        )
+    
+    else:
+        raise HTTPException(400, f"Unsupported format: {export_req.format}")
+
+
+@router.get("/wells")
+async def get_exportable_wells(
+    district: Optional[str] = Query(None, description="Filter by district"),
+    db: Session = Depends(get_db)
+):
+    """
+    Get list of wells available for export.
+    
+    **Query Parameters:**
+    - `district`: Optional district filter
+    
+    **Returns:** List of wells with metadata
+    """
+    if district:
+        wells = _get_wells_by_district(district, db)
+    else:
+        wells = _get_all_wells(db, limit=100)
+    
+    return {
+        "count": len(wells),
+        "wells": wells
+    }
+
+
+@router.get("/districts")
+async def get_districts(db: Session = Depends(get_db)):
+    """
+    Get list of districts with well counts.
+    
+    **Returns:** List of districts with metadata
+    """
+    query = text("""
+        SELECT 
+            district,
+            COUNT(*) as well_count,
+            SUM(CASE WHEN trend_label = 'Critical' THEN 1 ELSE 0 END) as critical_count,
+            SUM(CASE WHEN trend_label = 'Watch' THEN 1 ELSE 0 END) as watch_count,
+            SUM(CASE WHEN trend_label = 'Stable' THEN 1 ELSE 0 END) as stable_count
+        FROM wells
+        WHERE geom IS NOT NULL AND district IS NOT NULL AND district != 'Unknown'
+        GROUP BY district
+        ORDER BY district
+    """)
+    
+    results = db.execute(query).mappings().all()
+    
+    return {
+        "count": len(results),
+        "districts": [dict(r) for r in results]
+    }

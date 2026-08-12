@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import forecast, wells, zones
+from .routers import forecast, wells, zones, location_predictor, stress_map, exports
 
 
 @asynccontextmanager
@@ -49,6 +49,9 @@ app.add_middleware(
 app.include_router(wells.router)
 app.include_router(forecast.router)
 app.include_router(zones.router)
+app.include_router(location_predictor.router)
+app.include_router(stress_map.router)
+app.include_router(exports.router)
 
 
 @app.get("/health")

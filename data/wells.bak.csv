@@ -1,0 +1,1197 @@
+Well No,Well Type,District,Tahsil / Taluk,Block / Mandal,Village,Northing,Easting,Elevation of Ground Level,Aquifer Zone,Command Area,Coord Validated,geology_type,aquifer_classification
+BPL001-OW,Observation Well,Unknown,Berasia,Berasia,Naziabad,23.798333,77.250278,457.9,,,False,Basalt,Weathered
+BPL002-OW,Observation Well,Unknown,Berasia,Berasia,Ramgarha,23.653611,77.354722,488.645,,,False,Basalt,Weathered
+BPL003-OW,Observation Well,Unknown,Berasia,Berasia,Hinoti,23.493333,77.473611,476.22,,,False,Basalt,Weathered
+BPL004-OW,Observation Well,Unknown,Berasia,Berasia,Parsora,23.683611,77.310556,465.63,,,False,Basalt,Weathered
+BPL005-OW,Observation Well,Unknown,Berasia,Berasia,Kulahar,23.640833,77.516111,463.85,,,False,Basalt,Weathered
+BPL006A-OW,Observation Well,Unknown,Berasia,Berasia,Bhainsonda,23.663333,77.335278,484.0,,,False,Basalt,Weathered
+BPL007A-OW,Observation Well,Unknown,Berasia,Berasia,Barasia,23.637778,77.433611,451.0,,,False,Basalt,Weathered
+BPL008A-OW,Observation Well,Unknown,Berasia,Berasia,Mani khedi,23.66,77.196667,507.0,,,False,Basalt,Weathered
+BPL009-OW,Observation Well,Unknown,Hujur,Fanda,Golekhedi,23.381389,77.398889,480.396,,,False,Vindhyan,Weathered
+BPL010A-OW,Observation Well,Unknown,Hujur,Fanda,Adampur,23.268889,77.386389,466.0,,,False,Basalt,Weathered
+BPL011A-OW,Observation Well,Unknown,Hujur,Fanda,Misrod,23.1575,77.465278,519.0,,,False,Basalt,Weathered
+BPL012A-OW,Observation Well,Unknown,Hujur,Fanda,Khajuri Sadak,23.240278,77.251944,518.0,,,False,Basalt,Weathered
+BPL013-OW,Observation Well,Unknown,Berasia,Berasia,Arera colony,23.230556,77.427778,503.0,,,False,Basalt,Weathered
+BPL014A-OW,Observation Well,Unknown,Hujur,Fanda,Perwalia Sadak,23.327778,77.271667,484.0,,,False,Basalt,Weathered
+BPL015-OW,Observation Well,Unknown,Hujur,Fanda,Ratibad,23.354167,77.280556,503.9,,,False,Basalt,Weathered
+BPL016A-OW,Observation Well,Unknown,Hujur,Fanda,Pipalner,23.303333,77.335278,598.0,,,False,Basalt,Weathered
+BPL017A-OW,Observation Well,Unknown,Hujur,Fanda,Mungalia hat,23.354167,77.2625,514.0,,,False,Basalt,Weathered
+BPL018-OW,Observation Well,Unknown,Hujur,Fanda,Jhirniya,23.350556,77.237222,500.9,,,False,Basalt,Weathered
+BPL019-OW,Observation Well,Unknown,Hujur,Fanda,Kurana,23.329167,77.324444,494.92,,,False,Basalt,Weathered
+BPL020A-OW2016,Observation Well,Unknown,Berasia,Berasia,Bagmugaliya,23.192778,77.4725,495.0,,,False,Vindhyan,Weathered
+BPL021A-OW,Observation Well,Unknown,Hujur,Fanda,Ahemadpur,23.191111,77.618056,537.0,,,False,Basalt,Weathered
+BPL022-OW,Observation Well,Unknown,Hujur,Fanda,Babdia Kala,23.180278,77.443611,535.0,,,False,Basalt,Weathered
+BPL023-OW,Observation Well,Unknown,Hujur,Fanda,Beenapur,23.381111,77.387222,482.45,,,False,Basalt,Weathered
+BPL024A-OW,Observation Well,Unknown,Hujur,Fanda,Intkhedi,23.365833,77.396944,479.28,,,False,Basalt,Weathered
+BPL025-OW,Observation Well,Unknown,Hujur,Fanda,Parewa kheda,23.331389,77.378611,495.0,,,False,Basalt,Weathered
+BPL026-OW,Observation Well,Unknown,Hujur,Fanda,Dupadia,23.436944,77.395278,475.82,,,False,Basalt,Weathered
+BPL027A-OW,Observation Well,Unknown,Berasia,Berasia,Gunga,23.451667,77.358611,502.0,,,False,Basalt,Weathered
+BPL028A-OW2016,Observation Well,Unknown,Berasia,Berasia,Mudiya Kheda (jaitpura),23.443056,77.383333,484.0,,,False,Basalt,Weathered
+BPL029A-OW,Observation Well,Unknown,Berasia,Berasia,Harra-kheda,23.514722,77.398889,479.0,,,False,Basalt,Weathered
+BPL030-OW,Observation Well,Unknown,Berasia,Berasia,Dellod,23.509722,77.372222,469.915,,,False,Basalt,Weathered
+BPL031A-OW2016,Observation Well,Unknown,Berasia,Berasia,Sonkachh,23.551944,77.411111,493.0,,,False,Basalt,Weathered
+BPL032A-OW,Observation Well,Unknown,Berasia,Berasia,Ratua Ratanpura,23.460278,77.412778,490.0,,,False,Basalt,Weathered
+BPL033A-OW,Observation Well,Unknown,Hujur,Fanda,Berkhedi Kala,30.205,77.358611,516.0,,,False,Basalt,Weathered
+BPL034-OW,Observation Well,Unknown,Hujur,Fanda,Bairagarh chichli,23.152222,77.408889,473.0,,,False,Basalt,Weathered
+BPL035-OW,Observation Well,Unknown,Berasia,Berasia,Ejgiri,23.509444,77.351111,483.73,,,False,Basalt,Weathered
+BPL036A-OW,Observation Well,Unknown,Hujur,Fanda,Chopra kala,23.325278,77.464167,494.0,,,False,Basalt,Weathered
+BPL037-OW,Observation Well,Unknown,Berasia,Berasia,Mangal garh,23.708333,77.209722,448.0,,,False,Basalt,Weathered
+BPL038A-OW2016,Observation Well,Unknown,Berasia,Berasia,Kolukhedi,23.521667,77.419167,440.0,,,False,Basalt,Weathered
+BPL039-OW,Observation Well,Unknown,Berasia,Berasia,Runaha,23.819167,77.296389,444.0,,,False,Basalt,Weathered
+BPL040-OW,Observation Well,Unknown,Berasia,Berasia,Imliya swroop,23.640556,77.401111,469.345,,,False,Basalt,Weathered
+BPL041A-OW,Observation Well,Unknown,Berasia,Berasia,Semri Kala,23.531111,77.410556,480.0,,,False,Basalt,Weathered
+BPL042-OW,Observation Well,Unknown,Hujur,Fanda,Phanda,23.227778,77.216667,513.785,,,False,Basalt,Weathered
+BPL043-OW,Observation Well,Unknown,Hujur,Fanda,Bhainsa khedi,23.25,77.318056,507.9,,,False,Basalt,Weathered
+BPL044-OW,Observation Well,Unknown,Hujur,Fanda,Shahpura,23.41,77.349444,493.0,,,False,Basalt,Weathered
+BPL045A-OW2016,Observation Well,Unknown,Hujur,Fanda,Akbarpur,23.172778,77.414444,516.0,,,False,Basalt,Weathered
+BPL046A-OW2016,Observation Well,Unknown,Berasia,Berasia,Imaliya Barru,23.619722,77.495278,463.0,,,False,Basalt,Weathered
+BPL047A-OW2016,Observation Well,Unknown,Berasia,Berasia,Dhamarra,23.541111,77.359722,495.0,,,False,Basalt,Weathered
+BPL048A-OW2016,Observation Well,Unknown,Berasia,Berasia,Bankhedi ( Bhonrasa),23.469444,77.468333,497.0,,,False,Basalt,Weathered
+BPL049-OW,Observation Well,Unknown,Berasia,Berasia,Habibganj,23.6575,77.381389,468.16,,,False,Basalt,Weathered
+BPL050-OW,Observation Well,Unknown,Berasia,Berasia,Nalkheda,23.593056,77.387222,478.795,,,False,Basalt,Weathered
+BPL051-OW,Observation Well,Unknown,Hujur,Fanda,Nipanniya,23.409722,77.398889,480.71,,,False,Basalt,Weathered
+BPL052A-OW,Observation Well,Unknown,Hujur,Fanda,Arwaliya,23.341667,77.394444,494.0,,,False,Basalt,Weathered
+BPL053A-0W,Observation Well,Unknown,Hujur,Fanda,Lambakheda,23.325833,77.403056,491.0,,,False,Basalt,Weathered
+BPL054-OW,Observation Well,Unknown,Hujur,Fanda,Nabi bag,23.311389,77.407222,492.34,,,False,Basalt,Weathered
+BPL055-OW2016,Observation Well,Unknown,Berasia,Berasia,Karhod,23.299722,77.409167,498.0,,,False,Basalt,Weathered
+BPL056A-OW2016,Observation Well,Unknown,Berasia,Berasia,Chandbad,23.269722,77.42,498.0,,,False,Basalt,Weathered
+BPL057A-OW2016,Observation Well,Unknown,Berasia,Berasia,Teela Jamalpura,23.266667,77.4,493.0,,,False,Vindhyan,Weathered
+BPL058A-OW,Observation Well,Unknown,Hujur,Fanda,Balampur,23.396389,77.531944,510.0,,,False,Basalt,Weathered
+BPL059-OW,Observation Well,Unknown,Hujur,Fanda,Rasla khedi,23.316944,77.441944,484.0,,,False,Basalt,Weathered
+BPL060-OW,Observation Well,Unknown,Hujur,Fanda,Sukhi savenia,23.353333,77.482222,504.5,,,False,Vindhyan,Weathered
+BPL061-OW,Observation Well,Unknown,Hujur,Fanda,Piplani market,23.245556,77.4725,511.0,,,False,Vindhyan,Weathered
+BPL062A-OW,Observation Well,Unknown,Hujur,Fanda,Koluwa,23.248611,77.553056,452.0,,,False,Basalt,Weathered
+BPL063-OW,Observation Well,Unknown,Hujur,Fanda,Bilkheria,23.258056,77.582778,445.0,,,False,Vindhyan,Weathered
+BPL064A-OW2016,Observation Well,Unknown,Berasia,Berasia,Bhenropur,23.151111,77.480556,456.0,,,False,Basalt,Weathered
+BPL065A-OW,Observation Well,Unknown,Hujur,Fanda,Bangrasiya,23.135556,77.533056,450.0,,,False,Basalt,Weathered
+BPL066A-OW2016,Observation Well,Unknown,Berasia,Berasia,Kotra Sultanabad,23.222222,77.395833,513.0,,,False,Basalt,Weathered
+BPL067A-OW,Observation Well,Unknown,Hujur,Fanda,Neelbad,23.193056,77.343333,542.0,,,False,Basalt,Weathered
+BPL068A-OW,Observation Well,Unknown,Hujur,Fanda,Badzhini,23.133056,77.277222,515.0,,,False,Basalt,Weathered
+BPL069A-OW2016,Observation Well,Unknown,Berasia,Berasia,Kulukhedi,23.86,77.331111,509.0,,,False,Basalt,Weathered
+BPL070-OW,Observation Well,Unknown,Hujur,Fanda,Bairagarh,23.282778,77.323611,506.71,,,False,Basalt,Weathered
+BPL071A-OW2016,Observation Well,Unknown,Berasia,Berasia,Saingarcholi,23.284722,77.361944,597.0,,,False,Basalt,Weathered
+BPL072-OW,Observation Well,Unknown,Hujur,Fanda,Khoa-fiza (khanugaon),23.26,77.367778,560.0,,,False,Vindhyan,Weathered
+BPL073-OW,Observation Well,Unknown,Hujur,Fanda,Dharampuri,23.236944,77.376667,520.0,,,False,Basalt,Weathered
+BPL074A-OW2016,Observation Well,Unknown,Hujur,Fanda,Jhangirabad,23.191944,77.351111,479.0,,,False,Vindhyan,Weathered
+BPL075A-OW2016,Observation Well,Unknown,Berasia,Berasia,Chhola,23.281111,77.414722,495.0,,,False,Basalt,Weathered
+BPL076A-OW,Observation Well,Unknown,Hujur,Fanda,Choona bhatti,23.201944,77.413611,527.0,,,False,Basalt,Weathered
+BPL077-OW,Observation Well,Unknown,Hujur,Fanda,Shahpura,23.213333,77.434722,497.0,,,False,Basalt,Weathered
+BPL078-OW,Observation Well,Unknown,Hujur,Fanda,Narela sankari,23.265833,77.466944,461.0,,,False,Basalt,Weathered
+BPL079A-OW2016,Observation Well,Unknown,Berasia,Berasia,Patalpur,23.645833,77.448611,459.0,,,False,Basalt,Weathered
+BPL080-OW,Observation Well,Unknown,Berasia,Berasia,Mankhayai,23.641944,77.481389,446.0,,,False,Basalt,Weathered
+BPL081-OW,Observation Well,Unknown,Berasia,Berasia,Tekan kheda,23.616111,77.425,476.825,,,False,Basalt,Weathered
+BPL082A-OW2016,Observation Well,Unknown,Berasia,Berasia,Khajuriya Ramdas,23.608056,77.411944,484.0,,,False,Basalt,Weathered
+BPL083A-OW,Observation Well,Unknown,Berasia,Berasia,Basai,23.623889,77.448889,483.0,,,False,Basalt,Weathered
+BPL084-OW,Observation Well,Unknown,Berasia,Berasia,Garetiya dangi,23.569444,77.431667,484.315,,,False,Basalt,Weathered
+BPL085-OW,Observation Well,Unknown,Berasia,Berasia,Tarawali kala,23.567778,77.39,481.96,,,False,Basalt,Weathered
+BPL086A-OW2016,Observation Well,Unknown,Berasia,Berasia,Tanda,23.541667,77.388611,489.0,,,False,Basalt,Weathered
+BPL087-OW,Observation Well,Unknown,Berasia,Berasia,Mudiya kheda,23.443056,77.383333,484.23,,,False,Basalt,Weathered
+BPL088-OW,Observation Well,Unknown,Berasia,Berasia,Pardhi,23.489167,77.421667,471.74,,,False,Basalt,Weathered
+BPL089A-OW2016,Observation Well,Unknown,Berasia,Berasia,Rasuli Dillod,23.496667,77.393333,481.0,,,False,Basalt,Weathered
+BPL090A-OW,Observation Well,Unknown,Berasia,Berasia,Bhojapura,23.663333,77.335278,500.0,,,False,Basalt,Weathered
+BPL091A-OW2016,Observation Well,Unknown,Berasia,Berasia,Bagraj,23.515,77.453333,461.0,,,False,Basalt,Weathered
+BPL092A-OW2016,Observation Well,Unknown,Berasia,Berasia,Neemkhedi,23.744722,77.25,442.0,,,False,Basalt,Weathered
+BPL093-OW,Observation Well,Unknown,Berasia,Berasia,Bhairawal,23.764167,77.25,445.0,,,False,Basalt,Weathered
+BPL094-OW,Observation Well,Unknown,Berasia,Berasia,Sunga,23.715833,77.278889,498.215,,,False,Basalt,Weathered
+BPL095A-OW,Observation Well,Unknown,Berasia,Berasia,Badlee,23.700833,77.282222,471.0,,,False,Basalt,Weathered
+BPL096A-OW2016,Observation Well,Unknown,Berasia,Berasia,Berkhedikalan,23.443611,77.418889,504.0,,,False,Basalt,Weathered
+BPL097A-OW2016,Observation Well,Unknown,Berasia,Berasia,Sagoni Jora,23.466111,77.430833,479.0,,,False,Basalt,Weathered
+BPL098-OW,Observation Well,Unknown,Berasia,Berasia,Narela bazayaft,23.5975,77.428611,479.745,,,False,Basalt,Weathered
+BPL099-OW2016,Observation Well,Unknown,Berasia,Berasia,Berkhedi Bhoji,23.651667,77.429167,469.0,,,False,Basalt,Weathered
+BPL100-OW,Observation Well,Unknown,Berasia,Berasia,Ibrahimpura,23.631667,77.420556,474.0,,,False,Basalt,Weathered
+BPL-PZ-01,Piezometer,Unknown,Hujur,Fanda,Nishatpura,23.287222,77.4,491.73,,,False,Vindhyan,Fractured
+BPL-PZ-02,Piezometer,Unknown,Hujur,Fanda,Walmi,23.247222,77.4,483.6,,,False,Basalt,Weathered
+BPL-PZ-03,Piezometer,Unknown,Hujur,Fanda,Bairagarh,23.280556,77.333333,507.44,,,False,Basalt,Weathered
+BPL-PZ-04,Piezometer,Unknown,Hujur,Fanda,Khajoori Sadak,23.240278,77.251944,510.57,,,False,Basalt,Weathered
+BPL-PZ-05,Piezometer,Unknown,Hujur,Fanda,Parwalia Sadak,23.327778,77.271667,477.3,,,False,Basalt,Weathered
+BPL-PZ-06,Piezometer,Unknown,Hujur,Fanda,Intkhedi,23.365833,77.396944,479.9,,,False,Basalt,Weathered
+BPL-PZ-07,Piezometer,Unknown,Barasia,Barasia,Najeerabad,23.798333,77.250278,428.68,,,False,Basalt,Weathered
+BPL-PZ-08,Piezometer,Unknown,Barasia,Barasia,Barasia,23.637778,77.433611,464.52,,,False,Basalt,Weathered
+BPL-PZ-09,Piezometer,Unknown,Hujur,Fanda,Bagmugaliya (univercity),23.192778,77.4725,478.96,,,False,Basalt,Weathered
+BPL-PZ-10,Piezometer,Unknown,Hujur,Fanda,Bilkhiriya,23.258056,77.582778,420.0,,,False,Vindhyan,Weathered
+BPL-PZ-11,Piezometer,Unknown,Hujur,Fanda,Balampur,23.396389,77.365278,462.36,,,False,Basalt,Weathered
+BPL-PZ-12,Piezometer,Unknown,Hujur,Fanda,Gitanjali Girls Collage,23.25,77.433333,492.55,,,False,Vindhyan,Weathered
+CHHAT001-OW,Observation Well,Chhatarpur,Badamalhara,Badamalahra,Manwara[chanpura],25.3875,80.208333,140.5,,,False,Granite,Weathered
+Chhat001-PZ,Piezometer,Chhatarpur,Bijawar,Bakswaha,Buxwasha,24.257222,79.305833,,,,False,Basalt,Weathered
+CHHAT002-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Harpalpur,25.233333,79.266667,214.61,,,False,Granite,Weathered
+Chhat002-PZ,Piezometer,Chhatarpur,Bijawar,Badamlahra,Moli R House,24.5425,79.297778,328.34,,,False,Unknown,Fractured
+CHHAT003-OW,Observation Well,Chhatarpur,Gaurihar,Gaurihar,Dhawari,25.252222,80.067778,188.36,,,False,Granite,Weathered
+Chhat003-PZ,Piezometer,Chhatarpur,Bijawar,Bijawar,Bijawar,24.620556,79.494167,346.26,,,False,Granite,Weathered
+CHHAT004-OW,Observation Well,Chhatarpur,Gaurihar,Gaurihar,Gaurihar,25.277222,80.195556,209.72,,,False,Granite,Weathered
+Chhat004-PZ,Piezometer,Chhatarpur,Bijawar,Bijawar,Deora,24.581667,79.656389,,,,False,Granite,Weathered
+CHHAT005-OW,Observation Well,Chhatarpur,Loundi,Loundi,Chitahri,25.232778,79.904444,204.4,,,False,Unknown,Weathered
+Chhat005-PZ,Piezometer,Chhatarpur,Nowgong,Nowgong,Garhimalhera,25.050833,79.696944,265.0,,,False,Granite,Weathered
+CHHAT006-OW,Observation Well,Chhatarpur,Loundi,Loundi,Bamhori purwa,25.193889,80.053889,172.72,,,False,Granite,Weathered
+Chhat006-PZ,Piezometer,Chhatarpur,Nowgong,Nowgong,Harpalpur,25.283611,79.334722,214.61,,,False,Granite,Weathered
+CHHAT007-OW,Observation Well,Chhatarpur,Loundi,Loundi,Bahadurpur,25.2025,80.242222,137.75,,,False,Granite,Weathered
+Chhat007-PZ,Piezometer,Chhatarpur,Rajnagar,Rajnagar,Khajuraho,24.846667,79.941667,214.4,,,False,Granite,Weathered
+CHHAT008-OW,Observation Well,Chhatarpur,Loundi,Loundi,Padariya,25.233333,80.293611,134.5,,,False,Granite,Weathered
+Chhat.008-PZ,Piezometer,Chhatarpur,Chhatarpur,Chhatarpur,Chhatarpur,24.909167,79.596944,299.67,,,False,Granite,Weathered
+CHHAT010-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Alipura,25.174444,79.339167,221.29,,,False,Granite,Weathered
+CHHAT011-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Lugasi,25.067222,79.564722,265.8,,,False,Granite,Weathered
+CHHAT012-OW,Observation Well,Chhatarpur,Loundi,Loundi,Tahanga,25.113333,79.923889,213.5,,,False,Granite,Weathered
+CHHAT013-OW,Observation Well,Chhatarpur,Loundi,Loundi,Loundi,25.140556,80.004722,198.176,,,False,Granite,Weathered
+CHHAT014-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Nowgong,25.047222,79.445556,246.14,,,False,Granite,Weathered
+CHHAT015-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Maharajpur,24.994444,79.721111,262.62,,,False,Granite,Weathered
+CHHAT016-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Tatam,25.041667,79.858889,228.78,,,False,Granite,Weathered
+CHHAT017-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Chandla,25.073611,80.188333,121.78,,,False,Granite,Weathered
+CHHAT018-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Mau- sahania,25.018056,79.480833,394.44,,,False,Granite,Weathered
+CHHAT019-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Chhatarpur,24.909167,79.596944,299.67,,,False,Granite,Weathered
+CHHAT020-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Gopalpura,24.924722,79.696111,259.42,,,False,Granite,Weathered
+CHHAT021-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Dumra,25.051667,79.913889,214.65,,,False,Granite,Weathered
+CHHAT022-OW,Observation Well,Chhatarpur,Loundi,Loundi,Bachhon,24.988889,80.099167,180.32,,,False,Granite,Weathered
+CHHAT023-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Issanagar,24.8625,79.387778,250.08,,,False,Granite,Weathered
+CHHAT024-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Guraiya,24.846944,79.590833,306.61,,,False,Granite,Weathered
+CHHAT025-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Rajnagar,24.884167,79.911389,219.19,,,False,Granite,Weathered
+CHHAT026-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Khajuraho,24.846667,79.941667,214.4,,,False,Granite,Weathered
+CHHAT027-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Angour,24.737222,79.417778,320.32,,,False,Granite,Weathered
+CHHAT028-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Mataguwan,24.802222,79.495833,308.37,,,False,Granite,Weathered
+CHHAT029-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Basari,24.820278,79.714444,275.43,,,False,Granite,Weathered
+CHHAT030-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Bamitha,24.781111,79.880556,204.4,,,False,Granite,Weathered
+CHHAT032-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Gulgang,24.704722,79.370833,309.85,,,False,Granite,Weathered
+CHHAT033A-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Panagar,24.706944,79.474444,362.0,,,False,Granite,Weathered
+CHHAT034-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Rangawan,24.794722,79.419444,228.9,,,False,Granite,Weathered
+CHHAT035-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Chauka,24.8325,79.501944,309.37,,,False,Granite,Weathered
+CHHAT036-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Bandha,24.5475,79.102778,292.82,,,False,Granite,Weathered
+CHHAT037-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Bijawar,24.620556,79.494167,346.26,,,False,Granite,Weathered
+CHHAT038-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Lahar,24.604167,79.610833,320.55,,,False,Vindhyan,Weathered
+CHHAT039-OW,Observation Well,Chhatarpur,Badamalahra,Badamalahra,Sendhpa,24.529167,79.248889,321.55,,,False,Granite,Weathered
+CHHAT040-OW,Observation Well,Chhatarpur,Badamalahra,Badamalahra,Mauli,24.5425,79.297778,328.34,,,False,Granite,Weathered
+CHHAT041-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Satai,24.718889,79.640833,321.11,,,False,Granite,Weathered
+CHHAT042-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Deora,24.581667,79.656389,220.7,,,False,Vindhyan,Weathered
+CHHAT043-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Sadwa,24.473889,79.265833,343.66,,,False,Vindhyan,Weathered
+CHHAT044-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Dargawan,24.427778,79.276944,355.05,,,False,Granite,Weathered
+CHHAT045-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Kishangrah,24.681944,79.456667,423.61,,,False,Vindhyan,Weathered
+CHHAT046-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Bajna,24.430833,79.359167,366.16,,,False,Vindhyan,Weathered
+CHHAT047-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Gadohi,24.301389,79.216111,459.45,,,False,Vindhyan,Weathered
+CHHAT048-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Bamori,24.212778,79.173611,485.35,,,False,Vindhyan,Weathered
+CHHAT049-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Buxwaha,24.257222,79.305833,501.5,,,False,Vindhyan,Weathered
+CHHAT050-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Jujharpura,24.223889,79.311389,507.33,,,False,Vindhyan,Weathered
+CHHAT051-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Khearon,24.790556,79.459167,309.15,,,False,Granite,Weathered
+CHHAT052-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Piporakala,24.856111,79.4875,280.6,,,False,Granite,Weathered
+CHHAT053-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Panotha,24.883333,79.473056,290.5,,,False,Granite,Weathered
+CHHAT054-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Ramgrah,24.834167,79.603611,305.45,,,False,Granite,Weathered
+CHHAT055-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Hama,24.963889,79.608889,279.17,,,False,Granite,Weathered
+CHHAT056-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Deari,24.907778,79.52,301.6,,,False,Granite,Weathered
+CHHAT057-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Brijpura,24.852778,79.658333,308.7,,,False,Granite,Weathered
+CHHAT058-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Ganj,24.794167,79.778889,216.75,,,False,Granite,Weathered
+CHHAT059-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Nayagawan,24.813333,79.833056,255.7,,,False,Granite,Weathered
+CHHAT060-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Kheari,24.771667,79.826389,261.3,,,False,Granite,Weathered
+CHHAT061-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Chandnagar,24.745833,79.948333,210.5,,,False,Granite,Weathered
+CHHAT062-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Bhiyiatal,24.779167,79.963333,216.7,,,False,Granite,Weathered
+CHHAT063-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Pira,24.773056,79.91,240.3,,,False,Granite,Weathered
+CHHAT064-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Tikuri,24.8,79.93,243.3,,,False,Granite,Weathered
+CHHAT065-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Khajuwa,24.927222,79.921944,194.3,,,False,Granite,Weathered
+CHHAT066-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Daharra,24.972778,79.908889,204.35,,,False,Granite,Weathered
+CHHAT067-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Maniya,25.018611,79.899167,217.8,,,False,Granite,Weathered
+CHHAT068-OW,Observation Well,Chhatarpur,Loundi,Loundi,Bagmau,25.093889,79.972778,213.05,,,False,Granite,Weathered
+CHHAT069-OW,Observation Well,Chhatarpur,Loundi,Loundi,Girdhari,25.103889,79.941944,205.8,,,False,Granite,Weathered
+CHHAT070-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Singhpur,25.093611,79.9025,227.5,,,False,Granite,Weathered
+CHHAT071-OW,Observation Well,Chhatarpur,Loundi,Loundi,Ragoli,25.133056,79.879167,213.6,,,False,Granite,Weathered
+CHHAT072-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Didawara,25.244444,79.963889,203.8,,,False,Granite,Weathered
+CHHAT073-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Joraha,25.21,79.981944,175.8,,,False,Granite,Weathered
+CHHAT074-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Hardwar,25.167222,79.999444,203.1,,,False,Granite,Weathered
+CHHAT075-OW,Observation Well,Chhatarpur,Loundi,Loundi,Barigrah,25.226111,80.046667,190.5,,,False,Granite,Weathered
+CHHAT076-OW,Observation Well,Chhatarpur,Gaurihar,Gaurihar,Sunwaha,24.240556,79.205833,522.68,,,False,Granite,Weathered
+CHHAT077-OW,Observation Well,Chhatarpur,Gaurihar,Gaurihar,Madh deora,24.350556,79.176667,460.7,,,False,Granite,Weathered
+CHHAT078-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Bamnorakala,24.436111,79.105278,312.8,,,False,Granite,Weathered
+CHHAT079-OW,Observation Well,Chhatarpur,Badamalahra,Badamalahra,Ghuwara,24.505833,79.085278,328.3,,,False,Granite,Weathered
+CHHAT080-OW,Observation Well,Chhatarpur,Badamalahra,Badamalahra,Blagwan/bhangawan,24.558889,79.168611,326.4,,,False,Granite,Weathered
+CHHAT081-OW,Observation Well,Chhatarpur,Badamalahra,Badamalahra,Ramtoriya,24.413333,79.022778,364.1,,,False,Granite,Weathered
+CHHAT082-OW,Observation Well,Chhatarpur,Badamalahra,Badamalahra,Mankari,24.599167,79.377222,323.7,,,False,Granite,Weathered
+CHHAT083A-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Ranital,24.549167,79.418333,362.0,,,False,Granite,Weathered
+CHHAT084-OW,Observation Well,Chhatarpur,Badamalahra,Badamalahra,Barethi,24.595556,79.218611,323.6,,,False,Granite,Weathered
+CHHAT085-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Bharatpura,24.660556,79.445,345.8,,,False,Granite,Weathered
+CHHAT086-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Raipura,24.479444,79.708611,342.92,,,False,Granite,Weathered
+CHHAT087-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Kupi,24.529167,79.665556,288.9,,,False,Granite,Weathered
+CHHAT089-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Jaitpura,24.393889,79.853056,321.9,,,False,Granite,Weathered
+CHHAT090-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Lakhangown,24.747222,79.518611,339.9,,,False,Granite,Weathered
+CHHAT091-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Ragoli,24.635556,79.69,347.3,,,False,Granite,Weathered
+CHHAT092-OW,Observation Well,Chhatarpur,Bijawar,Bijawar,Amronia,25.09,79.3575,309.6,,,False,Granite,Weathered
+CHHAT093-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Garoli,25.074444,79.459444,244.2,,,False,Granite,Weathered
+CHHAT094-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Negown,25.298611,79.296111,240.3,,,False,Granite,Weathered
+CHHAT095-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Sarsed,25.1,79.402778,205.4,,,False,Granite,Weathered
+CHHAT096-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Doria,25.115833,79.568333,245.3,,,False,Granite,Weathered
+CHHAT097-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Jhijhan,25.050833,79.696944,257.3,,,False,Granite,Weathered
+CHHAT098-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Gadimalehra,25.097778,79.678611,265.0,,,False,Granite,Weathered
+CHHAT099-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Kurraha,25.183611,80.286944,247.85,,,False,Granite,Weathered
+CHHAT09-OW,Observation Well,Chhatarpur,Gaurihar,Buxwaha,Sarwai,24.703333,79.549444,142.0,,,False,Granite,Weathered
+CHHAT100-OW,Observation Well,Chhatarpur,Nowgaon,Nowgaon,Mankari,25.025833,79.791944,245.8,,,False,Granite,Weathered
+CHHAT101-OW,Observation Well,Chhatarpur,Chhatarpur,Chhatarpur,Niwari,24.9875,79.656389,278.48,,,False,Granite,Weathered
+CHHATO31-OW,Observation Well,Chhatarpur,Rajnagar,Rajnagar,Toriya,24.740556,79.994722,213.66,,,False,Granite,Weathered
+PANNA001A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Khora-sarvansi,25.018889,80.426111,157.0,,,False,Unknown,Unknown
+PANNA002A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Shahpura,24.951944,80.33,167.0,,,False,Unknown,Unknown
+PANNA003-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Harseni,24.975278,80.276389,165.06,,,False,Unknown,Unknown
+PANNA004-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Nayagaon,24.960556,80.382778,157.88,,,False,Unknown,Unknown
+PANNA005-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Dharmpur,24.9725,80.431944,145.3,,,False,Unknown,Unknown
+PANNA006A-OW,Observation Well,Panna,Gunour,Gunour,Shankargarh,24.384444,80.223333,336.0,,,False,Unknown,Unknown
+PANNA007-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Singhpur,24.881389,80.295,140.4,,,False,Unknown,Unknown
+PANNA008-OW,Observation Well,Panna,Panna,Panna,Ajaigarh,24.9,80.245278,152.47,,,False,Unknown,Unknown
+PANNA009-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Madhoganj,24.911111,80.266111,156.3,,,False,Unknown,Unknown
+PANNA010-OW,Observation Well,Panna,Panna,Panna,Hardi,24.93,80.354444,130.4,,,False,Unknown,Unknown
+PANNA011-OW,Observation Well,Panna,Panna,Panna,Jaruapur,24.703611,80.125833,363.99,,,False,Unknown,Unknown
+PANNA012-OW,Observation Well,Panna,Panna,Panna,Kaliyanpur,24.745556,80.244444,382.21,,,False,Unknown,Unknown
+PANNA013-OW,Observation Well,Panna,Panna,Panna,Udaki,24.764444,80.316944,356.67,,,False,Unknown,Unknown
+PANNA014-OW,Observation Well,Panna,Panna,Panna,Itwa Khas,24.786944,80.379444,342.0,,,False,Unknown,Unknown
+PANNA015-OW,Observation Well,Panna,Panna,Panna,Brijpur,24.811667,80.439167,345.41,,,False,Unknown,Unknown
+PANNA016-OW,Observation Well,Panna,Panna,Panna,Pahadi kheda,24.858889,80.523889,343.08,,,False,Unknown,Unknown
+PANNA017A-OW,Observation Well,Panna,Gunour,Gunour,Jaswantpura,24.506944,80.038889,328.0,,,False,Unknown,Unknown
+PANNA018-OW,Observation Well,Panna,Panna,Panna,Tara,24.522778,80.083333,324.07,,,False,Unknown,Unknown
+PANNA019-OW,Observation Well,Panna,Panna,Panna,Barach,24.543333,80.173056,318.2,,,False,Unknown,Unknown
+PANNA020A-OW,Observation Well,Panna,Panna,Panna,Kakrahati,24.561389,80.264167,331.0,,,False,Unknown,Unknown
+PANNA021-OW,Observation Well,Panna,Panna,Panna,Devndra nagar,24.615278,80.388333,326.9,,,False,Unknown,Unknown
+PANNA022A-OW,Observation Well,Panna,Panna,Panna,Jigdaha,24.591389,80.383333,346.0,,,False,Unknown,Unknown
+PANNA023A-OW,Observation Well,Panna,Panna,Panna,Phulwari,24.599444,80.4375,344.0,,,False,Unknown,Unknown
+PANNA024-OW,Observation Well,Panna,Panna,Panna,Tindunhai,24.529167,80.376389,342.94,,,False,Unknown,Unknown
+PANNA025-OW,Observation Well,Panna,Panna,Panna,Panna,24.707222,80.180556,349.99,,,False,Unknown,Unknown
+PANNA026-OW,Observation Well,Panna,Panna,Panna,Amanganj,24.926389,80.031667,306.22,,,False,Unknown,Unknown
+PANNA027A-OW,Observation Well,Panna,Gunour,Gunour,Siri,24.46,80.010833,319.0,,,False,Unknown,Unknown
+PANNA028-OW,Observation Well,Panna,Gunour,Gunour,Gunnour,24.461389,80.248889,362.02,,,False,Unknown,Unknown
+PANNA029-OW,Observation Well,Panna,Gunour,Gunour,Lohargaon,24.492778,80.319444,355.94,,,False,Unknown,Unknown
+PANNA030-OW,Observation Well,Panna,Gunour,Gunour,Jharkua,24.353889,88.044722,365.84,,,False,Unknown,Unknown
+PANNA031-OW,Observation Well,Panna,Gunour,Gunour,Mahewa,24.401389,80.131111,328.38,,,False,Unknown,Unknown
+PANNA032A-OW,Observation Well,Panna,Gunour,Gunour,Sathaniya,24.37,80.273611,333.0,,,False,Unknown,Unknown
+PANNA033-OW,Observation Well,Panna,Gunour,Gunour,Saleha,24.413056,80.400556,362.04,,,False,Unknown,Unknown
+PANNA034-OW,Observation Well,Panna,Pawai,Pawai,Deora,24.344444,79.971944,306.42,,,False,Unknown,Unknown
+PANNA035A-OW,Observation Well,Panna,Pawai,Pawai,Simariya,24.266944,79.896667,322.0,,,False,Unknown,Unknown
+PANNA036A-OW,Observation Well,Panna,Pawai,Pawai,Mudwari,24.341111,80.290833,334.0,,,False,Unknown,Unknown
+PANNA037A-OW,Observation Well,Panna,Pawai,Pawai,Padariya Kala,24.341111,80.194167,322.0,,,False,Unknown,Unknown
+PANNA037-OW,Observation Well,Panna,Shahnagar,Shahnagar,Maharajganj,34.133333,79.833333,319.43,,,False,Unknown,Unknown
+PANNA038-OW,Observation Well,Panna,Pawai,Pawai,Mohendra,24.190833,79.9575,336.0,,,False,Unknown,Unknown
+PANNA039A-OW,Observation Well,Panna,Pawai,Pawai,Rehuta,24.260556,80.052222,324.0,,,False,Unknown,Unknown
+PANNA039-OW,Observation Well,Panna,Pawai,Pawai,Hatkuri,24.238889,80.067222,320.8,,,False,Unknown,Unknown
+PANNA040-OW,Observation Well,Panna,Pawai,Pawai,Chomukha,24.323056,80.084167,312.29,,,False,Unknown,Unknown
+PANNA041A-OW,Observation Well,Panna,Pawai,Pawai,Karhi,24.285556,80.2025,332.0,,,False,Unknown,Unknown
+PANNA042A-OW,Observation Well,Panna,Pawai,Pawai,Itay,24.294444,80.267778,334.0,,,False,Unknown,Unknown
+PANNA043A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Baghwarkala,23.974722,79.918056,414.0,,,False,Unknown,Unknown
+PANNA044A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Takhori,23.988889,79.948889,420.0,,,False,Unknown,Unknown
+PANNA045-OW,Observation Well,Panna,Shahnagar,Shahnagar,Repura,23.899444,79.964722,412.02,,,False,Unknown,Unknown
+PANNA046A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Malghan,24.026389,80.060278,413.0,,,False,Unknown,Unknown
+PANNA047A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bori,24.039722,80.138889,410.0,,,False,Unknown,Unknown
+PANNA048-OW,Observation Well,Panna,Shahnagar,Shahnagar,Imliya,24.109722,80.218889,380.49,,,False,Unknown,Unknown
+PANNA049-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bisani,24.125278,80.285278,387.15,,,False,Unknown,Unknown
+PANNA050-OW,Observation Well,Panna,Shahnagar,Shahnagar,Shahnagar,23.989167,80.308889,370.79,,,False,Unknown,Unknown
+PANNA051-OW,Observation Well,Panna,Pawai,Pawai,Pawai,24.27,80.163333,316.4,,,False,Unknown,Unknown
+PANNA052-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Krishnpur,24.742778,80.258333,112.7,,,False,Unknown,Unknown
+PANNA053-0W,Observation Well,Panna,Ajaygarh,Ajaygarh,Deogaon,24.934722,80.313611,102.6,,,False,Unknown,Unknown
+PANNA054-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Kunwarpur,24.886667,80.190556,140.6,,,False,Unknown,Unknown
+PANNA055-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Bariyarpur,24.854444,80.1,155.6,,,False,Unknown,Unknown
+PANNA057A-OW,Observation Well,Panna,Gunour,Gunour,Pagra,24.561389,80.264167,331.0,,,False,Unknown,Unknown
+PANNA058-OW,Observation Well,Panna,Gunour,Gunour,Garokhar,24.418056,79.833333,306.1,,,False,Unknown,Unknown
+PANNA059A-OW,Observation Well,Panna,Gunour,Gunour,Ghatari,24.416667,80.076944,323.0,,,False,Unknown,Unknown
+PANNA060A-OW,Observation Well,Panna,Gunour,Gunour,Sahilwara,24.403056,80.281111,345.0,,,False,Unknown,Unknown
+PANNA061-OW,Observation Well,Panna,Gunour,Gunour,Bilgari,24.491111,80.213611,362.0,,,False,Unknown,Unknown
+PANNA062A-OW,Observation Well,Panna,Panna,Panna,Chopara-sakariya,24.604444,80.275,353.0,,,False,Unknown,Unknown
+PANNA063A-OW,Observation Well,Panna,Panna,Panna,Itwa Kala,24.544722,80.141389,324.0,,,False,Unknown,Unknown
+PANNA064-OW,Observation Well,Panna,Gunour,Gunour,Duwari,24.487222,80.056111,318.6,,,False,Unknown,Unknown
+PANNA065A-OW,Observation Well,Panna,Panna,Panna,Majhguon,24.647778,80.029722,382.0,,,False,Unknown,Unknown
+PANNA066-OW,Observation Well,Panna,Panna,Panna,Akola,24.630833,80.140556,460.8,,,False,Unknown,Unknown
+PANNA067A-OW,Observation Well,Panna,Panna,Panna,Janwar,24.654722,80.2025,432.0,,,False,Unknown,Unknown
+PANNA068-OW,Observation Well,Panna,Panna,Panna,Garipadriya,24.59,80.287222,230.4,,,False,Unknown,Unknown
+PANNA069-OW,Observation Well,Panna,Panna,Panna,Marla,24.735556,80.018056,216.0,,,False,Unknown,Unknown
+PANNA071A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Salaiya,24.103889,80.299722,202.0,,,False,Unknown,Unknown
+PANNA072A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Bhapatpur Deora,24.827222,80.1075,180.0,,,False,Unknown,Unknown
+PANNA073A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Chhateni,24.894167,80.35,394.0,,,False,Unknown,Unknown
+PANNA074A-OW,Observation Well,Panna,Ajaygarh,Ajaygarh,Sinhai Aama Moad,24.913056,80.213611,172.0,,,False,Unknown,Unknown
+PANNA075A-OW,Observation Well,Panna,Pawai,Pawai,Sirsi Patna,24.385278,79.905556,307.0,,,False,Unknown,Unknown
+PANNA076A-OW,Observation Well,Panna,Panna,Panna,Jamunhai Khas,24.799444,80.314444,405.0,,,False,Unknown,Unknown
+PANNA077-OW,Observation Well,Panna,Gunour,Gunour,Kushedar,24.460833,80.325278,362.1,,,False,Unknown,Unknown
+PANNA078A-OW,Observation Well,Panna,Gunour,Gunour,Bandhur,24.398889,80.342778,334.0,,,False,Unknown,Unknown
+PANNA079A-OW,Observation Well,Panna,Gunour,Gunour,Patna Tamoli,24.385556,80.391667,349.0,,,False,Unknown,Unknown
+PANNA080A-OW,Observation Well,Panna,Pawai,Pawai,Danwara,24.200556,79.913889,334.0,,,False,Unknown,Unknown
+PANNA081-OW,Observation Well,Panna,Pawai,Pawai,Deori,24.2625,79.840833,310.28,,,False,Unknown,Unknown
+PANNA082A-OW,Observation Well,Panna,Pawai,Pawai,Tighra,24.289444,79.961667,312.0,,,False,Unknown,Unknown
+PANNA083A-OW,Observation Well,Panna,Pawai,Pawai,Semra Kala,24.218889,80.044722,343.0,,,False,Unknown,Unknown
+PANNA084A-OW,Observation Well,Panna,Pawai,Pawai,Banouli,24.166389,79.876389,332.0,,,False,Unknown,Unknown
+PANNA085A-OW,Observation Well,Panna,Pawai,Pawai,Patoree,24.253611,80.090556,336.0,,,False,Unknown,Unknown
+PANNA086A-OW,Observation Well,Panna,Pawai,Pawai,Jhanjhar,24.215,80.283333,414.0,,,False,Unknown,Unknown
+PANNA087A-OW,Observation Well,Panna,Pawai,Pawai,Krishangarh,24.308056,80.244444,338.0,,,False,Unknown,Unknown
+PANNA088-OW,Observation Well,Panna,Pawai,Pawai,Shikarpur,24.186111,80.251667,382.3,,,False,Unknown,Unknown
+PANNA089A-OW,Observation Well,Panna,Pawai,Pawai,Sunehi-jagdispura,24.291111,80.233056,334.0,,,False,Unknown,Unknown
+PANNA090-OW,Observation Well,Panna,Pawai,Pawai,Tikriya,24.143611,80.251667,383.6,,,False,Unknown,Unknown
+PANNA091A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Raiguan,24.097222,80.188056,409.0,,,False,Unknown,Unknown
+PANNA092A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bagrod,23.980833,79.969722,417.0,,,False,Unknown,Unknown
+PANNA093A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Hardua Sahasbahu,24.028611,79.991389,405.0,,,False,Unknown,Unknown
+PANNA094A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Bilpura Siharan,24.079167,79.963889,406.0,,,False,Unknown,Unknown
+PANNA095-OW,Observation Well,Panna,Shahnagar,Shahnagar,Banjari  Chopra,24.103889,80.269722,384.15,,,False,Unknown,Unknown
+PANNA096A-OW,Observation Well,Panna,Pawai,Pawai,Sijahati,24.18,80.258333,375.0,,,False,Unknown,Unknown
+PANNA097-OW,Observation Well,Panna,Shahnagar,Shahnagar,Kachori,23.979444,80.333889,369.65,,,False,Unknown,Unknown
+PANNA098A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Thepa,24.0275,80.163056,405.0,,,False,Unknown,Unknown
+PANNA099A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Rohaniya,24.0425,80.333889,360.0,,,False,Unknown,Unknown
+PANNA100A-OW,Observation Well,Panna,Shahnagar,Shahnagar,Shahpur Khurd,24.168889,80.308889,354.0,,,False,Unknown,Unknown
+PANNA102-OW,Observation Well,Panna,Panna,Panna,Piparwah,24.458611,80.042222,316.0,,,False,Unknown,Unknown
+PANNA103-OW,Observation Well,Panna,Gunour,Gunour,Bhamarha,24.451944,80.39,352.0,,,False,Unknown,Unknown
+PANNA104-OW,Observation Well,Panna,Shahnagar,Shahnagar,Kachori-new,23.979444,80.333889,369.65,,,False,Unknown,Unknown
+Panna-PZ-01,Piezometer,Panna,Gunour,Gunour,Amangang,24.419167,80.039167,415.034,,,False,Vindhyan,Weathered
+Panna-PZ-02,Piezometer,Panna,Panna,Panna,Devendranagar,24.623333,80.368889,344.94,,,False,Unknown,Weathered
+Panna-PZ-03,Piezometer,Panna,Panna,Panna,janakpur,24.741111,80.229444,309.005,,,False,Vindhyan,Weathered
+PANOA022-OWD,Observation Well,Panna,Panna,Panna,Jigdha,24.575556,80.381111,333.02,,,False,Unknown,Unknown
+SAGAR0010-PZ,Piezometer,Sagar,Devri,Devri,Devri,23.380833,79.012778,435.42,,,False,Basalt,Weathered
+SAGAR001-PZ,Piezometer,Sagar,Sagar,Rahatgarh,Rahatgarh,23.788333,78.391111,468.53,,,False,Basalt,Weathered
+SAGAR002-PZ,Piezometer,Sagar,Sagar,Jaisinagar,Jaisinagar,23.6225,78.573611,602.77,,,False,Basalt,Weathered
+SAGAR005-PZ,Piezometer,Sagar,Banda,Shahgarh,Dalpatpur,24.137778,79.008056,498.83,,,False,Basalt,Weathered
+SAGAR006-PZ,Piezometer,Sagar,Sagar,Sagar,Surkhi,23.629167,78.833889,504.9,,,False,Basalt,Weathered
+SAGAR008,Piezometer,Sagar,Devri,Devri,Gourjhamar,23.528611,78.944167,425.87,,,False,Basalt,Weathered
+SAGAR009-PZ,Piezometer,Sagar,Devri,Kesli,Kesli,23.423333,78.810556,487.51,,,False,Basalt,Weathered
+SAGAR011-PZ,Piezometer,Sagar,Garhakota,Rehli,Garhakota,23.779444,79.16,374.17,,,False,Vindhyan,Weathered
+SAGAR012-PZ,Piezometer,Sagar,Khurai,Khurai,Khurai,24.041111,78.328333,457.1,,,False,Basalt,Weathered
+SAGAR013-PZ,Piezometer,Sagar,Bina,Bina,Bina,24.171389,78.185556,412.1,,,False,Basalt,Weathered
+SAGAR014-PZ,Piezometer,Sagar,Sagar,Sagar,Sagar,23.832778,78.746667,530.0,,,False,Basalt,Weathered
+SAGAR015-PZ,Piezometer,Sagar,Sagar,Sagar,Parsoriya,23.854722,78.931389,498.1,,,False,Basalt,Weathered
+SAGAR-PDS-016-PZ,Piezometer,Sagar,Banda,Banda,Pidruwa,24.1,78.7025,,,,False,Vindhyan,Weathered
+SAGAR-PDS-017-PZ,Piezometer,Sagar,Banda,Banda,Behrol,23.890556,78.476667,,,,False,Vindhyan,Weathered
+SAGAR-PDS-018-PZ,Piezometer,Sagar,Malthone,Malthon,Bandri,24.044444,78.640278,,,,False,Vindhyan,Weathered
+SAGAR-PDS-019-PZ,Piezometer,Sagar,Rahatgarh,Rahatgarh,Jaruwakhera,23.973611,78.481944,,,,False,Basalt,Weathered
+SAGAR-PDS-020-PZ,Piezometer,Sagar,Rahatgarh,Rahatgarh,Mehar,23.986667,78.665833,,,,False,Vindhyan,Weathered
+Sag-PZ-03,Piezometer,Sagar,Khurai,Malthon,Pali,24.308333,78.525278,477.65,,,False,Vindhyan,Weathered
+Sag-PZ-04,Piezometer,Sagar,Banda,Banda,Banda,24.042778,78.958056,478.4,,,False,Vindhyan,Weathered
+Sag-PZ-07,Piezometer,Sagar,Rehli,Rehli,Rehli,23.566111,78.529444,375.0,,,False,Vindhyan,Fractured
+SGR001-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Shahgarh,24.326944,79.107778,384.1,,,False,Granite,Weathered
+SGR002-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Heerapur,24.378889,79.227222,397.47,,,False,Unknown,Weathered
+SGR003-OW,Observation Well,Sagar,Bina,Bina,Niwari,24.256111,78.325,405.95,,,False,Basalt,Weathered
+SGR004-OW,Observation Well,Sagar,Bina,Bina,Bhangarh,24.315556,78.2675,391.88,,,False,Basalt,Weathered
+SGR005-OW,Observation Well,Sagar,Malthone,Malthone,Malthone,24.308333,78.525278,480.83,,,False,Vindhyan,Weathered
+SGR006-OW,Observation Well,Sagar,Bina,Bina,Bina,24.171389,78.185556,418.68,,,False,Basalt,Weathered
+SGR008-OW,Observation Well,Sagar,Malthone,Malthone,Barodia kalan,24.21,78.596111,467.01,,,False,Basalt,Weathered
+SGR009-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Rurawan,24.178056,79.023333,469.13,,,False,Vindhyan,Weathered
+SGR011-OW,Observation Well,Sagar,Khurai,Khurai,Dugaha kalan,24.145,78.425278,421.5,,,False,Basalt,Weathered
+SGR012-OW,Observation Well,Sagar,Malthone,Malthone,Rajwans,24.161667,78.597778,485.5,,,False,Basalt,Weathered
+SGR013-OW,Observation Well,Sagar,Banda,Banda,Bahrol,24.063611,78.734722,458.04,,,False,Basalt,Weathered
+SGR014-OW,Observation Well,Sagar,Banda,Banda,Singtoni,24.081111,78.860278,472.12,,,False,Basalt,Weathered
+SGR015-OW,Observation Well,Sagar,Bina,Bina,Dhansara,24.048056,78.163333,408.12,,,False,Basalt,Weathered
+SGR016-OW,Observation Well,Sagar,Khurai,Khurai,Khurai,24.041111,78.328333,428.78,,,False,Basalt,Weathered
+SGR018-OW,Observation Well,Sagar,Malthone,Malthone,Bandri,24.044444,78.640278,579.25,,,False,Vindhyan,Weathered
+SGR019-OW,Observation Well,Sagar,Banda,Banda,Chhapri,23.958611,78.911111,489.54,,,False,Basalt,Weathered
+SGR021-OW,Observation Well,Sagar,Banda,Banda,Bara,24.033889,78.148056,379.69,,,False,Vindhyan,Weathered
+SGR022-OW,Observation Well,Sagar,Khurai,Khurai,Barodia nonagir,23.905,78.335278,437.9,,,False,Vindhyan,Weathered
+SGR023-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Ranipura,23.931667,78.690833,478.39,,,False,Vindhyan,Weathered
+SGR024-OW,Observation Well,Sagar,Sagar,Sagar,Karrapur,23.941111,78.861667,425.95,,,False,Vindhyan,Weathered
+SGR025-OW,Observation Well,Sagar,Sagar,Sagar,Shahpur,23.893611,79.051667,415.6,,,False,Vindhyan,Weathered
+SGR026-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Naryawali,23.904722,78.587778,495.6,,,False,Vindhyan,Weathered
+SGR028-OW,Observation Well,Sagar,Sagar,Sagar,Sagar,23.833611,78.763611,548.7,,,False,Basalt,Weathered
+SGR029-OW,Observation Well,Sagar,Sagar,Sagar,Parsoriya,23.854722,78.931389,497.16,,,False,Basalt,Weathered
+SGR030-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Rahatgarh,23.788333,78.391111,462.3,,,False,Basalt,Weathered
+SGR031-OW,Observation Well,Sagar,Jaisinagar,Jaisinagar,Semadhana,23.773333,78.615556,518.35,,,False,Basalt,Weathered
+SGR034-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Rampurtapra,23.759167,78.278333,446.76,,,False,Basalt,Weathered
+SGR035-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Hinotia,23.677778,78.414722,494.6,,,False,Basalt,Weathered
+SGR038-OW,Observation Well,Sagar,Jaisinagar,Jaisinagar,Bilhera,23.648889,78.733333,537.52,,,False,Basalt,Weathered
+SGR039-OW,Observation Well,Sagar,Sagar,Sagar,Surkhi,23.629167,78.833889,501.4,,,False,Basalt,Weathered
+SGR041-OW,Observation Well,Sagar,Devri,Devri,Gourjhamar,23.516944,78.936944,428.41,,,False,Basalt,Weathered
+SGR042-OW,Observation Well,Sagar,Rehli,Rehli,Chandpur,23.549722,79.098333,432.23,,,False,Vindhyan,Weathered
+SGR044-OW,Observation Well,Sagar,Kesli,Kesli,Tada,23.428889,78.661389,534.67,,,False,Basalt,Weathered
+SGR045-OW,Observation Well,Sagar,Kesli,Kesli,Kesli,23.423333,78.810556,465.24,,,False,Basalt,Weathered
+SGR047-OW,Observation Well,Sagar,Kesli,Kesli,Ghana,23.373611,78.789444,488.25,,,False,Basalt,Weathered
+SGR048-OW,Observation Well,Sagar,Devri,Devri,Deori,23.380833,79.012778,427.05,,,False,Basalt,Weathered
+SGR049-OW,Observation Well,Sagar,Kesli,Kesli,Sahajpur,23.3025,78.840278,440.16,,,False,Basalt,Weathered
+SGR050-OW,Observation Well,Sagar,Devri,Devri,Maharajpur,23.28,79.044167,425.7,,,False,Basalt,Weathered
+SGR051-OW,Observation Well,Sagar,Bina,Bina,Agasod,24.268889,78.164722,426.34,,,False,Basalt,Weathered
+SGR052-OW,Observation Well,Sagar,Khurai,Khurai,Talapar,24.136111,78.338611,442.23,,,False,Basalt,Weathered
+SGR053-OW,Observation Well,Sagar,Khurai,Khurai,Khimlasa,24.207778,78.363611,436.1,,,False,Vindhyan,Weathered
+SGR054-OW,Observation Well,Sagar,Malthone,Malthone,Khiriya,24.261944,78.448333,483.64,,,False,Basalt,Weathered
+SGR055-OW,Observation Well,Sagar,Malthone,Malthone,Bamnora,24.221111,78.421667,470.11,,,False,Basalt,Weathered
+SGR056-OW,Observation Well,Sagar,Bina,Bina,Mandi bamora,24.054722,78.082778,412.76,,,False,Basalt,Weathered
+SGR057-OW,Observation Well,Sagar,Khurai,Khurai,Kulwai,24.109444,78.275278,421.03,,,False,Basalt,Weathered
+SGR058-OW,Observation Well,Sagar,Malthone,Malthone,Pithoriya,24.051389,78.591667,437.06,,,False,Basalt,Weathered
+SGR061-OW,Observation Well,Sagar,Khurai,Khurai,Katheli,23.975,78.330278,436.33,,,False,Basalt,Weathered
+SGR062-OW,Observation Well,Sagar,Malthone,Malthone,Paharguwa,24.055556,78.708333,491.79,,,False,Vindhyan,Weathered
+SGR063-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Sihora,23.803611,78.578611,503.13,,,False,Basalt,Weathered
+SGR066-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Jhila,23.855556,78.328611,448.1,,,False,Basalt,Weathered
+SGR067-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Jalandhar,23.899167,78.441667,521.34,,,False,Basalt,Weathered
+SGR068-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Jaruakheda,23.9725,78.480556,497.81,,,False,Basalt,Weathered
+SGR071-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Mehar,23.986667,78.665833,504.28,,,False,Basalt,Weathered
+SGR072-OW,Observation Well,Sagar,Jaisinagar,Jaisinagar,Sarkhadi,23.735,78.585833,523.61,,,False,Basalt,Weathered
+SGR075-OW,Observation Well,Sagar,Sagar,Sagar,Dhana,23.746667,78.8675,496.12,,,False,Basalt,Weathered
+SGR076-OW,Observation Well,Sagar,Sagar,Jaisinagar,Baroda-sagar,23.713889,78.708611,522.58,,,False,Basalt,Weathered
+SGR077-OW,Observation Well,Sagar,Sagar,Sagar,Girwar,23.827222,78.954722,391.05,,,False,Vindhyan,Weathered
+SGR079-OW,Observation Well,Sagar,Rehli,Rehli,Chhulla,23.718611,79.220833,385.08,,,False,Basalt,Weathered
+SGR082-OW,Observation Well,Sagar,Rehli,Rehli,Chhirari,23.581389,79.140833,401.42,,,False,Vindhyan,Weathered
+SGR083-OW,Observation Well,Sagar,Rehli,Rehli,Kachhi-pipariya,23.576667,79.045556,425.2,,,False,Basalt,Weathered
+SGR085A-OW,Observation Well,Sagar,Kesli,Kesli,Patha,23.431389,78.734722,476.0,,,False,Basalt,Weathered
+SGR086-OW,Observation Well,Sagar,Devri,Devri,Titarpani,23.231944,79.045,437.69,,,False,Basalt,Weathered
+SGR087-OW,Observation Well,Sagar,Devri,Devri,Reechai,23.319167,79.031944,422.16,,,False,Basalt,Weathered
+SGR088-OW,Observation Well,Sagar,Devri,Devri,Chheola,23.444722,79.003889,444.5,,,False,Basalt,Weathered
+SGR089-OW,Observation Well,Sagar,Banda,Banda,Dhamoni,24.191667,78.768611,492.45,,,False,Basalt,Weathered
+SGR090-OW,Observation Well,Sagar,Banda,Banda,Pidaruwa,24.1,78.7025,458.39,,,False,Vindhyan,Weathered
+SGR092-OW,Observation Well,Sagar,Banda,Banda,Sorai,24.010556,78.928889,474.51,,,False,Basalt,Weathered
+SGR093-OW,Observation Well,Sagar,Banda,Banda,Patauwa,23.986944,79.009167,463.18,,,False,Basalt,Weathered
+SGR094-OW,Observation Well,Sagar,Banda,Banda,Kandwa,24.009444,79.121389,384.03,,,False,Basalt,Weathered
+SGR095-OW,Observation Well,Sagar,Banda,Banda,Pahladpura,24.011944,79.042222,442.0,,,False,Basalt,Weathered
+SGR096-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Sansa,24.071389,79.119167,473.42,,,False,Vindhyan,Weathered
+SGR097-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Barattiha,24.294722,78.9375,377.77,,,False,Basalt,Weathered
+SGR098-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Baraj,24.355556,79.015556,348.67,,,False,Granite,Weathered
+SGR099-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Gugra Khurd,24.143333,78.936111,469.39,,,False,Basalt,Weathered
+SGR100-OW,Observation Well,Sagar,Shahgarh,Shahgarh,Barethi,24.189444,78.910833,469.39,,,False,Vindhyan,Weathered
+SGR101-OW,Observation Well,Sagar,Sagar,Sagar,Bamohari-bika,23.7825,78.808611,512.75,,,False,Basalt,Weathered
+SGR102-OW,Observation Well,Sagar,Banda,Banda,Banda,24.042778,78.958056,472.38,,,False,Vindhyan,Weathered
+SGR103-OW,Observation Well,Sagar,Rehli,Rehli,Garhakota,23.779444,79.16,376.86,,,False,Vindhyan,Weathered
+SGR104-OW,Observation Well,Sagar,Jaisinagar,Jaisinagar,Jaisinagar,23.6225,78.573611,490.2,,,False,Basalt,Weathered
+SGR105-OW,Observation Well,Sagar,Rehli,Rehli,Rehli,23.634444,79.049444,399.16,,,False,Vindhyan,Weathered
+SGR106-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Jerai,23.860556,78.601389,503.35,,,False,Basalt,Weathered
+SGR107-OW,Observation Well,Sagar,Banda,Banda,Khojampur,24.034167,78.861944,467.11,,,False,Vindhyan,Weathered
+SGR108-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Palitoda,23.965278,78.499722,490.85,,,False,Vindhyan,Weathered
+SGR109-OW,Observation Well,Sagar,Devri,Devri,Dongarsaliya,23.436111,79.058611,433.49,,,False,Basalt,Weathered
+SGR10A-OW,Observation Well,Sagar,Khurai,Khurai,Semara-ganpat,24.153611,78.298333,427.59,,,False,Basalt,Weathered
+SGR110-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Chowki,23.790278,78.481944,498.84,,,False,Basalt,Weathered
+SGR112-OW,Observation Well,Sagar,Sagar,Sagar,Lidhora,23.850556,78.88,495.6,,,False,Basalt,Weathered
+SGR114-OW,Observation Well,Sagar,Jaisinagar,Jaisinagar,Samanapur,23.715,78.810278,518.99,,,False,Basalt,Weathered
+SGR116-OW,Observation Well,Sagar,Rahatgarh,Rahatgarh,Meerkhedi,23.769167,78.297222,445.9,,,False,Basalt,Weathered
+SGR119-OW,Observation Well,Sagar,Malthone,Malthone,Pali,24.103056,78.604444,474.28,,,False,Basalt,Weathered
+SGR120-OW,Observation Well,Sagar,Khurai,Khurai,Basahri,24.215278,78.297778,476.39,,,False,Basalt,Weathered
+SGR121-OW,Observation Well,Sagar,Devri,Devri,Kopra,23.484722,79.060278,435.0,,,False,Basalt,Weathered
+SGR122-OW,Observation Well,Sagar,Rehli,Rehli,Gunjora,23.690278,79.166389,386.15,,,False,Basalt,Weathered
+SGR123-OW,Observation Well,Sagar,Rehli,Rehli,Luhagar,23.703333,79.095,378.01,,,False,Basalt,Weathered
+SGR124-OW,Observation Well,Sagar,Rehli,Rehli,Roan,23.770833,79.2275,384.65,,,False,Basalt,Weathered
+SGR125-OW,Observation Well,Sagar,Devri,Devri,Berkoti,23.558611,78.875,493.78,,,False,Basalt,Weathered
+SGR126-OW,Observation Well,Sagar,Khurai,Khurai,Sumreri,24.0125,78.408611,442.0,,,False,Basalt,Weathered
+SGR127-OW,Observation Well,Sagar,Sagar,Sagar,Baroda Rehli,23.710833,78.914167,503.53,,,False,Basalt,Weathered
+SGR128-OW,Observation Well,Sagar,Sagar,Sagar,Patharia Hat,23.859444,78.677222,506.96,,,False,Basalt,Weathered
+SGR129-OW,Observation Well,Sagar,Bina,Bina,Katchnoda,24.269722,78.224444,405.25,,,False,Basalt,Weathered
+SGUN001-OW,Observation Well,Guna,Guna,Bamori,Padon,25.013056,76.910556,867.26,,,False,Basalt,Weathered
+SGUN001-PZ,Piezometer,Guna,Isagarh,Isagarh,Jhanghar,24.875,77.816667,498.96,,,False,Basalt,Weathered
+SGUN002-OW,Observation Well,Guna,Guna,Bamori,Fathgarh,24.098333,76.975556,358.75,,,False,Basalt,Weathered
+SGUN002-PZ,Piezometer,Guna,Guna,Guna,Guna,24.645556,77.356389,496.03,,,False,Basalt,Weathered
+SGUN003-OW,Observation Well,Guna,Guna,Bamori,Patan,25.054722,77.139167,458.21,,,False,Basalt,Weathered
+SGUN003-PZ,Piezometer,Guna,Guna,Guna,Guna,24.645556,77.356389,496.72,,,False,Basalt,Weathered
+SGUN004-OW,Observation Well,Guna,Guna,Bamori,Bamori,24.866389,77.126667,452.17,,,False,Basalt,Weathered
+SGUN004-PZ,Piezometer,Guna,Raghogarh,Raghogarh,Raghogarh,24.440833,77.170833,430.11,,,False,Basalt,Weathered
+SGUN005-OW,Observation Well,Guna,Guna,Bamori,Jhagar,24.776389,77.006667,403.4,,,False,Basalt,Weathered
+SGUN005-PZ,Piezometer,Guna,Kumbharaj,Chachoda,Khatakiya,24.339444,77.115556,409.005,,,False,Basalt,Weathered
+SGUN006A-OW,Observation Well,Guna,Guna,Bamori,Patai A,24.746667,77.035,416.27,,,False,Basalt,Weathered
+SGUN006-PZ,Piezometer,Guna,Kumbharaj,Chachoda,Khatakiya,24.339444,77.115556,408.99,,,False,Basalt,Weathered
+SGUN007-OW,Observation Well,Guna,Guna,Bamori,Kudhka,24.875,76.970833,395.41,,,False,Basalt,Weathered
+SGUN007-PZ,Piezometer,Guna,Kumbharaj,Chachoda,Khatakiya,24.339444,77.115556,409.115,,,False,Basalt,Weathered
+SGUN008-OW,Observation Well,Guna,Guna,Bamori,Paranth,24.934167,77.050833,441.17,,,False,Basalt,Weathered
+SGUN008-PZ,Piezometer,Guna,Chachoda,Chachoda,Chachoda,24.181667,77.0,426.6,,,False,Basalt,Weathered
+SGUN009A-PZ,Piezometer,Guna,Chachoda,Chachoda,Binaganj,24.181667,77.0,427.05,,,False,Unknown,Unknown
+SGUN009-OW,Observation Well,Guna,Guna,Bamori,Akoda,24.872222,77.208333,441.17,,,False,Basalt,Weathered
+SGUN009-PZ,Piezometer,Guna,Chachoda,Chachoda,Chachoda,24.181667,77.0,427.05,,,False,Basalt,Weathered
+SGUN010-OW,Observation Well,Guna,Guna,Bamori,Kaloni,24.82,77.119722,416.27,,,False,Basalt,Weathered
+SGUN011A-OW,Observation Well,Guna,Guna,Bamori,Parwah A,24.750278,76.973333,399.7,,,False,Basalt,Weathered
+SGUN012-OW,Observation Well,Guna,Guna,Bamori,Haripur,24.803056,77.091944,470.3,,,False,Basalt,Weathered
+SGUN013A-OW,Observation Well,Guna,Guna,Bamori,Garha A,24.769167,77.015,466.051,,,False,Basalt,Weathered
+SGUN014-OW,Observation Well,Guna,Guna,Guna,Guna,24.654167,77.318333,475.85,,,False,Basalt,Weathered
+SGUN015-OW,Observation Well,Guna,Guna,Guna,Bajrang Garh,24.555,77.288889,366.25,,,False,Basalt,Weathered
+SGUN016-OW,Observation Well,Guna,Guna,Guna,Bhadora,24.704722,77.394167,490.91,,,False,Basalt,Weathered
+SGUN017A-OW,Observation Well,Guna,Guna,Guna,Mayanaa,24.847222,77.459722,474.85,,,False,Basalt,Weathered
+SGUN018-OW,Observation Well,Guna,Guna,Guna,Pagara,24.657778,77.445,813.5,,,False,Basalt,Weathered
+SGUN019-OW,Observation Well,Guna,Guna,Guna,Jalampur,24.763333,77.312778,385.95,,,False,Basalt,Weathered
+SGUN020A-OW,Observation Well,Guna,Guna,Guna,Dungasra,24.711111,77.391111,463.87,,,False,Basalt,Weathered
+SGUN021-OW,Observation Well,Guna,Guna,Guna,Magrana,24.680278,77.504167,474.08,,,False,Basalt,Weathered
+SGUN022-OW,Observation Well,Guna,Guna,Guna,Hilagna,24.616667,77.275,499.3,,,False,Basalt,Weathered
+SGUN023-OW,Observation Well,Guna,Guna,Guna,Mawan,24.642778,77.425278,507.28,,,False,Basalt,Weathered
+SGUN024-OW,Observation Well,Guna,Guna,Guna,Barkheda Gird,24.5625,77.4,510.89,,,False,Basalt,Weathered
+SGUN025-OW,Observation Well,Guna,Guna,Guna,Chhipon,24.511111,77.344444,500.91,,,False,Basalt,Weathered
+SGUN026-OW,Observation Well,Guna,Raghogarh,Raghogarh,Ruthiyi,24.498333,77.12,412.73,,,False,Basalt,Weathered
+SGUN027-OW,Observation Well,Guna,Raghogarh,Raghogarh,Raghogarh,24.440833,77.170833,420.35,,,False,Basalt,Weathered
+SGUN028-OW,Observation Well,Guna,Raghogarh,Raghogarh,Barkheda,24.293056,77.151389,402.86,,,False,Basalt,Weathered
+SGUN029-OW,Observation Well,Guna,Raghogarh,Raghogarh,Jamner,24.179722,77.216667,425.86,,,False,Basalt,Weathered
+SGUN030-OW,Observation Well,Guna,Raghogarh,Raghogarh,Maksoodangarh,24.062778,77.25,434.87,,,False,Basalt,Weathered
+SGUN031-OW,Observation Well,Guna,Raghogarh,Raghogarh,Dharnaoda,24.526111,77.063889,390.96,,,False,Basalt,Weathered
+SGUN032-OW,Observation Well,Guna,Raghogarh,Raghogarh,Dorana,24.475,77.1875,425.46,,,False,Basalt,Weathered
+SGUN033-OW,Observation Well,Guna,Raghogarh,Raghogarh,Ramnagar,24.404722,77.195278,422.31,,,False,Basalt,Weathered
+SGUN034-OW,Observation Well,Guna,Raghogarh,Raghogarh,Janjali,24.370833,77.120833,406.05,,,False,Basalt,Weathered
+SGUN035-OW,Observation Well,Guna,Raghogarh,Raghogarh,Todra,24.230556,77.1875,430.83,,,False,Basalt,Weathered
+SGUN036-OW,Observation Well,Guna,Raghogarh,Raghogarh,Dongar Motipur,24.133333,77.241667,423.51,,,False,Unknown,Weathered
+SGUN037-OW,Observation Well,Guna,Raghogarh,Raghogarh,Barod,23.986111,77.254444,442.63,,,False,Basalt,Weathered
+SGUN038-OW,Observation Well,Guna,Raghogarh,Raghogarh,Ukawad,23.935278,77.29,444.34,,,False,Basalt,Weathered
+SGUN039-OW,Observation Well,Guna,Aron,Aron,Barkhedahat,24.456389,77.390278,517.0,,,False,Basalt,Weathered
+SGUN040A-OW,Observation Well,Guna,Aron,Aron,Aron,24.382778,77.417778,517.63,,,False,Basalt,Weathered
+SGUN041-OW,Observation Well,Guna,Aron,Aron,Rampur,24.346944,77.431944,500.97,,,False,Basalt,Weathered
+SGUN042-OW,Observation Well,Guna,Aron,Aron,Bhador,24.49,77.433056,479.53,,,False,Basalt,Weathered
+SGUN043-OW,Observation Well,Guna,Aron,Aron,Kham Kheda,24.425,77.454167,501.7,,,False,Basalt,Weathered
+SGUN044-OW,Observation Well,Guna,Aron,Aron,Rijoda,24.353889,77.386667,516.32,,,False,Basalt,Weathered
+SGUN045A-OW,Observation Well,Guna,Aron,Aron,Mundramata,24.275,77.441667,497.8,,,False,Basalt,Weathered
+SGUN046-OW,Observation Well,Guna,Aron,Aron,Panwarihat,24.35,77.575,518.7,,,False,Basalt,Weathered
+SGUN047-OW,Observation Well,Guna,Chachoda,Chachoda,Kumbhraj,24.369444,77.050556,404.02,,,False,Basalt,Weathered
+SGUN048A-OW,Observation Well,Guna,Chachoda,Chachoda,Bina Ganj A,24.180556,77.027778,425.9,,,False,Basalt,Weathered
+SGUN049A-OW,Observation Well,Guna,Chachoda,Chachoda,Barkheda Khurd,24.319167,77.103889,405.75,,,False,Basalt,Weathered
+SGUN050-OW,Observation Well,Guna,Chachoda,Chachoda,Sanai,24.383333,76.919444,433.09,,,False,Basalt,Weathered
+SGUN051-OW,Observation Well,Guna,Chachoda,Chachoda,Miragwas,24.325,76.902778,423.34,,,False,Basalt,Weathered
+SGUN052-OW,Observation Well,Guna,Chachoda,Chachoda,Batawada,24.283333,76.904167,429.31,,,False,Basalt,Weathered
+SGUN053A-OW,Observation Well,Guna,Chachoda,Chachoda,Baroda (a),24.416667,76.983333,426.84,,,False,Basalt,Weathered
+SGUN054-OW,Observation Well,Guna,Chachoda,Chachoda,Ramdi,24.241667,77.05,424.33,,,False,Basalt,Weathered
+SGUN055-OW,Observation Well,Guna,Chachoda,Chachoda,Cachoda,24.175,77.0,426.605,,,False,Basalt,Weathered
+SGUN056-OW,Observation Well,Guna,Chachoda,Chachoda,Kirwada,24.125,77.008333,433.48,,,False,Basalt,Weathered
+SGUN057-OW,Observation Well,Guna,Chachoda,Chachoda,Pakhariyapura,24.066667,76.966667,393.63,,,False,Basalt,Weathered
+SGUN058-OW,Observation Well,Guna,Chachoda,Chachoda,Teligaon,24.103333,77.126389,433.04,,,False,Basalt,Weathered
+SGUN059-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Bhadodi,24.400278,77.171667,413.73,,,False,Basalt,Weathered
+SGUN060-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Dokamandir,23.962778,77.247778,444.5,,,False,Basalt,Weathered
+SGUN061-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Bada Amliya,24.315,77.245278,430.17,,,False,Basalt,Weathered
+SGUN062-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,awan,24.406111,77.128889,429.15,,,False,Basalt,Weathered
+SGUN063-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Govind pura,24.075556,77.271389,428.3,,,False,Basalt,Weathered
+SGUN064-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,pipal khedi,24.361944,77.205278,427.1,,,False,Basalt,Weathered
+SGUN065-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Barsat,24.2625,77.145556,430.1,,,False,Basalt,Weathered
+SGUN066-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Motipura,24.140556,77.236111,431.1,,,False,Basalt,Weathered
+SGUN067-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Dongar Motipur,24.454722,77.136944,423.11,,,False,Basalt,Weathered
+SGUN068-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Kadai kheda,24.108056,77.239167,425.1,,,False,Basalt,Weathered
+SGUN069-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,kolaras,24.091944,77.263611,424.25,,,False,Basalt,Weathered
+SGUN070-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Sakatpur,24.5125,77.089722,424.3,,,False,Basalt,Weathered
+SGUN071-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Balabhet,24.541667,77.120278,441.17,,,False,Basalt,Weathered
+SGUN072-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Diroli,23.984444,77.240556,425.7,,,False,Basalt,Weathered
+SGUN073-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Maksudangrah,24.079444,77.245556,426.17,,,False,Basalt,Weathered
+SGUN074-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Torai,24.074722,77.24,424.31,,,False,Basalt,Weathered
+SGUN075-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,shripura,24.438889,77.176389,425.18,,,False,Basalt,Weathered
+SGUN076-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Nalkheda,24.058333,77.224722,425.8,,,False,Basalt,Weathered
+SGUN077-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Garkheda,24.038889,77.211944,426.2,,,False,Basalt,Weathered
+SGUN078-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Agar pura,24.044444,77.185,426.4,,,False,Basalt,Weathered
+SGUN079-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,Udaypuri,24.528889,77.091389,421.35,,,False,Basalt,Weathered
+SGUN080-OW 2016,Observation Well,Guna,Raghogarh,Raghogarh,kakwasa,24.531667,77.065833,421.34,,,False,Basalt,Weathered
+SGUN081-OW 2016,Observation Well,Guna,Chachoda,Chachoda,Gulbada,24.431389,77.071389,425.18,,,False,Basalt,Weathered
+SGUN082-OW 2016,Observation Well,Guna,Chachoda,Chachoda,kaikadya kalan,24.458333,76.974722,424.2,,,False,Basalt,Weathered
+SGUN083-OW 2016,Observation Well,Guna,Chachoda,Chachoda,Kaikadya khurd,24.310278,76.889444,424.7,,,False,Basalt,Weathered
+SGUN084-OW 2016,Observation Well,Guna,Chachoda,Chachoda,Bhamabad,24.471944,77.0875,426.1,,,False,Basalt,Weathered
+SGUN085-OW 2016,Observation Well,Guna,Bamori,Bamori,Golakhedi,24.570833,77.1225,481.1,,,False,Basalt,Weathered
+SGUN086-OW 2016,Observation Well,Guna,Bamori,Bamori,Sujakhedi,24.649167,77.160833,480.15,,,False,Basalt,Weathered
+SGUN087-OW 2016,Observation Well,Guna,Bamori,Bamori,Barkhedi,24.605,77.166944,481.9,,,False,Basalt,Weathered
+SGUN088-OW 2016,Observation Well,Guna,Guna,Guna,Gajnai,24.730278,77.519444,401.2,,,False,Basalt,Weathered
+SGUN089-OW 2016,Observation Well,Guna,Guna,Guna,Majhola,24.09,77.296944,405.5,,,False,Basalt,Weathered
+SGUN090-OW 2016,Observation Well,Guna,Guna,Guna,Negma,24.715556,77.311111,406.75,,,False,Basalt,Weathered
+SGUN091-OW 2016,Observation Well,Guna,Guna,Guna,Siganpur,24.89,77.441111,404.15,,,False,Basalt,Weathered
+SGUN092-OW 2016,Observation Well,Guna,Guna,Guna,Khajuri,24.8625,77.5,395.92,,,False,Basalt,Weathered
+SGUN093-OW 2016,Observation Well,Guna,Guna,Guna,Makravda,24.738611,77.279444,390.95,,,False,Basalt,Weathered
+SGUN094-OW 2016,Observation Well,Guna,Guna,Guna,Dhananwa,24.695833,77.123889,401.75,,,False,Basalt,Weathered
+SGUN095-OW 2016,Observation Well,Guna,Guna,Guna,Gopalpura Taktaiya,24.583333,77.356389,397.55,,,False,Basalt,Weathered
+SGUN096-OW 2016,Observation Well,Guna,Guna,Guna,Puraposar,24.371111,77.296944,390.95,,,False,Basalt,Weathered
+SGUN097-OW 2016,Observation Well,Guna,Guna,Guna,Banskhedi,24.014167,77.136944,402.55,,,False,Basalt,Weathered
+SGUN098-OW 2016,Observation Well,Guna,Aron,Aron,Ramgir Khurd,24.415556,77.374167,510.7,,,False,Basalt,Weathered
+SGUN099-OW 2016,Observation Well,Guna,Aron,Aron,Banjarapura Lmaliya,24.360833,77.405278,512.5,,,False,Basalt,Weathered
+SGUN100-OW 2016,Observation Well,Guna,Aron,Aron,Manpur,24.441389,77.341111,498.2,,,False,Basalt,Weathered
+SGWL001-PZ,Piezometer,Unknown,Gird (gwalior),Morar,Thatipur,26.2125,78.208333,207.11,,,False,Granite,Fractured
+SGWL002-PZ,Piezometer,Unknown,Gird (gwalior),Morar,Ratwai,26.241667,78.345833,184.49,,,False,Unknown,Weathered
+SGWL003A-OW,Observation Well,Unknown,Gird (gwalior),Morar,Maharajpura,26.273333,78.220278,192.0,,,False,Vindhyan,Weathered
+SGWL003-PZ,Piezometer,Unknown,Dabra,Dabra,Gijora,26.066667,78.433889,220.45,,,False,Vindhyan,Weathered
+SGWL004A-OW,Observation Well,Unknown,Gird (gwalior),Morar,Sonsa,26.174722,78.271111,213.0,,,False,Vindhyan,Weathered
+SGWL004-PZ,Piezometer,Unknown,Gird (gwalior),Morar,Hastinapur,26.166667,78.416667,201.535,,,False,Vindhyan,Weathered
+SGWL005-PZ,Piezometer,Unknown,Gird (gwalior),Ghatigaon,Purani Chavni,26.263889,78.129167,197.38,,,False,Vindhyan,Weathered
+SGWL006-PZ,Piezometer,Unknown,Dabra,Dabra,Makoda,26.033611,78.258333,242.44,,,False,Granite,Weathered
+SGWL007-OW,Observation Well,Unknown,Gird (gwalior),Morar,Behat,26.170833,78.538889,207.63,,,False,Vindhyan,Weathered
+SGWL007-PZ,Piezometer,Unknown,Gird (gwalior),Ghatigaon,Mohna New,25.908333,77.775,312.305,,,False,Vindhyan,Fractured
+SGWL009A-OW,Observation Well,Unknown,Gird (gwalior),Morar,Sikroda,26.1175,78.215,228.0,,,False,Vindhyan,Weathered
+SGWL011A-OW,Observation Well,Unknown,Dabra,Dabra,Takanpur,25.994444,78.288889,233.74,,,False,Vindhyan,Weathered
+SGWL012-OW,Observation Well,Unknown,Dabra,Dabra,Samudan,25.961111,78.282222,222.015,,,False,Vindhyan,Weathered
+SGWL015A-OW,Observation Well,Unknown,Dabra,Dabra,Magrora,25.839444,78.342222,189.7,,,False,Granite,Weathered
+SGWL016A-OW,Observation Well,Unknown,Dabra,Dabra,Pichore,25.951667,78.383889,202.4,,,False,Granite,Weathered
+SGWL017-OW,Observation Well,Unknown,Dabra,Dabra,Bhageh.,26.033333,78.433333,207.565,,,False,Granite,Weathered
+SGWL018-OW,Observation Well,Unknown,Dabra,Dabra,Sukalhari,26.025,78.491667,199.98,,,False,Granite,Weathered
+SGWL021-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Kachhaaua,26.0,78.166667,340.99,,,False,Vindhyan,Weathered
+SGWL022-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Bagbai,25.825,78.15,239.95,,,False,Vindhyan,Weathered
+SGWL023-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Bhitarwar,25.791667,78.108333,237.155,,,False,Granite,Weathered
+SGWL024-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Harsi,25.761111,77.929167,254.68,,,False,Granite,Weathered
+SGWL025-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Mastura,25.8125,78.027778,242.275,,,False,Vindhyan,Weathered
+SGWL026-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Cheenor,25.933333,78.116667,237.875,,,False,Vindhyan,Weathered
+SGWL027-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Karahiya,25.891667,78.013889,259.22,,,False,Vindhyan,Weathered
+SGWL028-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Sirsula,25.918056,78.075,244.565,,,False,Vindhyan,Weathered
+SGWL030A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Sagartal,26.241944,78.16,204.0,,,False,Vindhyan,Weathered
+SGWL031A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Hazira,26.23,78.181667,201.0,,,False,Vindhyan,Weathered
+SGWL032A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Rudrapura,26.288889,78.150833,188.0,,,False,Vindhyan,Weathered
+SGWL033A-OW,Observation Well,Unknown,Bhitarwar,Ghatigaon,Hukumgarh,25.988611,78.021944,258.0,,,False,Vindhyan,Weathered
+SGWL034A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Santau,26.1075,78.129444,249.0,,,False,Vindhyan,Weathered
+SGWL035A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Ramprasad Ka Pura,26.293611,78.079722,205.0,,,False,Vindhyan,Weathered
+SGWL036A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Ghatigaon,26.053333,77.939167,350.0,,,False,Vindhyan,Weathered
+SGWL037-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Rehat,25.976389,77.833056,346.0,,,False,Vindhyan,Weathered
+SGWL038-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Mohana,25.891667,77.769444,320.15,,,False,Vindhyan,Weathered
+SGWL039-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Aron,25.952778,77.936111,362.06,,,False,Vindhyan,Weathered
+SGWL040A-OW,Observation Well,Unknown,Gird (gwalior),Morar,Madanpura,26.299722,78.169444,182.0,,,False,Vindhyan,Weathered
+SGWL041-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Susera,26.312222,78.159444,181.0,,,False,Vindhyan,Weathered
+SGWL042-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Bilpura,26.291944,78.094722,191.0,,,False,Vindhyan,Weathered
+SGWL043A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Odpura,26.2075,78.0925,230.0,,,False,Vindhyan,Weathered
+SGWL044-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Tigra,26.216667,78.008333,229.0,,,False,Vindhyan,Weathered
+SGWL045-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Prathvi Ka Pura,26.249722,78.041111,214.0,,,False,Vindhyan,Weathered
+SGWL046-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Ghosipura,26.212778,78.151389,244.0,,,False,Vindhyan,Weathered
+SGWL047A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Barai,26.115,78.011389,297.0,,,False,Vindhyan,Weathered
+SGWL048-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Dhoouan,26.0625,77.916667,332.89,,,False,Vindhyan,Weathered
+SGWL049-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Sirsa,26.028056,77.9,352.0,,,False,Vindhyan,Weathered
+SGWL050A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Daurar,25.950833,77.792778,339.0,,,False,Vindhyan,Weathered
+SGWL051-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Barai ka pura,25.930556,77.788889,319.29,,,False,Vindhyan,Weathered
+SGWL052-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Badagaon,25.907222,77.721389,318.31,,,False,Vindhyan,Weathered
+SGWL053-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Dursendi,26.019444,77.948056,357.7,,,False,Vindhyan,Weathered
+SGWL054-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Lawan ka pura,25.922222,77.916667,379.23,,,False,Vindhyan,Weathered
+SGWL055-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Patai,25.891667,77.911111,377.54,,,False,Vindhyan,Weathered
+SGWL056A-OW,Observation Well,Unknown,Gird (gwalior),Morar,Girgaon,26.279167,78.258333,181.0,,,False,Vindhyan,Weathered
+SGWL057-OW,Observation Well,Unknown,Gird (gwalior),Morar,Berja,26.264167,78.368611,174.0,,,False,Vindhyan,Weathered
+SGWL063A-OW,Observation Well,Unknown,Gird (gwalior),Morar,Lakhnoti Kala,26.141111,78.216111,216.0,,,False,Vindhyan,Weathered
+SGWL064-OW,Observation Well,Unknown,Gird (gwalior),Morar,Singhpur,26.078611,78.422778,259.47,,,False,Vindhyan,Weathered
+SGWL066-OW,Observation Well,Unknown,Dabra,Dabra,Gijjora,26.066667,78.466667,231.78,,,False,Vindhyan,Weathered
+SGWL068-OW,Observation Well,Unknown,Dabra,Dabra,Sukhapatha,26.041111,78.374167,209.35,,,False,Vindhyan,Weathered
+SGWL069-OW,Observation Well,Unknown,Dabra,Dabra,Ghoghe,26.0,78.416667,195.21,,,False,Vindhyan,Weathered
+SGWL070A-OW,Observation Well,Unknown,Dabra,Dabra,Dhai Dhava,25.934722,78.358333,197.9,,,False,Vindhyan,Weathered
+SGWL071-OW,Observation Well,Unknown,Dabra,Dabra,Arru,25.916667,78.3,211.16,,,False,Vindhyan,Weathered
+SGWL072-OW,Observation Well,Unknown,Dabra,Dabra,Makoda,26.033333,78.258333,237.45,,,False,Vindhyan,Weathered
+SGWL073-OW,Observation Well,Unknown,Dabra,Dabra,Jorasi,26.070556,78.254722,248.17,,,False,Vindhyan,Weathered
+SGWL074A-OW,Observation Well,Unknown,Gird (gwalior),Morar,Adupura Jagir,26.116944,78.222778,228.0,,,False,Vindhyan,Weathered
+SGWL075-OW,Observation Well,Unknown,Gird (gwalior),Morar,Sitholi,26.15,78.183333,222.54,,,False,Vindhyan,Weathered
+SGWL076A-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Naugaon,26.143056,78.124722,243.0,,,False,Vindhyan,Weathered
+SGWL078-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Bhori,25.975,78.125,223.87,,,False,Vindhyan,Weathered
+SGWL079-OW,Observation Well,Unknown,Dabra,Dabra,Rajiyar,25.888611,78.230278,225.78,,,False,Vindhyan,Weathered
+SGWL082A-OW,Observation Well,Unknown,Dabra,Dabra,Masoodpur,25.8325,78.245,205.8,,,False,Vindhyan,Weathered
+SGWL083-OW,Observation Well,Unknown,Dabra,Dabra,Kariawati,25.819444,78.180556,222.11,,,False,Vindhyan,Weathered
+SGWL084-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Gohinda,25.766667,78.125,240.79,,,False,Vindhyan,Weathered
+SGWL085-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Kerua,25.743611,78.111944,241.65,,,False,Vindhyan,Weathered
+SGWL086-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Silah,25.779167,78.033333,241.75,,,False,Vindhyan,Weathered
+SGWL087-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Deari Kalan,25.778611,77.995278,240.85,,,False,Vindhyan,Weathered
+SGWL089-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Chait,25.950278,78.000556,261.0,,,False,Vindhyan,Weathered
+SGWL090-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Dadori,25.882778,77.791667,312.0,,,False,Vindhyan,Weathered
+SGWL091-OW,Observation Well,Unknown,Gird (gwalior),Ghatigaon,Chatri Mandi,26.201944,78.143889,234.0,,,False,Vindhyan,Weathered
+SGWL092-OW,Observation Well,Unknown,Gird (gwalior),Morar,Nagore,26.122222,78.200833,235.0,,,False,Vindhyan,Weathered
+SGWL093-OW,Observation Well,Unknown,Gird (gwalior),Morar,Bhadroli,26.293611,78.183333,188.0,,,False,Vindhyan,Weathered
+SGWL094-OW,Observation Well,Unknown,Gird (gwalior),Morar,Govind Ka Pura,26.283333,78.183889,192.0,,,False,Vindhyan,Weathered
+SGWL095-OW,Observation Well,Unknown,Gird (gwalior),Morar,Jamhar,26.280278,78.1725,199.0,,,False,Vindhyan,Weathered
+SGWL096-OW,Observation Well,Unknown,Gird (gwalior),Morar,Sumer Ka Pura,26.173611,78.218889,211.0,,,False,Vindhyan,Weathered
+SGWL097-OW,Observation Well,Unknown,Gird (gwalior),Morar,Rammua,26.163056,78.218333,206.0,,,False,Vindhyan,Weathered
+SGWL098-OW,Observation Well,Unknown,Gird (gwalior),Morar,Padampur Kheria,26.250278,78.245,196.0,,,False,Vindhyan,Weathered
+SGWL099-OW,Observation Well,Unknown,Gird (gwalior),Morar,Jahangir Pur,26.2625,78.260833,182.0,,,False,Vindhyan,Weathered
+SGWL100-OW,Observation Well,Unknown,Gird (gwalior),Morar,Maithana,26.266389,78.268611,187.0,,,False,Vindhyan,Weathered
+SGWL101-OW,Observation Well,Unknown,Gird (gwalior),Morar,Behta,26.274444,78.287222,174.0,,,False,Vindhyan,Weathered
+SGWL102-OW,Observation Well,Unknown,Gird (gwalior),Morar,Suro,26.29,78.289722,177.0,,,False,Vindhyan,Weathered
+SGWL103-OW,Observation Well,Unknown,Gird (gwalior),Morar,Keshavpur Farm,26.278056,78.323611,167.0,,,False,Vindhyan,Weathered
+SGWL104-OW,Observation Well,Unknown,Gird (gwalior),Morar,Birampura,26.261111,78.311667,177.0,,,False,Vindhyan,Weathered
+SGWL105-OW,Observation Well,Unknown,Gird (gwalior),Morar,Siroli,26.260833,78.320556,182.0,,,False,Vindhyan,Weathered
+SGWL106-OW,Observation Well,Unknown,Gird (gwalior),Morar,Ratwai,26.250556,78.334444,175.0,,,False,Vindhyan,Weathered
+SGWL107-OW,Observation Well,Unknown,Dabra,Dabra,Cheemak,25.898889,78.181667,216.4,,,False,Vindhyan,Weathered
+SGWL108-OW,Observation Well,Unknown,Dabra,Dabra,Bharoli,25.974444,78.401667,177.0,,,False,Vindhyan,Weathered
+SGWL109-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Klayani Mouja,26.038056,78.234444,237.2,,,False,Vindhyan,Weathered
+SGWL110-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Antri Mouja,26.038889,78.229167,237.04,,,False,Vindhyan,Weathered
+SGWL111-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Araya,26.030278,78.191111,234.1,,,False,Vindhyan,Weathered
+SGWL112-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Kachhua Mouja,26.006111,78.176389,230.0,,,False,Vindhyan,Weathered
+SGWL113-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Sikroda,25.984167,78.160833,228.2,,,False,Vindhyan,Weathered
+SGWL114-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Jheel Badera,25.965278,78.121667,232.2,,,False,Vindhyan,Weathered
+SGWL115-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Chinore Mouja,25.942778,78.125,230.8,,,False,Vindhyan,Weathered
+SGWL116-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Rarua,25.9425,78.135,223.5,,,False,Vindhyan,Weathered
+SGWL117-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Gharsondi,25.925833,78.142778,216.6,,,False,Vindhyan,Weathered
+SGWL118-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Kanthi,25.938889,78.155,241.0,,,False,Vindhyan,Weathered
+SGWL119-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Kishanpur,25.955278,78.164167,219.8,,,False,Vindhyan,Weathered
+SGWL120-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Khedi Dabaria Chak,25.956944,78.168889,220.2,,,False,Vindhyan,Weathered
+SGWL121-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Shekhupura,25.910278,78.150278,208.9,,,False,Vindhyan,Weathered
+SGWL122-OW,Observation Well,Unknown,Bhitarwar,Bhitarwar,Pairagaon,25.916111,78.164722,217.6,,,False,Vindhyan,Weathered
+SIND001-OW,Observation Well,Indore,Mhow,Mhow,Yashwant Nagar,22.452222,75.661111,573.465,,,True,Basalt,Weathered
+SIND-001-PZ,Piezometer,Indore,Depalpur,Depalpur,Agra,22.816667,75.643333,532.1,,,True,Basalt,Weathered
+SIND-002-PZ,Piezometer,Indore,Depalpur,Depalpur,Ushapura,22.807778,75.684722,523.65,,,True,Basalt,Weathered
+SIND-003-PZ,Piezometer,Indore,Depalpur,Depalpur,Mirzapur,22.828056,75.682778,578.25,,,True,Basalt,Weathered
+SIND-004-A-PZ,Piezometer,Indore,Depalpur,Depalpur,Mendakwas-a,22.952778,75.530833,506.1,,,True,Basalt,Weathered
+SIND-004-B-PZ,Piezometer,Indore,Depalpur,Depalpur,Mendakwas-b,22.952778,75.530833,506.0,,,True,Basalt,Weathered
+SIND-004-C-PZ,Piezometer,Indore,Depalpur,Depalpur,Mendakwas-c,22.952778,75.530833,506.2,,,True,Basalt,Weathered
+SIND-005-PZ,Piezometer,Indore,Depalpur,Depalpur,Methwada,22.657222,75.555278,533.0,,,True,Basalt,Weathered
+SIND-006-PZ,Piezometer,Indore,Mhow,Mhow,Thawlai,22.528333,75.654167,559.15,,,True,Basalt,Weathered
+SIND007-OW,Observation Well,Indore,Mhow,Mhow,Pigdamber,22.619167,75.795833,602.66,,,True,Basalt,Weathered
+SIND-007-PZ,Piezometer,Indore,Mhow,Mhow,Sutarkhedi,22.554167,75.790278,568.13,,,True,Basalt,Fractured
+SIND-008-PZ,Piezometer,Indore,Sanwer,Sanwer,Panchola,22.9925,75.7825,568.13,,,True,Basalt,Weathered
+SIND-009-PZ,Piezometer,Indore,Sanwer,Sanwer,Chandrawatiganj,22.983333,75.675,511.0,,,True,Basalt,Weathered
+SIND-010-PZ,Piezometer,Indore,Sanwer,Sanwer,Balriya,23.008333,75.733611,516.0,,,True,Basalt,Weathered
+SIND-011-PZ,Piezometer,Indore,Sanwer,Sanwer,Dayakheda,22.956111,75.749167,520.0,,,True,Basalt,Weathered
+SIND-012-PZ,Piezometer,Indore,Sanwer,Sanwer,Keshripura,22.966667,75.820833,508.0,,,True,Basalt,Weathered
+SIND-013-PZ,Piezometer,Indore,Sanwer,Sanwer,Tarana,22.560833,75.853056,514.0,,,True,Basalt,Weathered
+SIND014-OW,Observation Well,Indore,Indore,Indore,Rau,23.565556,75.818889,604.07,,,False,Basalt,Weathered
+SIND-014-PZ,Piezometer,Indore,Sanwer,Sanwer,Siloda Bujurg,22.912778,75.852222,514.0,,,True,Basalt,Weathered
+SIND-015-PZ,Piezometer,Indore,Sanwer,Sanwer,Alwasa,22.820833,75.827222,541.0,,,True,Basalt,Weathered
+SIND-016-PZ,Piezometer,Indore,Sanwer,Sanwer,Barlai,22.9,75.954167,420.0,,,True,Basalt,Weathered
+SIND017-OW,Observation Well,Indore,Indore,Indore,Khajrana,22.735833,75.914722,550.47,,,True,Basalt,Weathered
+SIND-017-PZ,Piezometer,Indore,Sanwer,Sanwer,Dakachiya,22.858889,75.958611,526.24,,,True,Basalt,Weathered
+SIND-018-PZ,Piezometer,Indore,Sanwer,Sanwer,Mangliya,22.815,75.929444,538.38,,,True,Basalt,Weathered
+SIND-019-A-PZ,Piezometer,Indore,Indore,Indore,Bagamkhedi A,22.740556,75.989167,541.89,,,True,Basalt,Weathered
+SIND-019-B-PZ,Piezometer,Indore,Indore,Indore,Begamkhedi B,22.740556,75.989167,542.11,,,True,Basalt,Weathered
+SIND-019-C-PZ,Piezometer,Indore,Indore,Indore,Begamkhedi C,22.740556,75.989167,541.86,,,True,Basalt,Weathered
+SIND-020-PZ,Piezometer,Indore,Indore,Indore,Kajipalasiya,22.679722,76.029444,538.73,,,True,Basalt,Weathered
+SIND021-OW,Observation Well,Indore,Indore,Indore,Budhaniya,22.775556,75.7675,550.785,,,True,Basalt,Weathered
+SIND-021-PZ,Piezometer,Indore,Indore,Indore,Dhamnay,22.661111,76.001389,556.76,,,True,Basalt,Weathered
+SIND-022-PZ,Piezometer,Indore,Indore,Indore,Mundla Nayta,22.665556,75.915833,580.79,,,True,Basalt,Weathered
+SIND-023-PZ,Piezometer,Indore,Indore,Indore,Mirzapur,22.637222,75.909444,578.25,,,True,Basalt,Weathered
+SIND024-OW,Observation Well,Indore,Indore,Indore,Mundla dostdak,22.63,75.994722,566.015,,,True,Basalt,Weathered
+SIND-024-PZ,Piezometer,Indore,Indore,Indore,Tillorkhurd,22.613056,75.957222,578.675,,,True,Basalt,Weathered
+SIND025-OW,Observation Well,Indore,Indore,Indore,Kampel,22.6175,76.061944,532.775,,,True,Basalt,Weathered
+SIND-025-PZ,Piezometer,Indore,Indore,Indore,Narwal,22.775,75.846667,556.67,,,True,Basalt,Weathered
+SIND026-OW,Observation Well,Indore,Indore,Indore,Pipalda,22.596944,76.036667,533.855,,,True,Basalt,Weathered
+SIND-026-PZ,Piezometer,Indore,Sanwer,Sanwer,Kumredi,22.780833,75.863333,535.0,,,True,Basalt,Weathered
+SIND027-OW,Observation Well,Indore,Indore,Indore,Tinchha,22.578889,75.965,536.225,,,True,Basalt,Weathered
+SIND-027-PZ,Piezometer,Indore,Indore,Indore,Nawdapanth,22.686111,75.773056,549.0,,,True,Basalt,Weathered
+SIND-028-PZ,Piezometer,Indore,Depalpur,Depalpur,Sagrod,22.766111,75.509444,518.0,,,True,Basalt,Weathered
+SIND-029-PZ,Piezometer,Indore,Depalpur,Depalpur,Bahirampur,23.028333,75.523611,497.0,,,True,Basalt,Weathered
+SIND030-OW,Observation Well,Indore,Indore,Indore,Gandhi hall,22.716667,75.85,530.92,,,True,Basalt,Weathered
+SIND-030-PZ,Piezometer,Indore,Depalpur,Depalpur,Chander,22.793056,75.500833,513.0,,,True,Basalt,Weathered
+SIND-031-PZ,Piezometer,Indore,Depalpur,Depalpur,Takipura,22.831667,75.538056,532.0,,,True,Basalt,Weathered
+SIND-032-PZ,Piezometer,Indore,Depalpur,Depalpur,Ataheda,22.901944,75.628889,526.0,,,True,Basalt,Weathered
+SIND-033-PZ,Piezometer,Indore,Depalpur,Depalpur,Sumtha,22.855556,75.648333,523.0,,,True,Basalt,Weathered
+SIND-034-PZ,Piezometer,Indore,Depalpur,Depalpur,Chimankhedi,22.856389,75.59,,,,True,Basalt,Weathered
+SIND-035-NEW,Piezometer,Indore,Indore,Indore,Phool Karadiya,22.795278,75.706944,527.0,,,True,Basalt,Weathered
+SIND-035-PZ,Piezometer,Indore,Indore,Indore,Phoolkaradiya,22.795278,75.706944,,,,True,Basalt,Weathered
+SIND-036-PZ,Piezometer,Indore,Indore,Indore,Pedmi,22.611667,76.108611,532.0,,,True,Basalt,Weathered
+SIND-037-PZ,Piezometer,Indore,Indore,Indore,Kheda (shivni),22.678333,76.143889,548.0,,,True,Basalt,Weathered
+SIND-038-PZ,Piezometer,Indore,,Indore,Jambudi Hapsi.,22.7425,75.743889,538.0,,,True,Basalt,Weathered
+SIND-039-A-PZ,Piezometer,Indore,Sanwer,Sanwer,Ajnod A,22.934722,75.753889,523.0,,,True,Basalt,Weathered
+SIND-039-B-PZ,Piezometer,Indore,Sanwer,Sanwer,Ajnod.b,22.934722,75.753889,523.2,,,True,Basalt,Weathered
+SIND-040-PZ,Piezometer,Indore,Indore,Indore,Kasturbagram.,22.633333,75.906944,575.11,,,True,Basalt,Weathered
+SIND041-OW,Observation Well,Indore,Sanwer,Sanwer,Khajuriya,22.8175,75.711944,529.865,,,True,Basalt,Weathered
+SIND050-OW,Observation Well,Indore,Sanwer,Sanwer,Hatuniya,22.919722,75.913056,521.2,,,True,Basalt,Weathered
+SIND060-OW,Observation Well,Indore,Depalpur,Depalpur,Dhannod,22.635278,75.720556,547.485,,,True,Basalt,Weathered
+SIND064-OW,Observation Well,Indore,Depalpur,Depalpur,Ataheda,22.901944,75.628889,526.84,,,True,Basalt,Weathered
+SIND067-OW,Observation Well,Indore,Mhow,Mhow,Choral,22.444167,75.952222,339.55,,,True,Basalt,Weathered
+SIND-06-PTW,Piezometer,Indore,Mhow,Mhow,Sitapat New,22.535556,75.6375,559.15,,,True,Unknown,Unknown
+SIND070-OW,Observation Well,Indore,Mhow,Mhow,Khurdi,22.357222,75.659444,589.57,,,True,Basalt,Weathered
+SIND071-OW,Observation Well,Indore,Mhow,Mhow,Mend,22.401667,75.706944,640.84,,,True,Basalt,Weathered
+SIND072-OW,Observation Well,Indore,Mhow,Mhow,Badgonda,22.468056,75.739167,616.02,,,True,Basalt,Weathered
+SIND074-OW,Observation Well,Indore,Mhow,Mhow,Hasalpur,22.4875,75.628889,567.71,,,True,Basalt,Weathered
+SIND075-OW,Observation Well,Indore,Mhow,Mhow,Patalpani,22.500278,75.805833,569.01,,,True,Basalt,Weathered
+SIND076-OW,Observation Well,Indore,Mhow,Mhow,Harniyakhedi,22.59,75.781667,563.72,,,True,Basalt,Weathered
+SIND101-OW,Observation Well,Indore,Indore,Indore,Nawadapanth,22.686111,75.773056,549.2,,,True,Basalt,Weathered
+SIND102-OW,Observation Well,Indore,Indore,Indore,Kalariya,22.684722,75.728333,532.2,,,True,Basalt,Weathered
+SIND104-OW,Observation Well,Indore,Indore,Indore,Nenod,22.728889,75.776111,555.0,,,True,Basalt,Weathered
+SIND105-OW,Observation Well,Indore,Indore,Indore,Dhamnay,22.661111,76.001389,564.0,,,True,Basalt,Weathered
+SIND107-OW,Observation Well,Indore,Indore,Indore,Dudhiya,22.678333,75.9475,569.2,,,True,Basalt,Weathered
+SIND108-OW,Observation Well,Indore,Indore,Indore,Palda,22.679444,75.896667,571.6,,,True,Basalt,Weathered
+SIND109-OW,Observation Well,Indore,Indore,Indore,Buranakhedi,22.7675,76.013056,530.9,,,True,Basalt,Weathered
+SIND112-OW,Observation Well,Indore,Indore,Indore,Lasudiya,22.782222,75.915278,544.6,,,True,Basalt,Weathered
+SIND114-OW,Observation Well,Indore,Indore,Indore,Vidhayadham Temple,22.753333,75.803889,56.1,,,True,Basalt,Weathered
+SIND117-OW,Observation Well,Indore,Indore,Indore,Nehru Nager,22.736667,75.888056,549.0,,,True,Basalt,Weathered
+SIND118-OW,Observation Well,Indore,Indore,Indore,Hatoda,22.793611,75.737778,538.6,,,True,Basalt,Weathered
+SIND119-OW,Observation Well,Indore,Depalpur,Depalpur,Khalibillod,22.639444,75.623333,556.9,,,True,Basalt,Weathered
+SIND121-OW,Observation Well,Indore,Depalpur,Depalpur,Rawat,22.712222,75.585556,544.0,,,True,Basalt,Weathered
+SIND123-OW,Observation Well,Indore,Depalpur,Depalpur,Ushapura,22.810833,75.684722,523.0,,,True,Basalt,Weathered
+SIND124-OW,Observation Well,Indore,Depalpur,Depalpur,Ahirkhedi,22.837222,75.640833,530.1,,,True,Basalt,Weathered
+SIND125-OW,Observation Well,Indore,Depalpur,Depalpur,Agra,22.818056,75.635833,532.8,,,True,Basalt,Weathered
+SIND126-OW,Observation Well,Indore,Depalpur,Depalpur,Talawali,23.013333,75.549722,501.5,,,True,Basalt,Weathered
+SIND128-OW,Observation Well,Indore,Depalpur,Depalpur,Gokulpur,22.906111,75.521389,531.0,,,True,Basalt,Weathered
+SIND129-OW,Observation Well,Indore,Depalpur,Depalpur,Birgonda,22.885,75.530556,532.0,,,True,Basalt,Weathered
+SIND130-OW,Observation Well,Indore,Depalpur,Depalpur,Machal,22.671944,75.684167,564.9,,,True,Basalt,Weathered
+SIND131-OW,Observation Well,Indore,Depalpur,Depalpur,Rangwasa,22.838333,75.438611,535.2,,,True,Basalt,Weathered
+SIND132-OW,Observation Well,Indore,Depalpur,Depalpur,Chikloda,22.766944,75.551111,533.2,,,True,Basalt,Weathered
+SIND135-OW,Observation Well,Indore,Depalpur,Depalpur,Banediya,22.877778,75.578056,540.2,,,True,Basalt,Weathered
+SIND136-OW,Observation Well,Indore,Depalpur,Depalpur,Chander(mirjapur),22.793056,75.500833,513.0,,,True,Basalt,Weathered
+SIND138-OW,Observation Well,Indore,Depalpur,Depalpur,Badoli Hoze,22.830556,75.575278,532.5,,,True,Basalt,Weathered
+SIND139-OW,Observation Well,Indore,Mhow,Mhow,Bhatkhedi,22.598333,75.711944,576.2,,,True,Basalt,Weathered
+SIND140-OW,Observation Well,Indore,Mhow,Mhow,Kadmpur,22.5225,75.617778,11.4,,,True,Basalt,Weathered
+SIND141-OW,Observation Well,Indore,Mhow,Mhow,Rampuriya,22.429167,75.603333,609.0,,,True,Basalt,Weathered
+SIND142-OW,Observation Well,Indore,Mhow,Mhow,Sherpur,22.4475,75.592222,556.0,,,True,Basalt,Weathered
+SIND143-OW,Observation Well,Indore,Mhow,Mhow,Khedisihod,22.495,75.730278,547.3,,,True,Basalt,Weathered
+SIND144-OW,Observation Well,Indore,Mhow,Mhow,Kuwali,22.485,75.672778,596.5,,,True,Basalt,Weathered
+SIND145-OW,Observation Well,Indore,Mhow,Mhow,Jamli,22.5225,75.688056,616.5,,,True,Basalt,Weathered
+SIND146-OW,Observation Well,Indore,Mhow,Mhow,Dongergaon,22.546389,75.737778,601.4,,,True,Basalt,Weathered
+SIND147-OW,Observation Well,Indore,Mhow,Mhow,Kodriya,22.521667,75.769444,595.6,,,True,Basalt,Weathered
+SIND148-OW,Observation Well,Indore,Mhow,Mhow,Neuguradiya,22.540278,75.789167,578.1,,,True,Basalt,Weathered
+SIND149-OW,Observation Well,Indore,Mhow,Mhow,Harsola,22.575278,75.827222,585.3,,,True,Basalt,Weathered
+SIND150-OW,Observation Well,Indore,Mhow,Mhow,Mhow,22.571944,75.732222,585.1,,,True,Basalt,Weathered
+SIND151-OW,Observation Well,Indore,Mhow,Mhow,Jamkhurd,22.365833,75.742222,664.5,,,True,Basalt,Weathered
+SIND152-OW,Observation Well,Indore,Mhow,Mhow,Amba Chandan,22.535278,75.846389,595.7,,,True,Basalt,Weathered
+SIND153-OW,Observation Well,Indore,Mhow,Mhow,Bai,22.471667,75.9525,417.5,,,True,Basalt,Weathered
+SIND154-OW,Observation Well,Indore,Mhow,Mhow,Simrol,22.536667,75.92,584.0,,,True,Basalt,Weathered
+SIND155-OW,Observation Well,Indore,Mhow,Mhow,Bardari,22.562778,75.907778,416.96,,,True,Basalt,Weathered
+SIND156-OW,Observation Well,Indore,Mhow,Mhow,Ghosikheda,22.556389,75.94,540.8,,,True,Basalt,Weathered
+SIND157-OW,Observation Well,Indore,Sanwer,Sanwer,Alwasa,22.826667,75.831667,540.8,,,True,Basalt,Weathered
+SIND158-OW,Observation Well,Indore,Sanwer,Sanwer,Kachariya,22.928056,75.718611,534.2,,,True,Basalt,Weathered
+SIND160OW,Observation Well,Indore,Sanwer,Sanwer,Sinnod,22.972778,75.751944,522.0,,,True,Basalt,Weathered
+SIND162-OW,Observation Well,Indore,Sanwer,Sanwer,Mangaliya,22.815,75.929444,536.4,,,True,Basalt,Weathered
+SIND163-OW,Observation Well,Indore,Sanwer,Sanwer,Kudana,22.960833,75.865833,518.8,,,True,Basalt,Weathered
+SIND165-OW,Observation Well,Indore,Sanwer,Sanwer,Panchola,22.9925,75.7825,511.0,,,True,Basalt,Weathered
+SIND166-OW,Observation Well,Indore,Sanwer,Sanwer,Mukata,22.964722,75.793889,511.8,,,True,Basalt,Weathered
+SIND167-OW,Observation Well,Indore,Sanwer,Sanwer,Barodiya Khan,23.010556,75.831111,509.7,,,True,Basalt,Weathered
+SIND168-OW,Observation Well,Indore,Sanwer,Sanwer,Kayasthkhedi,22.994444,75.828889,513.9,,,True,Basalt,Weathered
+SIND171-OW,Observation Well,Indore,Sanwer,Sanwer,Balriya,23.008333,75.733611,531.6,,,True,Basalt,Weathered
+SIND172-OW,Observation Well,Indore,Sanwer,Sanwer,Dharampuri,22.85,75.866667,531.7,,,True,Basalt,Weathered
+SIND174-OW,Observation Well,Indore,Sanwer,Sanwer,Gurana,22.936667,75.89,519.6,,,True,Basalt,Weathered
+SIND176-OW,Observation Well,Indore,Sanwer,Sanwer,Malikhedi,22.918056,75.893056,521.8,,,True,Basalt,Weathered
+SIND177-OW,Observation Well,Indore,Sanwer,Sanwer,Dkachiya,22.858889,75.958611,526.8,,,True,Basalt,Weathered
+SIND178-OW,Observation Well,Indore,Indore,Indore,Ujjaini,22.648056,75.991111,572.2,,,True,Basalt,Weathered
+SIND179-OW,Observation Well,Indore,Indore,Indore,Gandhi Nagar,22.744444,75.793333,552.0,,,True,Basalt,Weathered
+SIND180-OW,Observation Well,Indore,Mhow,Mhow,Bhesalay,22.626389,75.750556,561.9,,,True,Basalt,Weathered
+sind181-ow,Observation Well,Indore,Mhow,Mhow,Nanded,23.457778,76.045556,573.5,,,False,Basalt,Weathered
+sind182-ow,Observation Well,Indore,Mhow,Mhow,Awlay,22.541111,75.325556,565.9,,,False,Basalt,Weathered
+sind183-ow,Observation Well,Indore,Mhow,Mhow,Ahilyapura(majra),22.644167,75.658889,608.5,,,True,Basalt,Weathered
+sind184--ow,Observation Well,Indore,Mhow,Mhow,Bicholi,22.6975,75.929444,559.2,,,True,Basalt,Weathered
+sind185-ow,Observation Well,Indore,Mhow,Mhow,Kuti(janapaw),22.426667,75.743889,586.9,,,True,Basalt,Weathered
+sind186-ow,Observation Well,Indore,Mhow,Mhow,Badkuwa,22.466667,75.6725,601.8,,,True,Basalt,Weathered
+SIND187-OW,Observation Well,Indore,Mhow,Mhow,Kankriya,22.446944,75.635833,532.9,,,True,Basalt,Weathered
+SIND188-OW,Observation Well,Indore,Mhow,Mhow,Kalikiray,22.403333,75.557222,479.4,,,True,Basalt,Weathered
+SIND189-OW,Observation Well,Indore,Mhow,Mhow,Khedi,22.495,75.730278,549.0,,,True,Basalt,Weathered
+SIND190-OW,Observation Well,Indore,Mhow,Mhow,Kolani,22.425278,75.582222,549.1,,,True,Basalt,Weathered
+SIND191_OW,Observation Well,Indore,Indore,Indore,Bada Bangarda,22.758056,75.794167,554.0,,,True,Basalt,Weathered
+SIND192-OW,Observation Well,Indore,Sanwer,Sanwer,Baloda Takun,22.888056,75.765556,534.6,,,True,Basalt,Weathered
+SIND193 OW New 2016,Observation Well,Indore,,Indore,Radra,22.6275,75.962778,532.0,,,True,Basalt,Weathered
+SIND194- OW New 2016,Observation Well,Indore,Indore,Indore,Dutt Mandir,22.688056,75.836944,566.0,,,True,Basalt,Weathered
+SIND195-OW NEW 2016,Observation Well,Indore,Indore,Indore,Dhanwantri Nagar,22.675833,75.83,568.0,,,True,Basalt,Weathered
+SIND196 -OW New 2016,Observation Well,Indore,Indore,Indore,Rangwasa,22.650278,75.765833,537.0,,,True,Basalt,Weathered
+SIND197-OW New 2016,Observation Well,Indore,Indore,Indore,Hanuman Sadan,22.656111,75.823056,571.0,,,True,Basalt,Weathered
+SIND198 -OW New 2016,Observation Well,Indore,Indore,Indore,Sanawdiya,22.656389,75.938889,588.0,,,True,Basalt,Weathered
+SIND199-OW New 2016,Observation Well,Indore,Indore,Indore,Tillor Khurd,22.613056,75.957222,576.0,,,True,Basalt,Weathered
+SIND-34-PTW-NEW,Piezometer,Indore,Depalpur,Depalpur,Moorkheda,22.836667,75.606111,538.0,,,True,Basalt,Weathered
+SIND-PTW-01 NEW,Piezometer,Indore,Depalpur,Depalpur,Agra,22.818056,75.635833,532.2,,,True,Basalt,Weathered
+SIND-PTW-07,Piezometer,Indore,Mhow,Mhow,Harsola,22.575278,75.827222,559.15,,,True,Basalt,Weathered
+SIND-PTW-18,Piezometer,Indore,Sanwer,Sanwer,Mangliya,22.815,75.929444,,,,True,Basalt,Weathered
+SIND-PTW-21-NEW,Piezometer,Indore,Indore,Indore,Dhamnay,22.661111,76.001389,556.76,,,True,Basalt,Weathered
+SIND-PTW 38-PZ,Piezometer,Indore,Indore,Indore,Jambudi Hapsi,22.7425,75.743889,538.2,,,True,Basalt,Weathered
+SJBP001-OW-B,Observation Well,Jabalpur,Jabalpur,Panagar,Chikni Kuwa Garha,23.157778,79.901389,,,,False,Granite,Weathered
+SJBP002-OW-AA,Observation Well,Jabalpur,Jabalpur,Panagar,Anand Nagar,23.196111,79.944722,,,,False,Unknown,Weathered
+SJBP003-OW,Observation Well,Jabalpur,Jabalpur,Bargi,Nigri,23.0375,79.908611,413.655,,,False,Basalt,Weathered
+SJBP004-OW-A,Observation Well,Jabalpur,Jabalpur,Bargi,Bargi,22.996667,79.873611,,,,False,Basalt,Weathered
+SJBP005-OW-A,Observation Well,Jabalpur,Jabalpur,Bargi,Sukri Village,22.918611,79.831667,,,,False,Basalt,Weathered
+SJBP006-OW-A,Observation Well,Jabalpur,Jabalpur,Bargi,Barela,23.098333,80.049444,,,,False,Basalt,Weathered
+SJBP007-OW,Observation Well,Jabalpur,Jabalpur,Bargi,Padwar,23.131944,80.148333,436.275,,,False,Basalt,Weathered
+SJBP008-OW,Observation Well,Jabalpur,Jabalpur,Panagar,Khamaria,23.2025,80.041667,374.735,,,False,Vindhyan,Weathered
+SJBP009-OWA,Observation Well,Jabalpur,Jabalpur,Panagar,Panagar,23.288889,79.997778,,,,False,Unknown,Weathered
+SJBP010-OW,Observation Well,Jabalpur,Kundam,Kundam,Imlai,23.215833,80.253333,534.69,,,False,Unknown,Weathered
+SJBP011-OW-A,Observation Well,Jabalpur,Kundam,Kundam,Baghraji,23.319167,80.254444,,,,False,Unknown,Weathered
+SJBP012-OW-A,Observation Well,Jabalpur,Kundam,Kundam,Kundam,23.215833,80.349722,,,,False,Basalt,Weathered
+SJBP013-OW,Observation Well,Jabalpur,Kundam,Kundam,Mahgawan,23.215278,80.4025,551.78,,,False,Basalt,Weathered
+SJBP014-OW,Observation Well,Jabalpur,Shahpura,Shahpura,Semra,23.075,79.786944,401.645,,,False,Granite,Weathered
+SJBP015-OW,Observation Well,Jabalpur,Sihora,Sihora,Gosalpur,23.3975,80.056667,388.91,,,False,Vindhyan,Weathered
+SJBP016-OW-B,Observation Well,Jabalpur,Sihora,Majholi,Indrana,23.404722,79.908611,,,,False,Granite,Weathered
+SJBP017-OW-A,Observation Well,Jabalpur,Majholi,Majholi,Majholi,23.499167,79.920278,,,,False,Granite,Weathered
+SJBP018-OWNEW,Observation Well,Jabalpur,Patan,Patan,Pipariya Chandrabhan,23.231111,79.75,384.0,,,False,Vindhyan,Weathered
+SJBP019-OWNEW,Observation Well,Jabalpur,Patan,Patan,Mehgaon,23.219722,79.684167,375.0,,,False,Vindhyan,Weathered
+SJBP020-OWNEW,Observation Well,Jabalpur,Patan,Patan,Nunsar,23.243056,79.795833,382.0,,,False,Vindhyan,Weathered
+SJBP021-OWNEW,Observation Well,Jabalpur,Patan,Patan,Sakra,23.347222,79.735278,374.0,,,False,Vindhyan,Weathered
+SJBP022-OWNEW,Observation Well,Jabalpur,Patan,Patan,Benikheda,23.213889,79.835,384.0,,,False,Vindhyan,Weathered
+SJBP023-OW,Observation Well,Jabalpur,Sihora,Sihora,Majhgawan,23.419444,80.223056,406.67,,,False,Vindhyan,Weathered
+SJBP024-OWNEW,Observation Well,Jabalpur,Jabalpur,Shahpura,Majeetha,23.1925,79.788333,382.0,,,False,Unknown,Weathered
+SJBP025-OWNEW,Observation Well,Jabalpur,Jabalpur,Shahpura,Magarmuhan,23.126944,79.724722,382.0,,,False,Unknown,Weathered
+SJBP026-OW-A,Observation Well,Jabalpur,Sihora,Sihora,Sihora,23.486667,80.094167,,,,False,Vindhyan,Weathered
+SJBP027-OWNEW,Observation Well,Jabalpur,Jabalpur,Shahpura,Barkheda,23.142778,79.743611,382.0,,,False,Unknown,Weathered
+SJBP028-OW-A,Observation Well,Jabalpur,Shahpura,Shahpura,Gundrai,23.1675,79.498333,,,,False,Unknown,Weathered
+SJBP029-OW-B,Observation Well,Jabalpur,Shahpura,Shahpura,Pipariya,23.215278,79.560278,,,,False,Unknown,Weathered
+SJBP030-OW-C,Observation Well,Jabalpur,Shahpura,Shahpura,Bhitoni,23.138889,79.675556,,,,False,Unknown,Weathered
+SJBP031-OW,Observation Well,Jabalpur,Shahpura,Shahpura,Sahajpur,23.161667,79.748333,381.965,,,False,Unknown,Weathered
+SJBP032-OW,Observation Well,Jabalpur,Shahpura,Shahpura,Chargawan,23.061944,79.644167,398.09,,,False,Unknown,Weathered
+SJBP033-OW-A,Observation Well,Jabalpur,Patan,Patan,Padariya,23.265278,79.827778,,,,False,Unknown,Weathered
+SJBP034-OW-A,Observation Well,Jabalpur,Patan,Patan,Patan,23.284444,79.693611,,,,False,Unknown,Weathered
+SJBP035-OW-A,Observation Well,Jabalpur,Patan,Patan,Boriya,23.340556,79.840833,,,,False,Unknown,Weathered
+SJBP036-OW-A,Observation Well,Jabalpur,Patan,Patan,Katangi,23.4375,79.796944,,,,False,Vindhyan,Weathered
+SJBP037-OW,Observation Well,Jabalpur,Patan,Patan,Tamoria,23.368056,79.736944,362.98,,,False,Vindhyan,Weathered
+SJBP038-OWNEW,Observation Well,Jabalpur,Jabalpur,Shahpura,Bhadarwada,23.184444,79.685833,379.0,,,False,Unknown,Weathered
+SJBP039-OWNEW,Observation Well,Jabalpur,Jabalpur,Shahpura,Neechi,23.028889,79.742778,464.0,,,False,Unknown,Weathered
+SJBP040-OWNEW,Observation Well,Jabalpur,Jabalpur,Panagar,Baroda,23.286111,79.922778,382.0,,,False,Unknown,Weathered
+SJBP041-OWNEW,Observation Well,Jabalpur,Jabalpur,Panagar,Kogwan,23.158333,79.866389,391.0,,,False,Unknown,Weathered
+SJBP042-OWNEW,Observation Well,Jabalpur,Jabalpur,Panagar,Sagda,23.135278,79.869444,391.0,,,False,Unknown,Weathered
+SJBP043-OWNEW,Observation Well,Jabalpur,Jabalpur,Panagar,Ramnagara,23.146944,79.865,394.0,,,False,Unknown,Weathered
+SJBP044-OWNEW,Observation Well,Jabalpur,Jabalpur,Panagar,Amahinota,23.164167,79.8075,389.0,,,False,Unknown,Weathered
+SJBP045-OWNEW,Observation Well,Jabalpur,Jabalpur,Panagar,Singod,23.330833,79.964167,378.0,,,False,Unknown,Weathered
+SJBP046-OWNEW,Observation Well,Jabalpur,Jabalpur,Panagar,Khamariya,23.223333,79.877222,380.0,,,False,Unknown,Weathered
+SJBP047-OWNEW,Observation Well,Jabalpur,Jabalpur,Bargi (jabalpur),Chokhada,23.066389,79.989722,399.0,,,False,Basalt,Weathered
+SJBP048-OWNEW,Observation Well,Jabalpur,Jabalpur,Bargi (jabalpur),Barbati,22.981389,79.983889,417.0,,,False,Basalt,Weathered
+SJBP049-OWNEW,Observation Well,Jabalpur,Jabalpur,Bargi (jabalpur),Harrai,23.036944,79.875,419.0,,,False,Basalt,Weathered
+SJBP050-OWNEW,Observation Well,Jabalpur,Jabalpur,Bargi (jabalpur),Dhonda,23.030278,79.861944,425.0,,,False,Basalt,Weathered
+SJBP051-OWNEW,Observation Well,Jabalpur,Jabalpur,Bargi (jabalpur),Tinsi,22.965278,79.850556,413.0,,,False,Basalt,Weathered
+SJBP052-OWNEW,Observation Well,Jabalpur,Jabalpur,Bargi (jabalpur),Hulki,22.878333,79.8,442.0,,,False,Basalt,Weathered
+SJBP053-OW-C,Observation Well,Jabalpur,Jabalpur,Panagar,Amkhera,23.209167,79.931111,,,,False,Basalt,Weathered
+SJBP054-OW-A,Observation Well,Jabalpur,Jabalpur,Panagar,Nagana,23.268889,79.876944,,,,False,Unknown,Weathered
+SJBP055-OW,Observation Well,Jabalpur,Jabalpur,Panagar,Budhagar,23.356389,80.022222,381.36,,,False,Unknown,Weathered
+SJBP056-OW-A,Observation Well,Jabalpur,Jabalpur,Panagar,Kaladoomar,23.350833,79.931667,,,,False,Unknown,Weathered
+SJBP057-OW,Observation Well,Jabalpur,Jabalpur,Bargi,Kudari umaria,23.076944,80.171667,445.02,,,False,Basalt,Weathered
+SJBP058-OW-A,Observation Well,Jabalpur,Jabalpur,Bargi,Saliwada,23.096944,79.990278,,,,False,Basalt,Weathered
+SJBP059-OW-A,Observation Well,Jabalpur,Jabalpur,Bargi,Ranidurgawati Samadhi,23.038889,79.993333,,,,False,Basalt,Weathered
+SJBP060-OW,Observation Well,Jabalpur,Jabalpur,Bargi,Mangeli,23.093056,79.924444,,,,False,Basalt,Weathered
+SJBP061-OW-B,Observation Well,Jabalpur,Kundam,Kundam,Padariya,23.206111,80.148611,,,,False,Unknown,Weathered
+SJBP062-OW,Observation Well,Jabalpur,Kundam,Kundam,Sakri,23.104167,80.3175,492.545,,,False,Basalt,Weathered
+SJBP063-OWNEW,Observation Well,Jabalpur,Jabalpur,Bargi (jabalpur),Dagdaga Hinota,23.0875,79.823333,393.0,,,False,Basalt,Weathered
+SJBP064-OW,Observation Well,Jabalpur,Kundam,Kundam,Deohara,23.09,80.518056,552.34,,,False,Unknown,Weathered
+SJBP065-OW,Observation Well,Jabalpur,Sihora,Sihora,Agariya,23.385,80.147778,,,,False,Unknown,Weathered
+SJBP066-OW,Observation Well,Jabalpur,Sihora,Sihora,Kumhi,23.466389,80.256111,,,,False,Unknown,Weathered
+SJBP067-OW-A,Observation Well,Jabalpur,Sihora,Sihora,Fanwani,23.434722,80.158611,,,,False,Unknown,Weathered
+SJBP068-OW-A,Observation Well,Jabalpur,Majholi,Majholi,Khabra,23.5125,79.901111,,,,False,Unknown,Weathered
+SJBP069-OW,Observation Well,Jabalpur,Majholi,Majholi,Ponda,23.509167,80.0325,,,,False,Unknown,Weathered
+SJBP070-OW-A,Observation Well,Jabalpur,Majholi,Majholi,Dinari Khamariya,23.560556,80.126667,,,,False,Granite,Weathered
+SJBP071-OW-A,Observation Well,Jabalpur,Majholi,Majholi,Dhan Gawan,23.571944,80.190278,,,,False,Granite,Weathered
+SJBP072-OWNEW,Observation Well,Jabalpur,Jabalpur,Majholi,Pipariya,23.438889,79.907778,496.0,,,False,Unknown,Weathered
+SJBP073-OWNEW,Observation Well,Jabalpur,Jabalpur,Majholi,Ranital Katav,23.53,79.889444,552.0,,,False,Vindhyan,Weathered
+SJBP074-OWNEW,Observation Well,Jabalpur,Jabalpur,Majholi,Mohaniya,23.52,79.926389,530.0,,,False,Vindhyan,Weathered
+SJBP075-OWNEW,Observation Well,Jabalpur,Jabalpur,Majholi,Pipal Deori,23.498889,79.99,471.0,,,False,Vindhyan,Weathered
+SJBP076-OWNEW,Observation Well,Jabalpur,Jabalpur,Majholi,Darshni,23.504444,80.065556,382.0,,,False,Vindhyan,Weathered
+SJBP0770OWNEW,Observation Well,Jabalpur,Jabalpur,Majholi,Barkheda,23.520556,80.141389,394.0,,,False,Vindhyan,Weathered
+SJBP078-OWNEW,Observation Well,Jabalpur,Jabalpur,Majholi,Bargi,23.551111,80.148889,403.0,,,False,Vindhyan,Weathered
+SJBP079-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Jujhari,23.411944,80.070278,390.0,,,False,Unknown,Weathered
+SJBP080-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Kachhpura,23.402222,80.072222,381.0,,,False,Unknown,Weathered
+SJBP081-OW-C,Observation Well,Jabalpur,Patan,Patan,Ronsara,23.249167,79.761944,,,,False,Unknown,Weathered
+SJBP082-OW-A,Observation Well,Jabalpur,Patan,Patan,Ghunsor,23.166667,79.692222,,,,False,Unknown,Weathered
+SJBP083-OWB,Observation Well,Jabalpur,Patan,Patan,Dundi,23.272222,79.638889,,,,False,Unknown,Weathered
+SJBP084-OW-A,Observation Well,Jabalpur,Patan,Patan,Kakrehta,23.435278,79.831389,,,,False,Unknown,Weathered
+SJBP085-OW,Observation Well,Jabalpur,Jabalpur,Panagar,Bhedaghat,23.138056,79.800278,,,,False,Unknown,Weathered
+SJBP086-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Kivlari,23.380556,80.053611,395.0,,,False,Unknown,Weathered
+SJBP087-OW-B,Observation Well,Jabalpur,Patan,Shahpura,Chhapra,23.076944,79.746389,388.0,,,False,Vindhyan,Weathered
+SJBP088-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Khamaria,23.379167,80.063889,397.0,,,False,Unknown,Weathered
+SJBP089-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Purani Tikariya,23.371389,80.071944,402.0,,,False,Unknown,Weathered
+SJBP090-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Silua,23.373611,80.085278,399.0,,,False,Unknown,Weathered
+SJBP091-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Pondikala,23.366389,80.105833,402.0,,,False,Unknown,Weathered
+SJBP092-OWNEW,Observation Well,Jabalpur,Jabalpur,Sihora,Pondikhurd,23.366389,80.105833,411.0,,,False,Unknown,Weathered
+SJBP093-OWNEw,Observation Well,Jabalpur,Kundam,Kundam,Amjhar,23.201667,80.112778,504.0,,,False,Unknown,Weathered
+SJBP094-OWNEW,Observation Well,Jabalpur,Kundam,Kundam,Tilsani,23.221111,80.217222,534.0,,,False,Basalt,Weathered
+SJBP095-OWNEW,Observation Well,Jabalpur,Kundam,Kundam,Bairagi,23.225556,80.295278,560.0,,,False,Basalt,Weathered
+SJBP096-OWNEW,Observation Well,Jabalpur,Kundam,Kundam,Sadafal,23.229722,80.335278,571.0,,,False,Basalt,Weathered
+SJBP097-OWNEW,Observation Well,Jabalpur,Kundam,Kundam,Supawara,23.226944,80.431389,570.0,,,False,Basalt,Weathered
+SJBP098-OWNEW,Observation Well,Jabalpur,Kundam,Kundam,Chourai,23.226944,80.431389,570.0,,,False,Basalt,Weathered
+SJBP099-OWNEW,Observation Well,Jabalpur,Kundam,Kundam,Lahsar,23.276944,80.317778,438.0,,,False,Basalt,Weathered
+SJBP100-OWNEW,Observation Well,Jabalpur,Kundam,Kundam,Kundwara,23.280833,80.279167,450.0,,,False,Basalt,Weathered
+SJBPL001-PZ,Piezometer,Jabalpur,Jabalpur,Bargi,Kaladehi,22.9,79.854167,432.94,,,False,Basalt,Weathered
+SJBPL002-PZ,Piezometer,Jabalpur,Jabalpur,Panagar,Piparia,23.201944,80.068333,410.01,,,False,Vindhyan,Weathered
+SJBPL003-PZ,Piezometer,Jabalpur,Jabalpur,Panagar,Ramnagara,23.1125,79.870833,398.795,,,False,Unknown,Weathered
+SJBPL004-PZ,Piezometer,Jabalpur,Katni,Katni,Johla,23.786111,80.416667,382.2,,,False,Unknown,Fractured
+SJBPL005-PZ,Piezometer,Jabalpur,Patan,Patan,Bhunwara,23.208333,79.670833,374.74,,,False,Unknown,Weathered
+SJBPL006-PZ,Piezometer,Jabalpur,Jabalpur,Bargi,Neemkheda,23.104167,79.995833,401.245,,,False,Basalt,Weathered
+SJBPL006-PZ-D,Piezometer,Jabalpur,Jabalpur,Bargi,Neemkheda,23.104167,79.995833,,,,False,Basalt,Weathered
+SJBPL007-PZ,Piezometer,Jabalpur,Sihora,Sihora,Ramkhiria,23.406667,80.118611,385.23,,,False,Unknown,Weathered
+SJBPL008-PZ,Piezometer,Jabalpur,Patan,Shahpura,Gundrai,23.167222,79.4975,360.52,,,False,Unknown,Fractured
+SJBPL008PZ-D,Piezometer,Jabalpur,Jabalpur,Shahpura,Natwara(new),23.175,79.642222,,,,False,Unknown,Fractured
+SJBPL009-PZ,Piezometer,Jabalpur,Sihora,Sihora,Deonagar,23.368333,80.010833,382.215,,,False,Unknown,Weathered
+SJBPL009-PZ-D,Piezometer,Jabalpur,Sihora,Sihora,Deonagar,23.368333,80.010833,,,,False,Unknown,Fractured
+SJBPL010-PZ,Piezometer,Jabalpur,Patan,Shahpura,Chiraipondi,22.975278,79.760833,462.32,,,False,Basalt,Weathered
+SJBPL011-PZ,Piezometer,Jabalpur,Kundam,Kundam,Chikli,23.308611,80.423056,554.83,,,False,Basalt,Weathered
+SJBPL012-PZ,Piezometer,Jabalpur,Sihora,Majholi,Chitapal,23.457778,79.905833,384.115,,,False,Vindhyan,Weathered
+SJBPL013-PZ,Piezometer,Jabalpur,Patan,Patan,Konikala,23.326944,79.668056,369.055,,,False,Vindhyan,Weathered
+SJBPL013PZ-D,Piezometer,Jabalpur,Jabalpur,Patan,Basan,23.322222,79.656944,,,,False,Vindhyan,Fractured
+SJBPL014-PZ,Piezometer,Jabalpur,Sihora,Majholi,Khirwa,23.503056,79.931667,385.535,,,False,Unknown,Weathered
+SJBPL015-PZ,Piezometer,Jabalpur,,Dhimarkheda,Bhamka,23.510833,80.4425,433.505,,,False,Granite,Weathered
+SJBPL016-PZ,Piezometer,Jabalpur,Dhimarkheda,Dhimarkheda,Naigawan,23.46,80.288889,405.72,,,False,Unknown,Weathered
+SJBPL017-PZ,Piezometer,Jabalpur,Kundam,Kundam,Deori,23.333056,80.276111,424.12,,,False,Unknown,Weathered
+SJBPL018-PZ,Piezometer,Jabalpur,Katni,Katni,Barkheda,23.757778,80.399722,402.045,,,False,Unknown,Weathered
+SJBPL019-PZ,Piezometer,Jabalpur,Katni,Badwara,Pathra,23.793889,80.548611,427.585,,,False,Unknown,Weathered
+SJBPL019PZ-D,Piezometer,Jabalpur,Mudwara,Badwara,Bachharwara,23.730556,80.577778,,,,False,Vindhyan,Fractured
+SJBPL020-PZ,Piezometer,Jabalpur,Sihora,Bohriband,Sihondi,23.801944,80.006389,442.695,,,False,Vindhyan,Weathered
+SJBPL021-PZ,Piezometer,Jabalpur,Jabalpur,Panagar,Piparia D60m,23.201944,80.068333,410.72,,,False,Vindhyan,Fractured
+SJBPL022-PZ,Piezometer,Jabalpur,Jabalpur,Panagar,Piparia D90m,23.201944,80.068333,410.755,,,False,Vindhyan,Fractured
+SJBPL023-PZ,Piezometer,Jabalpur,Jabalpur,Bargi,Kaladehi D-90m.,22.8775,79.830278,432.925,,,False,Basalt,Weathered
+SJBPL023PZ-D,Piezometer,Jabalpur,Jabalpur,Bargi,Kaladehi,22.8775,79.830278,,,,False,Basalt,Weathered
+SJBPL024-PZ,Piezometer,Jabalpur,Patan,Patan,Bhunwara D-80m.,23.208889,79.667778,374.77,,,False,Granite,Fractured
+SJBPLO25-PZ,Piezometer,Jabalpur,Patan,Patan,Bhunwara-d-120m,23.208889,79.667778,374.835,,,False,Granite,Fractured
+SUJN001A-OW,Observation Well,Ujjain,Ujjain,Ujjain,Vikram Kirti Mander,23.129167,75.723333,501.0,,,False,Basalt,Weathered
+SUJN-001-PZ,Piezometer,Ujjain,Ujjain,Ujjain,Chintaman Ganesh,23.129167,75.723333,502.0,,,False,Basalt,Weathered
+SUJN002-OW,Observation Well,Ujjain,Ghatia,Ghatia,Rui,23.288333,75.650833,513.0,,,False,Basalt,Weathered
+SUJN-002-PZ,Piezometer,Ujjain,Ujjain,Ujjain,Ninora,23.091667,75.825,494.45,,,True,Basalt,Weathered
+SUJN003-OW,Observation Well,Ujjain,Ujjain,Ujjain,Pingleshawer,23.230278,75.909722,510.0,,,False,Basalt,Weathered
+SUJN-003-PZ,Piezometer,Ujjain,Ujjain,Ujjain,Tajpur,23.230278,75.909722,517.0,,,False,Basalt,Weathered
+SUJN004-OW,Observation Well,Ujjain,Tarana,Tarana,Kayatha,23.156389,75.5625,499.0,,,False,Basalt,Weathered
+SUJN-004-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Ingoria,23.156389,75.5625,502.0,,,False,Basalt,Weathered
+SUJN-005-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Kharsod Khurd,23.122222,75.458611,500.0,,,False,Basalt,Weathered
+SUJN006A-OW,Observation Well,Ujjain,Ujjain,Ujjain,Alampur,23.044444,75.858333,505.0,,,True,Basalt,Weathered
+SUJN-006-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Dangwara,23.092222,75.533611,492.0,,,True,Basalt,Weathered
+SUJN007-OW,Observation Well,Ujjain,Ujjain,Ujjain,Narwar,23.071944,75.911667,504.0,,,True,Basalt,Weathered
+SUJN-007-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Jalodia,22.991389,75.408056,503.0,,,True,Basalt,Weathered
+SUJN008-OW,Observation Well,Ujjain,Ghatia,Ghatia,Ujjaina,23.293611,75.870556,500.0,,,False,Basalt,Weathered
+SUJN-008-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Amla,23.035278,75.329722,513.0,,,False,Basalt,Weathered
+SUJN-009-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Lohana-30 M.,22.9125,75.373611,517.0,,,True,Basalt,Fractured
+SUJN010-OW,Observation Well,Ujjain,Ghatia,Ghatia,Ghatiya/Lovekhedi,23.337222,75.858889,510.0,,,False,Basalt,Weathered
+SUJN010-OW-A,Observation Well,Ujjain,Ghatia,Ghatia,Ghatiya,23.381667,75.857778,510.0,,,False,Basalt,Weathered
+SUJN-010-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Jassakhedi,23.083333,75.3275,517.0,,,False,Basalt,Weathered
+SUJN011-OW,Observation Well,Ujjain,Tarana,Tarana,Tarana,23.335278,76.041944,500.0,,,False,Basalt,Weathered
+SUJN-011-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Kharsod Kalan,23.223889,75.380556,517.0,,,False,Basalt,Weathered
+SUJN-012-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Bhatpachlana,23.255278,75.3,517.0,,,False,Basalt,Weathered
+SUJN013-OW,Observation Well,Ujjain,Tarana,Tarana,Banjari,23.354167,76.202222,457.0,,,False,Basalt,Weathered
+SUJN-013-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Palsoda,23.2725,75.502222,492.0,,,False,Basalt,Weathered
+SUJN014-OW,Observation Well,Ujjain,Tarana,Tarana,Khamali /Tilawad,23.413333,76.005,482.0,,,False,Basalt,Weathered
+SUJN-014-PZ,Piezometer,Ujjain,Ghatia,Ghatia,Ramgarh,23.249722,75.745556,502.0,,,False,Basalt,Weathered
+SUJN-015-PZ,Piezometer,Ujjain,Ghatia,Ghatia,Panbihar,23.3225,75.76,502.0,,,False,Basalt,Weathered
+SUJN-016-PZ,Piezometer,Ujjain,Mahidpur,Mahidpur,Jagoti,23.3975,75.804167,505.0,,,False,Basalt,Weathered
+SUJN-017-PZ,Piezometer,Ujjain,Mahidpur,Mahidpur,Koyal,23.616667,75.544444,517.0,,,False,Basalt,Weathered
+SUJN-018-PZ,Piezometer,Ujjain,Tarana,Tarana,Delchi,22.9125,75.373611,497.0,,,True,Basalt,Weathered
+SUJN019-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Ghosla,23.44,75.874167,,,,False,Basalt,Weathered
+SUJN-019-PZ,Piezometer,Ujjain,Tarana,Tarana,Khakari Sultan,23.406944,76.0075,485.0,,,False,Basalt,Weathered
+SUJN-020-PZ,Piezometer,Ujjain,Khachrod,Khachrod,Phernakhedi,23.507222,75.278889,489.0,,,False,Basalt,Weathered
+SUJN-021-PZ,Piezometer,Ujjain,Khachrod,Khachrod,Kanwas,23.401389,75.188611,483.0,,,False,Basalt,Weathered
+SUJN022-OW,Observation Well,Ujjain,Barnagar,Barnagar,Amla / Duparawda,23.013056,77.325833,513.0,,,False,Basalt,Weathered
+SUJN-022-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Lohana -90 M.,22.915833,75.369722,517.0,,,True,Basalt,Weathered
+SUJN023-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Gogapur,23.5675,75.501111,494.0,,,False,Basalt,Weathered
+SUJN-023-PZ,Piezometer,Ujjain,Barnagar,Barnagar,Lohana - 120 M.,22.9125,75.373611,517.0,,,True,Basalt,Weathered
+SUJN025-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Jharda/Shekhakhedi,23.603333,75.720556,477.0,,,False,Basalt,Weathered
+SUJN026-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Indokh,23.721667,75.7475,449.0,,,False,Basalt,Weathered
+SUJN027-OW,Observation Well,Ujjain,Tarana,Tarana,Pat,23.552778,75.903056,465.0,,,False,Basalt,Weathered
+SUJN029-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Mahu,23.422778,75.664722,484.0,,,False,Basalt,Weathered
+SUJN034-OW,Observation Well,Ujjain,Khachrod,Khachrod,Kamthana,23.309722,75.274167,514.0,,,False,Basalt,Weathered
+SUJN035-OW,Observation Well,Ujjain,Khachrod,Khachrod,Chapee Kheda/badawania,23.58,75.298611,476.0,,,False,Basalt,Weathered
+SUJN036-OW,Observation Well,Ujjain,Khachrod,Khachrod,Nagda,23.469167,75.408056,474.0,,,False,Basalt,Weathered
+SUJN040-OW,Observation Well,Ujjain,Khachrod,Khachrod,Pipliya Dabi,23.311111,75.578889,482.0,,,False,Basalt,Weathered
+SUJN041-OW,Observation Well,Ujjain,Barnagar,Barnagar,Badnagar,23.051667,75.364444,496.0,,,True,Basalt,Weathered
+SUJN044-OW,Observation Well,Ujjain,Barnagar,Barnagar,Runija,23.151667,75.253056,524.0,,,False,Basalt,Weathered
+SUJN047-OW,Observation Well,Ujjain,Khachrod,Khachrod,Makla/Hataipalki,23.414444,75.469722,497.0,,,False,Basalt,Weathered
+SUJN048-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Narayana,23.392778,75.678333,473.0,,,False,Basalt,Weathered
+SUJN051-OW,Observation Well,Ujjain,Ujjain,Ujjain,Ninora,23.075,75.83,494.0,,,True,Basalt,Weathered
+SUJN052-OW,Observation Well,Ujjain,Ujjain,Ujjain,Fathabad/Bharugarh,24.233611,75.765,487.0,,,False,Basalt,Weathered
+SUJN053-OW,Observation Well,Ujjain,Ujjain,Ujjain,Hamukhedi,23.123889,75.836389,2.0,,,False,Basalt,Weathered
+SUJN055-OW,Observation Well,Ujjain,Ujjain,Ujjain,Madhopur,23.092778,75.973889,533.0,,,True,Basalt,Weathered
+SUJN056-OW,Observation Well,Ujjain,Ghatia,Ghatia,Malikhedi,23.353889,75.905833,502.0,,,False,Basalt,Weathered
+SUJN057-OW,Observation Well,Ujjain,Tarana,Tarana,Baghera/kathbarod,23.287778,76.093056,503.0,,,False,Basalt,Weathered
+SUJN059-OW,Observation Well,Ujjain,Ujjain,Ujjain,Harsodan,23.189444,75.892222,528.0,,,False,Basalt,Weathered
+SUJN060-OW,Observation Well,Ujjain,Tarana,Tarana,Dhabla hardu,23.496111,75.897778,478.0,,,False,Basalt,Weathered
+SUJN061-OW,Observation Well,Ujjain,Tarana,Tarana,Tukral,23.464167,75.920278,485.0,,,False,Basalt,Weathered
+SUJN062-OW,Observation Well,Ujjain,Ghatia,Ghatia,Nazerpur,23.345833,75.841389,512.0,,,False,Basalt,Weathered
+SUJN063-OW,Observation Well,Ujjain,Ghatia,Ghatia,Jathal,23.284444,75.821111,512.0,,,False,Basalt,Weathered
+SUJN064-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Jawasiya panth,23.4825,75.742222,509.0,,,False,Basalt,Weathered
+SUJN065-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Ameri kheda,23.497778,75.698889,492.0,,,False,Basalt,Weathered
+SUJN066-OW,Observation Well,Ujjain,Ghatia,Ghatia,Kaluheda,23.350833,75.708611,475.0,,,False,Basalt,Weathered
+SUJN068-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Delchi Buzarg /nimboda,23.191944,76.038056,505.0,,,False,Basalt,Weathered
+SUJN070-OW,Observation Well,Ujjain,Khachrod,Khachrod,Rohal Khurd/ Rupata,23.523333,75.467222,482.0,,,False,Basalt,Weathered
+SUJN071-OW,Observation Well,Ujjain,Khachrod,Khachrod,Rupata Bhalla,23.490278,75.478056,484.0,,,False,Basalt,Weathered
+SUJN073-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Raghavi/dongarkheda,23.438056,75.848056,479.0,,,False,Basalt,Weathered
+SUJN074-OW,Observation Well,Ujjain,Tarana,Tarana,Rupa Khedi/Runji,23.478889,75.9725,481.0,,,False,Basalt,Weathered
+SUJN075-OW,Observation Well,Ujjain,Tarana,Tarana,Mohanpura/nalashri,23.163333,75.043056,506.0,,,False,Basalt,Weathered
+SUJN076-OW,Observation Well,Ujjain,Barnagar,Barnagar,Molana,23.082778,75.421389,500.0,,,True,Basalt,Weathered
+SUJN078-OW,Observation Well,Ujjain,Ghatia,Ghatia,Nalwa,23.159444,75.653611,492.0,,,False,Basalt,Weathered
+SUJN079-OW,Observation Well,Ujjain,Barnagar,Barnagar,Pirjhalar,23.0275,75.46,504.0,,,True,Basalt,Weathered
+SUJN081-OW,Observation Well,Ujjain,Barnagar,Barnagar,Sundrabad/khedawada,23.136389,75.311111,507.0,,,False,Basalt,Weathered
+SUJN083-OW,Observation Well,Ujjain,Khachrod,Khachrod,Chirola /Jalodia Jager,23.393611,75.319167,500.0,,,False,Basalt,Weathered
+SUJN084-OW,Observation Well,Ujjain,Khachrod,Khachrod,Pouchlasi/Buranabad,23.418056,75.336389,480.0,,,False,Basalt,Weathered
+SUJN085-OW,Observation Well,Ujjain,Khachrod,Khachrod,Ramgarh/navda Chopati,23.328889,75.517778,505.0,,,False,Basalt,Weathered
+SUJN087-OW,Observation Well,Ujjain,Ghatia,Ghatia,Makodia Aam Naka/ramgarh,23.204444,75.755833,489.0,,,False,Basalt,Weathered
+SUJN088-OW,Observation Well,Ujjain,Khachrod,Khachrod,Bhuwasa /Marawada,23.413056,75.223611,506.0,,,False,Basalt,Weathered
+SUJN089-OW,Observation Well,Ujjain,Khachrod,Khachrod,Pipliyamalu/ Akkaya Nazik,23.378056,75.489167,490.0,,,False,Basalt,Weathered
+SUJN090-OW,Observation Well,Ujjain,Khachrod,Khachrod,Unhel / Dauparawada,23.340556,75.554167,485.0,,,False,Basalt,Weathered
+SUJN091-OW,Observation Well,Ujjain,Khachrod,Khachrod,Unhel (vellage) Daberi,23.330556,75.535,485.0,,,False,Basalt,Weathered
+SUJN093-OW,Observation Well,Ujjain,Tarana,Tarana,Chhadawad,23.372222,76.034167,496.0,,,False,Basalt,Weathered
+SUJN096-OW,Observation Well,Ujjain,Tarana,Tarana,Borda/golwa,23.316389,76.175,513.0,,,False,Basalt,Weathered
+SUJN101-OW,Observation Well,Ujjain,Barnagar,Barnagar,Birgod,22.912222,75.411111,494.0,,,True,Basalt,Weathered
+SUJN102-OW,Observation Well,Ujjain,Barnagar,Barnagar,Kharodiya,23.170278,75.622778,486.0,,,False,Basalt,Weathered
+SUJN103-OW,Observation Well,Ujjain,Barnagar,Barnagar,Kharsod Khurd,23.122222,75.458611,505.0,,,False,Basalt,Weathered
+SUJN104-OW,Observation Well,Ujjain,Barnagar,Barnagar,Pitha Khedi,23.081944,75.353611,501.0,,,True,Basalt,Weathered
+SUJN105-OW,Observation Well,Ujjain,Barnagar,Barnagar,Rasulabad,23.102778,75.425278,506.0,,,False,Basalt,Weathered
+SUJN106-OW,Observation Well,Ujjain,Barnagar,Barnagar,Sarsana,23.144444,75.523889,490.0,,,False,Basalt,Weathered
+SUJN107-OW,Observation Well,Ujjain,Barnagar,Barnagar,Tokara,23.095278,75.333611,495.0,,,False,Basalt,Weathered
+SUJN108-OW,Observation Well,Ujjain,Ghatia,Ghatia,Bichrod,23.360833,75.959722,486.0,,,False,Basalt,Weathered
+SUJN109-OW,Observation Well,Ujjain,Ghatia,Ghatia,Dabala Rehawari-ii,23.306389,75.831944,496.0,,,False,Basalt,Weathered
+SUJN110-OW,Observation Well,Ujjain,Ghatia,Ghatia,Jaithal Tak,23.306389,75.831944,499.0,,,False,Basalt,Weathered
+SUJN111-OW,Observation Well,Ujjain,Ghatia,Ghatia,Khalana,23.274444,75.714444,489.0,,,False,Basalt,Weathered
+SUJN112-OW,Observation Well,Ujjain,Khachrod,Khachrod,Akkayanazic,23.347222,75.498889,488.0,,,False,Basalt,Weathered
+SUJN113-OW,Observation Well,Ujjain,Khachrod,Khachrod,Biriakhedi,23.467778,75.356667,473.0,,,False,Basalt,Weathered
+SUJN114-OW,Observation Well,Ujjain,Khachrod,Khachrod,Chapnair,23.590833,75.319167,465.0,,,False,Basalt,Weathered
+SUJN115-OW,Observation Well,Ujjain,Khachrod,Khachrod,Ghinoda,23.496944,75.293056,493.0,,,False,Basalt,Weathered
+SUJN116-OW,Observation Well,Ujjain,Khachrod,Khachrod,Jalodiya,23.488333,75.448056,477.0,,,False,Basalt,Weathered
+SUJN117-OW,Observation Well,Ujjain,Khachrod,Khachrod,Marawadi,23.399722,75.2975,502.0,,,False,Basalt,Weathered
+SUJN118-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Balaikheda,23.499444,75.612222,425.0,,,False,Basalt,Weathered
+SUJN119-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Jawasiya Jamki,23.486667,75.746667,429.0,,,False,Basalt,Weathered
+SUJN120-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Kazi Kheda,23.650278,75.683056,462.0,,,False,Basalt,Weathered
+SUJN121-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Narayankhedi,23.421944,75.864722,508.0,,,False,Basalt,Weathered
+SUJN122-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Palwa,23.421944,75.864722,508.0,,,False,Basalt,Weathered
+SUJN123-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Parwat Kheda,23.500556,75.643889,459.0,,,False,Basalt,Weathered
+SUJN124-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Pipliya dhuma,23.680278,75.738889,457.0,,,False,Basalt,Weathered
+SUJN125-OW,Observation Well,Ujjain,Mahidpur,Mahidpur,Shekha khedi,23.462778,75.664444,461.0,,,False,Basalt,Weathered
+SUJN126-OW,Observation Well,Ujjain,Tarana,Tarana,Gail Kheda,23.495278,76.023056,495.0,,,False,Basalt,Weathered
+SUJN127-OW,Observation Well,Ujjain,Tarana,Tarana,Gurjarkhedi,23.286667,76.121944,508.0,,,False,Basalt,Weathered
+SUJN128-OW,Observation Well,Ujjain,Tarana,Tarana,Halu Khedi,23.285278,75.064444,497.0,,,False,Basalt,Weathered
+SUJN129-OW,Observation Well,Ujjain,Tarana,Tarana,Kanasia,23.302778,76.147778,476.0,,,False,Basalt,Weathered
+SUJN130-OW,Observation Well,Ujjain,Tarana,Tarana,Molga,23.196667,76.025,503.0,,,False,Basalt,Weathered
+SUJN131-OW,Observation Well,Ujjain,Tarana,Tarana,Nanu Kheda,23.248611,76.064722,495.0,,,False,Basalt,Weathered
+SUJN132-OW,Observation Well,Ujjain,Tarana,Tarana,Samanara,23.471111,75.948889,476.0,,,False,Basalt,Weathered
+SUJN133-OW,Observation Well,Ujjain,Tarana,Tarana,Titodi,23.208333,75.928056,461.0,,,False,Basalt,Weathered
+SUJN134-OW,Observation Well,Ujjain,Tarana,Tarana,Dubali,23.239444,76.101944,506.0,,,False,Basalt,Weathered
+SUJN135-OW,Observation Well,Ujjain,Ujjain,Ujjain,Bhasoda,23.21,75.928611,521.0,,,False,Basalt,Weathered
+SUJN136-OW,Observation Well,Ujjain,Ujjain,Ujjain,Hasampura,23.105,75.733333,516.0,,,False,Basalt,Weathered
+SUJN137-OW,Observation Well,Ujjain,Ujjain,Ujjain,Karoandia,23.176111,75.844444,505.0,,,False,Basalt,Weathered
+SUJN138-OW,Observation Well,Ujjain,Ujjain,Ujjain,Palkhanda,23.116944,75.749167,520.0,,,False,Basalt,Weathered
+SUJN139-OW,Observation Well,Ujjain,Ujjain,Ujjain,Tankaria Panth,23.073889,75.689444,515.0,,,True,Basalt,Weathered
+Tikm001-PZ,Piezometer,Tikamgarh,Nivari,Nivari,orchha,25.353056,78.636944,,,,False,Granite,Weathered
+Tikm002-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Mudara,25.359444,78.838611,239.74,,,False,Granite,Weathered
+Tikm003-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Uboura,25.426667,78.911389,228.995,,,False,Granite,Weathered
+Tikm004-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Sindursagar,25.485278,78.92,,,,False,Granite,Weathered
+Tikm005-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Nivari,25.354722,78.804167,236.77,,,False,Granite,Weathered
+Tikm006-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Kuluwa,25.278611,78.782222,,,,False,Granite,Weathered
+Tikm007-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Ladwaree,25.260833,78.733333,,,,False,Granite,Weathered
+Tikm008-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Puchhi Kar Gawan,25.451944,78.825556,,,,False,Granite,Weathered
+Tikm009-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Teharka,25.293611,78.921667,,,,False,Granite,Weathered
+Tikm010-PZ,Piezometer,Tikamgarh,Pirthipur,Pirthipur,Pirthipur,25.2075,78.7575,298.53,,,False,Granite,Weathered
+Tikm011-PZ,Piezometer,Tikamgarh,Jatara,Jatara,Lidhora,25.066111,78.864167,,,,False,Granite,Weathered
+Tikm012-PZ,Piezometer,Tikamgarh,Pirthipur,Pirthipur,Madiya,25.164444,78.738333,302.59,,,False,Granite,Weathered
+Tikm013-PZ,Piezometer,Tikamgarh,Nivari,Nivari,Orchha,25.353056,78.636944,,,,False,Granite,Weathered
+Tikm014-PZ,Piezometer,Tikamgarh,Jatara,Jatara,Jatara,25.009722,79.066389,257.07,,,False,Granite,Weathered
+Tikm015-PZ,Piezometer,Tikamgarh,Tikamgarh,Tikamgarh,Mabai Khas,25.164444,78.738333,,,,False,Granite,Weathered
+Tikm016-PZ,Piezometer,Tikamgarh,Tikamgarh,Tikamgarh,Tikamgarh,24.750278,78.823889,,,,False,Granite,Weathered
+Tikm017-PZ,Piezometer,Tikamgarh,Baldavgarh,Baldavgarh,Khargapur,24.831111,79.142778,,,,False,Granite,Weathered
+Tikm020-PZ,Piezometer,Tikamgarh,Tikamgarh,Tikamgarh,Badagoan,24.565556,79.028333,,,,False,Granite,Weathered
+Tikm-20-PZ,Piezometer,Tikamgarh,Tikamgarh,Tikamgarh,Para Khas,24.613611,79.01,,,,False,Granite,Weathered
+Tikm-21-PZ,Piezometer,Tikamgarh,Baldavgarh,Baldavgarh,Patori-jagir,24.690556,79.238889,,,,False,Granite,Weathered
+Tikm-22-PZ,Piezometer,Tikamgarh,Baldavgarh,Baldavgarh,Kudila,24.807778,79.223056,291.38,,,False,Granite,Weathered
+Tikm-23-PZ,Piezometer,Tikamgarh,Baldavgarh,Baldavgarh,Deri,24.896944,79.258333,,,,False,Granite,Weathered
+Tikm-24-PZ,Piezometer,Tikamgarh,Palera,Palera,Alampur,25.069167,79.310556,,,,False,Granite,Weathered
+Tikmo18-PZ,Piezometer,Tikamgarh,Baldavgarh,Baldavgarh,Baldavgarh,24.428889,79.072222,,,,False,Granite,Weathered
+Tikmo19-PZ,Piezometer,Tikamgarh,Palera,Palera,Palera,25.011111,79.249444,254.1,,,False,Granite,Weathered
+TKM001-OW,Observation Well,Tikamgarh,Niwari,Niwari,Jjgora,25.431944,78.666944,213.18,,,False,Granite,Weathered
+TKM002-OW,Observation Well,Tikamgarh,Niwari,Niwari,Baghat,25.467778,78.781111,180.625,,,False,Granite,Weathered
+TKM003-OW,Observation Well,Tikamgarh,Niwari,Niwari,Orchha,25.351667,78.639722,215.73,,,False,Granite,Weathered
+TKM004-OW,Observation Well,Tikamgarh,Niwari,Niwari,Tarichar Kala,25.409444,78.892222,228.995,,,False,Granite,Weathered
+TKM005-OW,Observation Well,Tikamgarh,Niwari,Niwari,Sendri,25.523333,78.906389,199.775,,,False,Granite,Weathered
+TKM006-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Negowan,25.251944,78.673889,254.96,,,False,Granite,Weathered
+TKM007-OW,Observation Well,Tikamgarh,Niwari,Niwari,Niwari,25.347222,78.803056,236.77,,,False,Granite,Weathered
+TKM008-OW,Observation Well,Tikamgarh,Niwari,Niwari,Teharka,25.293611,78.921667,261.36,,,False,Granite,Weathered
+TKM009-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Jerakhas,25.178889,78.671389,303.995,,,False,Granite,Weathered
+TKM010-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Prithvipur,25.2075,78.7575,298.53,,,False,Granite,Weathered
+TKM011-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Chomo,25.167778,78.866389,299.51,,,False,Granite,Weathered
+TKM012-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Jeron,25.105278,78.666667,295.03,,,False,Granite,Weathered
+TKM013-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Berorakhet,25.128889,78.780833,316.02,,,False,Granite,Weathered
+TKM014A-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Jewra Mora,25.1025,78.803611,312.0,,,False,Granite,Weathered
+TKM015-OW,Observation Well,Tikamgarh,Palera,Palera,Kharon,25.144722,78.925278,281.1,,,False,Granite,Weathered
+TKM016A-OW,Observation Well,Tikamgarh,Palera,Palera,Bamhori Kala,25.140833,79.092778,243.0,,,False,Granite,Weathered
+TKM017-OW,Observation Well,Tikamgarh,Palera,Palera,Kachhora,25.081389,79.186389,213.68,,,False,Granite,Weathered
+TKM018-OW,Observation Well,Tikamgarh,Palera,Palera,Karola,25.100833,79.3225,217.35,,,False,Granite,Weathered
+TKM019-OW,Observation Well,Tikamgarh,Jatara,Jatara,Kumheri,25.036111,78.714167,282.0,,,False,Granite,Weathered
+TKM020-OW,Observation Well,Tikamgarh,Jatara,Jatara,Bamhori barana,25.065833,78.814722,328.325,,,False,Granite,Weathered
+TKM021-OW,Observation Well,Tikamgarh,Jatara,Jatara,Berau,25.0175,78.858333,327.33,,,False,Granite,Weathered
+TKM022A-OW,Observation Well,Tikamgarh,Palera,Palera,Sagarwara,25.055278,79.029167,258.39,,,False,Granite,Weathered
+TKM023-OW,Observation Well,Tikamgarh,Jatara,Jatara,Jatara,25.009722,79.066389,257.07,,,False,Granite,Weathered
+TKM024-OW,Observation Well,Tikamgarh,Palera,Palera,Barana,25.051111,79.127222,243.97,,,False,Granite,Weathered
+TKM025-OW,Observation Well,Tikamgarh,Palera,Palera,Palera,25.011111,79.249444,254.1,,,False,Granite,Weathered
+TKM026A-OW,Observation Well,Tikamgarh,Jatara,Jatara,Mastapur,24.933611,78.675833,310.0,,,False,Granite,Weathered
+TKM027A-OW,Observation Well,Tikamgarh,Jatara,Jatara,Bigrawan,24.974722,78.803611,333.0,,,False,Granite,Weathered
+TKM028-OW,Observation Well,Tikamgarh,Jatara,Jatara,Lohargown,24.923889,78.868333,351.35,,,False,Granite,Weathered
+TKM029-OW,Observation Well,Tikamgarh,Jatara,Jatara,Vajeetpura,25.012222,79.010556,268.885,,,False,Granite,Weathered
+TKM030-OW,Observation Well,Tikamgarh,Palera,Palera,Palli,24.947778,79.131389,348.36,,,False,Granite,Weathered
+TKM031-OW,Observation Well,Tikamgarh,Jatara,Jatara,Ramnagar,24.867222,78.83,340.595,,,False,Granite,Weathered
+TKM032-0W,Observation Well,Tikamgarh,Jatara,Jatara,Ramgarh,24.902778,78.983056,262.965,,,False,Granite,Weathered
+TKM033A-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Shiv Nagar,24.874444,79.188611,272.85,,,False,Granite,Weathered
+TKM034-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Deri,24.896944,79.258333,260.21,,,False,Granite,Weathered
+TKM035-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Babri,24.833333,78.837222,339.78,,,False,Granite,Weathered
+TKM036-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Badoraghat,24.800556,78.799167,335.57,,,False,Granite,Weathered
+TKM037-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Mawai khas,25.096944,79.165833,317.79,,,False,Granite,Weathered
+TKM038-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Baldevgarh,24.762222,79.072222,324.89,,,False,Granite,Weathered
+TKM039-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Khargapur,24.831111,79.142778,297.34,,,False,Granite,Weathered
+TKM040-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Heerapur,24.7675,79.251944,274.05,,,False,Granite,Weathered
+TKM041-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Ganesh Ganj,24.721389,78.807222,362.385,,,False,Granite,Weathered
+TKM042-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Tikamgarh,24.750278,78.823889,356.93,,,False,Granite,Weathered
+TKM043-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Sundarpur,24.693333,78.935278,359.465,,,False,Granite,Weathered
+TKM044-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Surajpur,25.218056,78.653611,329.5,,,False,Granite,Weathered
+TKM045-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Patoree,24.690556,79.238889,297.94,,,False,Granite,Weathered
+TKM046-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Karmarai,24.642778,78.784444,350.765,,,False,Granite,Weathered
+TKM047-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Amarpur,24.608611,78.983333,350.0,,,False,Granite,Weathered
+TKM048-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Nagara,24.6525,79.0075,329.81,,,False,Granite,Weathered
+TKM049-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Sujara,24.633333,79.143056,316.51,,,False,Granite,Weathered
+TKM050-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Badagown,24.565556,79.028333,344.04,,,False,Granite,Weathered
+TKM051-OW,Observation Well,Tikamgarh,Jatara,Jatara,Digoda,24.969444,78.846389,338.305,,,False,Granite,Weathered
+TKM052-OW,Observation Well,Tikamgarh,Jatara,Jatara,Barmatal,24.908889,78.833056,355.595,,,False,Granite,Weathered
+TKM053-OW,Observation Well,Tikamgarh,Jatara,Jatara,Goor,24.926111,78.769444,351.09,,,False,Granite,Weathered
+TKM054-OW,Observation Well,Tikamgarh,Jatara,Jatara,Dargown khurd,24.953333,78.718889,336.575,,,False,Granite,Weathered
+TKM055-OW,Observation Well,Tikamgarh,Jatara,Jatara,Mohan garh,24.997778,78.676389,325.09,,,False,Granite,Weathered
+TKM056-OW,Observation Well,Tikamgarh,Jatara,Jatara,Mohara,24.586944,79.048333,284.18,,,False,Granite,Weathered
+TKM057-OW,Observation Well,Tikamgarh,Jatara,Jatara,Satgown,25.049722,78.928056,287.53,,,False,Granite,Weathered
+TKM058-OW,Observation Well,Tikamgarh,Jatara,Jatara,Lidhora,25.066111,78.864167,260.89,,,False,Granite,Weathered
+TKM059-OW,Observation Well,Tikamgarh,Jatara,Jatara,Machi,24.958056,79.011944,294.855,,,False,Granite,Weathered
+TKM060-OW,Observation Well,Tikamgarh,Jatara,Jatara,Larkhurd,24.900278,79.010556,265.395,,,False,Granite,Weathered
+TKM061-OW,Observation Well,Tikamgarh,Niwari,Niwari,Ladwari,25.263056,78.751944,248.35,,,False,Granite,Weathered
+TKM062-OW,Observation Well,Tikamgarh,Niwari,Niwari,Kuluwa,25.298611,78.778611,238.72,,,False,Granite,Weathered
+TKM063A-OW,Observation Well,Tikamgarh,Niwari,Niwari,Mudara,25.359444,78.838611,239.0,,,False,Granite,Weathered
+TKM064-OW,Observation Well,Tikamgarh,Niwari,Niwari,Urdora,25.328611,78.921111,219.43,,,False,Granite,Weathered
+TKM065-OW,Observation Well,Tikamgarh,Niwari,Niwari,Chakarpur,25.288889,78.518611,217.6,,,False,Granite,Weathered
+TKM066A-OW,Observation Well,Tikamgarh,Niwari,Niwari,Puchhikargown,25.451944,78.825556,189.18,,,False,Granite,Weathered
+TKM067-OW,Observation Well,Tikamgarh,Niwari,Niwari,Sakat bheroo,25.503333,78.849722,189.375,,,False,Granite,Weathered
+TKM068-OW,Observation Well,Tikamgarh,Palera,Palera,Laroon,25.060833,79.276111,239.85,,,False,Granite,Weathered
+TKM069A-OW,Observation Well,Tikamgarh,Palera,Palera,Rampura Nibavri,24.933611,79.208056,264.0,,,False,Granite,Weathered
+TKM070A-OW,Observation Well,Tikamgarh,Palera,Palera,Sanjay Nagar,25.040833,79.186667,236.0,,,False,Granite,Weathered
+TKM071A-OW,Observation Well,Tikamgarh,Palera,Palera,Kharjupura,25.069444,79.076389,261.0,,,False,Granite,Weathered
+TKM072A-OW,Observation Well,Tikamgarh,Palera,Palera,Kanera,25.161944,79.098056,239.0,,,False,Granite,Weathered
+TKM073-OW,Observation Well,Tikamgarh,Palera,Palera,Jewar,25.248333,78.999444,224.25,,,False,Granite,Weathered
+TKM074-OW,Observation Well,Tikamgarh,Palera,Palera,Chandera,25.111944,78.980278,269.77,,,False,Granite,Weathered
+TKM075-OW,Observation Well,Tikamgarh,Niwari,Niwari,Gurh Kodar,25.487222,79.910556,213.76,,,False,Granite,Weathered
+TKM076-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Kharella,24.678056,79.778056,291.77,,,False,Granite,Weathered
+TKM077-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Sarkar,24.735278,79.242778,284.615,,,False,Granite,Weathered
+TKM078-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Dargown,24.729444,79.203333,307.43,,,False,Granite,Weathered
+TKM079A-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Bhelsi,24.7875,79.126667,3313.415,,,False,Granite,Weathered
+TKM080-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Phuter,24.863889,79.167222,277.45,,,False,Granite,Weathered
+TKM081-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Khera,24.881111,79.205556,283.63,,,False,Granite,Weathered
+TKM082-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Segora,24.857222,79.106389,297.23,,,False,Granite,Weathered
+TKM083-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Chandpura,24.819444,79.190833,305.71,,,False,Granite,Weathered
+TKM084A-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Kudeela,24.807778,79.223056,291.38,,,False,Granite,Weathered
+TKM085A-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Nayanbaree,24.680833,78.965278,348.0,,,False,Granite,Weathered
+TKM086-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Lar buzrug,25.004444,79.214167,355.64,,,False,Granite,Weathered
+TKM087-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Budera,24.657778,79.091111,321.985,,,False,Granite,Weathered
+TKM088-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Patha,24.689722,78.882222,365.18,,,False,Granite,Weathered
+TKM089-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Madumar,24.711111,78.870833,358.88,,,False,Granite,Weathered
+TKM090-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Samarra,24.638611,78.931111,370.69,,,False,Granite,Weathered
+TKM091-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Khiriya Naka,24.600556,78.79,352.125,,,False,Granite,Weathered
+TKM092-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Neem khera,24.673333,78.793056,348.47,,,False,Granite,Weathered
+TKM093A-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Naya Khera,24.766389,78.790833,346.0,,,False,Granite,Weathered
+TKM094-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Dhajrai,24.765833,78.915556,325.77,,,False,Granite,Weathered
+TKM095-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Majna,24.833611,78.996667,297.965,,,False,Granite,Weathered
+TKM096-OW,Observation Well,Tikamgarh,Baldevgarh,Baldevgarh,Ladwari 2,25.206111,78.719722,317.8,,,False,Granite,Weathered
+TKM097A-OW,Observation Well,Tikamgarh,Tikamgarh,Tikamgarh,Hira Nagar,24.830556,78.820556,337.0,,,False,Granite,Weathered
+TKM098-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Madiya,25.164444,78.738333,302.59,,,False,Granite,Weathered
+TKM099-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Chandpura,25.2825,78.6575,234.07,,,False,Granite,Weathered
+TKM100-OW,Observation Well,Tikamgarh,Prithvipur,Prithvipur,Ladwari 3,25.206111,78.719722,284.92,,,False,Granite,Weathered

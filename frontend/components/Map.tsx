@@ -16,11 +16,21 @@ function trendBorderColor(label?: string | null): string {
   }
 }
 
+function MapClickHandler({ onMapClick }: { onMapClick: (lat: number, lon: number) => void }) {
+  useMapEvents({
+    click: (e) => {
+      onMapClick(e.latlng.lat, e.latlng.lng);
+    },
+  });
+  return null;
+}
+
 export default function GroundwaterMap({
   onWellSelect,
+  onLocationSelect,
 }: {
-  onWellSelect: (wellId: string) => void;
-  onPointSelect?: (lat: number, lon: number) => void;  // Make optional since we won't use it
+  onWellSelect: (wellId: string, district?: string) => void;
+  onLocationSelect?: (lat: number, lon: number) => void;
 }) {
   const [wells, setWells] = useState<WellSummary[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -59,6 +69,7 @@ export default function GroundwaterMap({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; OpenStreetMap contributors'
         />
+        {onLocationSelect && <MapClickHandler onMapClick={onLocationSelect} />}
         {wells.map((w) => (
           <CircleMarker
             key={w.well_id}
@@ -73,7 +84,7 @@ export default function GroundwaterMap({
             eventHandlers={{
               click: (e) => {
                 L.DomEvent.stopPropagation(e);
-                onWellSelect(w.well_id);
+                onWellSelect(w.well_id, w.district || undefined);
               },
             }}
           >

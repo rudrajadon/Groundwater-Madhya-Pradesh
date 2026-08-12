@@ -9,6 +9,7 @@ export interface WellSummary {
   trend_label?: "Stable" | "Watch" | "Critical" | "Unknown" | string | null;
   geology_type?: "Basalt" | "Granite" | "Vindhyan" | "Unknown" | string | null;
   aquifer_classification?: "Weathered" | "Fractured" | "Massive" | "Unknown" | string | null;
+  district?: string;
 }
 
 export interface ForecastPoint {

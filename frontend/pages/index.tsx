@@ -3,18 +3,27 @@ import { useState } from "react";
 import { getForecast, getForecastByWellId, getWellHistory, ForecastResponse } from "../lib/api";
 import ForecastChart from "../components/ForecastChart";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
+import LocationPredictor from "../components/LocationPredictor";
+import ExportModal from "../components/ExportModal";
 
-// Leaflet touches `window` — must be loaded client-side only, standard
-// pattern for react-leaflet inside Next.js.
+// Leaflet touches `window` — must be loaded client-side only
 const GroundwaterMap = dynamic(() => import("../components/Map"), { ssr: false });
+const StressMap = dynamic(() => import("../components/StressMap"), { ssr: false });
 
 export default function Home() {
   const [pointForecast, setPointForecast] = useState<ForecastResponse | null>(null);
   const [history, setHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showLocationPredictor, setShowLocationPredictor] = useState(false);
+  const [selectedLat, setSelectedLat] = useState<number | undefined>();
+  const [selectedLon, setSelectedLon] = useState<number | undefined>();
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [currentWellId, setCurrentWellId] = useState<string | null>(null);
+  const [currentDistrict, setCurrentDistrict] = useState<string | null>(null);
+  const [mapView, setMapView] = useState<"wells" | "stress">("wells");
 
-  async function handleWellSelect(wellId: string) {
+  async function handleWellSelect(wellId: string, districtName?: string) {
     setLoading(true);
     setError(null);
     try {
@@ -24,13 +33,24 @@ export default function Home() {
       ]);
       setHistory(h.readings || []);
       setPointForecast(fc);
+      setCurrentWellId(wellId);
+      // Set district from parameter or from well data
+      setCurrentDistrict(districtName || null);
     } catch (e: any) {
       setError(e.message);
       setPointForecast(null);
       setHistory([]);
+      setCurrentWellId(null);
+      setCurrentDistrict(null);
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleMapClick(lat: number, lon: number) {
+    setSelectedLat(lat);
+    setSelectedLon(lon);
+    setShowLocationPredictor(true);
   }
 
   const historyChartData = history.map((r: any) => ({
@@ -41,9 +61,104 @@ export default function Home() {
 
   return (
     <div style={{ display: "flex", height: "100vh" }}>
-      <div style={{ flex: 2 }}>
-        <GroundwaterMap onWellSelect={handleWellSelect} />
+      <div style={{ flex: 2, position: "relative" }}>
+        
+        {/* Map View Toggle */}
+        <div style={{
+          position: "absolute",
+          top: "70px",
+          left: "20px",
+          zIndex: 1000,
+          display: "flex",
+          gap: "8px",
+          background: "white",
+          borderRadius: "8px",
+          padding: "4px",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}>
+          <button
+            onClick={() => setMapView("wells")}
+            style={{
+              padding: "8px 16px",
+              background: mapView === "wells" ? "#3b82f6" : "white",
+              color: mapView === "wells" ? "white" : "#374151",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "13px",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            Well Map
+          </button>
+          <button
+            onClick={() => setMapView("stress")}
+            style={{
+              padding: "8px 16px",
+              background: mapView === "stress" ? "#3b82f6" : "white",
+              color: mapView === "stress" ? "white" : "#374151",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "13px",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            Stress Map
+          </button>
+        </div>
+        
+        {/* Conditional Map Rendering */}
+        {mapView === "wells" ? (
+          <>
+            <GroundwaterMap 
+              onWellSelect={handleWellSelect} 
+              onLocationSelect={handleMapClick}
+            />
+            
+            {/* Custom Location Button (only on well map) */}
+            <button
+              onClick={() => setShowLocationPredictor(true)}
+              style={{
+                position: "absolute",
+                top: "20px",
+                left: "20px",
+                zIndex: 1000,
+                background: "#3b82f6",
+                color: "white",
+                border: "none",
+                padding: "12px 20px",
+                borderRadius: "8px",
+                fontSize: "14px",
+                fontWeight: 600,
+                cursor: "pointer",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = "#2563eb"}
+              onMouseLeave={(e) => e.currentTarget.style.background = "#3b82f6"}
+            >
+              Custom Location Predictor
+            </button>
+          </>
+        ) : (
+          <StressMap onDistrictSelect={(district) => setCurrentDistrict(district)} />
+        )}
       </div>
+      
+      {showLocationPredictor && (
+        <LocationPredictor 
+          onClose={() => {
+            setShowLocationPredictor(false);
+            setSelectedLat(undefined);
+            setSelectedLon(undefined);
+          }}
+          initialLat={selectedLat}
+          initialLon={selectedLon}
+        />
+      )}
       
       <aside style={{ flex: 1, padding: 24, overflowY: "auto", borderLeft: "1px solid #e5e7eb", background: "#f9fafb" }}>
         <div style={{ marginBottom: 24 }}>
@@ -89,6 +204,30 @@ export default function Home() {
                   {pointForecast.aquifer_zone}
                 </p>
               )}
+              
+              {/* Export Button */}
+              <button
+                onClick={() => setShowExportModal(true)}
+                style={{
+                  marginTop: "12px",
+                  padding: "8px 16px",
+                  background: "#3b82f6",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = "#2563eb"}
+                onMouseLeave={(e) => e.currentTarget.style.background = "#3b82f6"}
+              >
+                <span>📄</span>
+                Generate Report (PDF/CSV)
+              </button>
             </div>
 
             {/* Trend Status Card */}
@@ -170,6 +309,15 @@ export default function Home() {
 
         {!pointForecast && !loading && !error && null}
       </aside>
+      
+      {/* Export Modal */}
+      {showExportModal && (
+        <ExportModal 
+          wellId={currentWellId || undefined}
+          district={currentDistrict || undefined}
+          onClose={() => setShowExportModal(false)}
+        />
+      )}
     </div>
   );
 }

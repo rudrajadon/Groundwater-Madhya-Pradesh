@@ -22,7 +22,10 @@ CREATE TABLE IF NOT EXISTS wells (
     mass_pct        NUMERIC,
     dwlr_installed  BOOLEAN,
     dwlr_no         TEXT,
-    source_file     TEXT           -- source MDB filename for audit trail
+    source_file     TEXT,          -- source MDB filename for audit trail
+    trend_label     TEXT,          -- 'Stable' | 'Watch' | 'Critical'
+    geology_type    TEXT,          -- 'Basalt' | 'Granite' | 'Vindhyan' | 'Unknown'
+    aquifer_classification TEXT    -- 'Weathered' | 'Fractured' | 'Massive'
 );
 CREATE INDEX IF NOT EXISTS idx_wells_geom ON wells USING GIST (geom);
 

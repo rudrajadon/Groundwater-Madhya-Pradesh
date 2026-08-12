@@ -9,10 +9,19 @@ const MP_CENTER: [number, number] = [23.47, 77.95];
 
 function trendBorderColor(label?: string | null): string {
   switch (label) {
-    case "Critical": return "#ef4444"; // lighter red
-    case "Watch": return "#fbbf24";    // lighter amber
-    case "Stable": return "#22c55e";   // lighter green
-    default: return "#d1d5db";         // lighter gray - unknown/no data
+    case "Critical": return "#ef4444"; // red
+    case "Watch": return "#fbbf24";    // amber
+    case "Stable": return "#22c55e";   // green
+    default: return "#d1d5db";         // gray - unknown/no data
+  }
+}
+
+function geologyColor(type?: string | null): string {
+  switch (type) {
+    case "Basalt": return "#3b82f6";    // blue
+    case "Granite": return "#a855f7";   // purple
+    case "Vindhyan": return "#22c55e";  // green
+    default: return "#9ca3af";          // gray - unknown
   }
 }
 
@@ -34,6 +43,7 @@ export default function GroundwaterMap({
 }) {
   const [wells, setWells] = useState<WellSummary[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<"trend" | "geology">("trend");
 
   useEffect(() => {
     getWells()
@@ -76,10 +86,14 @@ export default function GroundwaterMap({
             center={[w.lat, w.lon]}
             radius={8}
             pathOptions={{ 
-              color: trendBorderColor(w.trend_label),  // Lighter colored border
-              fillColor: "#9ca3af",                     // Darker gray fill
-              fillOpacity: 0.8,
-              weight: 2                                 // Border thickness
+              color: viewMode === "trend" 
+                ? trendBorderColor(w.trend_label)      // Trend mode: colored border
+                : "#d1d5db",                           // Geology mode: lighter gray border
+              fillColor: viewMode === "trend"
+                ? "#9ca3af"                            // Trend mode: darker gray fill
+                : geologyColor(w.geology_type),        // Geology mode: colored fill
+              fillOpacity: 0.85,
+              weight: 2.5                              // Border thickness
             }}
             eventHandlers={{
               click: (e) => {
@@ -145,38 +159,92 @@ export default function GroundwaterMap({
         ))}
       </MapContainer>
       
-      {/* Geology Legend */}
+      {/* Legend with Toggle */}
       <div style={{
         position: "absolute",
         bottom: "20px",
         right: "10px",
         background: "white",
-        padding: "12px",
-        borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+        padding: "16px",
+        borderRadius: "12px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         fontSize: "13px",
         zIndex: 1000,
-        minWidth: "180px"
+        minWidth: "200px"
       }}>
-        <div style={{ fontWeight: 600, marginBottom: "8px", color: "#111827" }}>
-          Geology Types
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+          <div style={{ fontWeight: 700, color: "#111827", fontSize: "14px" }}>
+            {viewMode === "trend" ? "Trend Status" : "Geology Types"}
+          </div>
+          {/* Compact Toggle Button */}
+          <button
+            onClick={() => setViewMode(viewMode === "trend" ? "geology" : "trend")}
+            style={{
+              padding: "4px 10px",
+              background: "#f3f4f6",
+              border: "1px solid #d1d5db",
+              borderRadius: "6px",
+              fontSize: "11px",
+              fontWeight: 600,
+              color: "#374151",
+              cursor: "pointer",
+              transition: "all 0.2s",
+              whiteSpace: "nowrap"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#e5e7eb";
+              e.currentTarget.style.borderColor = "#9ca3af";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "#f3f4f6";
+              e.currentTarget.style.borderColor = "#d1d5db";
+            }}
+          >
+            {viewMode === "trend" ? "Geology" : "Trends"}
+          </button>
         </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-          <div style={{ width: "16px", height: "16px", borderRadius: "50%", background: "#0ea5e9", marginRight: "8px" }}></div>
-          <span>Basalt ({getPercent("Basalt")}%)</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-          <div style={{ width: "16px", height: "16px", borderRadius: "50%", background: "#a855f7", marginRight: "8px" }}></div>
-          <span>Granite ({getPercent("Granite")}%)</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-          <div style={{ width: "16px", height: "16px", borderRadius: "50%", background: "#22c55e", marginRight: "8px" }}></div>
-          <span>Vindhyan ({getPercent("Vindhyan")}%)</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ width: "16px", height: "16px", borderRadius: "50%", background: "#9ca3af", marginRight: "8px" }}></div>
-          <span>Unknown ({getPercent("Unknown")}%)</span>
-        </div>
+
+        {viewMode === "trend" ? (
+          // Trend Legend
+          <>
+            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #ef4444", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Critical</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #fbbf24", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Watch</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #22c55e", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Stable</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #d1d5db", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Unknown</span>
+            </div>
+          </>
+        ) : (
+          // Geology Legend
+          <>
+            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#3b82f6", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Basalt ({getPercent("Basalt")}%)</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#a855f7", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Granite ({getPercent("Granite")}%)</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#22c55e", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Vindhyan ({getPercent("Vindhyan")}%)</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
+              <span style={{ color: "#374151" }}>Unknown ({getPercent("Unknown")}%)</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

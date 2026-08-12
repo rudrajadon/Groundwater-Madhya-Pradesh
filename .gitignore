@@ -83,3 +83,4 @@ Thumbs.db
 .coverage
 htmlcov/
 .pytest_cache/
+data/train_sequences.pkl

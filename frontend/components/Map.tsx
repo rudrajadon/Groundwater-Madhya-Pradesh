@@ -12,7 +12,7 @@ function trendBorderColor(label?: string | null): string {
     case "Critical": return "#ef4444"; // red
     case "Watch": return "#fbbf24";    // amber
     case "Stable": return "#22c55e";   // green
-    default: return "#d1d5db";         // gray - unknown/no data
+    default: return "#9ca3af";         // darker gray - unknown/no data
   }
 }
 
@@ -90,7 +90,7 @@ export default function GroundwaterMap({
                 ? trendBorderColor(w.trend_label)      // Trend mode: colored border
                 : "#d1d5db",                           // Geology mode: lighter gray border
               fillColor: viewMode === "trend"
-                ? "#9ca3af"                            // Trend mode: darker gray fill
+                ? "#d1d5db"                            // Trend mode: lighter gray fill
                 : geologyColor(w.geology_type),        // Geology mode: colored fill
               fillOpacity: 0.85,
               weight: 2.5                              // Border thickness
@@ -208,19 +208,19 @@ export default function GroundwaterMap({
           // Trend Legend
           <>
             <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #ef4444", marginRight: "10px" }}></div>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #ef4444", marginRight: "10px" }}></div>
               <span style={{ color: "#374151" }}>Critical</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #fbbf24", marginRight: "10px" }}></div>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #fbbf24", marginRight: "10px" }}></div>
               <span style={{ color: "#374151" }}>Watch</span>
             </div>
             <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #22c55e", marginRight: "10px" }}></div>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #22c55e", marginRight: "10px" }}></div>
               <span style={{ color: "#374151" }}>Stable</span>
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "3px solid #d1d5db", marginRight: "10px" }}></div>
+              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #9ca3af", marginRight: "10px" }}></div>
               <span style={{ color: "#374151" }}>Unknown</span>
             </div>
           </>

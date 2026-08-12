@@ -42,11 +42,15 @@ def _nearest_well(lat: float, lon: float, wells: list[dict]) -> tuple[dict, floa
 
 
 def _fetch_readings(well_id: str, db: Session, n: int = SEQ_LEN) -> list[float]:
-    """Return the last n depth_bgl readings for a well, chronological order."""
+    """Return the last n head_msl readings for a well, chronological order.
+    
+    IMPORTANT: The model was trained on head_msl (hydraulic head above mean sea level),
+    NOT depth_bgl (depth below ground level). Using depth_bgl would invert the trend!
+    """
     rows = db.execute(text("""
-        SELECT depth_bgl_m AS wl
+        SELECT head_msl_m AS wl
         FROM readings
-        WHERE well_id = :wid AND depth_bgl_m IS NOT NULL
+        WHERE well_id = :wid AND head_msl_m IS NOT NULL
         ORDER BY date DESC
         LIMIT :n
     """), {"wid": well_id, "n": n}).mappings().all()
@@ -95,8 +99,8 @@ def _statistical_fallback(
     from ..services.statistical_trend import compute_statistical_trend
     trend = compute_statistical_trend(well_id, db, months_lookback=12)
     rows = db.execute(text("""
-        SELECT depth_bgl_m FROM readings
-        WHERE well_id = :wid AND depth_bgl_m IS NOT NULL
+        SELECT head_msl_m FROM readings
+        WHERE well_id = :wid AND head_msl_m IS NOT NULL
         ORDER BY date DESC LIMIT 1
     """), {"wid": well_id}).mappings().all()
 
@@ -113,7 +117,7 @@ def _statistical_fallback(
             caveat="No water level measurements found in the database.",
         )
 
-    recent = float(rows[0]["depth_bgl_m"])
+    recent = float(rows[0]["head_msl_m"])
     monthly = trend["slope_m_per_year"] / 12.0
     heads   = [recent + (i + 1) * monthly for i in range(12)]
     stds    = [1.5] * 12

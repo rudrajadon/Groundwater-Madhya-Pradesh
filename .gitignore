@@ -84,3 +84,4 @@ Thumbs.db
 htmlcov/
 .pytest_cache/
 data/train_sequences.pkl
+well_predictions_detailed.json

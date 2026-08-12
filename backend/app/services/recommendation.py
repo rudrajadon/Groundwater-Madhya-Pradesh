@@ -1,15 +1,19 @@
 """
-Recommendation heuristic — v2, updated for consistency.
-Aligned thresholds across both ML and statistical methods.
+Recommendation heuristic — v3, aligned with ML model predictions.
+More aggressive thresholds to better detect declining trends.
 """
 
-# Updated thresholds - more conservative and aligned
-CRITICAL_THRESHOLD_M = -4.0  # Decline > 4m over 12 months
-WATCH_THRESHOLD_M = -1.0     # Decline 1–4m over 12 months
+# Aligned thresholds (matching update_trends_from_model.py)
+CRITICAL_THRESHOLD_M = -2.0  # Decline > 2m over 12 months
+WATCH_THRESHOLD_M = -0.5     # Decline 0.5–2m over 12 months
 
 
 def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
-    """Returns (trend_label, recommendation_text) from a 12-point forecast."""
+    """Returns (trend_label, recommendation_text) from a 12-point forecast.
+    
+    NOTE: forecast_head_msl must be hydraulic head (m above MSL), NOT depth below ground!
+    Higher values = MORE water (good), lower values = LESS water (bad).
+    """
     change = forecast_head_msl[-1] - forecast_head_msl[0]
 
     if change <= CRITICAL_THRESHOLD_M:
@@ -24,7 +28,7 @@ def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
             "Monitor closely and review local abstraction patterns."
         )
     else:
-        if change > 0:
+        if change > 0.5:
             return "Stable", (
                 f"Water levels improving (+{change:.1f}m projected over 12 months). "
                 "Continue current management practices."

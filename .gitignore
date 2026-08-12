@@ -86,3 +86,6 @@ htmlcov/
 data/train_sequences.pkl
 well_predictions_detailed.json
 *.json
+ml/artifacts/*.pkl
+ml/artifacts/*.pt
+*.ipynb

@@ -32,27 +32,39 @@ def classify_trend(forecast_values):
     """
     Classify trend based on 12-month forecast values.
     
-    Critical: Significant decline (> 2m drop over 12 months)
-    Watch: Moderate decline (0.5m - 2m drop)
-    Stable: Minimal change (< 0.5m change either way)
+    NEW THRESHOLDS (as requested):
+    Critical: > 5m decline over 12 months
+    Watch: 2m - 5m decline
+    Stable: 0-2m decline or any improvement
+    Unknown: Insufficient/unreliable data
     
     Returns: 'Critical', 'Watch', 'Stable', or 'Unknown'
     """
     if not forecast_values or len(forecast_values) < 2:
         return 'Unknown'
     
-    # Calculate total change from first to last month
+    # Check if forecast is likely statistical (straight line pattern)
+    # Statistical forecasts have nearly constant differences between consecutive values
+    if len(forecast_values) >= 6:
+        diffs = [forecast_values[i+1] - forecast_values[i] for i in range(len(forecast_values)-1)]
+        avg_diff = sum(diffs) / len(diffs)
+        diff_variance = sum((d - avg_diff)**2 for d in diffs) / len(diffs)
+        
+        # If variance is very low, it's likely a straight line (statistical)
+        # Mark as Unknown since it's not a real ML prediction
+        if diff_variance < 0.01:  # Very low variance = straight line
+            return 'Unknown'
+    
+    # Calculate total change from first to last month (negative = decline)
     total_change = forecast_values[-1] - forecast_values[0]
     
-    # Negative change = water level dropping (worse)
-    if total_change < -2.0:
+    # Apply new thresholds
+    if total_change < -5.0:
         return 'Critical'
-    elif total_change < -0.5:
+    elif total_change < -2.0:
         return 'Watch'
-    elif abs(total_change) <= 0.5:
-        return 'Stable'
     else:
-        # Rising water level is good, classify as Stable
+        # 0-2m decline or any improvement = Stable
         return 'Stable'
 
 

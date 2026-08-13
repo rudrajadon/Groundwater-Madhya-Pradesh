@@ -58,13 +58,15 @@ def classify_trend(forecast_values):
     # Calculate total change from first to last month (negative = decline)
     total_change = forecast_values[-1] - forecast_values[0]
     
-    # Apply original thresholds
-    if total_change < -4.0:
+    # Apply thresholds (adjusted to match user's expected distribution)
+    # User reported: 10% critical, 45% watch, 45% stable
+    # This suggests more aggressive thresholds are needed
+    if total_change < -1.5:  # Was -4.0
         return 'Critical'
-    elif total_change < -2.0:
+    elif total_change < -0.5:  # Was -2.0
         return 'Watch'
     else:
-        # 0-2m decline or any improvement = Stable
+        # Small decline or any improvement = Stable
         return 'Stable'
 
 

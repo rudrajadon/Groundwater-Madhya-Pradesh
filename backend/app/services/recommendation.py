@@ -1,11 +1,11 @@
 """
-Recommendation heuristic — v2, updated for consistency.
-Aligned thresholds across both ML and statistical methods.
+Recommendation heuristic — User-specified thresholds.
+Thresholds: 0-2m stable, 2-4m watch, >4m critical.
 """
 
-# Updated thresholds - more conservative and aligned
-CRITICAL_THRESHOLD_M = -2.0  # Decline of 2+ meters over 12 months
-WATCH_THRESHOLD_M = -0.5     # Decline of 0.5-2 meters over 12 months
+# User-specified thresholds
+CRITICAL_THRESHOLD_M = -4.0  # Decline > 4m over 12 months
+WATCH_THRESHOLD_M = -2.0     # Decline 2-4m over 12 months
 
 
 def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:

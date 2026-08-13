@@ -23,12 +23,12 @@ DB_CONFIG = {
     'password': 'changeme'
 }
 
-# Original thresholds from first commit
-CRITICAL_THRESHOLD_M = -2.0
-WATCH_THRESHOLD_M = -0.5
+# User-specified thresholds
+CRITICAL_THRESHOLD_M = -4.0  # Decline > 4m over 12 months
+WATCH_THRESHOLD_M = -2.0     # Decline 2-4m over 12 months
 
 def classify_trend_original(forecast):
-    """Original trend classification logic."""
+    """User-specified trend classification: 0-2m stable, 2-4m watch, >4m critical."""
     change = forecast[-1] - forecast[0]
     
     if change <= CRITICAL_THRESHOLD_M:

@@ -32,9 +32,9 @@ def classify_trend(forecast_values):
     """
     Classify trend based on 12-month forecast values.
     
-    NEW THRESHOLDS (as requested):
-    Critical: > 5m decline over 12 months
-    Watch: 2m - 5m decline
+    ORIGINAL THRESHOLDS (restored):
+    Critical: > 4m decline over 12 months
+    Watch: 2-4m decline
     Stable: 0-2m decline or any improvement
     Unknown: Insufficient/unreliable data
     
@@ -58,8 +58,8 @@ def classify_trend(forecast_values):
     # Calculate total change from first to last month (negative = decline)
     total_change = forecast_values[-1] - forecast_values[0]
     
-    # Apply new thresholds
-    if total_change < -5.0:
+    # Apply original thresholds
+    if total_change < -4.0:
         return 'Critical'
     elif total_change < -2.0:
         return 'Watch'

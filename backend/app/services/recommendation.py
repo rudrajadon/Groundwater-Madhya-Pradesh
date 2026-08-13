@@ -1,11 +1,11 @@
 """
-Recommendation heuristic — v4, updated with new thresholds.
-Aligned with user requirements: 0-2m stable, 2-5m watch, >5m critical.
+Recommendation heuristic — ORIGINAL thresholds restored.
+Thresholds: 0-2m stable, 2-4m watch, >4m critical.
 """
 
-# Updated thresholds (as requested)
-CRITICAL_THRESHOLD_M = -5.0  # Decline > 5m over 12 months
-WATCH_THRESHOLD_M = -2.0     # Decline 2–5m over 12 months
+# Original thresholds
+CRITICAL_THRESHOLD_M = -4.0  # Decline > 4m over 12 months
+WATCH_THRESHOLD_M = -2.0     # Decline 2-4m over 12 months
 
 
 def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
@@ -15,15 +15,15 @@ def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
     Higher values = MORE water (good), lower values = LESS water (bad).
     
     Thresholds:
-    - Critical: > 5m decline
-    - Watch: 2-5m decline  
+    - Critical: > 4m decline
+    - Watch: 2-4m decline  
     - Stable: 0-2m decline or any improvement
     """
     change = forecast_head_msl[-1] - forecast_head_msl[0]
 
     if change <= CRITICAL_THRESHOLD_M:
         return "Critical", (
-            f"Severe water level decline projected ({abs(change):.1f}m over 12 months). "
+            f"Water level projected to drop {abs(change):.1f}m over the next 12 months. "
             "Immediate action required: prioritize recharge structures, reduce abstraction, "
             "and increase monitoring frequency."
         )
@@ -40,7 +40,7 @@ def classify_trend(forecast_head_msl: list[float]) -> tuple[str, str]:
             )
         else:
             return "Stable", (
-                f"Minimal decline projected ({abs(change):.1f}m over 12 months). "
+                f"No significant change projected ({change:+.1f}m over 12 months). "
                 "Continue regular monitoring."
             )
 

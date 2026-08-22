@@ -53,7 +53,8 @@ def _get_well_metadata(well_id: str, db: Session) -> dict:
             ST_X(geom::geometry) AS lon,
             geology_type,
             aquifer_classification,
-            trend_label
+            trend_label,
+            forecast_decline_m
         FROM wells
         WHERE well_id = :well_id
     """)
@@ -77,7 +78,8 @@ def _get_wells_by_district(district: str, db: Session) -> List[dict]:
             ST_X(geom::geometry) AS lon,
             geology_type,
             aquifer_classification,
-            trend_label
+            trend_label,
+            forecast_decline_m
         FROM wells
         WHERE district = :district
         AND geom IS NOT NULL
@@ -99,7 +101,8 @@ def _get_all_wells(db: Session, limit: int = 1000) -> List[dict]:
             ST_X(geom::geometry) AS lon,
             geology_type,
             aquifer_classification,
-            trend_label
+            trend_label,
+            forecast_decline_m
         FROM wells
         WHERE geom IS NOT NULL
         ORDER BY district, well_id
@@ -112,64 +115,48 @@ def _get_all_wells(db: Session, limit: int = 1000) -> List[dict]:
 
 def _get_forecast_for_well(well_id: str, model, db: Session) -> tuple:
     """
-    Get forecast for a single well.
+    Get forecast for a single well using the forecast endpoint.
     Returns (forecast_points, recommendation, model_version, caveat)
     """
-    from ..services.recommendation import classify_trend
-    import numpy as np
+    from ..routers.forecast import get_forecast_for_well as forecast_endpoint
+    from fastapi import Request
     
-    # Get last 24 readings
-    readings_query = text("""
-        SELECT depth_bgl_m
-        FROM readings
-        WHERE well_id = :well_id AND depth_bgl_m IS NOT NULL
-        ORDER BY date DESC
-        LIMIT 24
-    """)
+    # Create a mock request with the model
+    class MockRequest:
+        class State:
+            def __init__(self, model):
+                self.model = model
+        def __init__(self, model):
+            self.app = type('obj', (object,), {'state': self.State(model)})()
     
-    readings = db.execute(readings_query, {"well_id": well_id}).mappings().all()
+    mock_request = MockRequest(model)
     
-    if len(readings) < 24:
-        return [], "Insufficient data for forecast", "insufficient_data", "Less than 24 historical readings available"
-    
-    readings_list = [float(r["depth_bgl_m"]) for r in reversed(readings)]
-    
-    # Get scaler
-    scaler = model._scalers.get(well_id)
-    if not scaler:
-        return [], "Well not in training set", "not_trained", "This well was not included in model training"
-    
-    # Scale readings
-    scaled = scaler.transform(np.array(readings_list).reshape(-1, 1)).flatten()
-    
-    # Get well metadata for zone
-    well_meta = _get_well_metadata(well_id, db)
-    zone = well_meta.get('geology_type', 'Unknown')
-    
-    # Get forecast
-    if well_id in model.well_list:
-        result = model.predict_well(well_id, scaled, None, None, zone, scaler)
-    else:
-        return [], "Well not in model", "not_in_model", "Well not found in trained model"
-    
-    forecast_head = result['forecast_head_msl']
-    
-    # Convert to forecast points
-    forecast_points = []
-    for i in range(min(12, len(forecast_head))):
-        # Estimate uncertainty (simplified)
-        uncertainty = 1.0 + (i * 0.1)  # Increases with forecast horizon
-        forecast_points.append({
-            "month_index": i + 1,
-            "head_msl_m": round(forecast_head[i], 2),
-            "lower_m": round(forecast_head[i] - 1.96 * uncertainty, 2),
-            "upper_m": round(forecast_head[i] + 1.96 * uncertainty, 2),
-        })
-    
-    # Classify trend
-    trend_label, recommendation = classify_trend(forecast_head[:12])
-    
-    return forecast_points, recommendation, "PGNN-LSTM v1.0", None
+    try:
+        # Use the forecast endpoint to get predictions
+        forecast_response = forecast_endpoint(well_id, mock_request, db)
+        
+        # Extract data from response
+        forecast_points = forecast_response.forecast
+        recommendation = forecast_response.recommendation
+        model_version = forecast_response.model_version
+        caveat = forecast_response.caveat
+        
+        # Convert ForecastPoint objects to dicts
+        forecast_dicts = [
+            {
+                "month_index": p.month_index,
+                "head_msl_m": p.head_msl_m,
+                "lower_m": p.lower_m,
+                "upper_m": p.upper_m,
+            }
+            for p in forecast_points
+        ]
+        
+        return forecast_dicts, recommendation, model_version, caveat
+        
+    except Exception as e:
+        print(f"[EXPORT] Error getting forecast for {well_id}: {e}")
+        return [], f"Forecast unavailable: {str(e)}", "error", "Could not generate forecast"
 
 
 @router.post("/generate")
@@ -265,6 +252,10 @@ async def generate_export(
             watch_count = sum(1 for w in wells if w.get('trend_label') == 'Watch')
             stable_count = sum(1 for w in wells if w.get('trend_label') == 'Stable')
             
+            # Calculate average decline from database values
+            declines = [w.get('forecast_decline_m', 0) for w in wells if w.get('forecast_decline_m') is not None]
+            avg_decline = sum(declines) / len(declines) if declines else 0.0
+            
             statistics = {
                 'total_wells': total_wells,
                 'critical_count': critical_count,
@@ -273,16 +264,12 @@ async def generate_export(
                 'watch_pct': (watch_count / total_wells * 100) if total_wells > 0 else 0,
                 'stable_count': stable_count,
                 'stable_pct': (stable_count / total_wells * 100) if total_wells > 0 else 0,
-                'avg_decline_m': 0.0  # TODO: Calculate from forecasts
+                'avg_decline_m': avg_decline
             }
             
-            # Add forecast change to each well
+            # Use forecast_decline_m from database (already calculated correctly)
             for well in wells:
-                forecast_points, _, _, _ = _get_forecast_for_well(well['well_id'], model, db)
-                if forecast_points:
-                    well['forecast_change'] = forecast_points[-1]['head_msl_m'] - forecast_points[0]['head_msl_m']
-                else:
-                    well['forecast_change'] = 0.0
+                well['forecast_change'] = well.get('forecast_decline_m', 0.0) or 0.0
             
             buffer = io.BytesIO()
             generate_district_summary_pdf(district_name, wells, statistics, buffer)

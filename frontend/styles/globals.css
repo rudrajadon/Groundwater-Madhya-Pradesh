@@ -25,3 +25,61 @@ a {
 .leaflet-pane {
   outline: none !important;
 }
+
+/* District boundary labels */
+.district-label {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid #9ca3af !important;
+  border-radius: 4px !important;
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+/* Hide blue selection box on map interactions */
+.leaflet-container .leaflet-interactive:focus {
+  outline: none !important;
+}
+
+.leaflet-container svg rect {
+  outline: none !important;
+  pointer-events: none !important;
+}
+
+.leaflet-zoom-box {
+  display: none !important;
+}
+
+svg rect[class*="leaflet"] {
+  display: none !important;
+}
+
+/* Hide any blue rectangular selection boxes */
+.leaflet-container .leaflet-zoom-animated,
+.leaflet-container .leaflet-pane svg rect {
+  pointer-events: none !important;
+}
+
+.leaflet-container path:focus,
+.leaflet-container svg:focus {
+  outline: none !important;
+}
+
+/* Prevent blue outline on all map elements */
+.leaflet-container * {
+  outline: none !important;
+}
+
+.leaflet-overlay-pane svg rect {
+  display: none !important;
+}
+
+/* Specifically hide zoom box and selection boxes */
+.leaflet-zoom-box,
+.leaflet-control-zoom-box {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}

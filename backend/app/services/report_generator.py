@@ -19,6 +19,156 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
 from reportlab.pdfgen import canvas
 
 
+def generate_district_map_image(
+    district_name: str,
+    wells_data: List[Dict],
+    output_path: str
+) -> Optional[str]:
+    """
+    Generate a map showing the district boundary with well locations.
+    
+    Args:
+        district_name: Name of the district
+        wells_data: List of well dicts with lat, lon, trend_label
+        output_path: Path to save the PNG image
+        
+    Returns:
+        Path to generated image file, or None if generation failed
+    """
+    if not GEOPANDAS_AVAILABLE:
+        return None
+        
+    try:
+        # Load district boundaries
+        shp_paths = [
+            Path("/app/23/MP_DISTRICT_BDY.shp"),
+            Path(__file__).parent.parent.parent.parent.parent / "23" / "MP_DISTRICT_BDY.shp",
+        ]
+        
+        districts_gdf = None
+        for shp_path in shp_paths:
+            if shp_path.exists():
+                districts_gdf = gpd.read_file(shp_path)
+                districts_gdf = districts_gdf.to_crs("EPSG:4326")
+                break
+        
+        if districts_gdf is None:
+            print(f"[PDF] District shapefile not found, skipping map")
+            return None
+        
+        # Standardize column names
+        if 'DISTRICT' in districts_gdf.columns:
+            districts_gdf = districts_gdf.rename(columns={'DISTRICT': 'district'})
+        districts_gdf['district'] = districts_gdf['district'].str.strip().str.upper()
+        
+        # Find the target district
+        target_district = districts_gdf[
+            districts_gdf['district'] == district_name.upper()
+        ]
+        
+        if target_district.empty:
+            print(f"[PDF] District {district_name} not found in shapefile")
+            return None
+        
+        # Create figure
+        fig, ax = plt.subplots(1, 1, figsize=(6, 6), dpi=150)
+        
+        # Plot district boundary
+        target_district.boundary.plot(
+            ax=ax,
+            color='#1e40af',
+            linewidth=2,
+            label='District Boundary'
+        )
+        
+        # Fill district with light color
+        target_district.plot(
+            ax=ax,
+            color='#e0e7ff',
+            alpha=0.3,
+            edgecolor='none'
+        )
+        
+        # Plot wells by trend
+        if wells_data:
+            trend_colors = {
+                'Critical': '#dc2626',  # red
+                'Watch': '#f59e0b',     # orange
+                'Stable': '#22c55e',    # green
+                'Unknown': '#9ca3af'    # gray
+            }
+            
+            for trend, color in trend_colors.items():
+                trend_wells = [w for w in wells_data if w.get('trend_label') == trend]
+                if trend_wells:
+                    lats = [w['lat'] for w in trend_wells]
+                    lons = [w['lon'] for w in trend_wells]
+                    ax.scatter(
+                        lons, lats,
+                        c=color,
+                        s=30,
+                        alpha=0.7,
+                        edgecolors='white',
+                        linewidths=0.5,
+                        label=f'{trend} ({len(trend_wells)})',
+                        zorder=5
+                    )
+        
+        # Add district name as title
+        ax.set_title(
+            f'{district_name} District\nGroundwater Monitoring Wells',
+            fontsize=12,
+            fontweight='bold',
+            pad=10
+        )
+        
+        # Remove axis labels
+        ax.set_xlabel('Longitude', fontsize=9)
+        ax.set_ylabel('Latitude', fontsize=9)
+        ax.tick_params(labelsize=8)
+        
+        # Add legend
+        ax.legend(
+            loc='upper right',
+            fontsize=8,
+            framealpha=0.9,
+            edgecolor='gray'
+        )
+        
+        # Add grid
+        ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+        
+        # Tight layout
+        plt.tight_layout()
+        
+        # Save
+        plt.savefig(output_path, format='png', dpi=150, bbox_inches='tight')
+        plt.close()
+        
+        return output_path
+        
+    except Exception as e:
+        print(f"[PDF] Error generating district map: {e}")
+        import traceback
+        traceback.print_exc()
+        return None
+
+# For district map generation (optional)
+try:
+    import matplotlib
+    matplotlib.use('Agg')  # Use non-interactive backend
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Polygon
+    from matplotlib.collections import PatchCollection
+    import geopandas as gpd
+    from pathlib import Path
+    import numpy as np
+    GEOPANDAS_AVAILABLE = True
+except ImportError:
+    GEOPANDAS_AVAILABLE = False
+    print("[WARN] geopandas/matplotlib not available - district maps in PDFs will be disabled")
+
+
 def generate_well_forecast_pdf(
     well_data: Dict,
     forecast_data: List[Dict],
@@ -312,7 +462,6 @@ def generate_district_summary_pdf(
         ['Critical Wells:', f"{statistics.get('critical_count', 0)} ({statistics.get('critical_pct', 0):.1f}%)"],
         ['Watch Wells:', f"{statistics.get('watch_count', 0)} ({statistics.get('watch_pct', 0):.1f}%)"],
         ['Stable Wells:', f"{statistics.get('stable_count', 0)} ({statistics.get('stable_pct', 0):.1f}%)"],
-        ['Avg Projected Decline (12mo):', f"{statistics.get('avg_decline_m', 0):.2f} m"],
     ]
     
     stats_table = Table(stats_data, colWidths=[3*inch, 2*inch])
@@ -325,6 +474,33 @@ def generate_district_summary_pdf(
     elements.append(stats_table)
     elements.append(Spacer(1, 0.3*inch))
     
+    # Add district map if available
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
+        map_path = tmp.name
+    
+    map_image_path = generate_district_map_image(
+        district_name=district_name,
+        wells_data=wells_summary,
+        output_path=map_path
+    )
+    
+    if map_image_path:
+        try:
+            map_heading = Paragraph("District Map", styles['Heading2'])
+            elements.append(map_heading)
+            
+            # Add the map image
+            img = Image(map_image_path, width=5*inch, height=5*inch)
+            elements.append(img)
+            elements.append(Spacer(1, 0.2*inch))
+            
+            # Clean up temp file
+            import os
+            os.unlink(map_image_path)
+        except Exception as e:
+            print(f"[PDF] Could not add map image: {e}")
+    
     # Wells summary table
     wells_heading = Paragraph("Wells Summary", styles['Heading2'])
     elements.append(wells_heading)
@@ -335,12 +511,25 @@ def generate_district_summary_pdf(
     wells_to_show = wells_summary[:200]
     
     for well in wells_to_show:
+        # Get the forecast change value
+        # forecast_decline_m stores the decline amount (positive = decline, negative = rise)
+        change_value = well.get('forecast_change', 0)
+        
+        # Show as negative for decline (fall), positive for rise
+        # If forecast_decline_m is positive (decline), show as negative
+        if change_value > 0:
+            change_str = f"-{change_value:.2f}"
+        elif change_value < 0:
+            change_str = f"+{abs(change_value):.2f}"
+        else:
+            change_str = "0.00"
+        
         wells_table_data.append([
             well.get('well_id', ''),
             well.get('block', ''),
             well.get('trend_label', ''),
             well.get('geology_type', ''),
-            f"{well.get('forecast_change', 0):.2f}"
+            change_str
         ])
     
     wells_table = Table(wells_table_data, colWidths=[1.5*inch, 1.5*inch, 1*inch, 1.2*inch, 1.3*inch])

@@ -25,6 +25,8 @@ class ForecastResponse(BaseModel):
     matched_existing_well: bool
     distance_to_nearest_well_km: float | None = None
     aquifer_zone: str
+    geology_type: str | None = None  # Add geology type
+    district: str | None = None  # Add district
     forecast: list[ForecastPoint]
     trend_label: str
     recommendation: str

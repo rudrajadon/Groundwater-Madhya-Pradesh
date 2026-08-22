@@ -103,7 +103,7 @@ async def get_district_stress_levels(
     query = text("""
         SELECT 
             district,
-            COUNT(*) as total_wells,
+            COUNT(*) FILTER (WHERE trend_label != 'Unknown' AND trend_label IS NOT NULL) as total_wells,
             SUM(CASE WHEN trend_label = 'Critical' THEN 1 ELSE 0 END) as critical_count,
             SUM(CASE WHEN trend_label = 'Watch' THEN 1 ELSE 0 END) as watch_count,
             SUM(CASE WHEN trend_label = 'Stable' THEN 1 ELSE 0 END) as stable_count,
@@ -160,60 +160,55 @@ async def get_district_stress_levels(
 
 @router.get("/geojson")
 async def get_district_stress_geojson(
-    min_wells: int = Query(5, ge=1, description="Minimum wells required"),
+    min_wells: int = Query(0, ge=0, description="Minimum wells required (0 to show all districts)"),
     db: Session = Depends(get_db)
 ):
     """
-    Get district stress levels as GeoJSON FeatureCollection.
+    Get district stress levels as GeoJSON FeatureCollection with accurate boundaries.
     
-    Returns district boundaries (approximated from well locations) with properties:
+    Returns district boundaries (from shapefile) merged with well statistics:
     - District name
     - Well counts and trends
     - Risk level and color
     - Statistics
     
-    **Note:** This uses convex hull approximation from well locations.
-    For accurate district boundaries, integrate with a district shapefile.
+    Uses actual district boundary polygons from MP_DISTRICT_BDY shapefile.
+    Districts without wells are shown in gray with "No Data" status.
     
     **Query Parameters:**
-    - `min_wells`: Minimum wells required (default: 5)
+    - `min_wells`: Minimum wells required (default: 0 shows all 55 MP districts)
     
     **Example:**
     ```
-    GET /api/v1/stress-map/geojson?min_wells=5
+    GET /api/v1/stress-map/geojson?min_wells=0
     ```
     
-    **Response Format:** GeoJSON FeatureCollection
+    **Response Format:** GeoJSON FeatureCollection with district polygons
     """
-    query = text("""
+    # Get well statistics by district
+    stats_query = text("""
         SELECT 
-            district,
-            COUNT(*) as total_wells,
+            UPPER(district) as district,
+            COUNT(*) FILTER (WHERE trend_label != 'Unknown' AND trend_label IS NOT NULL) as total_wells,
             SUM(CASE WHEN trend_label = 'Critical' THEN 1 ELSE 0 END) as critical_count,
             SUM(CASE WHEN trend_label = 'Watch' THEN 1 ELSE 0 END) as watch_count,
             SUM(CASE WHEN trend_label = 'Stable' THEN 1 ELSE 0 END) as stable_count,
-            SUM(CASE WHEN trend_label = 'Unknown' OR trend_label IS NULL THEN 1 ELSE 0 END) as unknown_count,
-            ST_AsGeoJSON(
-                ST_Buffer(
-                    ST_ConvexHull(ST_Collect(geom::geometry)),
-                    0.1
-                )
-            ) as geometry
+            SUM(CASE WHEN trend_label = 'Unknown' OR trend_label IS NULL THEN 1 ELSE 0 END) as unknown_count
         FROM wells
         WHERE 
             geom IS NOT NULL 
             AND district IS NOT NULL 
             AND district != 'Unknown'
             AND district != ''
-        GROUP BY district
-        HAVING COUNT(*) >= :min_wells
-        ORDER BY district
+        GROUP BY UPPER(district)
     """)
     
-    results = db.execute(query, {"min_wells": min_wells}).mappings().all()
+    stats_results = db.execute(stats_query).mappings().all()
     
-    features = []
-    for row in results:
+    # Create a dictionary of stats by district
+    stats_by_district = {}
+    for row in stats_results:
+        district = row['district']
         total = row['total_wells']
         critical_count = row['critical_count']
         watch_count = row['watch_count']
@@ -228,26 +223,76 @@ async def get_district_stress_geojson(
         # Classify risk
         risk_level, risk_color = classify_risk_level(critical_pct, watch_pct)
         
-        # Parse geometry
-        import json
-        geometry = json.loads(row['geometry']) if row['geometry'] else None
+        stats_by_district[district] = {
+            "total_wells": total,
+            "critical_count": critical_count,
+            "watch_count": watch_count,
+            "stable_count": stable_count,
+            "unknown_count": unknown_count,
+            "critical_pct": round(critical_pct, 1),
+            "watch_pct": round(watch_pct, 1),
+            "stable_pct": round(stable_pct, 1),
+            "risk_level": risk_level,
+            "risk_color": risk_color,
+        }
+    
+    # Load district boundaries GeoJSON
+    import json
+    from pathlib import Path
+    
+    # Try multiple locations for the GeoJSON file
+    geo_paths = [
+        Path("/tmp/mp_districts_simplified.geojson"),
+        Path(__file__).parent.parent.parent.parent / "frontend" / "public" / "geo" / "mp_districts_simplified.geojson",
+    ]
+    
+    districts_geojson = None
+    for path in geo_paths:
+        if path.exists():
+            with open(path, 'r') as f:
+                districts_geojson = json.load(f)
+            break
+    
+    if not districts_geojson:
+        # Fallback to old convex hull method if GeoJSON not available
+        raise HTTPException(
+            status_code=500,
+            detail="District boundaries GeoJSON not found. Run etl/process_district_boundaries.py"
+        )
+    
+    # Merge stats with district boundaries
+    features = []
+    for feature in districts_geojson['features']:
+        district_name = feature['properties'].get('district', '').upper()
+        
+        if district_name in stats_by_district:
+            stats = stats_by_district[district_name]
+            
+            # Only include if meets minimum well requirement
+            if min_wells > 0 and stats['total_wells'] < min_wells:
+                continue
+            
+            # Add stats to properties
+            feature['properties'].update(stats)
+        else:
+            # District has no wells - show as "No Data"
+            feature['properties'].update({
+                "total_wells": 0,
+                "critical_count": 0,
+                "watch_count": 0,
+                "stable_count": 0,
+                "unknown_count": 0,
+                "critical_pct": 0.0,
+                "watch_pct": 0.0,
+                "stable_pct": 0.0,
+                "risk_level": "No Data",
+                "risk_color": "#d1d5db",  # Light gray
+            })
         
         features.append(GeoJSONFeature(
             type="Feature",
-            properties={
-                "district": row['district'],
-                "total_wells": total,
-                "critical_count": critical_count,
-                "watch_count": watch_count,
-                "stable_count": stable_count,
-                "unknown_count": unknown_count,
-                "critical_pct": round(critical_pct, 1),
-                "watch_pct": round(watch_pct, 1),
-                "stable_pct": round(stable_pct, 1),
-                "risk_level": risk_level,
-                "risk_color": risk_color,
-            },
-            geometry=geometry
+            properties=feature['properties'],
+            geometry=feature['geometry']
         ))
     
     return GeoJSONFeatureCollection(

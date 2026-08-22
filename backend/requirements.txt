@@ -14,3 +14,5 @@ joblib
 reportlab>=4.0
 pillow>=10.0
 matplotlib>=3.7
+geopandas>=0.14
+shapely>=2.0

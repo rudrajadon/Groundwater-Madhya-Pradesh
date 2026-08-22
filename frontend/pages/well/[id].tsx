@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getForecast, getWellHistory, getWells, ForecastResponse, WellSummary } from "../../lib/api";
+import { getForecastByWellId, getWellHistory, getWells, ForecastResponse, WellSummary } from "../../lib/api";
 import ForecastChart from "../../components/ForecastChart";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 
@@ -21,16 +21,8 @@ export default function WellDetail() {
       .then((h) => setHistory(h.readings))
       .catch((e) => setError(e.message));
 
-    // Fetch forecast: look up well coordinates from wells list,
-    // then call the forecast endpoint with lat/lon
-    getWells()
-      .then((wells) => {
-        const well = wells.find((w) => w.well_id === id);
-        if (well) {
-          return getForecast(well.lat, well.lon);
-        }
-        throw new Error("Well not found in wells list");
-      })
+    // Fetch forecast directly by well ID
+    getForecastByWellId(id)
       .then((fc) => setForecast(fc))
       .catch((e) => {
         // Forecast may fail if model isn't loaded — not a fatal error
@@ -67,12 +59,36 @@ export default function WellDetail() {
           <p style={{ color: "var(--text-secondary)" }}>{loading ? "Loading history…" : "No readings found."}</p>
         ) : (
           <div style={{ marginTop: 24 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+              <h3 style={{ margin: 0, borderBottom: "none" }}>Historical Readings</h3>
+              <span style={{ fontSize: 13, color: "var(--text-secondary)", fontWeight: 500, padding: "4px 12px", background: "var(--bg-secondary)", borderRadius: "6px" }}>
+                {(() => {
+                  const dates = history.map((r: any) => new Date(r.date));
+                  const oldestDate = new Date(Math.min(...dates.map(d => d.getTime())));
+                  const newestDate = new Date(Math.max(...dates.map(d => d.getTime())));
+                  const yearsDiff = (newestDate.getTime() - oldestDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+                  const years = Math.floor(yearsDiff);
+                  
+                  return years >= 1 
+                    ? `${years} year${years > 1 ? 's' : ''} of data (${history.length} readings)`
+                    : `${history.length} readings`;
+                })()}
+              </span>
+            </div>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={historyChartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
                 <XAxis dataKey="date" tick={{ fontSize: 11 }} stroke="var(--text-secondary)" />
-                <YAxis label={{ value: "Head (m MSL)", angle: -90, position: "insideLeft", fill: "var(--text-secondary)" }} stroke="var(--text-secondary)" />
-                <Tooltip contentStyle={{ backgroundColor: "var(--bg-tertiary)", borderColor: "var(--border-color)", color: "var(--text-primary)" }} />
+                <YAxis 
+                  label={{ value: "Head (m MSL)", angle: -90, position: "insideLeft", fill: "var(--text-secondary)" }} 
+                  stroke="var(--text-secondary)"
+                  domain={['auto', 'auto']}
+                  tickFormatter={(value) => value.toFixed(1)}
+                />
+                <Tooltip 
+                  contentStyle={{ backgroundColor: "var(--bg-tertiary)", borderColor: "var(--border-color)", color: "var(--text-primary)" }}
+                  formatter={(value: number) => value.toFixed(2) + " m MSL"}
+                />
                 <Line type="monotone" dataKey="head" name="Hydraulic Head" stroke="var(--accent-secondary)" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>

@@ -1,309 +1,492 @@
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
+import { useEffect, useState, useRef } from "react";
+import { MapContainer, TileLayer, GeoJSON, Tooltip, useMap, CircleMarker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-interface DistrictStress {
+const MP_CENTER: [number, number] = [23.47, 77.95];
+
+interface DistrictProperties {
   district: string;
   total_wells: number;
   critical_count: number;
   watch_count: number;
   stable_count: number;
-  unknown_count: number;
   critical_pct: number;
   watch_pct: number;
   stable_pct: number;
   risk_level: string;
   risk_color: string;
-  avg_lat: number;
-  avg_lon: number;
 }
 
-interface StateSummary {
-  state: string;
-  total_districts: number;
-  districts_with_data: number;
-  total_wells: number;
-  trend_distribution: {
-    critical: { count: number; percentage: number };
-    watch: { count: number; percentage: number };
-    stable: { count: number; percentage: number };
-    unknown: { count: number; percentage: number };
-  };
-  risk_distribution: {
-    Critical: number;
-    High: number;
-    Moderate: number;
-    Low: number;
-  };
-  overall_risk_level: string;
+interface DistrictFeature {
+  type: string;
+  properties: DistrictProperties;
+  geometry: any;
 }
 
-const MP_CENTER: [number, number] = [23.47, 77.95];
+interface StressData {
+  type: string;
+  features: DistrictFeature[];
+}
 
-// Map view controller component
-function MapViewController({ center, zoom }: { center: [number, number]; zoom: number }) {
+interface StressMapProps {
+  onDistrictSelect?: (district: string) => void;
+}
+
+interface WellData {
+  well_id: string;
+  lat: number;
+  lon: number;
+  trend_label: string;
+  district: string;
+}
+
+// Component to handle map zoom and bounds
+function MapController({ 
+  bounds, 
+  zoom 
+}: { 
+  bounds: L.LatLngBoundsExpression | null;
+  zoom: number | null;
+}) {
   const map = useMap();
   
   useEffect(() => {
-    map.setView(center, zoom);
-  }, [center, zoom, map]);
+    if (bounds) {
+      map.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+    } else if (zoom) {
+      map.setView(MP_CENTER, zoom);
+    }
+  }, [bounds, zoom, map]);
   
   return null;
 }
 
-export default function StressMap({
-  onDistrictSelect,
-}: {
-  onDistrictSelect?: (district: string) => void;
-}) {
-  const [districts, setDistricts] = useState<DistrictStress[]>([]);
-  const [summary, setSummary] = useState<StateSummary | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+// Component to capture map instance
+function MapInstanceCapture({ onMapReady }: { onMapReady: (map: L.Map) => void }) {
+  const map = useMap();
+  useEffect(() => {
+    onMapReady(map);
+  }, [map, onMapReady]);
+  return null;
+}
+
+// Heat map layer component - creates colored regions based on well locations
+// Clipped to district boundaries
+function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], districtGeometry?: any }) {
+  const map = useMap();
+  const layerRef = useRef<any>(null);
+  const clipLayerRef = useRef<any>(null);
 
   useEffect(() => {
-    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
-    
-    Promise.all([
-      fetch(`${API_BASE}/api/v1/stress-map/districts?min_wells=5`).then(r => r.json()),
-      fetch(`${API_BASE}/api/v1/stress-map/summary`).then(r => r.json())
-    ])
-      .then(([districtsData, summaryData]) => {
-        setDistricts(districtsData);
-        setSummary(summaryData);
+    if (!map || wells.length === 0) return;
+
+    // Remove previous layers
+    if (layerRef.current) {
+      map.removeLayer(layerRef.current);
+    }
+    if (clipLayerRef.current) {
+      map.removeLayer(clipLayerRef.current);
+    }
+
+    // Create the district boundary as a clipping layer
+    if (districtGeometry) {
+      const districtLayer = L.geoJSON(districtGeometry, {
+        style: {
+          fill: false,
+          color: '#374151',
+          weight: 2,
+          opacity: 1
+        },
+        pane: 'overlayPane'
+      });
+      clipLayerRef.current = districtLayer;
+      districtLayer.addTo(map);
+
+      // Get the SVG element and add clip path
+      const svg = map.getPanes().overlayPane.querySelector('svg');
+      if (svg) {
+        // Create clip path element
+        let defs = svg.querySelector('defs');
+        if (!defs) {
+          defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+          svg.insertBefore(defs, svg.firstChild);
+        }
+
+        // Remove old clip path if exists
+        const oldClip = defs.querySelector('#district-clip');
+        if (oldClip) oldClip.remove();
+
+        // Create new clip path
+        const clipPath = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
+        clipPath.setAttribute('id', 'district-clip');
+
+        // Get the district path and clone it for clipping
+        const districtPath = districtLayer.getLayers()[0];
+        if (districtPath && (districtPath as any)._path) {
+          const pathElement = (districtLayer.getLayers()[0] as any)._path;
+          const clonedPath = pathElement.cloneNode(true);
+          clipPath.appendChild(clonedPath);
+          defs.appendChild(clipPath);
+        }
+      }
+    }
+
+    // Group wells by status
+    const criticalWells = wells.filter(w => w.trend_label === 'Critical');
+    const watchWells = wells.filter(w => w.trend_label === 'Watch');
+    const stableWells = wells.filter(w => w.trend_label === 'Stable');
+
+    // Create overlapping circles to form colored regions
+    const createHeatCircles = (wellList: WellData[], color: string, opacity: number) => {
+      return wellList.map(well => {
+        const circle = L.circle([well.lat, well.lon], {
+          radius: 3000, // 3km radius of influence
+          color: 'transparent',
+          fillColor: color,
+          fillOpacity: opacity,
+          weight: 0,
+          interactive: false,
+          className: 'heat-circle',
+          pane: 'overlayPane'
+        });
+
+        // Apply clip path after circle is added
+        setTimeout(() => {
+          const circleElement = (circle as any)._path;
+          if (circleElement && districtGeometry) {
+            circleElement.setAttribute('clip-path', 'url(#district-clip)');
+          }
+        }, 10);
+
+        return circle;
+      });
+    };
+
+    // Create layers - stable first, then watch, then critical
+    const stableCircles = createHeatCircles(stableWells, '#22c55e', 0.25);
+    const watchCircles = createHeatCircles(watchWells, '#f59e0b', 0.35);
+    const criticalCircles = createHeatCircles(criticalWells, '#dc2626', 0.45);
+
+    // Add all circles to the map in order
+    const allCircles = [...stableCircles, ...watchCircles, ...criticalCircles];
+    const layerGroup = L.layerGroup(allCircles);
+    layerRef.current = layerGroup;
+    layerGroup.addTo(map);
+
+    // Apply clip path to all circles after they're rendered
+    setTimeout(() => {
+      allCircles.forEach(circle => {
+        const circleElement = (circle as any)._path;
+        if (circleElement && districtGeometry) {
+          circleElement.setAttribute('clip-path', 'url(#district-clip)');
+          circleElement.style.clipPath = 'url(#district-clip)';
+        }
+      });
+    }, 100);
+
+    return () => {
+      if (layerRef.current) {
+        map.removeLayer(layerRef.current);
+      }
+      if (clipLayerRef.current) {
+        map.removeLayer(clipLayerRef.current);
+      }
+      // Clean up clip path
+      const panes = map.getPanes();
+      if (panes && panes.overlayPane) {
+        const svg = panes.overlayPane.querySelector('svg');
+        if (svg) {
+          const defs = svg.querySelector('defs');
+          if (defs) {
+            const clipPath = defs.querySelector('#district-clip');
+            if (clipPath) clipPath.remove();
+          }
+        }
+      }
+    };
+  }, [map, wells, districtGeometry]);
+
+  return null;
+}
+
+export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMapProps & { zoomToDistrict?: string | null }) {
+  const [stressData, setStressData] = useState<StressData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedDistrict, setSelectedDistrict] = useState<DistrictProperties | null>(null);
+  const [districtBounds, setDistrictBounds] = useState<L.LatLngBoundsExpression | null>(null);
+  const [currentZoom, setCurrentZoom] = useState<number | null>(7);
+  const [districtWells, setDistrictWells] = useState<WellData[]>([]);
+  const [showWellLevel, setShowWellLevel] = useState(false);
+  const [selectedDistrictGeometry, setSelectedDistrictGeometry] = useState<any>(null);
+  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+
+  useEffect(() => {
+    console.log('[StressMap] Fetching stress map data...');
+    fetch('http://localhost:8000/api/v1/stress-map/geojson?min_wells=0')
+      .then(res => res.json())
+      .then(data => {
+        console.log('[StressMap] Loaded stress data:', data.features?.length, 'districts');
+        setStressData(data);
         setLoading(false);
       })
-      .catch((e) => {
+      .catch(e => {
+        console.error('[StressMap] Error loading stress data:', e);
         setError(e.message);
         setLoading(false);
       });
   }, []);
 
-  const handleDistrictClick = (district: DistrictStress) => {
-    setSelectedDistrict(district.district);
-    if (onDistrictSelect) {
-      onDistrictSelect(district.district);
+  // Zoom to district when selected from sidebar
+  useEffect(() => {
+    if (zoomToDistrict && stressData && mapInstance) {
+      const feature = stressData.features.find(
+        (f: any) => f.properties?.district?.toUpperCase() === zoomToDistrict.toUpperCase()
+      );
+      if (feature && feature.geometry) {
+        const layer = L.geoJSON(feature as any);
+        const bounds = layer.getBounds();
+        mapInstance.fitBounds(bounds, { padding: [50, 50], maxZoom: 13 });
+        
+        const props = feature.properties as DistrictProperties;
+        
+        // Set district state
+        setDistrictBounds(bounds);
+        setShowWellLevel(props.total_wells >= 30);
+        setSelectedDistrictGeometry(feature.geometry);
+        
+        // Fetch wells for this district if it has enough wells
+        if (props.total_wells >= 30) {
+          fetch(`http://localhost:8000/api/v1/wells?limit=1000`)
+            .then(res => res.json())
+            .then(wells => {
+              const filteredWells = wells.filter((w: WellData) => 
+                w.district === props.district
+              );
+              setDistrictWells(filteredWells);
+            })
+            .catch(err => console.error('Error fetching wells:', err));
+        } else {
+          setDistrictWells([]);
+        }
+        
+        setSelectedDistrict(props);
+        if (onDistrictSelect) {
+          onDistrictSelect(props.district);
+        }
+      }
     }
+  }, [zoomToDistrict, stressData, mapInstance, onDistrictSelect]);
+
+  const getStyle = (feature: any) => {
+    const props = feature.properties as DistrictProperties;
+    // If district has less than 30 wells, show it in gray (no heat map color)
+    const shouldShowHeatMap = props.total_wells >= 30;
+    
+    if (!shouldShowHeatMap) {
+      return {
+        fillColor: '#9ca3af',
+        fillOpacity: 0.6,
+        color: '#374151',
+        weight: 1,
+        opacity: 1
+      };
+    }
+    
+    // Calculate gradient color based on critical and watch percentages
+    // Use actual percentages for more accurate representation
+    const criticalPct = props.critical_pct;
+    const watchPct = props.watch_pct;
+    const stablePct = props.stable_pct;
+    
+    // Calculate risk score: critical wells are most important
+    // If >20% critical = very high risk
+    // If >10% critical = high risk
+    // If >5% critical = moderate risk
+    // Otherwise look at watch percentage
+    
+    let fillColor;
+    
+    if (criticalPct >= 20) {
+      // Deep red (20%+ critical)
+      fillColor = '#dc2626';
+    } else if (criticalPct >= 12) {
+      // Red-orange (12-20% critical)
+      const t = (criticalPct - 12) / 8;
+      const red = 220;
+      const green = Math.floor(38 + (220 - 38) * (1 - t));
+      const blue = 38;
+      fillColor = `rgb(${red}, ${green}, ${blue})`;
+    } else if (criticalPct >= 8) {
+      // Orange (8-12% critical)
+      fillColor = '#f59e0b';
+    } else if (criticalPct >= 5) {
+      // Light orange (5-8% critical)
+      const t = (criticalPct - 5) / 3;
+      const red = Math.floor(251 - (251 - 245) * t);
+      const green = Math.floor(191 - (191 - 158) * t);
+      const blue = Math.floor(36 - (36 - 11) * t);
+      fillColor = `rgb(${red}, ${green}, ${blue})`;
+    } else if (watchPct >= 25) {
+      // Yellow (low critical but high watch)
+      fillColor = '#fbbf24';
+    } else if (watchPct >= 15) {
+      // Light yellow (moderate watch)
+      fillColor = '#fde047';
+    } else if (watchPct >= 8) {
+      // Very light yellow
+      fillColor = '#fef08a';
+    } else if (stablePct >= 80) {
+      // Bright green (mostly stable)
+      fillColor = '#22c55e';
+    } else {
+      // Light green (decent stability)
+      fillColor = '#86efac';
+    }
+    
+    return {
+      fillColor: fillColor,
+      fillOpacity: 0.7,
+      color: '#374151',
+      weight: 1,
+      opacity: 1
+    };
   };
 
-  // Calculate marker size based on total wells
-  const getMarkerSize = (totalWells: number) => {
-    return Math.min(Math.max(totalWells / 5, 15), 40);
+  const onEachFeature = (feature: any, layer: any) => {
+    const props = feature.properties as DistrictProperties;
+    
+    // Tooltip
+    layer.bindTooltip(
+      `<div style="font-family: system-ui; font-size: 12px;">
+        <strong style="font-size: 14px;">${props.district}</strong><br/>
+        ${props.total_wells >= 30
+          ? `<span style="color: ${props.risk_color}; font-weight: bold;">${props.risk_level} Risk</span><br/>
+             Wells: ${props.total_wells} (${props.critical_count} critical, ${props.watch_count} watch)`
+          : props.total_wells > 0
+            ? `<span style="color: #6b7280; font-weight: bold;">Insufficient Data (${props.total_wells} wells)</span><br/>
+               <span style="font-size: 11px;">Requires ≥30 wells for risk assessment</span>`
+            : `<span style="color: #6b7280; font-weight: bold;">No Monitoring Data</span>`
+        }
+      </div>`,
+      { sticky: true }
+    );
+
+    // Click handler
+    layer.on({
+      click: (e: any) => {
+        L.DomEvent.stopPropagation(e);
+        L.DomEvent.preventDefault(e);
+        
+        // Calculate bounds of the clicked district
+        const bounds = layer.getBounds();
+        setDistrictBounds(bounds);
+        setShowWellLevel(props.total_wells >= 30);
+        
+        // Store the district geometry for clipping
+        setSelectedDistrictGeometry(feature.geometry);
+        
+        // Fetch wells for this district if it has enough wells
+        if (props.total_wells >= 30) {
+          fetch(`http://localhost:8000/api/v1/wells?limit=1000`)
+            .then(res => res.json())
+            .then(wells => {
+              const filteredWells = wells.filter((w: WellData) => 
+                w.district === props.district
+              );
+              setDistrictWells(filteredWells);
+            })
+            .catch(err => console.error('Error fetching wells:', err));
+        } else {
+          setDistrictWells([]);
+        }
+        
+        setSelectedDistrict(props);
+        if (onDistrictSelect) {
+          onDistrictSelect(props.district);
+        }
+      },
+      mouseover: (e: any) => {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 2,
+          fillOpacity: 0.8
+        });
+      },
+      mouseout: (e: any) => {
+        const layer = e.target;
+        layer.setStyle({
+          weight: 1,
+          fillOpacity: 0.7
+        });
+      }
+    });
   };
+
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        height: '100%',
+        fontSize: '1.25rem',
+        color: '#6b7280'
+      }}>
+        Loading district stress data...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        height: '100%',
+        fontSize: '1rem',
+        color: '#dc2626'
+      }}>
+        Error loading stress map: {error}
+      </div>
+    );
+  }
 
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      {error && (
-        <div style={{ padding: 8, background: "#fee2e2", color: "#991b1b" }}>
-          Could not load stress map: {error}
-        </div>
-      )}
-      
-      {loading && (
-        <div style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 1000,
-          background: "white",
-          padding: "20px",
-          borderRadius: "8px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
-        }}>
-          Loading stress map...
-        </div>
-      )}
-      
       <MapContainer 
         center={MP_CENTER} 
         zoom={7} 
-        style={{ height: "100%", width: "100%", outline: "none" }}
+        style={{ height: "100%", width: "100%" }}
+        doubleClickZoom={true}
+        scrollWheelZoom={true}
+        dragging={true}
+        zoomControl={true}
       >
+        <MapInstanceCapture onMapReady={setMapInstance} />
+        <MapController bounds={districtBounds} zoom={currentZoom} />
+        
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; OpenStreetMap contributors'
         />
         
-        {/* District markers */}
-        {districts.map((d) => (
-          <CircleMarker
-            key={d.district}
-            center={[d.avg_lat, d.avg_lon]}
-            radius={getMarkerSize(d.total_wells)}
-            pathOptions={{ 
-              color: d.risk_color,
-              fillColor: d.risk_color,
-              fillOpacity: 0.6,
-              weight: selectedDistrict === d.district ? 4 : 2
-            }}
-            eventHandlers={{
-              click: (e) => {
-                L.DomEvent.stopPropagation(e);
-                handleDistrictClick(d);
-              },
-            }}
-          >
-            <Popup>
-              <div style={{ minWidth: "220px", fontFamily: "system-ui, sans-serif" }}>
-                {/* District Name */}
-                <div style={{ fontWeight: 700, fontSize: "16px", color: "#111827", marginBottom: "8px" }}>
-                  {d.district} District
-                </div>
-
-                {/* Risk Level Badge */}
-                <div style={{
-                  display: "inline-block",
-                  padding: "4px 12px",
-                  background: d.risk_color,
-                  color: "white",
-                  borderRadius: "12px",
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  marginBottom: "12px"
-                }}>
-                  {d.risk_level} Risk
-                </div>
-
-                <hr style={{ border: "none", borderTop: "1px solid #e5e7eb", margin: "8px 0" }} />
-
-                {/* Statistics */}
-                <div style={{ fontSize: "13px", marginBottom: "8px" }}>
-                  <div style={{ fontWeight: 600, color: "#6b7280", marginBottom: "4px" }}>
-                    Total Wells: {d.total_wells}
-                  </div>
-                  
-                  {d.critical_count > 0 && (
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
-                      <span>🔴 Critical:</span>
-                      <span style={{ fontWeight: 600 }}>
-                        {d.critical_count} ({d.critical_pct}%)
-                      </span>
-                    </div>
-                  )}
-                  
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
-                    <span>🟡 Watch:</span>
-                    <span style={{ fontWeight: 600 }}>
-                      {d.watch_count} ({d.watch_pct}%)
-                    </span>
-                  </div>
-                  
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
-                    <span>🟢 Stable:</span>
-                    <span style={{ fontWeight: 600 }}>
-                      {d.stable_count} ({d.stable_pct}%)
-                    </span>
-                  </div>
-                  
-                  {d.unknown_count > 0 && (
-                    <div style={{ display: "flex", justifyContent: "space-between", color: "#9ca3af" }}>
-                      <span>⚪ Unknown:</span>
-                      <span>{d.unknown_count}</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Click hint */}
-                <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "8px", fontStyle: "italic" }}>
-                  Click for detailed district report
-                </div>
-              </div>
-            </Popup>
-          </CircleMarker>
-        ))}
+        {stressData && (
+          <GeoJSON
+            key={showWellLevel ? 'zoomed' : 'normal'}
+            data={stressData as any}
+            style={getStyle}
+            onEachFeature={onEachFeature}
+          />
+        )}
+        
+        {/* Show well-level heat map when zoomed into a district */}
+        {showWellLevel && districtWells.length > 0 && (
+          <WellHeatMapLayer wells={districtWells} districtGeometry={selectedDistrictGeometry} />
+        )}
       </MapContainer>
-      
-      {/* State Summary Panel */}
-      {summary && !loading && (
-        <div style={{
-          position: "absolute",
-          top: "20px",
-          right: "10px",
-          background: "white",
-          padding: "16px",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-          fontSize: "13px",
-          zIndex: 1000,
-          minWidth: "260px",
-          maxWidth: "320px"
-        }}>
-          <div style={{ fontWeight: 700, fontSize: "16px", marginBottom: "12px", color: "#111827" }}>
-            {summary.state}
-          </div>
-          
-          {/* Overall Risk Level */}
-          <div style={{
-            padding: "8px 12px",
-            background: summary.overall_risk_level === "Critical" ? "#fef2f2"
-              : summary.overall_risk_level === "High" ? "#fffbeb"
-              : summary.overall_risk_level === "Moderate" ? "#fef3c7"
-              : "#f0fdf4",
-            borderRadius: "8px",
-            marginBottom: "12px",
-            borderLeft: `4px solid ${
-              summary.overall_risk_level === "Critical" ? "#dc2626"
-              : summary.overall_risk_level === "High" ? "#f59e0b"
-              : summary.overall_risk_level === "Moderate" ? "#fbbf24"
-              : "#22c55e"
-            }`
-          }}>
-            <div style={{ fontSize: "11px", color: "#6b7280", marginBottom: "2px" }}>Overall Status</div>
-            <div style={{ fontWeight: 700, fontSize: "14px", color: "#111827" }}>
-              {summary.overall_risk_level} Risk
-            </div>
-          </div>
-
-          {/* Statistics */}
-          <div style={{ marginBottom: "12px" }}>
-            <div style={{ fontWeight: 600, marginBottom: "6px", color: "#374151" }}>
-              State Statistics
-            </div>
-            <div style={{ fontSize: "12px", color: "#6b7280" }}>
-              <div style={{ marginBottom: "4px" }}>
-                📊 {summary.total_wells} wells in {summary.districts_with_data} districts
-              </div>
-              <div style={{ marginBottom: "4px" }}>
-                🔴 {summary.trend_distribution.critical.count} Critical ({summary.trend_distribution.critical.percentage}%)
-              </div>
-              <div style={{ marginBottom: "4px" }}>
-                🟡 {summary.trend_distribution.watch.count} Watch ({summary.trend_distribution.watch.percentage}%)
-              </div>
-              <div>
-                🟢 {summary.trend_distribution.stable.count} Stable ({summary.trend_distribution.stable.percentage}%)
-              </div>
-            </div>
-          </div>
-
-          {/* Risk Distribution */}
-          <div>
-            <div style={{ fontWeight: 600, marginBottom: "6px", color: "#374151" }}>
-              Districts by Risk Level
-            </div>
-            <div style={{ fontSize: "12px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
-                <span>Critical:</span>
-                <span style={{ fontWeight: 600, color: "#dc2626" }}>{summary.risk_distribution.Critical}</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
-                <span>High:</span>
-                <span style={{ fontWeight: 600, color: "#f59e0b" }}>{summary.risk_distribution.High}</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
-                <span>Moderate:</span>
-                <span style={{ fontWeight: 600, color: "#fbbf24" }}>{summary.risk_distribution.Moderate}</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span>Low:</span>
-                <span style={{ fontWeight: 600, color: "#22c55e" }}>{summary.risk_distribution.Low}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Legend */}
       <div style={{
@@ -311,36 +494,151 @@ export default function StressMap({
         bottom: "20px",
         right: "10px",
         background: "white",
-        padding: "12px",
-        borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-        fontSize: "12px",
+        padding: "16px",
+        borderRadius: "12px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        fontSize: "13px",
         zIndex: 1000,
-        minWidth: "180px"
+        minWidth: "220px"
       }}>
-        <div style={{ fontWeight: 600, marginBottom: "8px", color: "#111827" }}>
-          Risk Levels
+        <div style={{ fontWeight: 700, marginBottom: "12px", fontSize: "14px" }}>
+          Groundwater Risk
         </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-          <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#dc2626", marginRight: "8px" }}></div>
-          <span>Critical (&gt;40% critical or &gt;70% declining)</span>
+        
+        {/* Gradient bar */}
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
+            <div style={{ width: "24px", height: "20px", background: "#dc2626", borderRadius: "3px", border: "1px solid #999" }}></div>
+            <span style={{ fontSize: "12px" }}>Critical (&gt;12% critical)</span>
+          </div>
+          
+          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
+            <div style={{ width: "24px", height: "20px", background: "#f59e0b", borderRadius: "3px", border: "1px solid #999" }}></div>
+            <span style={{ fontSize: "12px" }}>High (8-12% critical)</span>
+          </div>
+          
+          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
+            <div style={{ width: "24px", height: "20px", background: "#fbbf24", borderRadius: "3px", border: "1px solid #999" }}></div>
+            <span style={{ fontSize: "12px" }}>Moderate (5-8% or high watch)</span>
+          </div>
+          
+          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
+            <div style={{ width: "24px", height: "20px", background: "#fef08a", borderRadius: "3px", border: "1px solid #999" }}></div>
+            <span style={{ fontSize: "12px" }}>Watch (&lt;5% critical, 8-15% watch)</span>
+          </div>
+          
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: "24px", height: "20px", background: "#22c55e", borderRadius: "3px", border: "1px solid #999" }}></div>
+            <span style={{ fontSize: "12px" }}>Low (&gt;80% stable)</span>
+          </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-          <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#f59e0b", marginRight: "8px" }}></div>
-          <span>High (20-40% critical or 50-70% declining)</span>
+        
+        <div style={{ display: "flex", alignItems: "center", paddingTop: "12px", borderTop: "1px solid #e5e7eb" }}>
+          <div style={{ width: "24px", height: "20px", background: "#9ca3af", marginRight: "10px", border: "1px solid #999", borderRadius: "3px" }}></div>
+          <span style={{ fontSize: "12px" }}>Insufficient/No Data (&lt;30 wells)</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-          <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#fbbf24", marginRight: "8px" }}></div>
-          <span>Moderate (10-20% critical)</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ width: "20px", height: "20px", borderRadius: "50%", background: "#22c55e", marginRight: "8px" }}></div>
-          <span>Low (&lt;10% critical)</span>
-        </div>
-        <div style={{ marginTop: "8px", fontSize: "10px", color: "#6b7280", fontStyle: "italic" }}>
-          Circle size = number of wells
-        </div>
+
+        {stressData && (
+          <div style={{ marginTop: "12px", paddingTop: "12px", borderTop: "1px solid #e5e7eb", fontSize: "11px", color: "#6b7280" }}>
+            {stressData.features.length} districts shown
+          </div>
+        )}
       </div>
+
+      {/* District Info Panel */}
+      {selectedDistrict && (
+        <div style={{
+          position: "absolute",
+          top: "20px",
+          left: "10px",
+          background: "white",
+          padding: "20px",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          zIndex: 1000,
+          minWidth: "300px",
+          maxWidth: "400px"
+        }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: "12px" }}>
+            <h3 style={{ margin: 0, fontSize: "1.25rem", fontWeight: 700 }}>
+              {selectedDistrict.district}
+            </h3>
+            <button
+              onClick={() => {
+                setSelectedDistrict(null);
+                setDistrictBounds(null);
+                setCurrentZoom(7);
+                setShowWellLevel(false);
+                setDistrictWells([]);
+                setSelectedDistrictGeometry(null);
+              }}
+              style={{
+                background: "none",
+                border: "none",
+                fontSize: "1.5rem",
+                cursor: "pointer",
+                color: "#6b7280",
+                padding: "0 4px",
+                lineHeight: 1
+              }}
+            >
+              ×
+            </button>
+          </div>
+
+          <div style={{
+            display: "inline-block",
+            padding: "4px 12px",
+            borderRadius: "6px",
+            background: selectedDistrict.total_wells >= 30 ? selectedDistrict.risk_color : '#9ca3af',
+            color: "white",
+            fontWeight: 600,
+            fontSize: "0.875rem",
+            marginBottom: "16px"
+          }}>
+            {selectedDistrict.total_wells >= 30 
+              ? `${selectedDistrict.risk_level} Risk`
+              : selectedDistrict.total_wells > 0
+                ? 'Insufficient Data'
+                : 'No Data'
+            }
+          </div>
+
+          {selectedDistrict.total_wells >= 30 ? (
+            <>
+              <div style={{ fontSize: "0.875rem" }}>
+                <div style={{ marginBottom: "8px" }}>
+                  <strong>Total Wells:</strong> {selectedDistrict.total_wells}
+                </div>
+                
+                <div style={{ marginBottom: "8px" }}>
+                  <strong style={{ color: "#dc2626" }}>Critical:</strong>{" "}
+                  {selectedDistrict.critical_count} ({selectedDistrict.critical_pct.toFixed(1)}%)
+                </div>
+                
+                <div style={{ marginBottom: "8px" }}>
+                  <strong style={{ color: "#f59e0b" }}>Watch:</strong>{" "}
+                  {selectedDistrict.watch_count} ({selectedDistrict.watch_pct.toFixed(1)}%)
+                </div>
+                
+                <div style={{ marginBottom: "8px" }}>
+                  <strong style={{ color: "#22c55e" }}>Stable:</strong>{" "}
+                  {selectedDistrict.stable_count} ({selectedDistrict.stable_pct.toFixed(1)}%)
+                </div>
+              </div>
+            </>
+          ) : selectedDistrict.total_wells > 0 ? (
+            <div style={{ fontSize: "0.875rem", color: "#6b7280" }}>
+              <p><strong>Wells:</strong> {selectedDistrict.total_wells}</p>
+              <p style={{ marginTop: "8px" }}>This district has monitoring wells but requires at least 30 wells for reliable risk assessment.</p>
+            </div>
+          ) : (
+            <div style={{ fontSize: "0.875rem", color: "#6b7280" }}>
+              <p>No monitoring wells currently installed in this district.</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

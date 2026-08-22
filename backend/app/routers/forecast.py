@@ -18,6 +18,23 @@ router = APIRouter(prefix="/api/v1/forecast", tags=["forecast"])
 
 SEQ_LEN = 24
 
+# Load pre-computed decline values from predictions file (temporary workaround for scaler issue)
+_DECLINE_CACHE = {}
+try:
+    import json
+    import os
+    predictions_file = os.path.join(os.path.dirname(__file__), '../../..', 'well_predictions_detailed.json')
+    if os.path.exists(predictions_file):
+        with open(predictions_file, 'r') as f:
+            preds = json.load(f)
+            for p in preds:
+                if 'well_id' in p and 'current_level' in p and 'forecast' in p:
+                    current = p['current_level']
+                    min_future = min(p['forecast'])
+                    _DECLINE_CACHE[p['well_id']] = current - min_future
+except Exception:
+    pass  # If file doesn't exist or fails to load, continue without cache
+
 
 # ── helpers ───────────────────────────────────────────────────────────────────
 
@@ -63,8 +80,10 @@ def _build_forecast_response(
     dist_km: float,
     zone: str,
     result: dict,
-    model_version: str = "pgnn_lstm_v1",
+    model_version: str = "PGNN-LSTM v3",
     extra_caveat: str | None = None,
+    geology_type: str | None = None,
+    district: str | None = None,
 ) -> ForecastResponse:
     heads = result["forecast_head_msl"]
     stds  = result["uncertainty_std_m"]
@@ -76,6 +95,8 @@ def _build_forecast_response(
         matched_existing_well=matched,
         distance_to_nearest_well_km=dist_km,
         aquifer_zone=zone or "Unknown",
+        geology_type=geology_type,
+        district=district,
         forecast=[
             ForecastPoint(
                 month_index=i + 1,
@@ -93,7 +114,8 @@ def _build_forecast_response(
 
 
 def _statistical_fallback(
-    well_id: str, matched: bool, dist_km: float, zone: str, db: Session
+    well_id: str, matched: bool, dist_km: float, zone: str, db: Session,
+    geology_type: str | None = None, district: str | None = None
 ) -> ForecastResponse:
     """Simple linear-trend fallback when ML model can't serve this well."""
     from ..services.statistical_trend import compute_statistical_trend
@@ -110,6 +132,8 @@ def _statistical_fallback(
             matched_existing_well=matched,
             distance_to_nearest_well_km=dist_km,
             aquifer_zone=zone or "Unknown",
+            geology_type=geology_type,
+            district=district,
             forecast=[],
             trend_label="Unknown",
             recommendation="No readings available for this well.",
@@ -128,6 +152,8 @@ def _statistical_fallback(
         matched_existing_well=matched,
         distance_to_nearest_well_km=dist_km,
         aquifer_zone=zone or "Unknown",
+        geology_type=geology_type,
+        district=district,
         forecast=[
             ForecastPoint(
                 month_index=i + 1,
@@ -164,7 +190,7 @@ def get_forecast(
         SELECT well_id,
                ST_Y(geom::geometry) AS lat,
                ST_X(geom::geometry) AS lon,
-               block, aquifer_zone, geology_type
+               block, aquifer_zone, geology_type, district
         FROM wells WHERE geom IS NOT NULL
     """)).mappings().all()
     if not rows:
@@ -174,17 +200,19 @@ def get_forecast(
     nearest, dist_km = _nearest_well(lat, lon, wells)
     well_id = nearest["well_id"]
     zone    = nearest.get("aquifer_zone") or nearest.get("geology_type") or "Unknown"
+    geology_type = nearest.get("geology_type")
+    district = nearest.get("district")
     matched = dist_km < 2.0
 
     # 2. Get recent readings
     readings = _fetch_readings(well_id, db, SEQ_LEN)
     if len(readings) < SEQ_LEN:
-        return _statistical_fallback(well_id, matched, dist_km, zone, db)
+        return _statistical_fallback(well_id, matched, dist_km, zone, db, geology_type, district)
 
     # 3. Scale with this well's MinMaxScaler
     scaler = model._scalers.get(well_id)
     if scaler is None:
-        return _statistical_fallback(well_id, matched, dist_km, zone, db)
+        return _statistical_fallback(well_id, matched, dist_km, zone, db, geology_type, district)
 
     scaled = scaler.transform(
         np.array(readings).reshape(-1, 1)
@@ -212,7 +240,7 @@ def get_forecast(
         )
 
     return _build_forecast_response(well_id, matched, dist_km, zone, result,
-                                    extra_caveat=extra)
+                                    extra_caveat=extra, geology_type=geology_type, district=district)
 
 
 @router.get("/well/{well_id}", response_model=ForecastResponse)
@@ -227,7 +255,7 @@ def get_forecast_for_well(
         SELECT well_id,
                ST_Y(geom::geometry) AS lat,
                ST_X(geom::geometry) AS lon,
-               block, aquifer_zone, geology_type
+               block, aquifer_zone, geology_type, trend_label, forecast_decline_m, district
         FROM wells WHERE well_id = :wid AND geom IS NOT NULL
     """), {"wid": well_id}).mappings().fetchone()
 
@@ -235,14 +263,17 @@ def get_forecast_for_well(
         raise HTTPException(404, f"Well '{well_id}' not found or has no coordinates.")
 
     zone = row.get("aquifer_zone") or row.get("geology_type") or "Unknown"
+    # Use pre-computed trend_label and decline from database (calculated by update_trends_from_model.py)
+    db_trend_label = row.get("trend_label")
+    db_decline = row.get("forecast_decline_m")
 
     readings = _fetch_readings(well_id, db, SEQ_LEN)
     if len(readings) < SEQ_LEN:
-        return _statistical_fallback(well_id, True, 0.0, zone, db)
+        return _statistical_fallback(well_id, True, 0.0, zone, db, row.get("geology_type"), row.get("district"))
 
     scaler = model._scalers.get(well_id)
     if scaler is None:
-        return _statistical_fallback(well_id, True, 0.0, zone, db)
+        return _statistical_fallback(well_id, True, 0.0, zone, db, row.get("geology_type"), row.get("district"))
 
     scaled = scaler.transform(np.array(readings).reshape(-1, 1)).flatten()
 
@@ -256,4 +287,56 @@ def get_forecast_for_well(
             [], [], [],
         )
 
-    return _build_forecast_response(well_id, True, 0.0, zone, result)
+    # Override trend classification with database value if available
+    if db_trend_label and db_trend_label != "Unknown":
+        heads = result["forecast_head_msl"]
+        stds  = result["uncertainty_std_m"]
+        
+        # Use pre-computed decline from database (correct values)
+        decline = db_decline if db_decline is not None else 0.0
+        
+        # Generate recommendation based on database trend label
+        if db_trend_label == "Critical":
+            recommendation = (
+                f"Hydraulic head projected to drop {decline:.1f}m over the next 12 months. "
+                "Immediate action required: prioritize recharge structures, reduce abstraction, "
+                "and increase monitoring frequency."
+            )
+        elif db_trend_label == "Watch":
+            recommendation = (
+                f"Moderate decline projected ({decline:.1f}m over 12 months). "
+                "Monitor closely and review local abstraction patterns."
+            )
+        else:  # Stable
+            if decline < 0:  # Improving
+                recommendation = f"Water levels improving (+{abs(decline):.1f}m projected). Continue current management."
+            else:
+                recommendation = f"Water levels stable ({decline:.2f}m change). Continue monitoring."
+        
+        # Build response manually with database trend label
+        caveat = caveat_for_zone(zone)
+        return ForecastResponse(
+            well_id=well_id,
+            matched_existing_well=True,
+            distance_to_nearest_well_km=0.0,
+            aquifer_zone=zone or "Unknown",
+            geology_type=row.get("geology_type"),
+            district=row.get("district"),
+            forecast=[
+                ForecastPoint(
+                    month_index=i + 1,
+                    head_msl_m=round(heads[i], 2),
+                    lower_m=round(heads[i] - 1.96 * stds[i], 2),
+                    upper_m=round(heads[i] + 1.96 * stds[i], 2),
+                )
+                for i in range(len(heads))
+            ],
+            trend_label=db_trend_label,
+            recommendation=recommendation,
+            model_version="PGNN-LSTM v3",
+            caveat=caveat,
+        )
+    
+    # Fallback to calculated trend if not in database
+    return _build_forecast_response(well_id, True, 0.0, zone, result,
+                                    geology_type=row.get("geology_type"), district=row.get("district"))

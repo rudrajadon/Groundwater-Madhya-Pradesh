@@ -37,7 +37,13 @@ def bgl_to_msl(wl: pd.DataFrame, wells: pd.DataFrame) -> pd.DataFrame:
     wl["Elevation of Ground Level"] = wl.apply(fill_elev, axis=1)
     wl["depth_bgl"] = wl["Water Level"].copy()
     wl["head_msl"] = wl["Elevation of Ground Level"] - wl["Water Level"]
+    # CRITICAL: Set Water Level to head_msl so all downstream code uses MSL
     wl["Water Level"] = wl["head_msl"]
+    
+    print(f"  ✓ Converted to head_msl (m MSL)")
+    print(f"    head_msl range: {wl['head_msl'].min():.1f} - {wl['head_msl'].max():.1f} m MSL")
+    print(f"    depth_bgl range: {wl['depth_bgl'].min():.1f} - {wl['depth_bgl'].max():.1f} m BGL")
+    
     return wl
 
 
@@ -91,9 +97,11 @@ def classify_aquifer(well_no: str, litho_df: pd.DataFrame):
 
 
 def build_monthly_series(wl: pd.DataFrame) -> dict:
+    """Build monthly time series of hydraulic head (m MSL)."""
     monthly = {}
     for well in sorted(wl["Well No"].unique()):
         wdf = wl[wl["Well No"] == well].set_index("date")
+        # Water Level column now contains head_msl after bgl_to_msl conversion
         ms = wdf["Water Level"].resample("MS").mean()
         ms = ms.interpolate(method="linear", limit=3).dropna()
         if len(ms) >= 60:

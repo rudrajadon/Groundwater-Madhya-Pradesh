@@ -29,6 +29,8 @@ export interface ForecastResponse {
   recommendation: string;
   model_version: string;
   caveat?: string;
+  geology_type?: string;
+  district?: string;
 }
 
 export async function getWells(): Promise<WellSummary[]> {
@@ -52,5 +54,23 @@ export async function getForecast(lat: number, lon: number): Promise<ForecastRes
 export async function getForecastByWellId(wellId: string): Promise<ForecastResponse> {
   const res = await fetch(`${API_BASE}/api/v1/forecast/well/${encodeURIComponent(wellId)}`);
   if (!res.ok) throw new Error(`Failed to fetch well forecast: ${res.status}`);
+  return res.json();
+}
+
+export interface DistrictStress {
+  district: string;
+  total_wells: number;
+  critical_wells: number;
+  watch_wells: number;
+  stable_wells: number;
+  critical_pct: number;
+  watch_pct: number;
+  stable_pct: number;
+  stress_score: number;
+}
+
+export async function getDistrictStress(): Promise<DistrictStress[]> {
+  const res = await fetch(`${API_BASE}/api/v1/stress-map/districts`);
+  if (!res.ok) throw new Error(`Failed to fetch district stress: ${res.status}`);
   return res.json();
 }

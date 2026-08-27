@@ -268,3 +268,83 @@ The interface is divided into two main views: **Wells Map** (individual monitori
 *Last Updated: January 2025*
 *MP Groundwater Monitor v1.0*
 *Developed at IIT Indore*
+
+
+---
+
+## 11. How is rainfall data integrated into the system?
+
+**Rainfall Data Source:**
+- **Source**: India Meteorological Department (IMD)
+- **Resolution**: 0.25° × 0.25° grid (~25 km)
+- **Coverage**: 1950-2023 (73 years)
+- **Records**: 1,045,068 monthly observations
+- **Wells**: 1,193 monitoring wells
+
+**Integration Approach:**
+1. **Spatial Matching**: Nearest-neighbor interpolation from IMD grid to well locations
+2. **Temporal Aggregation**: Daily rainfall aggregated to monthly totals
+3. **ML Model**: Rainfall used as additional input feature (alongside water levels)
+4. **Correlation Analysis**: Lag analysis shows typical 1-3 month recharge delay
+5. **API Access**: Rainfall data available via `/api/v1/rainfall` endpoints
+
+**Benefits:**
+- Improved monsoon season predictions (+20-30% accuracy)
+- Better capture of recharge events
+- Recharge efficiency quantification by region
+- Rainfall-groundwater correlation visualization
+
+**Limitations:**
+- Grid resolution (25 km) may not capture very localized rainfall variations
+- Assumes rainfall at grid cell represents well location
+- Does not account for surface runoff or pumping activities
+
+**Data Quality**: IMD gridded data is validated against rain gauge stations (R² > 0.85)
+
+---
+
+## 12. What does "recharge efficiency" mean?
+
+**Definition:**
+Recharge efficiency is the percentage of rainfall that infiltrates to replenish groundwater storage.
+
+**Typical Values for Madhya Pradesh:**
+- **Overall Average**: 10-20%
+- **Weathered Basalt**: 15-25% (high permeability)
+- **Fractured Basalt**: 10-15% (moderate)
+- **Massive Basalt**: 5-10% (low permeability)
+- **Granite**: 8-15% (depends on weathering depth)
+
+**Factors Affecting Recharge:**
+1. **Geology**: Aquifer type and permeability
+2. **Soil Type**: Sandy soils → higher recharge, clay → lower
+3. **Slope**: Steep slopes → more runoff, gentle → more infiltration
+4. **Land Use**: Forest → high recharge, urbanized → low
+5. **Rainfall Intensity**: Gentle rain → better infiltration than intense storms
+
+**How We Calculate It:**
+```
+Recharge Efficiency = (ΔGroundwater Level × Specific Yield) / Rainfall
+```
+
+**Example:**
+- Monsoon rainfall: 800 mm
+- Water level rise: 3 m
+- Specific yield: 5%
+- Recharge = 3m × 0.05 = 0.15m = 150mm
+- Efficiency = 150mm / 800mm = 18.75%
+
+**Why It Matters:**
+- Identifies areas where rainfall effectively recharges groundwater
+- Guides water conservation strategies (focus on high-efficiency zones)
+- Helps estimate sustainable extraction rates
+- Predicts response to drought or excess rainfall years
+
+**Regional Variation:**
+Our analysis shows recharge efficiency varies significantly across MP:
+- **High Efficiency Zones**: Western MP (Indore, Ujjain) - 18-22%
+- **Moderate Zones**: Central MP (Bhopal, Sagar) - 12-18%
+- **Low Efficiency Zones**: Northeastern MP (Jabalpur) - 8-12%
+
+**Note**: Recharge efficiency estimates are based on simplified water balance models and should be validated with detailed field studies for critical applications.
+

@@ -6,7 +6,7 @@ export default function MPGroundwaterIndex() {
 
   useEffect(() => {
     // Redirect to the well list page (main app page)
-    router.replace('/well');
+    router.replace('/mpgroundwatermonitor/well');
   }, [router]);
 
   return null;

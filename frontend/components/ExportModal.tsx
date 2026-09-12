@@ -91,7 +91,6 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "X-Request-Time": Date.now().toString(), // Force fresh request
           },
           body: JSON.stringify(requestBody),
           signal: controller.signal,

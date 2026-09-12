@@ -474,32 +474,33 @@ def generate_district_summary_pdf(
     elements.append(stats_table)
     elements.append(Spacer(1, 0.3*inch))
     
-    # Add district map if available
-    import tempfile
-    with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
-        map_path = tmp.name
-    
-    map_image_path = generate_district_map_image(
-        district_name=district_name,
-        wells_data=wells_summary,
-        output_path=map_path
-    )
-    
-    if map_image_path:
-        try:
-            map_heading = Paragraph("District Map", styles['Heading2'])
-            elements.append(map_heading)
-            
-            # Add the map image
-            img = Image(map_image_path, width=5*inch, height=5*inch)
-            elements.append(img)
-            elements.append(Spacer(1, 0.2*inch))
-            
-            # Clean up temp file
-            import os
-            os.unlink(map_image_path)
-        except Exception as e:
-            print(f"[PDF] Could not add map image: {e}")
+    # DISABLED: Map generation is slow (causes timeouts)
+    # TODO: Re-enable after optimizing map rendering
+    # import tempfile
+    # with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as tmp:
+    #     map_path = tmp.name
+    # 
+    # map_image_path = generate_district_map_image(
+    #     district_name=district_name,
+    #     wells_data=wells_summary,
+    #     output_path=map_path
+    # )
+    # 
+    # if map_image_path:
+    #     try:
+    #         map_heading = Paragraph("District Map", styles['Heading2'])
+    #         elements.append(map_heading)
+    #         
+    #         # Add the map image
+    #         img = Image(map_image_path, width=5*inch, height=5*inch)
+    #         elements.append(img)
+    #         elements.append(Spacer(1, 0.2*inch))
+    #         
+    #         # Clean up temp file
+    #         import os
+    #         os.unlink(map_image_path)
+    #     except Exception as e:
+    #         print(f"[PDF] Could not add map image: {e}")
     
     # Wells summary table
     wells_heading = Paragraph("Wells Summary", styles['Heading2'])

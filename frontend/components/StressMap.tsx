@@ -78,8 +78,15 @@ function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], dist
   const layerRef = useRef<any>(null);
   const clipLayerRef = useRef<any>(null);
 
+  console.log(`[WellHeatMapLayer] Rendering with ${wells.length} wells`);
+
   useEffect(() => {
-    if (!map || wells.length === 0) return;
+    if (!map || wells.length === 0) {
+      console.log(`[WellHeatMapLayer] Skipping - map: ${!!map}, wells: ${wells.length}`);
+      return;
+    }
+
+    console.log(`[WellHeatMapLayer] Creating heat circles for ${wells.length} wells`);
 
     // Remove previous layers
     if (layerRef.current) {
@@ -382,6 +389,8 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
         L.DomEvent.stopPropagation(e);
         L.DomEvent.preventDefault(e);
         
+        console.log(`[StressMap Click] District: ${props.district}, total_wells: ${props.total_wells}`);
+        
         // Calculate bounds of the clicked district
         const bounds = layer.getBounds();
         setDistrictBounds(bounds);
@@ -392,16 +401,23 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
         
         // Fetch wells for this district if it has enough wells
         if (props.total_wells >= 30) {
+          console.log(`[StressMap] Fetching wells for district: ${props.district}`);
           fetch(`${API_BASE}/api/v1/wells?limit=1000`)
-            .then(res => res.json())
+            .then(res => {
+              console.log(`[StressMap] API response status: ${res.status}`);
+              return res.json();
+            })
             .then(wells => {
+              console.log(`[StressMap] Fetched ${wells.length} total wells`);
               const filteredWells = wells.filter((w: WellData) => 
                 w.district === props.district
               );
+              console.log(`[StressMap] Filtered to ${filteredWells.length} wells for ${props.district}`);
               setDistrictWells(filteredWells);
             })
-            .catch(err => console.error('Error fetching wells:', err));
+            .catch(err => console.error('[StressMap] Error fetching wells:', err));
         } else {
+          console.log(`[StressMap] Not enough wells (${props.total_wells}), skipping`);
           setDistrictWells([]);
         }
         

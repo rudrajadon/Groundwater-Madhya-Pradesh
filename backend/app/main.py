@@ -60,7 +60,13 @@ app = FastAPI(title="Indore Groundwater Forecast API", version="0.1.0", lifespan
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # tighten to the deployed frontend origin before going live
+    allow_origins=[
+        "*",  # Allow all for development
+        "https://rudrajadon.in",
+        "https://www.rudrajadon.in",
+        "https://groundwater-madhya-pradesh.vercel.app",
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )

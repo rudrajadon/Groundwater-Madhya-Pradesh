@@ -116,12 +116,13 @@ def _get_all_wells(db: Session, limit: int = 1000) -> List[dict]:
 def _get_forecast_for_well(well_id: str, model, db: Session) -> tuple:
     """
     Get forecast for a single well using the forecast endpoint.
+    Uses cached forecasts if available, falls back to model if provided.
     Returns (forecast_points, recommendation, model_version, caveat)
     """
     from ..routers.forecast import get_forecast_for_well as forecast_endpoint
     from fastapi import Request
     
-    # Create a mock request with the model
+    # Create a mock request with the model (can be None)
     class MockRequest:
         class State:
             def __init__(self, model):
@@ -132,7 +133,7 @@ def _get_forecast_for_well(well_id: str, model, db: Session) -> tuple:
     mock_request = MockRequest(model)
     
     try:
-        # Use the forecast endpoint to get predictions
+        # Use the forecast endpoint to get predictions (uses cache first)
         forecast_response = forecast_endpoint(well_id, mock_request, db)
         
         # Extract data from response
@@ -154,6 +155,12 @@ def _get_forecast_for_well(well_id: str, model, db: Session) -> tuple:
         
         return forecast_dicts, recommendation, model_version, caveat
         
+    except HTTPException as e:
+        # Handle case where well has no cached forecast and model is not loaded
+        if e.status_code == 503:
+            print(f"[EXPORT] Well {well_id} has no cached forecast and model not available")
+            return [], "Forecast unavailable (no cache, model not loaded)", "cache-only", "Pre-calculated forecast not available for this well"
+        raise
     except Exception as e:
         print(f"[EXPORT] Error getting forecast for {well_id}: {e}")
         return [], f"Forecast unavailable: {str(e)}", "error", "Could not generate forecast"
@@ -186,7 +193,10 @@ async def generate_export(
     - District CSV: `{"district": "Bhopal", "format": "csv"}`
     - All wells CSV: `{"format": "csv"}`
     """
-    model = _require_model(request)
+    # Model is optional now - we use cached forecasts
+    model = getattr(request.app.state, "model", None)
+    if model is None:
+        print("[EXPORT] WARNING: Model not loaded, will use cached forecasts only")
     
     # Determine which wells to export
     if export_req.well_ids:

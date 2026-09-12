@@ -38,7 +38,7 @@ export default function AgreementModal({ onAccept }: AgreementModalProps) {
           gap: '20px',
         }}>
           <img 
-            src="/iiti.png" 
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/iiti.png`}
             alt="IIT Indore" 
             style={{ 
               height: '64px',

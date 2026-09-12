@@ -56,7 +56,11 @@ async def lifespan(app: FastAPI):
     print("[shutdown] Backend shutting down...")
 
 
-app = FastAPI(title="Indore Groundwater Forecast API", version="0.1.0", lifespan=lifespan)
+app = FastAPI(
+    title="Indore Groundwater Forecast API", 
+    version="0.1.1",  # Bumped to force redeploy
+    lifespan=lifespan
+)
 
 app.add_middleware(
     CORSMiddleware,

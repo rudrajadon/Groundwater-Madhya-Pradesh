@@ -601,7 +601,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Critical (≥10% critical OR ≥30% combined)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Critical (≥10% critical OR ≥30% not stable)</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -612,7 +612,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>High (5-10% critical OR 20-30% combined)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>High (5-10% critical OR 20-30% not stable)</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -623,7 +623,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Moderate (2-5% critical OR 10-20% combined)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Moderate (2-5% critical OR 10-20% not stable)</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -634,7 +634,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Low (&lt;2% critical AND &lt;10% combined)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Low (&lt;2% critical AND &lt;10% not stable)</span>
               </div>
               
               <div style={{ 

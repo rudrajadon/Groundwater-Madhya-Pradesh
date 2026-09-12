@@ -47,11 +47,15 @@ def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str
     """
     Classify district risk level based on well trends.
     
-    Risk Levels:
-    - Critical: >40% wells critical OR >70% critical+watch
-    - High: 20-40% critical OR 50-70% critical+watch
-    - Moderate: 10-20% critical OR 30-50% critical+watch
-    - Low: <10% critical AND <30% critical+watch
+    Updated thresholds based on real data distribution in Madhya Pradesh:
+    - Most districts have <5% critical wells
+    - Combined critical+watch typically <25%
+    
+    Risk Levels (more sensitive to actual data):
+    - Critical: ≥10% critical wells OR ≥30% critical+watch
+    - High: 5-10% critical wells OR 20-30% critical+watch  
+    - Moderate: 2-5% critical wells OR 10-20% critical+watch
+    - Low: <2% critical wells AND <10% critical+watch
     
     Args:
         critical_pct: Percentage of critical wells
@@ -62,12 +66,19 @@ def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str
     """
     combined_pct = critical_pct + watch_pct
     
-    if critical_pct > 40 or combined_pct > 70:
-        return ("Critical", "#dc2626")  # Red
-    elif critical_pct > 20 or combined_pct > 50:
-        return ("High", "#f59e0b")  # Orange
-    elif critical_pct > 10 or combined_pct > 30:
-        return ("Moderate", "#fbbf24")  # Yellow
+    # Critical: Significant critical wells or high combined stress
+    if critical_pct >= 10 or combined_pct >= 30:
+        return ("Critical", "#dc2626")  # Bright red
+    
+    # High: Moderate critical wells or elevated combined stress
+    elif critical_pct >= 5 or combined_pct >= 20:
+        return ("High", "#f97316")  # Orange-red
+    
+    # Moderate: Some critical wells or notable combined stress
+    elif critical_pct >= 2 or combined_pct >= 10:
+        return ("Moderate", "#fbbf24")  # Amber/yellow
+    
+    # Low: Very few stressed wells
     else:
         return ("Low", "#22c55e")  # Green
 

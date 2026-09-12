@@ -166,6 +166,12 @@ def _get_forecast_for_well(well_id: str, model, db: Session) -> tuple:
         return [], f"Forecast unavailable: {str(e)}", "error", "Could not generate forecast"
 
 
+@router.options("/generate")
+async def generate_export_options():
+    """Handle CORS preflight requests"""
+    return {}
+
+
 @router.post("/generate")
 async def generate_export(
     request: Request,

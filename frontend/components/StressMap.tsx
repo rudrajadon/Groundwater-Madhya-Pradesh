@@ -272,7 +272,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
             .then(res => res.json())
             .then(wells => {
               const filteredWells = wells.filter((w: WellData) => 
-                w.district === props.district
+                w.district?.toLowerCase() === props.district?.toLowerCase()
               );
               setDistrictWells(filteredWells);
             })
@@ -410,7 +410,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
             .then(wells => {
               console.log(`[StressMap] Fetched ${wells.length} total wells`);
               const filteredWells = wells.filter((w: WellData) => 
-                w.district === props.district
+                w.district?.toLowerCase() === props.district?.toLowerCase()
               );
               console.log(`[StressMap] Filtered to ${filteredWells.length} wells for ${props.district}`);
               setDistrictWells(filteredWells);

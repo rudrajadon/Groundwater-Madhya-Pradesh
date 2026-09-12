@@ -249,18 +249,49 @@ def get_forecast_for_well(
     request: Request,
     db: Session = Depends(get_db),
 ):
-    model = _require_model(request)
-
+    # Check cache first!
     row = db.execute(text("""
         SELECT well_id,
                ST_Y(geom::geometry) AS lat,
                ST_X(geom::geometry) AS lon,
-               block, aquifer_zone, geology_type, trend_label, forecast_decline_m, district
+               block, aquifer_zone, geology_type, trend_label, forecast_decline_m, district,
+               forecast_cache
         FROM wells WHERE well_id = :wid AND geom IS NOT NULL
     """), {"wid": well_id}).mappings().fetchone()
 
     if not row:
         raise HTTPException(404, f"Well '{well_id}' not found or has no coordinates.")
+    
+    # Return cached forecast if available
+    if row.get("forecast_cache"):
+        cache = row["forecast_cache"]
+        zone = row.get("aquifer_zone") or row.get("geology_type") or "Unknown"
+        caveat = caveat_for_zone(zone)
+        
+        return ForecastResponse(
+            well_id=well_id,
+            matched_existing_well=True,
+            distance_to_nearest_well_km=0.0,
+            aquifer_zone=zone or "Unknown",
+            geology_type=row.get("geology_type"),
+            district=row.get("district"),
+            forecast=[
+                ForecastPoint(
+                    month_index=pt["month_index"],
+                    head_msl_m=pt["head_msl_m"],
+                    lower_m=pt["lower_m"],
+                    upper_m=pt["upper_m"],
+                )
+                for pt in cache["forecast"]
+            ],
+            trend_label=cache["trend_label"],
+            recommendation=cache["recommendation"],
+            model_version=cache.get("model_version", "PGNN-LSTM v3"),
+            caveat=caveat,
+        )
+    
+    # Fall back to live ML model if no cache
+    model = _require_model(request)
 
     zone = row.get("aquifer_zone") or row.get("geology_type") or "Unknown"
     # Use pre-computed trend_label and decline from database (calculated by update_trends_from_model.py)

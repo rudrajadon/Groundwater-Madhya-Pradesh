@@ -211,6 +211,8 @@ function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], dist
 }
 
 export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMapProps & { zoomToDistrict?: string | null }) {
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8000';
+  
   const [stressData, setStressData] = useState<StressData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -221,10 +223,11 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
   const [showWellLevel, setShowWellLevel] = useState(false);
   const [selectedDistrictGeometry, setSelectedDistrictGeometry] = useState<any>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+  const [legendMinimized, setLegendMinimized] = useState(false);
 
   useEffect(() => {
     console.log('[StressMap] Fetching stress map data...');
-    fetch('http://localhost:8000/api/v1/stress-map/geojson?min_wells=0')
+    fetch(`${API_BASE}/api/v1/stress-map/geojson?min_wells=0`)
       .then(res => res.json())
       .then(data => {
         console.log('[StressMap] Loaded stress data:', data.features?.length, 'districts');
@@ -258,7 +261,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
         
         // Fetch wells for this district if it has enough wells
         if (props.total_wells >= 30) {
-          fetch(`http://localhost:8000/api/v1/wells?limit=1000`)
+          fetch(`${API_BASE}/api/v1/wells?limit=1000`)
             .then(res => res.json())
             .then(wells => {
               const filteredWells = wells.filter((w: WellData) => 
@@ -389,7 +392,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
         
         // Fetch wells for this district if it has enough wells
         if (props.total_wells >= 30) {
-          fetch(`http://localhost:8000/api/v1/wells?limit=1000`)
+          fetch(`${API_BASE}/api/v1/wells?limit=1000`)
             .then(res => res.json())
             .then(wells => {
               const filteredWells = wells.filter((w: WellData) => 
@@ -464,6 +467,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
         scrollWheelZoom={true}
         dragging={true}
         zoomControl={true}
+        touchZoom={true}
       >
         <MapInstanceCapture onMapReady={setMapInstance} />
         <MapController bounds={districtBounds} zoom={currentZoom} />
@@ -488,59 +492,169 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
         )}
       </MapContainer>
 
-      {/* Legend */}
-      <div style={{
-        position: "absolute",
-        bottom: "20px",
-        right: "10px",
-        background: "white",
-        padding: "16px",
-        borderRadius: "12px",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-        fontSize: "13px",
-        zIndex: 1000,
-        minWidth: "220px"
-      }}>
-        <div style={{ fontWeight: 700, marginBottom: "12px", fontSize: "14px" }}>
-          Groundwater Risk
-        </div>
-        
-        {/* Gradient bar */}
-        <div style={{ marginBottom: 12 }}>
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
-            <div style={{ width: "24px", height: "20px", background: "#dc2626", borderRadius: "3px", border: "1px solid #999" }}></div>
-            <span style={{ fontSize: "12px" }}>Critical (&gt;12% critical)</span>
-          </div>
-          
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
-            <div style={{ width: "24px", height: "20px", background: "#f59e0b", borderRadius: "3px", border: "1px solid #999" }}></div>
-            <span style={{ fontSize: "12px" }}>High (8-12% critical)</span>
-          </div>
-          
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
-            <div style={{ width: "24px", height: "20px", background: "#fbbf24", borderRadius: "3px", border: "1px solid #999" }}></div>
-            <span style={{ fontSize: "12px" }}>Moderate (5-8% or high watch)</span>
-          </div>
-          
-          <div style={{ display: "flex", alignItems: "center", marginBottom: 6, gap: 8 }}>
-            <div style={{ width: "24px", height: "20px", background: "#fef08a", borderRadius: "3px", border: "1px solid #999" }}></div>
-            <span style={{ fontSize: "12px" }}>Watch (&lt;5% critical, 8-15% watch)</span>
-          </div>
-          
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: "24px", height: "20px", background: "#22c55e", borderRadius: "3px", border: "1px solid #999" }}></div>
-            <span style={{ fontSize: "12px" }}>Low (&gt;80% stable)</span>
-          </div>
-        </div>
-        
-        <div style={{ display: "flex", alignItems: "center", paddingTop: "12px", borderTop: "1px solid #e5e7eb" }}>
-          <div style={{ width: "24px", height: "20px", background: "#9ca3af", marginRight: "10px", border: "1px solid #999", borderRadius: "3px" }}></div>
-          <span style={{ fontSize: "12px" }}>Insufficient/No Data (&lt;30 wells)</span>
-        </div>
+      {/* Legend - Compact with minimize/maximize */}
+      <div 
+        className={`map-legend ${legendMinimized ? 'minimized' : ''}`}
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          right: "20px",
+          background: "white",
+          padding: legendMinimized ? "8px" : "12px",
+          borderRadius: "10px",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+          minWidth: legendMinimized ? "auto" : "200px",
+          maxWidth: legendMinimized ? "48px" : "220px",
+          zIndex: 400,
+        }}
+      >
+        {legendMinimized ? (
+          // Minimized state - just icon button
+          <button
+            onClick={() => setLegendMinimized(false)}
+            style={{
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: "4px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "24px",
+              color: "#374151",
+            }}
+            aria-label="Expand legend"
+            title="Expand legend"
+          >
+            🗺️
+          </button>
+        ) : (
+          // Expanded state
+          <div className="legend-content">
+            {/* Compact Header with minimize button */}
+            <div style={{ 
+              display: "flex", 
+              justifyContent: "space-between", 
+              alignItems: "center", 
+              marginBottom: "8px",
+              paddingBottom: "6px",
+              borderBottom: "1px solid #e5e7eb"
+            }}>
+              <div style={{ 
+                fontSize: "13px", 
+                fontWeight: 700, 
+                color: "#111827",
+                flex: 1
+              }}>
+                GW Risk
+              </div>
+              
+              <button
+                onClick={() => setLegendMinimized(true)}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: "0 3px",
+                  fontSize: "18px",
+                  color: "#6b7280",
+                  lineHeight: 1,
+                }}
+                aria-label="Minimize legend"
+                title="Minimize legend"
+              >
+                ×
+              </button>
+            </div>
 
-        {stressData && (
-          <div style={{ marginTop: "12px", paddingTop: "12px", borderTop: "1px solid #e5e7eb", fontSize: "11px", color: "#6b7280" }}>
-            {stressData.features.length} districts shown
+            {/* Legend Items - Compact */}
+            <div style={{ display: "grid", gap: "4px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{ 
+                  width: "16px", 
+                  height: "14px", 
+                  background: "#dc2626", 
+                  borderRadius: "2px",
+                  flexShrink: 0
+                }}></div>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Critical &gt;12%</span>
+              </div>
+              
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{ 
+                  width: "16px", 
+                  height: "14px", 
+                  background: "#f59e0b", 
+                  borderRadius: "2px",
+                  flexShrink: 0
+                }}></div>
+                <span style={{ fontSize: "10px", color: "#374151" }}>High 8-12%</span>
+              </div>
+              
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{ 
+                  width: "16px", 
+                  height: "14px", 
+                  background: "#fbbf24", 
+                  borderRadius: "2px",
+                  flexShrink: 0
+                }}></div>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Moderate 5-8%</span>
+              </div>
+              
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{ 
+                  width: "16px", 
+                  height: "14px", 
+                  background: "#fef08a", 
+                  borderRadius: "2px",
+                  flexShrink: 0
+                }}></div>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Watch &lt;5%</span>
+              </div>
+              
+              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                <div style={{ 
+                  width: "16px", 
+                  height: "14px", 
+                  background: "#22c55e", 
+                  borderRadius: "2px",
+                  flexShrink: 0
+                }}></div>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Low &gt;80%</span>
+              </div>
+              
+              <div style={{ 
+                display: "flex", 
+                alignItems: "center", 
+                gap: "6px",
+                paddingTop: "5px",
+                marginTop: "5px",
+                borderTop: "1px solid #e5e7eb"
+              }}>
+                <div style={{ 
+                  width: "16px", 
+                  height: "14px", 
+                  background: "#9ca3af", 
+                  borderRadius: "2px",
+                  flexShrink: 0
+                }}></div>
+                <span style={{ fontSize: "10px", color: "#374151" }}>No Data</span>
+              </div>
+            </div>
+
+            {stressData && (
+              <div style={{ 
+                marginTop: "8px", 
+                paddingTop: "8px", 
+                borderTop: "1px solid #e5e7eb", 
+                fontSize: "9px", 
+                color: "#6b7280",
+                textAlign: "center"
+              }}>
+                {stressData.features.length} districts
+              </div>
+            )}
           </div>
         )}
       </div>

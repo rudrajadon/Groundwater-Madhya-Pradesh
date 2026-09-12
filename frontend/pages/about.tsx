@@ -493,26 +493,6 @@ export default function About() {
                   PhD Scholar, IIT Indore
                 </div>
               </div>
-              <div style={{
-                padding: "24px",
-                background: "rgba(255,255,255,0.1)",
-                borderRadius: "12px",
-                backdropFilter: "blur(10px)",
-              }}>
-                <div style={{
-                  fontSize: "20px",
-                  fontWeight: 700,
-                  marginBottom: "6px",
-                }}>
-                  Rudra Pratap Singh Jadon
-                </div>
-                <div style={{
-                  fontSize: "15px",
-                  opacity: 0.9,
-                }}>
-                  BTech Student, IIT Indore
-                </div>
-              </div>
             </div>
           </div>
         </div>

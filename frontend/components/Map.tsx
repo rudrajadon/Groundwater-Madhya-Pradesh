@@ -263,7 +263,8 @@ export default function GroundwaterMap({
   // Load district boundaries
   useEffect(() => {
     console.log('[Map] Fetching district boundaries...');
-    fetch('/geo/mp_districts_simplified.geojson')
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    fetch(`${basePath}/geo/mp_districts_simplified.geojson`)
       .then(res => res.json())
       .then(data => {
         console.log('[Map] Loaded district boundaries:', data.features?.length, 'districts');

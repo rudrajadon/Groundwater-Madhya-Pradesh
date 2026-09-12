@@ -327,6 +327,15 @@ def generate_well_forecast_pdf(
     elements.append(model_info)
     elements.append(Spacer(1, 0.3*inch))
     
+    # Footer disclaimer
+    disclaimer = Paragraph(
+        "<i>This report is generated using PGNN-LSTM machine learning model trained on historical "
+        "groundwater monitoring data. Forecasts are subject to uncertainty and should be used "
+        "in conjunction with field observations and expert judgment.</i>",
+        ParagraphStyle('Disclaimer', parent=body_style, fontSize=8, textColor=colors.grey)
+    )
+    elements.append(disclaimer)
+    
     # Build PDF
     doc.build(elements)
     output_buffer.seek(0)
@@ -537,6 +546,16 @@ def generate_district_summary_pdf(
     if len(wells_summary) > 200:
         note = Paragraph(f"<i>Note: Showing first 200 of {len(wells_summary)} wells. Use CSV format for complete data.</i>", styles['Normal'])
         elements.append(note)
+    
+    # Footer disclaimer
+    elements.append(Spacer(1, 0.3*inch))
+    disclaimer = Paragraph(
+        "<i>This report is generated using PGNN-LSTM machine learning model trained on historical "
+        "groundwater monitoring data. Forecasts are subject to uncertainty and should be used "
+        "in conjunction with field observations and expert judgment.</i>",
+        ParagraphStyle('Disclaimer', parent=styles['Normal'], fontSize=8, textColor=colors.grey)
+    )
+    elements.append(disclaimer)
     
     doc.build(elements)
     output_buffer.seek(0)

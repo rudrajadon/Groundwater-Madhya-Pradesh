@@ -192,7 +192,24 @@ function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], dist
       });
     }, 100);
 
+    // Reapply clip-path on zoom events (fixes circles breaking during zoom)
+    const onZoomEnd = () => {
+      allCircles.forEach(circle => {
+        const circleElement = (circle as any)._path;
+        if (circleElement && districtGeometry) {
+          circleElement.setAttribute('clip-path', 'url(#district-clip)');
+          circleElement.style.clipPath = 'url(#district-clip)';
+        }
+      });
+    };
+
+    map.on('zoomend', onZoomEnd);
+    map.on('moveend', onZoomEnd);
+
     return () => {
+      map.off('zoomend', onZoomEnd);
+      map.off('moveend', onZoomEnd);
+      
       if (layerRef.current) {
         map.removeLayer(layerRef.current);
       }

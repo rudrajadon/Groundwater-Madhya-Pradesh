@@ -42,6 +42,8 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
   };
 
   const handleGenerate = async () => {
+    if (loading) return; // Prevent double-click
+    
     setLoading(true);
     setError(null);
     setDownloadUrl(null);

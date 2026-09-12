@@ -138,55 +138,6 @@ export default function AgreementModal({ onAccept }: AgreementModalProps) {
           </section>
 
           {/* Model Performance */}
-          <section style={{ marginBottom: '32px' }}>
-            <h3 style={{
-              fontSize: '20px',
-              fontWeight: 700,
-              color: '#0f172a',
-              marginBottom: '16px',
-            }}>
-              Model Performance & Accuracy
-            </h3>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '16px',
-            }}>
-              {[
-                { metric: 'RMSE (Root Mean Square Error)', value: '3.40 m' },
-                { metric: 'MAE (Mean Absolute Error)', value: '2.8 m' },
-                { metric: 'R² Score (Coefficient of Determination)', value: '0.65' },
-                { metric: 'Forecast Horizon', value: '12 Months' },
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    background: '#f8fafc',
-                    padding: '16px',
-                    borderRadius: '8px',
-                    border: '1px solid #e2e8f0',
-                  }}
-                >
-                  <div style={{
-                    fontSize: '13px',
-                    color: '#64748b',
-                    marginBottom: '6px',
-                    fontWeight: 600,
-                  }}>
-                    {item.metric}
-                  </div>
-                  <div style={{
-                    fontSize: '24px',
-                    fontWeight: 800,
-                    color: '#667eea',
-                  }}>
-                    {item.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* Data Inputs & Outputs */}
           <section style={{ marginBottom: '32px' }}>
             <h3 style={{

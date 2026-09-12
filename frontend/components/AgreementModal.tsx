@@ -88,7 +88,7 @@ export default function AgreementModal({ onAccept }: AgreementModalProps) {
               lineHeight: '1.8',
               marginBottom: '12px',
             }}>
-              This system has been developed at <strong>Indian Institute of Technology, Indore</strong> under the guidance of <strong>Dr. Manish Kumar Goyal</strong> (Professor, IIT Indore) and <strong>Deepak Mishra</strong> (PhD Scholar, IIT Indore).
+              This system has been developed at <strong>Indian Institute of Technology, Indore</strong> under the guidance of <strong>Dr. Manish Kumar Goyal</strong> (Professor, IIT Indore), <strong>Deepak Mishra</strong> (PhD Scholar, IIT Indore), and <strong>Rudra Pratap Singh Jadon</strong> (BTech Student, IIT Indore).
             </p>
             <p style={{
               fontSize: '15px',

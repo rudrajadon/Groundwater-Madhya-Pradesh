@@ -78,18 +78,23 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
       console.log('[ExportModal] Request body:', requestBody);
       console.log('[ExportModal] Fetching:', `${API_BASE}/api/v1/exports/generate`);
 
+      // Add cache-busting timestamp to force fresh request
+      const cacheBuster = Date.now();
+      const fetchUrl = `${API_BASE}/api/v1/exports/generate?_cb=${cacheBuster}`;
+
       // Create AbortController with 60s timeout
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 60000);
 
       try {
-        const response = await fetch(`${API_BASE}/api/v1/exports/generate`, {
+        const response = await fetch(fetchUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(requestBody),
           signal: controller.signal,
+          cache: 'no-store', // Disable cache
         });
 
         clearTimeout(timeoutId);
@@ -123,9 +128,13 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
         document.body.removeChild(a);
       } catch (fetchError: any) {
         clearTimeout(timeoutId);
+        console.error('[ExportModal] Fetch error:', fetchError);
         if (fetchError.name === 'AbortError') {
           console.error('[ExportModal] Request timeout after 60s');
           throw new Error('Request timed out. The backend may be slow or unavailable.');
+        }
+        if (fetchError.message === 'Failed to fetch') {
+          throw new Error(`Cannot reach backend at ${API_BASE}. Check if backend is running and CORS is configured.`);
         }
         throw fetchError;
       }

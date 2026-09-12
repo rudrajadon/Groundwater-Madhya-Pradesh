@@ -125,10 +125,40 @@ def predict_custom_location(
                 well_forecasts[well_id] = [pt['head_msl_m'] for pt in forecast_points]
                 continue
         
-        # No cache available - ML model is disabled on production
-        # Skip this well or raise error if we don't have enough cached wells
-        print(f"[location_predictor] WARNING: Well {well_id} has no cached forecast")
-        continue
+        # Fall back to live ML model if no cache
+        # Load model only when needed
+        if model is None:
+            model = _require_model(request)
+        
+        # Get readings
+        readings = _fetch_readings(well_id, db, SEQ_LEN)
+        if len(readings) < SEQ_LEN:
+            continue  # Skip wells with insufficient data
+        
+        # Get scaler
+        scaler = model._scalers.get(well_id)
+        if scaler is None:
+            continue  # Skip wells not in training set
+        
+        # Scale readings
+        scaled = scaler.transform(np.array(readings).reshape(-1, 1)).flatten()
+        
+        # Get forecast
+        zone = well.get('geology_type') or 'Unknown'
+        if well_id in model.well_list:
+            result = model.predict_well(well_id, scaled, None, None, zone, scaler)
+        else:
+            # Dynamic extension for wells not in training
+            existing_coords = [(w['lon'], w['lat']) for w in nearest_wells]
+            existing_zones = [w.get('geology_type', 'Unknown') for w in nearest_wells]
+            existing_blocks = [w.get('block', '') for w in nearest_wells]
+            result = model.predict_point(
+                well['lat'], well['lon'], zone, well.get('block', ''),
+                scaled, None, None, scaler,
+                existing_coords, existing_zones, existing_blocks
+            )
+        
+        well_forecasts[well_id] = result['forecast_head_msl']
     
     if not well_forecasts:
         raise HTTPException(

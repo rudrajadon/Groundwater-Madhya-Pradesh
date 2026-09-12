@@ -290,8 +290,13 @@ def get_forecast_for_well(
             caveat=caveat,
         )
     
-    # Fall back to live ML model if no cache
-    model = _require_model(request)
+    # No cache available - ML model is disabled on production
+    raise HTTPException(
+        503,
+        f"Forecast not available for well '{well_id}'. "
+        "This well does not have pre-calculated forecast data. "
+        "Only 1,011 wells with sufficient historical data have cached forecasts."
+    )
 
     zone = row.get("aquifer_zone") or row.get("geology_type") or "Unknown"
     # Use pre-computed trend_label and decline from database (calculated by update_trends_from_model.py)

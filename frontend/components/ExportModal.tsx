@@ -78,21 +78,28 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
       console.log('[ExportModal] Request body:', requestBody);
       console.log('[ExportModal] Fetching:', `${API_BASE}/api/v1/exports/generate`);
 
-      const response = await fetch(`${API_BASE}/api/v1/exports/generate`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
+      // Create AbortController with 60s timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 60000);
 
-      console.log('[ExportModal] Response status:', response.status, response.statusText);
+      try {
+        const response = await fetch(`${API_BASE}/api/v1/exports/generate`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+          signal: controller.signal,
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('[ExportModal] Error response:', errorData);
-        throw new Error(errorData.detail || `Export failed: ${response.statusText}`);
-      }
+        clearTimeout(timeoutId);
+        console.log('[ExportModal] Response status:', response.status, response.statusText);
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          console.error('[ExportModal] Error response:', errorData);
+          throw new Error(errorData.detail || `Export failed: ${response.statusText}`);
+        }
 
       // Get filename from Content-Disposition header
       const contentDisposition = response.headers.get("Content-Disposition");
@@ -103,18 +110,27 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
       }
 
       // Convert response to blob
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      setDownloadUrl(url);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        setDownloadUrl(url);
 
-      // Auto-download
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+        // Auto-download
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch (fetchError: any) {
+        clearTimeout(timeoutId);
+        if (fetchError.name === 'AbortError') {
+          console.error('[ExportModal] Request timeout after 60s');
+          throw new Error('Request timed out. The backend may be slow or unavailable.');
+        }
+        throw fetchError;
+      }
     } catch (err: any) {
+      console.error('[ExportModal] Export failed:', err);
       setError(err.message || "Failed to generate export");
     } finally {
       setLoading(false);

@@ -64,16 +64,10 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://rudrajadon.in",
-        "https://www.rudrajadon.in",
-        "https://groundwater-madhya-pradesh.vercel.app",
-        "http://localhost:3000",
-        "http://localhost:8000",
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],  # Allow all origins - fuck browser cache
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=False,  # Must be False with wildcard
 )
 
 app.include_router(wells.router)

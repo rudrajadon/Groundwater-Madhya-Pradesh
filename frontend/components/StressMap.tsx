@@ -234,10 +234,18 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
 
   useEffect(() => {
     console.log('[StressMap] Fetching stress map data...');
-    fetch(`${API_BASE}/api/v1/stress-map/geojson?min_wells=0`)
+    const cacheBuster = Date.now();
+    fetch(`${API_BASE}/api/v1/stress-map/geojson?min_wells=0&_=${cacheBuster}`, {
+      cache: 'no-store'
+    })
       .then(res => res.json())
       .then(data => {
         console.log('[StressMap] Loaded stress data:', data.features?.length, 'districts');
+        console.log('[StressMap] Sample district colors:', data.features?.slice(0, 3).map((f: any) => ({
+          district: f.properties.district,
+          risk_level: f.properties.risk_level,
+          risk_color: f.properties.risk_color
+        })));
         setStressData(data);
         setLoading(false);
       })
@@ -593,18 +601,18 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Critical &gt;12%</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Critical ≥30%</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 <div style={{ 
                   width: "16px", 
                   height: "14px", 
-                  background: "#f59e0b", 
+                  background: "#f97316", 
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>High 8-12%</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>High 20-30%</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -615,7 +623,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Moderate 5-8%</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Moderate 10-20%</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>

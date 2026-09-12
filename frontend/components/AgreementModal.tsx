@@ -131,7 +131,7 @@ export default function AgreementModal({ onAccept }: AgreementModalProps) {
               <div>
                 <strong style={{ color: '#0f172a', fontSize: '15px' }}>Training Data:</strong>
                 <span style={{ color: '#475569', fontSize: '15px', marginLeft: '8px' }}>
-                  Multi-year historical groundwater level measurements from 1,082+ monitoring wells
+                  Multi-year historical groundwater level measurements from 1,000+ monitoring wells
                 </span>
               </div>
             </div>

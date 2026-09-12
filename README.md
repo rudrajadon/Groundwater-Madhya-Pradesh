@@ -89,11 +89,9 @@ For detailed setup instructions, see [SETUP.md](SETUP.md).
 - **Hybrid PGNN-LSTM model**:
   - Spatial dependencies via Graph Neural Networks
   - Temporal patterns via LSTM networks
-  - **NEW: Rainfall integration** for improved monsoon predictions
 - **95% confidence intervals** for uncertainty quantification
 - **Trend classification**: Critical / Watch / Stable
 - **Model metrics**: RMSE 3.40m, R² 0.65, MAE 2.8m
-- **Data sources**: 1,193 wells + 75 years of IMD rainfall data
 
 ### 🎯 **Custom Location Predictor**
 - Predict groundwater at **any GPS coordinates** in Madhya Pradesh
@@ -107,8 +105,6 @@ For detailed setup instructions, see [SETUP.md](SETUP.md).
 - **Aquifer characteristics**: Weathered, Fractured, Massive zones
 - **District stress analysis**: Percentage of Critical/Watch/Stable wells
 - **Seasonal patterns**: Monsoon recharge and dry season depletion
-- **NEW: Rainfall-Groundwater Correlation**: 75-year IMD rainfall data integrated
-- **NEW: Recharge Analysis**: Efficiency metrics by region and aquifer type
 
 ### 📄 **Export & Reporting**
 - **PDF Reports**: Well-specific summaries with charts and recommendations

@@ -1,0 +1,1019 @@
+/* Mobile Responsive Styles for Groundwater App */
+
+/* Title shortening and navbar settings button */
+@media (max-width: 768px) {
+  .title-full {
+    display: none !important;
+  }
+  
+  .title-short {
+    display: inline !important;
+  }
+  
+  /* Show settings button in navbar on mobile */
+  .header-settings-btn {
+    display: flex !important;
+    order: 2; /* Put it after other elements */
+  }
+  
+  /* Hide desktop fixed settings button on mobile */
+  .settings-btn {
+    display: none !important;
+  }
+  
+  /* Ensure header controls are on the right */
+  .header-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  
+  /* Hide location toggle on mobile, show only settings */
+  .location-toggle {
+    display: none !important;
+  }
+  
+  /* View toggle stays visible but more compact */
+  .view-toggle {
+    display: flex !important;
+  }
+}
+
+/* Base Layout */
+.app-container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+.map-container {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+}
+
+.sidebar {
+  width: 480px;
+  padding: 32px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Hamburger Button - Hidden on Desktop */
+.hamburger-btn {
+  display: none;
+  padding: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Tablet Styles (1024px and below) */
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    width: 85% !important;
+    max-width: 400px;
+    z-index: 1050;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* Backdrop when sidebar is open */
+  .sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+  }
+
+  .sidebar-backdrop.visible {
+    display: block;
+  }
+
+  .hamburger-btn {
+    display: flex !important;
+  }
+
+  .header-subtitle {
+    display: none !important;
+  }
+
+  .location-toggle {
+    display: none !important;
+  }
+
+  .view-toggle {
+    gap: 4px !important;
+    padding: 3px !important;
+  }
+
+  .view-toggle button {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    min-height: 36px;
+  }
+
+  .header-bar {
+    padding: 12px 16px !important;
+  }
+
+  .header-title {
+    font-size: 16px !important;
+  }
+
+  /* Adjust map padding for smaller header */
+  .map-container > div:last-child {
+    padding-top: 60px !important;
+  }
+
+  /* Close button in sidebar for mobile */
+  .sidebar-close-btn {
+    display: block !important;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1;
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Mobile Styles (768px and below) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 24px 16px !important;
+  }
+
+  .header-controls {
+    gap: 8px !important;
+  }
+
+  .view-toggle button {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .header-bar {
+    padding: 10px 12px !important;
+  }
+
+  /* Adjust well cards for mobile */
+  aside button {
+    padding: 10px 12px !important;
+  }
+
+  /* Make charts more compact on mobile */
+  .recharts-wrapper {
+    font-size: 11px !important;
+  }
+}
+
+/* Touch-friendly buttons */
+@media (max-width: 1024px) {
+  button, a, input[type="checkbox"] {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Larger touch targets for interactive elements */
+  label[for="locationPicker"],
+  .well-button {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Close button - hidden on desktop */
+.sidebar-close-btn {
+  display: none;
+}
+
+/* Ensure proper stacking */
+@media (max-width: 1024px) {
+  .settings-menu {
+    z-index: 1100 !important;
+  }
+}
+
+
+/* Well Detail Page Responsive Styles */
+.well-detail-container {
+  padding: 40px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.well-header {
+  margin-bottom: 24px;
+}
+
+.back-button {
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.glass-panel {
+  padding: 32px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+/* Tablet Styles for Well Detail */
+@media (max-width: 1024px) {
+  .well-detail-container {
+    padding: 24px 20px;
+    gap: 20px;
+  }
+
+  .glass-panel {
+    padding: 24px;
+  }
+
+  .well-header h1 {
+    font-size: 2rem !important;
+  }
+}
+
+/* Mobile Styles for Well Detail */
+@media (max-width: 768px) {
+  .well-detail-container {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .glass-panel {
+    padding: 16px;
+  }
+
+  .well-header h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.2;
+  }
+
+  .well-header p {
+    font-size: 13px !important;
+  }
+
+  .back-button {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  /* Make charts scrollable horizontally on very small screens */
+  .recharts-responsive-container {
+    min-width: 300px;
+  }
+
+  /* Reduce chart heights on mobile */
+  .chart-container {
+    height: 250px !important;
+  }
+
+  /* Stack forecast cards vertically */
+  .forecast-info {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  /* Adjust chart text size */
+  .recharts-text {
+    font-size: 10px !important;
+  }
+
+  .recharts-cartesian-axis-tick-value {
+    font-size: 10px !important;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 480px) {
+  .well-detail-container {
+    padding: 12px;
+  }
+
+  .glass-panel {
+    padding: 12px;
+  }
+
+  .well-header h1 {
+    font-size: 1.25rem !important;
+  }
+
+  .chart-container {
+    height: 220px !important;
+  }
+
+  /* Smaller gap between sections */
+  .well-detail-container {
+    gap: 12px;
+  }
+}
+
+/* Responsive Chart Legends */
+@media (max-width: 768px) {
+  .recharts-legend-wrapper {
+    font-size: 11px !important;
+  }
+
+  .recharts-legend-item {
+    margin-right: 8px !important;
+  }
+}
+
+/* Touch-friendly tooltips */
+@media (max-width: 1024px) {
+  .recharts-tooltip-wrapper {
+    font-size: 12px !important;
+  }
+}
+
+
+/* Map Component Responsive Styles */
+
+/* Legend - Responsive positioning and sizing */
+.map-legend {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 13px;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+/* Tablet - Make legend more compact */
+@media (max-width: 1024px) {
+  .map-legend {
+    bottom: 10px;
+    right: 10px;
+    padding: 12px;
+    min-width: 160px;
+    font-size: 12px;
+    max-width: 180px;
+  }
+
+  .map-legend-title {
+    font-size: 13px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .map-legend-toggle {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+
+  .map-legend-item {
+    margin-bottom: 4px !important;
+    font-size: 11px !important;
+  }
+
+  .map-legend-circle {
+    width: 14px !important;
+    height: 14px !important;
+    margin-right: 8px !important;
+  }
+
+  /* Make district boundary checkbox more touch-friendly */
+  .district-toggle {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px !important;
+    padding-bottom: 10px !important;
+  }
+
+  .district-toggle input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+
+  .district-toggle label {
+    font-size: 11px !important;
+  }
+}
+
+/* Mobile - Completely Redesigned Compact Legends */
+@media (max-width: 768px) {
+  /* Show detailed analysis button on mobile, hide desktop hint */
+  .mobile-detailed-analysis-btn {
+    display: block !important;
+  }
+
+  .desktop-click-hint {
+    display: none !important;
+  }
+
+  .map-legend {
+    bottom: 30px !important;
+    right: 10px !important;
+    left: auto !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.25) !important;
+    max-width: none !important;
+    width: auto !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+  }
+
+  /* Minimized state - clean icon button */
+  .map-legend.minimized {
+    width: 44px !important;
+    height: 44px !important;
+    padding: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .map-legend.minimized button {
+    font-size: 22px !important;
+    padding: 0 !important;
+  }
+
+  /* Expanded state - slightly bigger */
+  .map-legend:not(.minimized) {
+    min-width: 165px !important;
+    max-width: 185px !important;
+  }
+
+  /* Header - single line, no waste */
+  .map-legend .legend-content > div:first-child {
+    margin-bottom: 5px !important;
+    padding-bottom: 5px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    gap: 5px !important;
+  }
+
+  .map-legend .legend-content > div:first-child > div:first-child {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  /* Buttons - minimal size */
+  .map-legend .legend-content > div:first-child > div:last-child {
+    gap: 3px !important;
+  }
+
+  .map-legend .legend-content > div:first-child button[title*="Switch"] {
+    font-size: 9px !important;
+    padding: 3px 6px !important;
+    border-radius: 3px !important;
+    line-height: 1.1 !important;
+    min-height: 20px !important;
+  }
+
+  .map-legend .legend-content > div:first-child button[aria-label="Minimize legend"] {
+    font-size: 19px !important;
+    padding: 0 3px !important;
+    line-height: 1 !important;
+  }
+
+  /* Hide district toggle completely */
+  .district-toggle {
+    display: none !important;
+  }
+
+  /* Legend items - tight but readable */
+  .map-legend .legend-content > div:last-child {
+    gap: 4px !important;
+  }
+
+  .map-legend .legend-content > div:last-child > div {
+    gap: 6px !important;
+    align-items: center !important;
+  }
+
+  /* Circles/squares - slightly bigger */
+  .map-legend .legend-content > div:last-child > div > div:first-child {
+    width: 12px !important;
+    height: 12px !important;
+    min-width: 12px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Text - compact and readable */
+  .map-legend .legend-content > div:last-child > div > span {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+    color: #374151 !important;
+  }
+
+  /* Hide percentages */
+  .geology-percent {
+    display: none !important;
+  }
+
+  /* District count - hide or make tiny */
+  .map-legend .legend-content > div:last-child + div {
+    display: none !important;
+  }
+
+  /* Remove extra dividers and padding */
+  .map-legend .legend-content > div:last-child > div[style*="border"] {
+    margin-top: 4px !important;
+    padding-top: 4px !important;
+    border-top: 1px solid #e5e7eb !important;
+  }
+}
+
+/* Extra small mobile - compact but readable */
+@media (max-width: 480px) {
+  .map-legend {
+    bottom: 25px !important;
+    right: 8px !important;
+    padding: 8px !important;
+  }
+
+  .map-legend.minimized {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 8px !important;
+  }
+
+  .map-legend.minimized button {
+    font-size: 20px !important;
+  }
+
+  .map-legend:not(.minimized) {
+    min-width: 155px !important;
+    max-width: 175px !important;
+  }
+
+  .map-legend .legend-content > div:first-child {
+    margin-bottom: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .map-legend .legend-content > div:first-child > div:first-child {
+    font-size: 11px !important;
+  }
+
+  .map-legend .legend-content > div:first-child button[title*="Switch"] {
+    font-size: 8px !important;
+    padding: 2px 5px !important;
+    min-height: 18px !important;
+  }
+
+  .map-legend .legend-content > div:first-child button[aria-label="Minimize legend"] {
+    font-size: 17px !important;
+  }
+
+  .map-legend .legend-content > div:last-child {
+    gap: 3px !important;
+  }
+
+  .map-legend .legend-content > div:last-child > div {
+    gap: 5px !important;
+  }
+
+  .map-legend .legend-content > div:last-child > div > div:first-child {
+    width: 11px !important;
+    height: 11px !important;
+    min-width: 11px !important;
+  }
+
+  .map-legend .legend-content > div:last-child > div > span {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Leaflet Map Touch Optimizations */
+@media (max-width: 1024px) {
+  /* Larger zoom controls for touch */
+  .leaflet-control-zoom a {
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 20px !important;
+  }
+
+  /* Better touch targets for popups */
+  .leaflet-popup-content {
+    margin: 16px 14px !important;
+    font-size: 13px !important;
+  }
+
+  .leaflet-popup-close-button {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 20px !important;
+  }
+
+  /* DO NOT increase marker stroke width on mobile - keep it the same as desktop */
+  .leaflet-interactive {
+    /* stroke-width is controlled by the component, don't override */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Even larger zoom controls */
+  .leaflet-control-zoom a {
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    font-size: 22px !important;
+  }
+
+  /* Position zoom controls better for one-handed use */
+  .leaflet-top.leaflet-left {
+    top: 70px !important;
+  }
+
+  /* Compact popup for mobile */
+  .leaflet-popup-content {
+    margin: 12px 10px !important;
+    font-size: 12px !important;
+    min-width: 140px !important;
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 8px !important;
+  }
+}
+
+/* Touch-friendly district tooltips */
+@media (max-width: 1024px) {
+  .district-label {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+}
+
+/* Disable double-tap zoom (handled by Leaflet) */
+.leaflet-container {
+  touch-action: pan-x pan-y;
+}
+
+
+/* Modal Components Responsive Styles */
+
+/* Export Modal */
+.export-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.export-modal-content {
+  background: #fff;
+  borderRadius: 16px;
+  max-width: 550px;
+  width: 90%;
+  maxHeight: 90vh;
+  overflow: auto;
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .export-modal-content {
+    padding: 20px;
+    max-height: 85vh;
+    width: 95%;
+  }
+
+  .export-modal-header h2 {
+    font-size: 18px !important;
+  }
+
+  .export-modal-header p {
+    font-size: 12px !important;
+  }
+
+  /* Stack format selection vertically on mobile */
+  .format-selection-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Stack action buttons vertically on small screens */
+  .modal-actions {
+    flex-direction: column !important;
+  }
+
+  .modal-actions button {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .export-modal-content {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .export-modal-header {
+    padding: 16px 0 !important;
+  }
+}
+
+/* Agreement Modal */
+.agreement-modal-container {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.agreement-modal-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .agreement-modal-content {
+    max-width: 700px;
+  }
+
+  .agreement-modal-header {
+    padding: 24px 28px !important;
+  }
+
+  .agreement-modal-header img {
+    height: 56px !important;
+  }
+
+  .agreement-modal-header h2 {
+    font-size: 24px !important;
+  }
+
+  .agreement-modal-body {
+    padding: 24px 28px !important;
+  }
+
+  .agreement-modal-footer {
+    padding: 20px 28px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .agreement-modal-container {
+    padding: 10px;
+  }
+
+  .agreement-modal-content {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  .agreement-modal-header {
+    padding: 20px 20px !important;
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .agreement-modal-header img {
+    height: 48px !important;
+    margin-bottom: 12px;
+  }
+
+  .agreement-modal-header h2 {
+    font-size: 20px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .agreement-modal-header p {
+    font-size: 13px !important;
+  }
+
+  .agreement-modal-body {
+    padding: 20px 20px !important;
+  }
+
+  .agreement-modal-body h3 {
+    font-size: 18px !important;
+  }
+
+  .agreement-modal-body section {
+    margin-bottom: 24px !important;
+  }
+
+  /* Stack performance metrics on mobile */
+  .performance-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Stack input/output sections on mobile */
+  .data-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .agreement-modal-footer {
+    padding: 16px 20px !important;
+  }
+
+  .agreement-modal-footer button {
+    padding: 12px 20px !important;
+    font-size: 15px !important;
+  }
+
+  .agreement-modal-footer label span {
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .agreement-modal-header {
+    padding: 16px !important;
+  }
+
+  .agreement-modal-body {
+    padding: 16px !important;
+  }
+
+  .agreement-modal-body h3 {
+    font-size: 16px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .agreement-modal-body p,
+  .agreement-modal-body li {
+    font-size: 13px !important;
+  }
+
+  .agreement-modal-footer {
+    padding: 14px 16px !important;
+  }
+}
+
+/* Settings Menu - Fix overlap with header */
+@media (max-width: 1024px) {
+  /* Move settings button below header on mobile */
+  .settings-btn {
+    top: 70px !important;
+    right: 10px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    z-index: 900 !important;
+  }
+
+  /* Settings dropdown */
+  .settings-dropdown {
+    top: 110px !important;
+    right: 10px !important;
+    width: 180px !important;
+    z-index: 900 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Position below compact header */
+  .settings-btn {
+    top: 65px !important;
+    right: 10px !important;
+    padding: 8px !important;
+    min-width: 40px !important;
+    z-index: 900 !important;
+  }
+
+  /* Hide "Settings" text on small mobile, show only icon */
+  .settings-btn {
+    font-size: 0 !important;
+    gap: 0 !important;
+  }
+
+  .settings-btn svg {
+    margin: 0 !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Settings dropdown */
+  .settings-dropdown {
+    top: 108px !important;
+    right: 10px !important;
+    width: 160px !important;
+    z-index: 900 !important;
+  }
+}
+
+/* Chart Components */
+.rainfall-chart-container,
+.forecast-chart-container {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  /* Reduce chart legend font sizes */
+  .recharts-legend-item-text {
+    font-size: 11px !important;
+  }
+
+  /* Make tooltips more compact */
+  .recharts-tooltip-wrapper {
+    font-size: 11px !important;
+  }
+
+  /* Smaller axis labels */
+  .recharts-cartesian-axis-tick text {
+    font-size: 10px !important;
+  }
+}
+
+/* District List Component */
+.district-list-container {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .district-list-item {
+    font-size: 13px !important;
+    padding: 10px 12px !important;
+  }
+}
+
+/* General Component Utilities */
+@media (max-width: 1024px) {
+  /* Ensure all modals are properly sized */
+  .modal-overlay {
+    padding: 16px !important;
+  }
+
+  /* Touch-friendly close buttons */
+  .modal-close-btn {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 24px !important;
+  }
+}
+
+/* Loading States */
+@media (max-width: 768px) {
+  .loading-spinner {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+
+/* Hide detailed analysis button on desktop */
+@media (min-width: 769px) {
+  .mobile-detailed-analysis-btn {
+    display: none !important;
+  }
+}

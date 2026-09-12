@@ -27,9 +27,11 @@ export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMen
   }, [isOpen]);
 
   return (
-    <div ref={menuRef} style={{ position: 'relative' }}>
+    <div ref={menuRef} className="settings-menu-container" style={{ position: 'relative' }}>
       {/* Settings Button */}
       <button
+        id="settings-menu-button"
+        className="settings-btn"
         onClick={() => setIsOpen(!isOpen)}
         style={{
           position: 'fixed',
@@ -52,7 +54,7 @@ export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMen
           color: darkMode ? '#e2e8f0' : '#475569',
           transition: 'all 0.2s',
           backdropFilter: 'blur(10px)',
-          zIndex: 1100,
+          zIndex: 900,
           boxShadow: darkMode
             ? '0 2px 8px rgba(0, 0, 0, 0.3)'
             : '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -87,6 +89,7 @@ export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMen
       {/* Dropdown Menu */}
       {isOpen && (
         <div
+          className="settings-dropdown"
           style={{
             position: 'fixed',
             top: '60px',
@@ -101,7 +104,7 @@ export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMen
               ? '1px solid rgba(255, 255, 255, 0.1)'
               : '1px solid rgba(0, 0, 0, 0.1)',
             padding: '6px',
-            zIndex: 1100,
+            zIndex: 900,
             animation: 'slideDown 0.2s ease-out',
           }}
         >

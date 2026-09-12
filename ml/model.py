@@ -42,27 +42,20 @@ class GeolLSTM(nn.Module):
 
 class PGNN_LSTM(nn.Module):
     """Physics-Guided Graph Neural Network LSTM.
-    Target: Hydraulic head (m MSL), not depth BGL.
-    
-    VERSION 2: With rainfall features
-    - Node features: 9 (was 8) - added avg_rainfall
-    - Sequence input: [B, 24, 2] (was [B, 24, 1]) - added rainfall channel
-    """
+    Target: Hydraulic head (m MSL), not depth BGL."""
 
-    def __init__(self, n_node_feat=9, seq_len=24, gcn_h=24, lstm_h=48,
-                 n_layers=2, horizon=12, drop=0.2, use_rainfall=True):
+    def __init__(self, n_node_feat=8, seq_len=24, gcn_h=24, lstm_h=48,
+                 n_layers=2, horizon=12, drop=0.2):
         super().__init__()
         self.seq_len = seq_len
         self.horizon = horizon
         self.gcn_h = gcn_h
-        self.use_rainfall = use_rainfall
 
         self.gcn1 = GraphConv(n_node_feat, gcn_h)
         self.gcn2 = GraphConv(gcn_h, gcn_h)
         self.gnorm = nn.LayerNorm(gcn_h)
 
-        # UPDATED: LSTM input now includes rainfall
-        lstm_in = (2 if use_rainfall else 1) + gcn_h  # water_level + rainfall + gcn_features
+        lstm_in = 1 + gcn_h
         self.lstm_W = GeolLSTM(lstm_in, lstm_h, n_layers, drop)
         self.lstm_F = GeolLSTM(lstm_in, lstm_h, n_layers, drop)
         self.lstm_M = GeolLSTM(lstm_in, lstm_h, n_layers, drop)

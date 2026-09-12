@@ -42,3 +42,61 @@ def well_history(well_id: str, db: Session = Depends(get_db)):
         FROM readings WHERE well_id = :wid ORDER BY date
     """), {"wid": well_id}).mappings().all()
     return {"well_id": well_id, "readings": [dict(r) for r in rows]}
+
+
+@router.get("/{well_id}/rainfall")
+def get_well_rainfall(
+    well_id: str,
+    db: Session = Depends(get_db)
+):
+    """
+    Get monthly rainfall data for a specific well.
+    Returns time-series rainfall data that can be plotted alongside water levels.
+    """
+    query = text("""
+        SELECT 
+            year,
+            month,
+            rainfall_mm,
+            TO_DATE(year || '-' || month || '-01', 'YYYY-MM-DD') as date
+        FROM well_rainfall
+        WHERE well_id = :well_id
+        ORDER BY year, month
+    """)
+    
+    result = db.execute(query, {"well_id": well_id})
+    rows = result.fetchall()
+    
+    if not rows:
+        return {
+            "well_id": well_id,
+            "rainfall_data": [],
+            "message": "No rainfall data available for this well"
+        }
+    
+    rainfall_data = []
+    for row in rows:
+        rainfall_data.append({
+            "year": row[0],
+            "month": row[1],
+            "rainfall_mm": round(row[2], 2),
+            "date": row[3].isoformat() if row[3] else None
+        })
+    
+    # Calculate statistics
+    total_rainfall = sum([r["rainfall_mm"] for r in rainfall_data])
+    avg_rainfall = total_rainfall / len(rainfall_data) if rainfall_data else 0
+    
+    return {
+        "well_id": well_id,
+        "rainfall_data": rainfall_data,
+        "total_records": len(rainfall_data),
+        "year_range": {
+            "min": min([r["year"] for r in rainfall_data]),
+            "max": max([r["year"] for r in rainfall_data])
+        },
+        "statistics": {
+            "total_rainfall_mm": round(total_rainfall, 2),
+            "avg_monthly_rainfall_mm": round(avg_rainfall, 2)
+        }
+    }

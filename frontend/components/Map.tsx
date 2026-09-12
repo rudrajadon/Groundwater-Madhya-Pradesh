@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, CircleMarker, Popup, GeoJSON, useMapEvents, us
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { WellSummary, getWells } from "../lib/api";
+import { useRouter } from "next/router";
 
 // Madhya Pradesh approximate center
 const MP_CENTER: [number, number] = [23.47, 77.95];
@@ -53,6 +54,7 @@ function ZoomResponsiveMarkers({
   onWellSelect: (wellId: string, district?: string) => void;
   selectedWellId?: string | null;
 }) {
+  const router = useRouter();
   const [zoom, setZoom] = useState(7);
   const markerRefs = useRef<{ [key: string]: L.CircleMarker | null }>({});
   
@@ -111,8 +113,8 @@ function ZoomResponsiveMarkers({
     <>
       {wells.map((w) => {
         const isSelected = w.well_id === selectedWellId;
-        const borderColor = viewMode === "trend" ? trendBorderColor(w.trend_label) : "#d1d5db";
-        const fillCol = viewMode === "trend" ? "#d1d5db" : geologyColor(w.geology_type);
+        const borderColor = viewMode === "trend" ? trendBorderColor(w.trend_label) : "#374151";
+        const fillCol = viewMode === "trend" ? trendBorderColor(w.trend_label) : geologyColor(w.geology_type);
         
         return (
           <CircleMarker
@@ -123,7 +125,7 @@ function ZoomResponsiveMarkers({
               color: isSelected ? "#000" : borderColor,
               fillColor: fillCol,
               fillOpacity: isSelected ? 1 : 0.7,
-              weight: isSelected ? borderWeight * 2 : borderWeight
+              weight: isSelected ? Math.min(borderWeight * 2, 3) : borderWeight
             }}
             eventHandlers={{
               click: (e) => {
@@ -188,8 +190,35 @@ function ZoomResponsiveMarkers({
                   </div>
                 )}
 
-                {/* Click hint */}
-                <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "8px", fontStyle: "italic" }}>
+                {/* Detailed Analysis Button - Mobile Only */}
+                <div
+                  className="mobile-detailed-analysis-btn"
+                  style={{
+                    display: "block",
+                    marginTop: "10px",
+                  }}
+                >
+                  <a
+                    href={`/well/${w.well_id}`}
+                    style={{
+                      display: "block",
+                      padding: "8px 12px",
+                      background: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+                      color: "white",
+                      textDecoration: "none",
+                      borderRadius: "6px",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      textAlign: "center",
+                      boxShadow: "0 2px 4px rgba(59, 130, 246, 0.3)",
+                    }}
+                  >
+                    📊 Detailed Analysis
+                  </a>
+                </div>
+
+                {/* Click hint - Desktop Only */}
+                <div className="desktop-click-hint" style={{ fontSize: "11px", color: "#9ca3af", marginTop: "8px", fontStyle: "italic" }}>
                   Click marker for 12-month forecast
                 </div>
               </div>
@@ -218,6 +247,7 @@ export default function GroundwaterMap({
   const [showDistricts, setShowDistricts] = useState<boolean>(true);
   const [districtBoundaries, setDistrictBoundaries] = useState<any>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+  const [legendMinimized, setLegendMinimized] = useState(false);
 
   useEffect(() => {
     console.log('[Map] Fetching wells data...');
@@ -279,6 +309,11 @@ export default function GroundwaterMap({
         center={MP_CENTER} 
         zoom={7} 
         style={{ height: "100%", width: "100%", outline: "none" }}
+        zoomControl={true}
+        touchZoom={true}
+        doubleClickZoom={true}
+        scrollWheelZoom={true}
+        dragging={true}
       >
         <MapInstanceCapture onMapReady={setMapInstance} />
         <TileLayer
@@ -319,111 +354,247 @@ export default function GroundwaterMap({
         />
       </MapContainer>
       
-      {/* Legend with Toggle */}
-      <div style={{
-        position: "absolute",
-        bottom: "20px",
-        right: "10px",
-        background: "white",
-        padding: "16px",
-        borderRadius: "12px",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-        fontSize: "13px",
-        zIndex: 1000,
-        minWidth: "200px"
-      }}>
-        {/* District Boundaries Toggle */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "12px",
-          paddingBottom: "12px",
-          borderBottom: "1px solid #e5e7eb"
-        }}>
-          <input
-            type="checkbox"
-            id="show-districts"
-            checked={showDistricts}
-            onChange={(e) => setShowDistricts(e.target.checked)}
-            style={{ marginRight: "8px", cursor: "pointer" }}
-          />
-          <label htmlFor="show-districts" style={{ fontSize: "13px", color: "#374151", cursor: "pointer" }}>
-            District Boundaries
-          </label>
-        </div>
-        
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-          <div style={{ fontWeight: 700, color: "#111827", fontSize: "14px" }}>
-            {viewMode === "trend" ? "Trend Status" : "Geology Types"}
-          </div>
-          {/* Compact Toggle Button */}
+      {/* Legend - Compact with minimize/maximize */}
+      <div 
+        className={`map-legend ${legendMinimized ? 'minimized' : ''}`}
+        style={{
+          position: "absolute",
+          bottom: "20px",
+          right: "20px",
+          background: "white",
+          padding: legendMinimized ? "8px" : "12px",
+          borderRadius: "10px",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+          minWidth: legendMinimized ? "auto" : "200px",
+          maxWidth: legendMinimized ? "48px" : "240px",
+          zIndex: 400,
+        }}
+      >
+        {legendMinimized ? (
+          // Minimized state - just icon button
           <button
-            onClick={() => setViewMode(viewMode === "trend" ? "geology" : "trend")}
+            onClick={() => setLegendMinimized(false)}
             style={{
-              padding: "4px 10px",
-              background: "#f3f4f6",
-              border: "1px solid #d1d5db",
-              borderRadius: "6px",
-              fontSize: "11px",
-              fontWeight: 600,
-              color: "#374151",
+              background: "transparent",
+              border: "none",
               cursor: "pointer",
-              transition: "all 0.2s",
-              whiteSpace: "nowrap"
+              padding: "4px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "24px",
+              color: "#374151",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#e5e7eb";
-              e.currentTarget.style.borderColor = "#9ca3af";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#f3f4f6";
-              e.currentTarget.style.borderColor = "#d1d5db";
-            }}
+            aria-label="Expand legend"
+            title="Expand legend"
           >
-            {viewMode === "trend" ? "Geology" : "Trends"}
+            🗺️
           </button>
-        </div>
-
-        {viewMode === "trend" ? (
-          // Trend Legend
-          <>
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #ef4444", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Critical</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #fbbf24", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Watch</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #22c55e", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Stable</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#d1d5db", border: "3px solid #9ca3af", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Unknown</span>
-            </div>
-          </>
         ) : (
-          // Geology Legend
-          <>
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#3b82f6", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Basalt ({getPercent("Basalt")}%)</span>
+          // Expanded state
+          <div className="legend-content">
+            {/* Compact Header with minimize button */}
+            <div style={{ 
+              display: "flex", 
+              justifyContent: "space-between", 
+              alignItems: "center", 
+              marginBottom: "8px",
+              gap: "6px"
+            }}>
+              <div style={{ 
+                fontSize: "13px", 
+                fontWeight: 700, 
+                color: "#111827",
+                flex: 1
+              }}>
+                {viewMode === "trend" ? "Trend" : "Geology"}
+              </div>
+              
+              {/* Toggle and Minimize buttons */}
+              <div style={{ display: "flex", gap: "3px", alignItems: "center" }}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setViewMode(viewMode === "trend" ? "geology" : "trend");
+                  }}
+                  style={{
+                    padding: "2px 6px",
+                    background: "#f3f4f6",
+                    border: "1px solid #d1d5db",
+                    borderRadius: "4px",
+                    fontSize: "9px",
+                    fontWeight: 600,
+                    color: "#374151",
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    lineHeight: 1.2,
+                  }}
+                  title={`Switch to ${viewMode === "trend" ? "geology" : "trend"} view`}
+                >
+                  {viewMode === "trend" ? "Geology" : "Trend"}
+                </button>
+                
+                <button
+                  onClick={() => setLegendMinimized(true)}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "0 3px",
+                    fontSize: "18px",
+                    color: "#6b7280",
+                    lineHeight: 1,
+                  }}
+                  aria-label="Minimize legend"
+                  title="Minimize legend"
+                >
+                  ×
+                </button>
+              </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#a855f7", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Granite ({getPercent("Granite")}%)</span>
+
+            {/* District Toggle - Compact */}
+            <div className="district-toggle" style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "8px",
+              paddingBottom: "6px",
+              borderBottom: "1px solid #e5e7eb",
+            }}>
+              <input
+                type="checkbox"
+                id="show-districts"
+                checked={showDistricts}
+                onChange={(e) => setShowDistricts(e.target.checked)}
+                style={{ 
+                  marginRight: "6px", 
+                  cursor: "pointer",
+                  width: "14px",
+                  height: "14px"
+                }}
+              />
+              <label 
+                htmlFor="show-districts" 
+                style={{ 
+                  fontSize: "11px", 
+                  color: "#374151", 
+                  cursor: "pointer",
+                  userSelect: "none"
+                }}
+              >
+                Districts
+              </label>
             </div>
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#22c55e", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Vindhyan ({getPercent("Vindhyan")}%)</span>
+
+            {/* Legend Items - Compact Grid Layout */}
+            <div style={{ 
+              display: "grid", 
+              gridTemplateColumns: viewMode === "geology" ? "1fr" : "1fr",
+              gap: "5px" 
+            }}>
+              {viewMode === "trend" ? (
+                // Trend Legend - Compact
+                <>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#d1d5db", 
+                      border: "3px solid #ef4444",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>Critical</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#d1d5db", 
+                      border: "3px solid #fbbf24",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>Watch</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#d1d5db", 
+                      border: "3px solid #22c55e",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>Stable</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#d1d5db", 
+                      border: "3px solid #9ca3af",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>Unknown</span>
+                  </div>
+                </>
+              ) : (
+                // Geology Legend - Compact with percentages
+                <>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#3b82f6",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>
+                      Basalt <span className="geology-percent" style={{ color: "#6b7280" }}>({getPercent("Basalt")}%)</span>
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#a855f7",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>
+                      Granite <span className="geology-percent" style={{ color: "#6b7280" }}>({getPercent("Granite")}%)</span>
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#22c55e",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>
+                      Vindhyan <span className="geology-percent" style={{ color: "#6b7280" }}>({getPercent("Vindhyan")}%)</span>
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <div style={{ 
+                      width: "14px", 
+                      height: "14px", 
+                      borderRadius: "50%", 
+                      background: "#9ca3af",
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: "11px", color: "#374151" }}>
+                      Unknown <span className="geology-percent" style={{ color: "#6b7280" }}>({getPercent("Unknown")}%)</span>
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ width: "18px", height: "18px", borderRadius: "50%", background: "#9ca3af", border: "2px solid #d1d5db", marginRight: "10px" }}></div>
-              <span style={{ color: "#374151" }}>Unknown ({getPercent("Unknown")}%)</span>
-            </div>
-          </>
+          </div>
         )}
       </div>
     </div>

@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { getForecast, getForecastByWellId, getWellHistory, ForecastResponse, getWells, WellSummary } from "../lib/api";
 import ForecastChart from "../components/ForecastChart";
+import RainfallChart from "../components/RainfallChart";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 import LocationPredictor from "../components/LocationPredictor";
 import ExportModal from "../components/ExportModal";
@@ -15,6 +16,7 @@ const StressMap = dynamic(() => import("../components/StressMap"), { ssr: false 
 export default function Home() {
   const [pointForecast, setPointForecast] = useState<ForecastResponse | null>(null);
   const [history, setHistory] = useState<any[]>([]);
+  const [rainfall, setRainfall] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showLocationPredictor, setShowLocationPredictor] = useState(false);
@@ -30,6 +32,7 @@ export default function Home() {
   const [loadingDistrict, setLoadingDistrict] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [showAgreement, setShowAgreement] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Check if user has accepted agreement
   useEffect(() => {
@@ -65,6 +68,7 @@ export default function Home() {
     if (!wellId) {
       setPointForecast(null);
       setHistory([]);
+      setRainfall([]);
       setCurrentWellId(null);
       return;
     }
@@ -80,10 +84,21 @@ export default function Home() {
       setPointForecast(fc);
       setCurrentWellId(wellId);
       setCurrentDistrict(districtName || null);
+      
+      // Fetch rainfall data
+      fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/wells/${wellId}/rainfall`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.rainfall_data) {
+            setRainfall(data.rainfall_data);
+          }
+        })
+        .catch(e => console.warn("Could not load rainfall:", e.message));
     } catch (e: any) {
       setError(e.message);
       setPointForecast(null);
       setHistory([]);
+      setRainfall([]);
       setCurrentWellId(null);
       setCurrentDistrict(null);
     } finally {
@@ -122,7 +137,10 @@ export default function Home() {
   }));
 
   return (
-    <div style={{ display: "flex", height: "100vh", background: darkMode ? "#0f172a" : "#f8fafc" }}>
+    <div className="app-container" style={{ background: darkMode ? "#0f172a" : "#f8fafc" }}>
+      {/* Sidebar Backdrop for Mobile */}
+      {sidebarOpen && <div className="sidebar-backdrop visible" onClick={() => setSidebarOpen(false)} />}
+      
       {/* Agreement Modal */}
       {showAgreement && <AgreementModal onAccept={handleAcceptAgreement} />}
       
@@ -130,10 +148,10 @@ export default function Home() {
       <SettingsMenu darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
       
       {/* Map Section */}
-      <div style={{ flex: 1, position: "relative", minWidth: 0 }}>
+      <div className="map-container">
         
         {/* Header Bar */}
-        <div style={{
+        <div className="header-bar" style={{
           position: "absolute",
           top: 0,
           left: 0,
@@ -147,18 +165,74 @@ export default function Home() {
           padding: "16px 24px",
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div>
-              <h1 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: darkMode ? "#f8fafc" : "#0f172a" }}>
-                MP Groundwater Monitor
-              </h1>
-              <p style={{ margin: "2px 0 0 0", fontSize: 13, color: darkMode ? "#94a3b8" : "#64748b" }}>
-                Real-time forecasting & analysis
-              </p>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              {/* Hamburger Menu Button - Mobile Only */}
+              <button
+                className="hamburger-btn"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                style={{
+                  color: darkMode ? "#f8fafc" : "#0f172a",
+                }}
+                aria-label="Toggle menu"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </button>
+              
+              <div>
+                <h1 className="header-title" style={{ margin: 0, fontSize: 20, fontWeight: 700, color: darkMode ? "#f8fafc" : "#0f172a" }}>
+                  <span className="title-full">MP Groundwater Monitor</span>
+                  <span className="title-short" style={{ display: 'none' }}>MP Groundwater</span>
+                </h1>
+                <p className="header-subtitle" style={{ margin: "2px 0 0 0", fontSize: 13, color: darkMode ? "#94a3b8" : "#64748b" }}>
+                  Real-time forecasting & analysis
+                </p>
+              </div>
             </div>
 
-            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <div className="header-controls" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              {/* Settings Button - Right corner on mobile */}
+              <button
+                onClick={() => {
+                  const settingsBtn = document.getElementById('settings-menu-button');
+                  if (settingsBtn) {
+                    settingsBtn.click();
+                  }
+                }}
+                className="header-settings-btn"
+                aria-label="Settings"
+                style={{
+                  display: 'none',
+                  padding: '10px',
+                  background: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.9)',
+                  border: darkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.1)',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  color: darkMode ? '#e2e8f0' : '#475569',
+                  minWidth: '44px',
+                  minHeight: '44px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.9)';
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </button>
+              
               {/* Custom Location Toggle */}
-              <div style={{
+              <div className="location-toggle" style={{
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
@@ -194,7 +268,7 @@ export default function Home() {
               </div>
 
               {/* Map View Toggle */}
-              <div style={{
+              <div className="view-toggle" style={{
                 display: "flex",
                 gap: "6px",
                 background: darkMode ? "#1e293b" : "#f1f5f9",
@@ -280,7 +354,7 @@ export default function Home() {
       )}
       
       {/* Sidebar */}
-      <aside style={{ 
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`} style={{ 
         width: "480px",
         padding: "32px 28px", 
         overflowY: "auto", 
@@ -290,6 +364,21 @@ export default function Home() {
         flexDirection: "column",
         gap: "24px",
       }}>
+        
+        {/* Close Button for Mobile */}
+        <button
+          className="sidebar-close-btn"
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            color: darkMode ? "#f8fafc" : "#0f172a",
+          }}
+          aria-label="Close sidebar"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
         
         {/* District Selector - Always visible */}
         {!pointForecast && (
@@ -736,7 +825,19 @@ export default function Home() {
               </div>
             )}
 
-            {/* Forecast Chart - Second */}
+            {/* Rainfall Chart - Between Historical and Forecast */}
+            {rainfall.length > 0 && (
+              <div style={{ 
+                background: darkMode ? "#334155" : "#fff", 
+                padding: "24px", 
+                borderRadius: "16px",
+                border: darkMode ? "1px solid #475569" : "1px solid #e2e8f0",
+              }}>
+                <RainfallChart data={rainfall} darkMode={darkMode} />
+              </div>
+            )}
+
+            {/* Forecast Chart - Third */}
             <div style={{ 
               background: darkMode ? "#334155" : "#fff", 
               padding: "24px", 

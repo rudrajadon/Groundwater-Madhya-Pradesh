@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getForecastByWellId, getWellHistory, getWells, ForecastResponse, WellSummary } from "../../lib/api";
 import ForecastChart from "../../components/ForecastChart";
+import RainfallChart from "../../components/RainfallChart";
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 
 export default function WellDetail() {
@@ -9,10 +10,16 @@ export default function WellDetail() {
   const { id } = router.query;
   const [history, setHistory] = useState<any[]>([]);
   const [forecast, setForecast] = useState<ForecastResponse | null>(null);
+  const [rainfall, setRainfall] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
+    // Check dark mode from localStorage
+    const isDark = localStorage.getItem('darkMode') === 'true';
+    setDarkMode(isDark);
+    
     if (typeof id !== "string") return;
     setLoading(true);
 
@@ -29,6 +36,16 @@ export default function WellDetail() {
         console.warn("Could not load forecast:", e.message);
       })
       .finally(() => setLoading(false));
+    
+    // Fetch rainfall data
+    fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/v1/wells/${id}/rainfall`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.rainfall_data) {
+          setRainfall(data.rainfall_data);
+        }
+      })
+      .catch(e => console.warn("Could not load rainfall:", e.message));
   }, [id]);
 
   const historyChartData = history.map((r: any) => ({
@@ -38,9 +55,16 @@ export default function WellDetail() {
   }));
 
   return (
-    <div style={{ padding: "40px 24px", maxWidth: 1000, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
-      <div>
-        <button onClick={() => router.push("/")} style={{ marginBottom: 24 }}>
+    <div className="well-detail-container">
+      <div className="well-header">
+        <button 
+          onClick={() => router.push("/")} 
+          className="back-button"
+          style={{
+            color: darkMode ? "#cbd5e1" : "#475569",
+            borderColor: darkMode ? "#475569" : "#cbd5e1",
+          }}
+        >
           &larr; Back to map
         </button>
         <h1 style={{ color: "var(--accent-primary)", fontSize: "2.5rem", marginBottom: 8 }}>Well {id}</h1>
@@ -75,7 +99,8 @@ export default function WellDetail() {
                 })()}
               </span>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
+            <div className="chart-container">
+              <ResponsiveContainer width="100%" height={300}>
               <LineChart data={historyChartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
                 <XAxis dataKey="date" tick={{ fontSize: 11 }} stroke="var(--text-secondary)" />
@@ -92,16 +117,24 @@ export default function WellDetail() {
                 <Line type="monotone" dataKey="head" name="Hydraulic Head" stroke="var(--accent-secondary)" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
+            </div>
           </div>
         )}
       </div>
+
+      {/* Rainfall Chart */}
+      {rainfall.length > 0 && (
+        <div className="glass-panel" style={{ padding: 32 }}>
+          <RainfallChart data={rainfall} darkMode={darkMode} />
+        </div>
+      )}
 
       <div className="glass-panel" style={{ padding: 32 }}>
         <h3 style={{ borderBottom: "1px solid var(--border-color)", paddingBottom: 16, marginTop: 0 }}>12-Month Forecast</h3>
         {loading && <p style={{ color: "var(--accent-primary)" }}>Running inference model…</p>}
         {forecast ? (
           <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 16 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div className="forecast-info" style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
               <strong style={{ fontSize: 18 }}>Trend:</strong>{" "}
               <span style={{
                 padding: "6px 12px", 
@@ -116,13 +149,13 @@ export default function WellDetail() {
                 {forecast.trend_label}
               </span>
             </div>
-            <p style={{ fontSize: 16, color: "var(--text-primary)", background: "rgba(255, 255, 255, 0.05)", padding: 16, borderRadius: 8 }}>{forecast.recommendation}</p>
+            <p style={{ fontSize: 16, color: "var(--text-primary)", background: "rgba(255, 255, 255, 0.05)", padding: 16, borderRadius: 8, lineHeight: 1.5 }}>{forecast.recommendation}</p>
             {forecast.caveat && (
-              <div style={{ fontSize: 14, color: "var(--warning)", background: "rgba(245, 158, 11, 0.1)", border: "1px solid rgba(245, 158, 11, 0.2)", padding: 16, borderRadius: 8 }}>
+              <div style={{ fontSize: 14, color: "var(--warning)", background: "rgba(245, 158, 11, 0.1)", border: "1px solid rgba(245, 158, 11, 0.2)", padding: 16, borderRadius: 8, lineHeight: 1.5 }}>
                 {forecast.caveat}
               </div>
             )}
-            <div style={{ marginTop: 16 }}>
+            <div style={{ marginTop: 16 }} className="chart-container">
               <ForecastChart data={forecast.forecast} />
             </div>
           </div>

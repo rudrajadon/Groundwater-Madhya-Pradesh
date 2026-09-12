@@ -103,12 +103,28 @@ def predict_custom_location(
     # 3. Calculate IDW weights
     weights = inverse_distance_weighting(lat, lon, nearest_wells, power=2.0)
     
-    # 4. Get forecasts for each nearest well
+    # 4. Get forecasts for each nearest well (from cache or model)
     well_forecasts = {}
     
     for well in nearest_wells:
         well_id = well['well_id']
         
+        # First, check if this well has a cached forecast
+        cached_result = db.execute(text("""
+            SELECT forecast_cache
+            FROM wells
+            WHERE well_id = :well_id AND forecast_cache IS NOT NULL
+        """), {"well_id": well_id}).fetchone()
+        
+        if cached_result and cached_result[0]:
+            # Use cached forecast
+            cache = cached_result[0]
+            forecast_points = cache.get('forecast', [])
+            if forecast_points:
+                well_forecasts[well_id] = [pt['head_msl_m'] for pt in forecast_points]
+                continue
+        
+        # Fall back to live ML model if no cache
         # Get readings
         readings = _fetch_readings(well_id, db, SEQ_LEN)
         if len(readings) < SEQ_LEN:

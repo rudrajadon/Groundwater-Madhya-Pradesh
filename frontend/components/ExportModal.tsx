@@ -56,6 +56,8 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
 
       const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
       
+      console.log('[ExportModal] Generating export:', { API_BASE, scope, district, wellId, format, reportType });
+      
       // Build request body
       const requestBody: any = {
         format,
@@ -73,6 +75,9 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
         return;
       }
 
+      console.log('[ExportModal] Request body:', requestBody);
+      console.log('[ExportModal] Fetching:', `${API_BASE}/api/v1/exports/generate`);
+
       const response = await fetch(`${API_BASE}/api/v1/exports/generate`, {
         method: "POST",
         headers: {
@@ -81,8 +86,11 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
         body: JSON.stringify(requestBody),
       });
 
+      console.log('[ExportModal] Response status:', response.status, response.statusText);
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
+        console.error('[ExportModal] Error response:', errorData);
         throw new Error(errorData.detail || `Export failed: ${response.statusText}`);
       }
 

@@ -113,8 +113,8 @@ function ZoomResponsiveMarkers({
     <>
       {wells.map((w) => {
         const isSelected = w.well_id === selectedWellId;
-        const borderColor = viewMode === "trend" ? trendBorderColor(w.trend_label) : "#374151";
-        const fillCol = viewMode === "trend" ? trendBorderColor(w.trend_label) : geologyColor(w.geology_type);
+        const borderColor = viewMode === "trend" ? trendBorderColor(w.trend_label) : "#d1d5db";
+        const fillCol = viewMode === "trend" ? "#d1d5db" : geologyColor(w.geology_type);
         
         return (
           <CircleMarker

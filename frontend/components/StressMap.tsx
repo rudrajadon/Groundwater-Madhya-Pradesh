@@ -110,9 +110,11 @@ function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], dist
       clipLayerRef.current = districtLayer;
       districtLayer.addTo(map);
 
-      // Get the SVG element and add clip path
-      const svg = map.getPanes().overlayPane.querySelector('svg');
-      if (svg) {
+      // Function to create/recreate clip path
+      const createClipPath = () => {
+        const svg = map.getPanes().overlayPane.querySelector('svg');
+        if (!svg) return;
+
         // Create clip path element
         let defs = svg.querySelector('defs');
         if (!defs) {
@@ -136,7 +138,23 @@ function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], dist
           clipPath.appendChild(clonedPath);
           defs.appendChild(clipPath);
         }
-      }
+      };
+
+      // Initial clip path creation
+      createClipPath();
+
+      // Recreate clip path on zoom/viewreset
+      const onMapReset = () => {
+        requestAnimationFrame(createClipPath);
+      };
+      map.on('viewreset', onMapReset);
+      map.on('zoomend', onMapReset);
+
+      // Store cleanup function
+      (districtLayer as any)._cleanupClipPath = () => {
+        map.off('viewreset', onMapReset);
+        map.off('zoomend', onMapReset);
+      };
     }
 
     // Group wells by status
@@ -182,18 +200,7 @@ function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], dist
     layerGroup.addTo(map);
 
     // Apply clip path to all circles after they're rendered
-    setTimeout(() => {
-      allCircles.forEach(circle => {
-        const circleElement = (circle as any)._path;
-        if (circleElement && districtGeometry) {
-          circleElement.setAttribute('clip-path', 'url(#district-clip)');
-          circleElement.style.clipPath = 'url(#district-clip)';
-        }
-      });
-    }, 100);
-
-    // Reapply clip-path on zoom events (fixes circles breaking during zoom)
-    const onZoomEnd = () => {
+    const applyClipPath = () => {
       allCircles.forEach(circle => {
         const circleElement = (circle as any)._path;
         if (circleElement && districtGeometry) {
@@ -203,17 +210,32 @@ function WellHeatMapLayer({ wells, districtGeometry }: { wells: WellData[], dist
       });
     };
 
-    map.on('zoomend', onZoomEnd);
-    map.on('moveend', onZoomEnd);
+    setTimeout(applyClipPath, 100);
+
+    // Reapply clip-path on zoom/pan events (fixes circles breaking during zoom)
+    const onMapUpdate = () => {
+      requestAnimationFrame(applyClipPath);
+    };
+
+    map.on('zoom', onMapUpdate);
+    map.on('zoomend', onMapUpdate);
+    map.on('moveend', onMapUpdate);
+    map.on('viewreset', onMapUpdate);
 
     return () => {
-      map.off('zoomend', onZoomEnd);
-      map.off('moveend', onZoomEnd);
+      map.off('zoom', onMapUpdate);
+      map.off('zoomend', onMapUpdate);
+      map.off('moveend', onMapUpdate);
+      map.off('viewreset', onMapUpdate);
       
       if (layerRef.current) {
         map.removeLayer(layerRef.current);
       }
       if (clipLayerRef.current) {
+        // Call stored cleanup function
+        if ((clipLayerRef.current as any)._cleanupClipPath) {
+          (clipLayerRef.current as any)._cleanupClipPath();
+        }
         map.removeLayer(clipLayerRef.current);
       }
       // Clean up clip path

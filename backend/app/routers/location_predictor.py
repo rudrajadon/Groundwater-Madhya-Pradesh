@@ -73,7 +73,8 @@ def predict_custom_location(
     
     **Returns:** 12-month forecast with interpolated values and uncertainty.
     """
-    model = _require_model(request)
+    # Don't load model yet - only if we need it for uncached wells
+    model = None
     
     # 1. Validate location is in Madhya Pradesh
     if not validate_location_in_mp(lat, lon):
@@ -125,6 +126,10 @@ def predict_custom_location(
                 continue
         
         # Fall back to live ML model if no cache
+        # Load model only when needed
+        if model is None:
+            model = _require_model(request)
+        
         # Get readings
         readings = _fetch_readings(well_id, db, SEQ_LEN)
         if len(readings) < SEQ_LEN:

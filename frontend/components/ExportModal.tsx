@@ -248,41 +248,31 @@ export default function ExportModal({ wellId, district, onClose }: ExportModalPr
 
               {/* District Summary Option */}
               <div
-                onClick={() => {
-                  if (format === "pdf") handleReportTypeChange("district_summary");
-                }}
                 style={{
-                  border: reportType === "district_summary" ? "2px solid #10b981" : "2px solid #e5e7eb",
+                  border: "2px solid #e5e7eb",
                   borderRadius: "10px",
                   padding: "14px 16px",
-                  cursor: format === "pdf" ? "pointer" : "not-allowed",
-                  background: reportType === "district_summary" ? "#ecfdf5" : "#ffffff",
-                  transition: "all 0.2s",
+                  cursor: "not-allowed",
+                  background: "#f9fafb",
                   display: "flex",
                   alignItems: "center",
                   gap: "12px",
-                  opacity: format === "csv" ? 0.5 : 1,
-                }}
-                onMouseEnter={(e) => {
-                  if (reportType !== "district_summary" && format === "pdf") e.currentTarget.style.borderColor = "#d1d5db";
-                }}
-                onMouseLeave={(e) => {
-                  if (reportType !== "district_summary" && format === "pdf") e.currentTarget.style.borderColor = "#e5e7eb";
+                  opacity: 0.6,
                 }}
               >
                 <div style={{
                   width: "20px",
                   height: "20px",
                   borderRadius: "50%",
-                  border: reportType === "district_summary" ? "6px solid #10b981" : "2px solid #d1d5db",
+                  border: "2px solid #d1d5db",
                   flexShrink: 0,
                 }} />
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: "14px", fontWeight: 600, color: "#1f2937" }}>
                     District Summary Report
                   </div>
-                  <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
-                    Summary of all wells in district
+                  <div style={{ fontSize: "12px", color: "#ef4444", marginTop: "2px", fontWeight: 500 }}>
+                    Not available at the moment
                   </div>
                 </div>
               </div>

@@ -414,12 +414,13 @@
 /* Tablet - Make legend more compact */
 @media (max-width: 1024px) {
   .map-legend {
-    bottom: 10px;
+    bottom: 60px; /* Increased to avoid iPhone/iPad home indicator */
     right: 10px;
     padding: 12px;
     min-width: 160px;
     font-size: 12px;
     max-width: 180px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); /* Respect safe area */
   }
 
   .map-legend-title {
@@ -474,7 +475,7 @@
   }
 
   .map-legend {
-    bottom: 30px !important;
+    bottom: 80px !important; /* Increased from 30px to avoid iPhone home indicator */
     right: 10px !important;
     left: auto !important;
     padding: 10px !important;
@@ -483,6 +484,7 @@
     max-width: none !important;
     width: auto !important;
     background: rgba(255, 255, 255, 0.98) !important;
+    padding-bottom: env(safe-area-inset-bottom, 10px) !important; /* Respect iPhone safe area */
   }
 
   /* Minimized state - clean icon button */
@@ -590,9 +592,10 @@
 /* Extra small mobile - compact but readable */
 @media (max-width: 480px) {
   .map-legend {
-    bottom: 25px !important;
+    bottom: 70px !important; /* Increased from 25px to avoid iPhone home indicator */
     right: 8px !important;
     padding: 8px !important;
+    padding-bottom: env(safe-area-inset-bottom, 8px) !important; /* Respect iPhone safe area */
   }
 
   .map-legend.minimized {

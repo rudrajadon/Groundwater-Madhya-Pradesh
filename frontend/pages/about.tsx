@@ -3,6 +3,7 @@ import SettingsMenu from "../components/SettingsMenu";
 
 export default function About() {
   const [darkMode, setDarkMode] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode');
@@ -22,10 +23,20 @@ export default function About() {
       minHeight: "100vh", 
       background: darkMode ? "#0f172a" : "#f8fafc",
     }}>
-      <SettingsMenu darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
+      <SettingsMenu 
+        darkMode={darkMode} 
+        onToggleDarkMode={toggleDarkMode}
+        isOpen={settingsOpen}
+        onToggle={setSettingsOpen}
+      />
 
       {/* Header */}
-      <div style={{
+      <div className="header-bar" style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
         background: darkMode 
           ? "linear-gradient(to bottom, rgba(15,23,42,0.98), rgba(15,23,42,0.95))"
           : "linear-gradient(to bottom, rgba(255,255,255,0.98), rgba(255,255,255,0.95))",
@@ -33,24 +44,83 @@ export default function About() {
         borderBottom: darkMode ? "1px solid #334155" : "1px solid #e2e8f0",
         padding: "16px 24px",
       }}>
-        <h1 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: darkMode ? "#f8fafc" : "#0f172a" }}>
-          MP Groundwater Monitor
-        </h1>
-        <p style={{ margin: "2px 0 0 0", fontSize: 13, color: darkMode ? "#94a3b8" : "#64748b" }}>
-          About this project
-        </p>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            {/* IIT Indore Logo */}
+            <img 
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/iiti.png`}
+              alt="IIT Indore" 
+              style={{ 
+                height: "40px", 
+                width: "auto",
+                objectFit: "contain"
+              }}
+            />
+            
+            <div>
+              <h1 className="header-title" style={{ margin: 0, fontSize: 20, fontWeight: 700, color: darkMode ? "#f8fafc" : "#0f172a" }}>
+                <span className="title-full">MP Groundwater Monitor</span>
+                <span className="title-short" style={{ display: 'none' }}>MP Groundwater</span>
+              </h1>
+              <p className="header-subtitle" style={{ margin: "2px 0 0 0", fontSize: 13, color: darkMode ? "#94a3b8" : "#64748b" }}>
+                About this project
+              </p>
+            </div>
+          </div>
+
+          <div className="header-controls" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            {/* Settings Button - Right corner on mobile */}
+            <button
+              onClick={() => {
+                setSettingsOpen(!settingsOpen);
+              }}
+              className="header-settings-btn"
+              aria-label="Settings"
+              style={{
+                display: 'none',
+                padding: '10px',
+                background: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.9)',
+                border: darkMode ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(0, 0, 0, 0.1)',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                color: darkMode ? '#e2e8f0' : '#475569',
+                minWidth: '44px',
+                minHeight: '44px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.9)';
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Content */}
-      <div style={{
+      <div className="about-content" style={{
         maxWidth: "1200px",
         margin: "0 auto",
         padding: "48px 24px",
+        paddingTop: "110px",
       }}>
         
         {/* Hero */}
         <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <h2 style={{
+          <h2 className="about-hero-title" style={{
             fontSize: "48px",
             fontWeight: 800,
             color: darkMode ? "#f8fafc" : "#0f172a",
@@ -59,7 +129,7 @@ export default function About() {
           }}>
             AI-Powered Groundwater Intelligence
           </h2>
-          <p style={{
+          <p className="about-hero-subtitle" style={{
             fontSize: "20px",
             color: darkMode ? "#94a3b8" : "#64748b",
             maxWidth: "700px",
@@ -71,14 +141,14 @@ export default function About() {
         </div>
 
         {/* Overview */}
-        <div style={{
+        <div className="about-card" style={{
           background: darkMode ? "#1e293b" : "white",
           borderRadius: "16px",
           padding: "48px",
           marginBottom: "32px",
           border: darkMode ? "1px solid #334155" : "1px solid #e2e8f0",
         }}>
-          <h3 style={{
+          <h3 className="about-section-title" style={{
             fontSize: "28px",
             fontWeight: 700,
             color: darkMode ? "#f8fafc" : "#0f172a",
@@ -104,7 +174,7 @@ export default function About() {
         </div>
 
         {/* Stats */}
-        <div style={{
+        <div className="about-stats-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: "24px",
@@ -118,6 +188,7 @@ export default function About() {
           ].map((stat, idx) => (
             <div
               key={idx}
+              className="about-stat-card"
               style={{
                 background: darkMode ? "#1e293b" : "white",
                 padding: "32px",
@@ -126,7 +197,7 @@ export default function About() {
                 border: darkMode ? "1px solid #334155" : "1px solid #e2e8f0",
               }}
             >
-              <div style={{
+              <div className="about-stat-value" style={{
                 fontSize: "36px",
                 fontWeight: 800,
                 color: "#667eea",
@@ -134,7 +205,7 @@ export default function About() {
               }}>
                 {stat.value}
               </div>
-              <div style={{
+              <div className="about-stat-label" style={{
                 fontSize: "13px",
                 fontWeight: 600,
                 color: darkMode ? "#94a3b8" : "#64748b",
@@ -148,7 +219,7 @@ export default function About() {
         </div>
 
         {/* Two Column */}
-        <div style={{
+        <div className="about-two-column" style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           gap: "32px",
@@ -279,7 +350,7 @@ export default function About() {
           marginBottom: "32px",
           border: darkMode ? "1px solid #334155" : "1px solid #e2e8f0",
         }}>
-          <h3 style={{
+          <h3 className="about-section-title" style={{
             fontSize: "24px",
             fontWeight: 700,
             color: darkMode ? "#f8fafc" : "#0f172a",
@@ -287,7 +358,7 @@ export default function About() {
           }}>
             Technology Stack
           </h3>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "40px" }}>
+          <div className="about-tech-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "40px" }}>
             {[
               { title: "Frontend", items: ["Next.js 14", "React 18", "TypeScript", "Leaflet.js", "Recharts"] },
               { title: "Backend", items: ["Python 3.11", "FastAPI", "PostgreSQL", "PostGIS", "Docker"] },
@@ -345,7 +416,7 @@ export default function About() {
           }}>
             The forecasting engine uses a hybrid <strong>Position-aware Graph Neural Network (PGNN) + Long Short-Term Memory (LSTM)</strong> architecture that captures both spatial dependencies between wells and temporal patterns in groundwater dynamics.
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+          <div className="about-model-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
             <div style={{
               padding: "24px",
               background: darkMode ? "rgba(220, 38, 38, 0.1)" : "#fef2f2",
@@ -416,7 +487,7 @@ export default function About() {
             paddingBottom: "40px",
             borderBottom: "1px solid rgba(255,255,255,0.2)",
           }}>
-            <div style={{
+            <div className="about-developer-title" style={{
               fontSize: "32px",
               fontWeight: 800,
               marginBottom: "8px",
@@ -424,7 +495,7 @@ export default function About() {
             }}>
               Rudra Pratap Singh Jadon
             </div>
-            <div style={{
+            <div className="about-developer-name" style={{
               fontSize: "18px",
               opacity: 0.9,
               marginBottom: "16px",
@@ -452,7 +523,7 @@ export default function About() {
             }}>
               Under Guidance Of
             </h4>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+            <div className="about-guidance-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
               <div style={{
                 padding: "24px",
                 background: "rgba(255,255,255,0.1)",

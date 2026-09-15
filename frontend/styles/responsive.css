@@ -10,6 +10,11 @@
     display: inline !important;
   }
   
+  /* Make IIT logo smaller on mobile */
+  .header-bar img[alt="IIT Indore"] {
+    height: 32px !important;
+  }
+  
   /* Show settings button in navbar on mobile */
   .header-settings-btn {
     display: flex !important;
@@ -20,8 +25,7 @@
   .settings-btn {
     display: none !important;
   }
-  
-  /* Ensure header controls are on the right */
+
   .header-controls {
     display: flex !important;
     align-items: center !important;
@@ -36,6 +40,17 @@
   /* View toggle stays visible but more compact */
   .view-toggle {
     display: flex !important;
+  }
+
+  /* Position map zoom controls top-left, just below navbar on mobile */
+  .leaflet-top.leaflet-left {
+    top: 60px !important;      /* Just below navbar (navbar is ~55px) */
+    left: 12px !important;     /* Top-left corner */
+  }
+
+  .leaflet-control-zoom {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
   }
 }
 
@@ -61,55 +76,20 @@
   gap: 24px;
 }
 
-/* Hamburger Button - Hidden on Desktop */
+/* Hamburger Button - Hidden on all screens (using drawer for mobile, sidebar for desktop) */
 .hamburger-btn {
-  display: none;
-  padding: 8px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  min-width: 44px;
+  display: none !important;
 }
 
-/* Tablet Styles (1024px and below) */
+/* Tablet Styles (1024px and below) - Use drawer instead of sidebar overlay */
 @media (max-width: 1024px) {
+  /* Hide sidebar on tablet - use drawer instead */
   .sidebar {
-    position: fixed !important;
-    top: 0;
-    left: -100%;
-    bottom: 0;
-    width: 85% !important;
-    max-width: 400px;
-    z-index: 1050;
-    transition: left 0.3s ease-in-out;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    display: none !important;
   }
 
-  .sidebar.open {
-    left: 0;
-  }
-
-  /* Backdrop when sidebar is open */
   .sidebar-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1040;
-    display: none;
-  }
-
-  .sidebar-backdrop.visible {
-    display: block;
-  }
-
-  .hamburger-btn {
-    display: flex !important;
+    display: none !important;
   }
 
   .header-subtitle {
@@ -189,6 +169,54 @@
   /* Make charts more compact on mobile */
   .recharts-wrapper {
     font-size: 11px !important;
+  }
+
+  /* HIDE sidebar completely on mobile - use drawer instead */
+  .sidebar {
+    display: none !important;
+  }
+
+  .sidebar-backdrop {
+    display: none !important;
+  }
+}
+
+/* Mobile Drawer - Show only on mobile and tablet */
+.mobile-well-drawer {
+  display: none;
+}
+
+.mobile-drawer-backdrop {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .mobile-well-drawer {
+    display: flex !important;
+  }
+
+  .mobile-drawer-backdrop {
+    display: block !important;
+  }
+
+  /* Smooth slide-up animation for drawer */
+  @keyframes slideUpDrawer {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* Fade in animation for backdrop */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
 
@@ -436,9 +464,9 @@
 
 /* Mobile - Completely Redesigned Compact Legends */
 @media (max-width: 768px) {
-  /* Show detailed analysis button on mobile, hide desktop hint */
+  /* HIDE detailed analysis button on mobile - keep popup simple */
   .mobile-detailed-analysis-btn {
-    display: block !important;
+    display: none !important;
   }
 
   .desktop-click-hint {
@@ -901,56 +929,7 @@
   }
 }
 
-/* Settings Menu - Fix overlap with header */
-@media (max-width: 1024px) {
-  /* Move settings button below header on mobile */
-  .settings-btn {
-    top: 70px !important;
-    right: 10px !important;
-    padding: 8px 12px !important;
-    font-size: 13px !important;
-    z-index: 900 !important;
-  }
-
-  /* Settings dropdown */
-  .settings-dropdown {
-    top: 110px !important;
-    right: 10px !important;
-    width: 180px !important;
-    z-index: 900 !important;
-  }
-}
-
-@media (max-width: 768px) {
-  /* Position below compact header */
-  .settings-btn {
-    top: 65px !important;
-    right: 10px !important;
-    padding: 8px !important;
-    min-width: 40px !important;
-    z-index: 900 !important;
-  }
-
-  /* Hide "Settings" text on small mobile, show only icon */
-  .settings-btn {
-    font-size: 0 !important;
-    gap: 0 !important;
-  }
-
-  .settings-btn svg {
-    margin: 0 !important;
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  /* Settings dropdown */
-  .settings-dropdown {
-    top: 108px !important;
-    right: 10px !important;
-    width: 160px !important;
-    z-index: 900 !important;
-  }
-}
+/* Settings Menu positioning removed - using navbar button on mobile instead */
 
 /* Chart Components */
 .rainfall-chart-container,
@@ -1015,5 +994,127 @@
 @media (min-width: 769px) {
   .mobile-detailed-analysis-btn {
     display: none !important;
+  }
+}
+
+
+/* About Page Responsive Styles */
+@media (max-width: 1024px) {
+  /* Adjust top padding for fixed navbar on about page */
+  .about-content {
+    padding-top: 200px !important;
+  }
+
+  /* Tablet: Keep header bar padding consistent */
+  .about-content ~ .header-bar {
+    padding: 12px 16px !important;
+  }
+
+  /* Make stats grid 2 columns on tablet */
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Stack two-column sections on tablet */
+  .about-two-column {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Make technology stack 2 columns on tablet */
+  .about-tech-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Stack guidance cards on tablet */
+  .about-guidance-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Show settings button on mobile/tablet for about page */
+  .header-settings-btn {
+    display: flex !important;
+  }
+
+  /* Hide desktop fixed settings button on tablet */
+  .settings-btn {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Adjust top padding for mobile */
+  .about-content {
+    padding-top: 180px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Mobile: Keep header bar padding consistent */
+  .about-content ~ .header-bar {
+    padding: 10px 12px !important;
+  }
+
+  /* Mobile: Single column for stats */
+  .about-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Reduce padding on cards */
+  .about-card {
+    padding: 24px 20px !important;
+  }
+
+  /* Smaller hero text */
+  .about-hero-title {
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+  }
+
+  .about-hero-subtitle {
+    font-size: 16px !important;
+  }
+
+  /* Single column technology stack */
+  .about-tech-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Smaller section titles */
+  .about-section-title {
+    font-size: 20px !important;
+  }
+
+  /* Reduce content padding */
+  .about-content {
+    padding: 32px 16px !important;
+  }
+
+  /* Smaller stat cards */
+  .about-stat-card {
+    padding: 20px 16px !important;
+  }
+
+  .about-stat-value {
+    font-size: 28px !important;
+  }
+
+  .about-stat-label {
+    font-size: 11px !important;
+  }
+
+  /* Stack model cards */
+  .about-model-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Developer section */
+  .about-developer-title {
+    font-size: 24px !important;
+  }
+
+  .about-developer-name {
+    font-size: 20px !important;
   }
 }

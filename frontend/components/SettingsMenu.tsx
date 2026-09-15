@@ -4,11 +4,17 @@ import Link from 'next/link';
 interface SettingsMenuProps {
   darkMode: boolean;
   onToggleDarkMode: () => void;
+  isOpen?: boolean;
+  onToggle?: (open: boolean) => void;
 }
 
-export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMenuProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function SettingsMenu({ darkMode, onToggleDarkMode, isOpen: externalIsOpen, onToggle }: SettingsMenuProps) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Use external state if provided, otherwise use internal state
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const setIsOpen = onToggle || setInternalIsOpen;
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -54,7 +60,7 @@ export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMen
           color: darkMode ? '#e2e8f0' : '#475569',
           transition: 'all 0.2s',
           backdropFilter: 'blur(10px)',
-          zIndex: 900,
+          zIndex: 1001,
           boxShadow: darkMode
             ? '0 2px 8px rgba(0, 0, 0, 0.3)'
             : '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -104,7 +110,7 @@ export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMen
               ? '1px solid rgba(255, 255, 255, 0.1)'
               : '1px solid rgba(0, 0, 0, 0.1)',
             padding: '6px',
-            zIndex: 900,
+            zIndex: 1001,
             animation: 'slideDown 0.2s ease-out',
           }}
         >
@@ -117,6 +123,15 @@ export default function SettingsMenu({ darkMode, onToggleDarkMode }: SettingsMen
               to {
                 opacity: 1;
                 transform: translateY(0);
+              }
+            }
+
+            /* Mobile positioning - right corner below navbar */
+            @media (max-width: 768px) {
+              .settings-dropdown {
+                top: 55px !important;      /* Just below navbar on mobile */
+                right: 8px !important;     /* Right corner */
+                left: auto !important;
               }
             }
           `}</style>

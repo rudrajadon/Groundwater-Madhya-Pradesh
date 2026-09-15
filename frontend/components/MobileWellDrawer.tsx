@@ -103,7 +103,7 @@ export default function MobileWellDrawer({
           right: 0,
           bottom: 0,
           background: 'rgba(0, 0, 0, 0.5)',
-          zIndex: 2000,
+          zIndex: 1500, // Lower than export modal (2000)
           animation: 'fadeIn 0.3s ease-in-out',
         }}
       />
@@ -120,7 +120,7 @@ export default function MobileWellDrawer({
           background: darkMode ? '#1e293b' : '#ffffff',
           borderTopLeftRadius: '24px',
           borderTopRightRadius: '24px',
-          zIndex: 2001,
+          zIndex: 1501, // Lower than export modal (2000)
           boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.3)',
           animation: 'slideUpDrawer 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           transition: 'height 0.3s ease-in-out',

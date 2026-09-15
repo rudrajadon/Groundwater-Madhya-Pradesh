@@ -733,18 +733,20 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
 
       {/* District Info Panel */}
       {selectedDistrict && (
-        <div style={{
-          position: "absolute",
-          top: "20px",
-          left: "10px",
-          background: "white",
-          padding: "20px",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-          zIndex: 1000,
-          minWidth: "300px",
-          maxWidth: "400px"
-        }}>
+        <div 
+          className="stress-district-info"
+          style={{
+            position: "absolute",
+            top: "90px", // Increased from 20px to avoid overlapping with fixed navbar
+            left: "10px",
+            background: "white",
+            padding: "20px",
+            borderRadius: "12px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1000,
+            minWidth: "300px",
+            maxWidth: "400px"
+          }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: "12px" }}>
             <h3 style={{ margin: 0, fontSize: "1.25rem", fontWeight: 700 }}>
               {selectedDistrict.district}

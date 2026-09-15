@@ -487,6 +487,21 @@
     padding-bottom: env(safe-area-inset-bottom, 10px) !important; /* Respect iPhone safe area */
   }
 
+  /* Stress Map District Info Panel - responsive on mobile */
+  .stress-district-info {
+    top: 80px !important; /* Adjust for mobile navbar height */
+    left: 10px !important;
+    right: 10px !important;
+    min-width: auto !important;
+    max-width: none !important;
+    padding: 16px !important;
+  }
+
+  .stress-district-info h3 {
+    font-size: 1.15rem !important;
+  }
+}
+
   /* Minimized state - clean icon button */
   .map-legend.minimized {
     width: 44px !important;
@@ -597,6 +612,25 @@
     padding: 8px !important;
     padding-bottom: env(safe-area-inset-bottom, 8px) !important; /* Respect iPhone safe area */
   }
+
+  /* Stress Map District Info Panel - make more compact on mobile */
+  .stress-district-info {
+    top: 70px !important; /* Reduced from 90px for mobile navbar */
+    left: 8px !important;
+    right: 8px !important;
+    min-width: auto !important;
+    max-width: none !important;
+    padding: 16px !important;
+  }
+
+  .stress-district-info h3 {
+    font-size: 1.1rem !important;
+  }
+
+  .stress-district-info button {
+    font-size: 1.3rem !important;
+  }
+}
 
   .map-legend.minimized {
     width: 40px !important;

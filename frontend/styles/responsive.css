@@ -505,7 +505,6 @@
   .stress-district-info h3 {
     font-size: 1.15rem !important;
   }
-}
 
   /* Minimized state - clean icon button */
   .map-legend.minimized {
@@ -635,7 +634,6 @@
   .stress-district-info button {
     font-size: 1.3rem !important;
   }
-}
 
   .map-legend.minimized {
     width: 40px !important;

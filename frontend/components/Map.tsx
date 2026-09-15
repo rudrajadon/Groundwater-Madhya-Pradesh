@@ -69,18 +69,48 @@ function ZoomResponsiveMarkers({
     if (selectedWellId) {
       const selectedWell = wells.find(w => w.well_id === selectedWellId);
       if (selectedWell) {
-        map.flyTo([selectedWell.lat, selectedWell.lon], Math.max(zoom, 10), {
-          duration: 0.8
-        });
+        const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
         
-        // Open popup immediately
-        const marker = markerRefs.current[selectedWellId];
-        if (marker) {
-          marker.openPopup();
+        if (isMobile) {
+          // On mobile: Position well + popup with comfortable space below navbar, animate gradually
+          map.setView([selectedWell.lat, selectedWell.lon], map.getZoom());
+          
+          // Calculate offset to position well with good spacing from navbar
+          const screenHeight = window.innerHeight;
+          const drawerHeight = screenHeight * 0.6; // 60vh drawer at bottom
+          
+          // Position well with comfortable top margin (navbar ~80px + extra spacing)
+          // Leave about 25% from top to have good clearance from navbar
+          const topMargin = screenHeight * 0.25; // 25% from top - more comfortable spacing
+          const offsetPixels = (screenHeight / 2) - topMargin;
+          
+          // Pan gradually - positive value pans map down, well moves up on screen
+          map.panBy([0, offsetPixels], {
+            animate: true,
+            duration: 1.0, // Slower, more gradual animation (1 second)
+            easeLinearity: 0.2 // Smoother easing
+          });
+          
+          // Open popup after gradual pan completes
+          setTimeout(() => {
+            const marker = markerRefs.current[selectedWellId];
+            if (marker) {
+              marker.openPopup();
+            }
+          }, 1050);
+        } else {
+          // Desktop behavior
+          map.flyTo([selectedWell.lat, selectedWell.lon], Math.max(zoom, 10), {
+            duration: 0.8
+          });
+          
+          const marker = markerRefs.current[selectedWellId];
+          if (marker) {
+            marker.openPopup();
+          }
         }
       }
     } else {
-      // Close all popups when no well is selected
       map.closePopup();
     }
   }, [selectedWellId, wells, map, zoom]);

@@ -9,6 +9,7 @@ import ExportModal from "../components/ExportModal";
 import DistrictList from "../components/DistrictList";
 import SettingsMenu from "../components/SettingsMenu";
 import AgreementModal from "../components/AgreementModal";
+import MobileWellDrawer from "../components/MobileWellDrawer";
 
 const GroundwaterMap = dynamic(() => import("../components/Map"), { ssr: false });
 const StressMap = dynamic(() => import("../components/StressMap"), { ssr: false });
@@ -33,6 +34,8 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [showAgreement, setShowAgreement] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   // Check if user has accepted agreement
   useEffect(() => {
@@ -41,6 +44,18 @@ export default function Home() {
       setShowAgreement(true);
     }
   }, []);
+
+  // Handle window resize - close mobile drawer if screen becomes desktop size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024 && mobileDrawerOpen) {
+        setMobileDrawerOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [mobileDrawerOpen]);
 
   // Handle agreement acceptance
   const handleAcceptAgreement = () => {
@@ -70,11 +85,19 @@ export default function Home() {
       setHistory([]);
       setRainfall([]);
       setCurrentWellId(null);
+      setMobileDrawerOpen(false);
       return;
     }
     
     setLoading(true);
     setError(null);
+    
+    // Open drawer on mobile and tablet (≤1024px), use sidebar on desktop
+    const isMobileOrTablet = typeof window !== 'undefined' && window.innerWidth <= 1024;
+    if (isMobileOrTablet) {
+      setMobileDrawerOpen(true);
+    }
+    
     try {
       const [h, fc] = await Promise.all([
         getWellHistory(wellId).catch(e => { console.warn(e); return { readings: [] }; }),
@@ -145,7 +168,12 @@ export default function Home() {
       {showAgreement && <AgreementModal onAccept={handleAcceptAgreement} />}
       
       {/* Settings Menu */}
-      <SettingsMenu darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
+      <SettingsMenu 
+        darkMode={darkMode} 
+        onToggleDarkMode={toggleDarkMode}
+        isOpen={settingsOpen}
+        onToggle={setSettingsOpen}
+      />
       
       {/* Map Section */}
       <div className="map-container">
@@ -166,21 +194,16 @@ export default function Home() {
         }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              {/* Hamburger Menu Button - Mobile Only */}
-              <button
-                className="hamburger-btn"
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                style={{
-                  color: darkMode ? "#f8fafc" : "#0f172a",
+              {/* IIT Indore Logo */}
+              <img 
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/iiti.png`}
+                alt="IIT Indore" 
+                style={{ 
+                  height: "40px", 
+                  width: "auto",
+                  objectFit: "contain"
                 }}
-                aria-label="Toggle menu"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-              </button>
+              />
               
               <div>
                 <h1 className="header-title" style={{ margin: 0, fontSize: 20, fontWeight: 700, color: darkMode ? "#f8fafc" : "#0f172a" }}>
@@ -197,10 +220,7 @@ export default function Home() {
               {/* Settings Button - Right corner on mobile */}
               <button
                 onClick={() => {
-                  const settingsBtn = document.getElementById('settings-menu-button');
-                  if (settingsBtn) {
-                    settingsBtn.click();
-                  }
+                  setSettingsOpen(!settingsOpen);
                 }}
                 className="header-settings-btn"
                 aria-label="Settings"
@@ -825,19 +845,7 @@ export default function Home() {
               </div>
             )}
 
-            {/* Rainfall Chart - Between Historical and Forecast */}
-            {rainfall.length > 0 && (
-              <div style={{ 
-                background: darkMode ? "#334155" : "#fff", 
-                padding: "24px", 
-                borderRadius: "16px",
-                border: darkMode ? "1px solid #475569" : "1px solid #e2e8f0",
-              }}>
-                <RainfallChart data={rainfall} darkMode={darkMode} />
-              </div>
-            )}
-
-            {/* Forecast Chart - Third */}
+            {/* Forecast Chart - Second (moved up) */}
             <div style={{ 
               background: darkMode ? "#334155" : "#fff", 
               padding: "24px", 
@@ -849,6 +857,18 @@ export default function Home() {
               </h4>
               <ForecastChart data={pointForecast.forecast} />
             </div>
+
+            {/* Rainfall Chart - Third (moved down) */}
+            {rainfall.length > 0 && (
+              <div style={{ 
+                background: darkMode ? "#334155" : "#fff", 
+                padding: "24px", 
+                borderRadius: "16px",
+                border: darkMode ? "1px solid #475569" : "1px solid #e2e8f0",
+              }}>
+                <RainfallChart data={rainfall} darkMode={darkMode} />
+              </div>
+            )}
           </div>
         )}
 
@@ -877,6 +897,25 @@ export default function Home() {
           onClose={() => setShowExportModal(false)}
         />
       )}
+
+      {/* Mobile Well Drawer */}
+      <MobileWellDrawer
+        isOpen={mobileDrawerOpen}
+        onClose={() => {
+          setMobileDrawerOpen(false);
+          setPointForecast(null);
+          setHistory([]);
+          setRainfall([]);
+          setCurrentWellId(null);
+        }}
+        pointForecast={pointForecast}
+        history={history}
+        rainfall={rainfall}
+        loading={loading}
+        error={error}
+        darkMode={darkMode}
+        onExport={() => setShowExportModal(true)}
+      />
 
       <style jsx global>{`
         @keyframes spin {

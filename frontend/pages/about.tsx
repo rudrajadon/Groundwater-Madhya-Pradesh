@@ -115,7 +115,7 @@ export default function About() {
         maxWidth: "1200px",
         margin: "0 auto",
         padding: "48px 24px",
-        paddingTop: "110px",
+        paddingTop: "120px", // 72px navbar + 48px gap
       }}>
         
         {/* Hero */}

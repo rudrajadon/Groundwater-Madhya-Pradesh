@@ -58,16 +58,17 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Indore Groundwater Forecast API", 
-    version="0.1.1",  # Bumped to force redeploy
+    version="0.1.2",  # Fix CORS for production domain
     lifespan=lifespan
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins - fuck browser cache
+    allow_origins=["*"],  # Allow all origins
     allow_methods=["*"],
     allow_headers=["*"],
-    allow_credentials=False,  # Must be False with wildcard
+    allow_credentials=False,
+    expose_headers=["*"],
 )
 
 app.include_router(wells.router)

@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements (already in backend/ context from Render)
+# Updated to psycopg3 for SQLAlchemy 2.0 compatibility
 COPY requirements.txt .
 
 # Install dependencies in stages to avoid timeout

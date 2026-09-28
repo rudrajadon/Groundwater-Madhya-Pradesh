@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY backend/requirements.txt .
+# Copy requirements (already in backend/ context from Render)
+COPY requirements.txt .
 
 # Install dependencies in stages to avoid timeout
 # First install the large ML packages
@@ -35,7 +35,9 @@ RUN pip install --no-cache-dir --timeout=1000 \
     pillow>=10.0 \
     matplotlib>=3.7
 
-COPY backend/app ./app
-COPY ml ./ml
+# Copy app code (we're already in backend/ folder on Render)
+COPY app ./app
+
 ENV PYTHONPATH=/app
+EXPOSE 8000
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

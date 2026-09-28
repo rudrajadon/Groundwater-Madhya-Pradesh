@@ -251,24 +251,17 @@ async def get_district_stress_geojson(
     import json
     from pathlib import Path
     
-    # Try multiple locations for the GeoJSON file
-    geo_paths = [
-        Path("/tmp/mp_districts_simplified.geojson"),
-        Path(__file__).parent.parent.parent.parent / "frontend" / "public" / "geo" / "mp_districts_simplified.geojson",
-    ]
+    # Load from backend's data directory
+    geo_path = Path(__file__).parent.parent / "data" / "mp_districts_simplified.geojson"
     
     districts_geojson = None
-    for path in geo_paths:
-        if path.exists():
-            with open(path, 'r') as f:
-                districts_geojson = json.load(f)
-            break
-    
-    if not districts_geojson:
-        # Fallback to old convex hull method if GeoJSON not available
+    if geo_path.exists():
+        with open(geo_path, 'r') as f:
+            districts_geojson = json.load(f)
+    else:
         raise HTTPException(
             status_code=500,
-            detail="District boundaries GeoJSON not found. Run etl/process_district_boundaries.py"
+            detail=f"District boundaries GeoJSON not found at {geo_path}"
         )
     
     # Merge stats with district boundaries

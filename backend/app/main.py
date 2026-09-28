@@ -58,7 +58,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Indore Groundwater Forecast API", 
-    version="0.1.3",  # Enable statistical fallback when ML model unavailable
+    version="0.1.4",  # Add district boundaries for stress map
     lifespan=lifespan
 )
 

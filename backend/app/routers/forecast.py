@@ -262,10 +262,11 @@ def get_forecast_for_well(
     if not row:
         raise HTTPException(404, f"Well '{well_id}' not found or has no coordinates.")
     
+    zone = row.get("aquifer_zone") or row.get("geology_type") or "Unknown"
+    
     # Return cached forecast if available
     if row.get("forecast_cache"):
         cache = row["forecast_cache"]
-        zone = row.get("aquifer_zone") or row.get("geology_type") or "Unknown"
         caveat = caveat_for_zone(zone)
         
         return ForecastResponse(
@@ -290,11 +291,26 @@ def get_forecast_for_well(
             caveat=caveat,
         )
     
-    # Fall back to live ML model if no cache
-    model = _require_model(request)
+    # Try to get ML model, but fall back to statistical if unavailable
+    model = getattr(request.app.state, "model", None)
+    if model is None:
+        # No model loaded - use statistical fallback
+        return _statistical_fallback(
+            well_id, True, 0.0, zone, db, 
+            row.get("geology_type"), row.get("district")
+        )
 
+    # Try to get ML model, but fall back to statistical if unavailable
+    model = getattr(request.app.state, "model", None)
+    if model is None:
+        # No model loaded - use statistical fallback
+        return _statistical_fallback(
+            well_id, True, 0.0, zone, db, 
+            row.get("geology_type"), row.get("district")
+        )
+    
+    # ML model available - use it
     zone = row.get("aquifer_zone") or row.get("geology_type") or "Unknown"
-    # Use pre-computed trend_label and decline from database (calculated by update_trends_from_model.py)
     db_trend_label = row.get("trend_label")
     db_decline = row.get("forecast_decline_m")
 

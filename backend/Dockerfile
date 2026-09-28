@@ -22,19 +22,21 @@ RUN pip install --no-cache-dir --timeout=1000 \
     scikit-learn \
     scipy
 
-# Then install the rest
+# Then install the rest (updated with psycopg3)
 RUN pip install --no-cache-dir --timeout=1000 \
     fastapi>=0.110 \
     uvicorn[standard]>=0.27 \
     sqlalchemy>=2.0 \
     geoalchemy2>=0.14 \
-    psycopg2-binary>=2.9 \
+    psycopg[binary]>=3.1 \
     pydantic>=2.6 \
     python-dotenv \
     joblib \
     reportlab>=4.0 \
     pillow>=10.0 \
-    matplotlib>=3.7
+    matplotlib>=3.7 \
+    geopandas>=0.14 \
+    shapely>=2.0
 
 # Copy app code (we're already in backend/ folder on Render)
 COPY app ./app

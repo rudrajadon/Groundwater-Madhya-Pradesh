@@ -12,6 +12,31 @@ from ..db import get_db
 
 router = APIRouter(prefix="/api/v1/stress-map", tags=["stress_map"])
 
+# Cache the GeoJSON file to avoid loading it on every request
+_DISTRICTS_GEOJSON_CACHE = None
+
+def _load_districts_geojson():
+    """Load and cache district boundaries GeoJSON"""
+    global _DISTRICTS_GEOJSON_CACHE
+    
+    if _DISTRICTS_GEOJSON_CACHE is not None:
+        return _DISTRICTS_GEOJSON_CACHE
+    
+    import json
+    from pathlib import Path
+    
+    geo_path = Path(__file__).parent.parent / "data" / "mp_districts_simplified.geojson"
+    
+    if geo_path.exists():
+        with open(geo_path, 'r') as f:
+            _DISTRICTS_GEOJSON_CACHE = json.load(f)
+        return _DISTRICTS_GEOJSON_CACHE
+    else:
+        raise HTTPException(
+            status_code=500,
+            detail=f"District boundaries GeoJSON not found at {geo_path}"
+        )
+
 
 class DistrictStress(BaseModel):
     """District stress level data"""
@@ -247,22 +272,8 @@ async def get_district_stress_geojson(
             "risk_color": risk_color,
         }
     
-    # Load district boundaries GeoJSON
-    import json
-    from pathlib import Path
-    
-    # Load from backend's data directory
-    geo_path = Path(__file__).parent.parent / "data" / "mp_districts_simplified.geojson"
-    
-    districts_geojson = None
-    if geo_path.exists():
-        with open(geo_path, 'r') as f:
-            districts_geojson = json.load(f)
-    else:
-        raise HTTPException(
-            status_code=500,
-            detail=f"District boundaries GeoJSON not found at {geo_path}"
-        )
+    # Load district boundaries GeoJSON (cached)
+    districts_geojson = _load_districts_geojson()
     
     # Merge stats with district boundaries
     features = []

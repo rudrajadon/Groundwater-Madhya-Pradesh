@@ -1,384 +1,379 @@
-# MP Groundwater Monitor - Project Structure
+# Project Structure Documentation
 
-## Overview
-This document provides a complete overview of the project structure, components, and how they work together.
+Detailed breakdown of the Madhya Pradesh Groundwater Monitoring System architecture.
 
----
-
-## 📁 Directory Structure
+## Directory Overview
 
 ```
 groundwater-app/
-├── frontend/                    # Next.js frontend application
-│   ├── components/             # React components
-│   │   ├── Map.tsx            # Interactive Leaflet map with well markers
-│   │   ├── StressMap.tsx      # District-level stress visualization
-│   │   ├── ForecastChart.tsx  # 12-month forecast chart with confidence intervals
-│   │   ├── LocationPredictor.tsx  # Custom GPS prediction modal
-│   │   ├── ExportModal.tsx    # PDF/CSV export interface
-│   │   ├── DistrictList.tsx   # District dropdown selector
-│   │   ├── SettingsMenu.tsx   # Dark mode & navigation menu
-│   │   └── AgreementModal.tsx # Terms & system info modal
-│   ├── pages/
-│   │   ├── index.tsx          # Main dashboard page
-│   │   ├── about.tsx          # About page with project details
-│   │   └── _app.tsx           # Next.js app wrapper
-│   ├── lib/
-│   │   └── api.ts             # API client for backend communication
-│   ├── styles/
-│   │   └── globals.css        # Global styles
-│   └── public/
-│       └── iiti.png           # IIT Indore logo
+├── backend/              # Backend API (FastAPI + Python)
+├── frontend/            # Frontend web app (Next.js + React)
+├── ml/                  # Machine learning models and training
+├── etl/                 # ETL pipelines for data processing
+├── data/               # Processed CSV data files
+├── raw_data/           # Original source data (MDB files)
+├── shapefile_data/     # Geographic shapefiles
+├── scripts/            # Utility scripts
+├── docs/               # Additional documentation
+├── infra/              # Infrastructure as code
+├── logs/               # Application logs
+└── _archive/           # Archived/deprecated files
+```
+
+## Backend (`/backend`)
+
+FastAPI REST API serving groundwater data and ML predictions.
+
+### Structure
+```
+backend/
+├── app/
+│   ├── __init__.py
+│   ├── main.py              # FastAPI app initialization, CORS, lifespan
+│   ├── db.py                # Database connection, SQLAlchemy engine
+│   ├── schemas.py           # Pydantic models for request/response
+│   │
+│   ├── routers/            # API endpoint definitions
+│   │   ├── __init__.py
+│   │   ├── wells.py        # /api/v1/wells endpoints
+│   │   ├── forecast.py     # /api/v1/forecast endpoints
+│   │   ├── stress_map.py   # /api/v1/stress-map endpoints
+│   │   ├── exports.py      # /api/v1/exports (PDF reports)
+│   │   ├── zones.py        # /api/v1/zones (aquifer zones)
+│   │   ├── districts.py    # /api/v1/districts
+│   │   └── location_predictor.py  # /api/v1/predict endpoints
+│   │
+│   ├── services/           # Business logic layer
+│   │   ├── recommendation.py    # Trend classification, recommendations
+│   │   ├── report_generator.py  # PDF report generation
+│   │   └── statistical_trend.py # Fallback trend analysis
+│   │
+│   └── data/              # Static data files
+│       └── mp_districts_simplified.geojson  # District boundaries
 │
-├── backend/                    # FastAPI backend application
-│   └── app/
-│       ├── main.py            # FastAPI app initialization
-│       ├── routers/           # API route handlers
-│       │   ├── forecast.py    # Well forecast endpoints
-│       │   ├── exports.py     # Report generation (PDF/CSV)
-│       │   ├── stress_map.py  # District stress analysis
-│       │   └── wells.py       # Well metadata endpoints
-│       ├── services/          # Business logic
-│       │   ├── ml_inference.py      # ML model inference
-│       │   ├── report_generator.py  # Report generation logic
-│       │   ├── recommendation.py    # Trend classification
-│       │   └── graph.py            # Dynamic graph construction
-│       └── db/
-│           └── database.py    # PostgreSQL connection
+├── Dockerfile             # Container definition for deployment
+├── requirements.txt       # Python dependencies
+└── README.md             # Backend-specific docs
+```
+
+### Key Components
+
+#### `main.py`
+- Initializes FastAPI application
+- Configures CORS middleware
+- Loads ML model at startup (lifespan event)
+- Includes all routers
+
+#### `db.py`
+- Creates SQLAlchemy engine with connection pooling
+- Defines database session dependency
+- Uses async-compatible psycopg3 driver
+
+#### `routers/`
+Each router handles a specific domain:
+- **wells.py:** Well locations, history, rainfall
+- **forecast.py:** ML predictions, statistical fallback
+- **stress_map.py:** District-level aggregations, GeoJSON
+- **exports.py:** PDF report generation
+- **zones.py:** Aquifer zone analysis
+- **districts.py:** District list and metadata
+
+#### `services/`
+Reusable business logic:
+- **recommendation.py:** Classifies trends as Critical/Watch/Stable
+- **report_generator.py:** Creates PDF reports with charts
+- **statistical_trend.py:** Linear regression for wells without ML
+
+## Frontend (`/frontend`)
+
+Next.js web application with React and Leaflet.
+
+### Structure
+```
+frontend/
+├── pages/
+│   ├── _app.tsx              # Next.js app wrapper
+│   ├── _document.tsx         # HTML document structure
+│   ├── index.tsx             # Main map page
+│   ├── about.tsx             # About page
+│   ├── stress-map.tsx        # District stress map page
+│   └── districts/[id].tsx    # District detail page (optional)
 │
-├── ml/                         # Machine learning models & training
-│   ├── model.py               # PGNN-LSTM model definition
-│   ├── preprocessing.py       # Data preprocessing & graph construction
-│   ├── evaluate.py            # Model evaluation metrics
-│   ├── train.py               # Model training script
-│   └── weights/
-│       └── pgnn_lstm_v3.pth   # Trained model weights
+├── components/
+│   ├── Map.tsx               # Main Leaflet map with well markers
+│   ├── StressMap.tsx         # District choropleth map
+│   ├── WellDetailPopup.tsx   # Well info modal
+│   ├── MobileWellDrawer.tsx  # Mobile-responsive well drawer
+│   ├── ForecastChart.tsx     # 12-month forecast visualization
+│   ├── ExportModal.tsx       # Export options dialog
+│   ├── DistrictSummary.tsx   # District statistics component
+│   └── Navbar.tsx            # Navigation bar
 │
-├── etl/                        # Data extraction, transformation, loading
-│   ├── ingest_wells.py        # Load well metadata from MDB files
-│   ├── ingest_water_levels.py # Load historical water level data
-│   ├── classify_geology_type.py # Geology classification
-│   └── fix_data_quality.py    # Data cleaning & validation
+├── styles/
+│   ├── globals.css           # Global styles, Leaflet overrides
+│   └── Home.module.css       # Page-specific styles
 │
-├── GW_Data/                    # Raw data files
-│   ├── Water Level/           # .mdb files with water level measurements
-│   └── Water Quality/         # .mdb files with quality parameters
+├── public/
+│   ├── geo/
+│   │   ├── mp_districts.geojson           # Full district boundaries
+│   │   └── mp_districts_simplified.geojson # Simplified for frontend
+│   ├── favicon.ico
+│   └── images/              # Static images
 │
-├── 23/                         # Shapefiles for district boundaries
-│   └── MP_DISTRICT_BDY.shp    # Madhya Pradesh district polygons
+├── next.config.js           # Next.js configuration (basePath, env)
+├── package.json             # npm dependencies
+├── tsconfig.json            # TypeScript configuration
+└── .env.local              # Local environment variables (gitignored)
+```
+
+### Key Components
+
+#### `pages/index.tsx`
+- Main application entry point
+- Renders interactive map with well markers
+- Handles well selection and detail popup
+- Responsive layout (desktop sidebar, mobile drawer)
+
+#### `components/Map.tsx`
+- Leaflet map integration
+- Well markers color-coded by trend
+- Clustering for performance
+- Click handlers for well selection
+
+#### `components/StressMap.tsx`
+- District-level choropleth
+- Color scale based on risk level
+- Click to zoom into district
+- Optional well-level heat map overlay
+
+#### `components/ForecastChart.tsx`
+- Recharts line chart
+- 12-month forecast with confidence intervals
+- Historical data overlay
+- Responsive design
+
+## Machine Learning (`/ml`)
+
+PGNN-LSTM model for groundwater forecasting.
+
+### Structure
+```
+ml/
+├── models/
+│   ├── __init__.py
+│   ├── pgnn_lstm.py         # PGNN-LSTM architecture
+│   ├── graph_builder.py     # Graph construction from wells
+│   └── attention.py         # Attention mechanism
 │
-├── infra/                      # Infrastructure & deployment
-│   └── docker-compose.yml     # Docker services configuration
+├── artifacts/               # Trained model outputs
+│   ├── model_metadata.json  # Training metadata, hyperparameters
+│   ├── best_model.pth       # Model weights
+│   ├── graph.pkl           # Pre-built graph structure
+│   └── scalers/            # Per-well MinMax scalers
+│       ├── WELL001.pkl
+│       ├── WELL002.pkl
+│       └── ...
 │
-├── docs/                       # Documentation
-│   ├── FAQ.md                 # Frequently Asked Questions
-│   ├── PROJECT_STRUCTURE.md   # This file
-│   ├── README.md              # Project overview
-│   └── SETUP.md               # Setup instructions
-│
-└── PGNN_LSTM_Final_ReviewerCorrected (5).ipynb  # Original research notebook
-
+├── train.py                 # Training script
+├── inference.py             # Inference wrapper class
+├── evaluate.py              # Model evaluation metrics
+├── config.py                # Hyperparameters, paths
+└── README.md               # ML-specific documentation
 ```
 
----
+### Model Architecture
 
-## 🏗️ System Architecture
+**PGNN-LSTM** (Physics-Guided Neural Network with LSTM)
+- **Graph Layer:** Captures spatial dependencies between wells
+- **LSTM Encoder:** Processes 24-month time series input
+- **LSTM Decoder:** Generates 12-month forecast
+- **Attention:** Focuses on relevant neighboring wells
 
-### High-Level Architecture
+**Input:** 24 months of historical water levels (head_msl_m)
+**Output:** 12 months of future predictions with uncertainty
 
+## ETL Pipelines (`/etl`)
+
+Extract, Transform, Load scripts for data processing.
+
+### Structure
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                        USER BROWSER                          │
-│                     (Next.js Frontend)                       │
-│  ┌─────────────┐  ┌──────────────┐  ┌──────────────────┐  │
-│  │  Dashboard  │  │  Stress Map  │  │  Agreement Modal │  │
-│  │    Page     │  │     View     │  │                  │  │
-│  └─────────────┘  └──────────────┘  └──────────────────┘  │
-└────────────────────────┬────────────────────────────────────┘
-                         │ HTTP/REST API
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    FASTAPI BACKEND                           │
-│  ┌──────────────┐  ┌───────────────┐  ┌─────────────────┐ │
-│  │   Routers    │  │   Services    │  │   ML Inference  │ │
-│  │              │──│               │──│                 │ │
-│  │ • Forecast   │  │ • Graph       │  │ • PGNN-LSTM    │ │
-│  │ • Exports    │  │ • Reports     │  │ • Predictions  │ │
-│  │ • StressMap  │  │ • Trends      │  │                 │ │
-│  └──────────────┘  └───────────────┘  └─────────────────┘ │
-└────────────────────────┬────────────────────────────────────┘
-                         │ SQL Queries
-                         ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   POSTGRESQL + POSTGIS                       │
-│  ┌──────────────┐  ┌───────────────┐  ┌─────────────────┐ │
-│  │    Wells     │  │ Water Levels  │  │   Forecasts     │ │
-│  │   Metadata   │  │   (Historical)│  │   (Cached)      │ │
-│  └──────────────┘  └───────────────┘  └─────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+etl/
+├── extract_from_mdb.py      # Extract data from MDB files
+├── process_wells.py         # Clean and geocode well data
+├── process_readings.py      # Process water level readings
+├── process_rainfall.py      # Process rainfall data
+├── process_district_boundaries.py  # Generate district GeoJSON
+├── fix_well_districts.py    # Assign wells to districts
+└── README.md               # ETL documentation
 ```
 
----
+### Data Flow
 
-## 🔄 Data Flow
+1. **Extract:** Read MDB files from `raw_data/groundwater/`
+2. **Transform:** Clean, validate, geocode
+3. **Load:** Write to `data/*.csv` and PostgreSQL
 
-### 1. **Initial Data Loading (ETL)**
-```
-Raw MDB Files (CGWB) 
-    ↓
-etl/ingest_wells.py (Well metadata)
-    ↓
-etl/ingest_water_levels.py (Historical measurements)
-    ↓
-etl/classify_geology_type.py (Geology classification)
-    ↓
-PostgreSQL Database
-```
+## Data Files
 
-### 2. **User Request Flow**
+### Processed Data (`/data`)
 ```
-User clicks well on map
-    ↓
-Frontend: API call to /forecast/{well_id}
-    ↓
-Backend Router: forecast.py
-    ↓
-Service: ml_inference.py
-    ↓
-Load historical data from DB
-    ↓
-Build graph structure (PGNN)
-    ↓
-Run PGNN-LSTM model
-    ↓
-Generate 12-month forecast
-    ↓
-Classify trend (Critical/Watch/Stable)
-    ↓
-Return JSON response
-    ↓
-Frontend: Display charts & details
+data/
+├── wells.csv                 # All wells with coordinates
+├── water_levels.csv          # Historical readings
+├── rainfall.csv              # Rainfall data by station
+└── well_geology_classifications.csv  # Geology types
 ```
 
-### 3. **Export Report Flow**
+### Raw Data (`/raw_data`)
 ```
-User clicks "Export Report"
-    ↓
-Frontend: POST to /exports/generate
-    ↓
-Backend: report_generator.py
-    ↓
-Fetch well data & forecast
-    ↓
-Generate PDF using reportlab / CSV using pandas
-    ↓
-Return file download
-    ↓
-User saves file
+raw_data/
+└── groundwater/
+    ├── Water Level/         # MDB files with water level data
+    │   ├── IndoreOW.mdb
+    │   ├── UjjanPZ.mdb
+    │   └── ...
+    └── Water Quality/       # MDB files with quality data
+        ├── BHOPAL_WQ.mdb
+        └── ...
 ```
 
----
+### Shapefiles (`/shapefile_data`)
+```
+shapefile_data/
+├── madhya_pradesh_districts/   # District boundaries
+│   ├── MP_DISTRICT_BDY.shp
+│   ├── MP_DISTRICT_BDY.dbf
+│   └── ...
+└── madhya_pradesh_state/       # State boundary
+    ├── MP_STATE_BDY.shp
+    └── ...
+```
 
-## 🧩 Key Components
+## Scripts (`/scripts`)
 
-### Frontend Components
+Utility scripts for maintenance and deployment.
 
-| Component | Purpose | Key Features |
-|-----------|---------|--------------|
-| **Map.tsx** | Interactive well visualization | Leaflet map, zoom-responsive markers, click handlers |
-| **StressMap.tsx** | District stress overlay | Heat maps, color-coded risk levels, district selection |
-| **ForecastChart.tsx** | Forecast visualization | Recharts line chart, confidence intervals, responsive |
-| **LocationPredictor.tsx** | Custom GPS predictions | Lat/lng input, spatial interpolation |
-| **ExportModal.tsx** | Report generation | PDF/CSV selection, loading states |
-| **DistrictList.tsx** | District selector | Dropdown with stress indicators |
-| **SettingsMenu.tsx** | App settings | Dark/light mode, navigation |
-| **AgreementModal.tsx** | Terms & info | Model metrics, limitations, IIT Indore branding |
+### Database Scripts (`/scripts/database`)
+```
+database/
+├── init_db.py               # Initialize database schema
+├── add_forecast_columns.py  # Add missing columns
+├── update_well_trends.py    # Calculate trend labels
+├── precalculate_all_forecasts.py  # Cache forecasts
+├── diagnose_database.py     # Check database health
+└── fix_*.py                 # Various fix scripts
+```
 
-### Backend Services
+### Data Processing (`/scripts/data_processing`)
+```
+data_processing/
+├── load_all_wells_to_render.py   # Load wells to production
+├── load_readings_only.py         # Load water level data
+├── load_rainfall_to_render.py    # Load rainfall data
+└── load_*.py                     # Other loading scripts
+```
 
-| Service | Purpose | Key Functions |
-|---------|---------|---------------|
-| **ml_inference.py** | ML predictions | `forecast_well()`, load model, run inference |
-| **graph.py** | Dynamic graph construction | `build_graph()`, edge weighting, spatial relationships |
-| **report_generator.py** | Report creation | `generate_pdf()`, `generate_csv()` |
-| **recommendation.py** | Trend classification | `classify_trend()`, stress assessment |
+### Deployment (`/scripts/deployment`)
+```
+deployment/
+├── deploy.sh                # Deploy to production
+├── START_DEPLOYMENT.sh      # Initial deployment
+└── PUSH_TO_GITHUB.sh       # Git push automation
+```
 
-### API Endpoints
-
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/forecast/{well_id}` | GET | Get 12-month forecast for a well |
-| `/forecast/location` | POST | Predict at custom GPS coordinates |
-| `/wells` | GET | List all monitoring wells |
-| `/wells/{well_id}` | GET | Get well metadata |
-| `/wells/{well_id}/history` | GET | Get historical water levels |
-| `/exports/generate` | POST | Generate PDF/CSV report |
-| `/stress-map/districts` | GET | Get district stress analysis |
-| `/stress-map/district/{name}` | GET | Get specific district details |
-
----
-
-## 🔧 Technology Stack
-
-### Frontend
-- **Framework:** Next.js 14 (React 18)
-- **Language:** TypeScript
-- **Mapping:** Leaflet.js
-- **Charts:** Recharts
-- **Styling:** Inline styles (CSS-in-JS)
-- **State Management:** React hooks (useState, useEffect)
-
-### Backend
-- **Framework:** FastAPI (Python 3.11)
-- **Database:** PostgreSQL 15 + PostGIS
-- **ML Framework:** PyTorch
-- **PDF Generation:** reportlab
-- **Data Processing:** pandas, numpy
-- **ORM:** SQLAlchemy
-
-### Machine Learning
-- **Model:** PGNN-LSTM (Position-aware Graph Neural Network + LSTM)
-- **Framework:** PyTorch
-- **Graph Processing:** Custom graph convolution layers
-- **Training:** Supervised learning on historical sequences
-- **Performance:** RMSE 3.40m, R² 0.65
-
-### Infrastructure
-- **Containerization:** Docker & Docker Compose
-- **Services:**
-  - Frontend: Node.js container (port 3000)
-  - Backend: Python container (port 8000)
-  - Database: PostgreSQL container (port 5432)
-
----
-
-## 📊 Database Schema
+## Database Schema
 
 ### Tables
 
 **wells**
-- `well_id` (PK): Unique well identifier
-- `latitude`, `longitude`: GPS coordinates
-- `district`: District name
-- `block`: Block/Mandal name
-- `geology_type`: Basalt/Granite/Vindhyan
-- `aquifer_type`: Weathered/Fractured/Massive
-- `depth_bgl_m`: Depth below ground level
+- Primary table for observation wells
+- Columns: well_id (PK), district, geom (PostGIS), trend_label, geology_type, etc.
 
-**water_levels**
-- `id` (PK): Auto-increment ID
-- `well_id` (FK): Reference to wells table
-- `date`: Measurement date
-- `depth_bgl_m`: Water level depth below ground
-- `head_msl_m`: Water level head above MSL
+**readings**
+- Water level measurements over time
+- Columns: id (PK), well_id (FK), date, depth_bgl_m, head_msl_m
+- Constraint: UNIQUE(well_id, date)
 
-**forecasts** (cached predictions)
-- `well_id` (PK): Well identifier
-- `forecast_data`: JSON array of predictions
-- `generated_at`: Timestamp of forecast generation
-- `trend_label`: Critical/Watch/Stable
+**rainfall_stations**
+- Rainfall monitoring stations
+- Columns: station_name (PK), geom
 
----
+**rainfall_readings**
+- Rainfall measurements
+- Columns: id (PK), station_name (FK), date, rainfall_mm
 
-## 🚀 Deployment
+**lithology_logs**
+- Geological layer information
+- Columns: id (PK), well_id (FK), depth_to_m, lithology, texture
 
-### Development Environment
+**admin_boundaries**
+- District and state boundaries
+- Columns: id (PK), level, name, geom (MultiPolygon)
+
+**model_versions**
+- ML model metadata
+- Columns: version_id (PK), trained_on, rmse, artifact_path
+
+## Configuration Files
+
+### Backend
+- **Dockerfile:** Multi-stage build for production
+- **requirements.txt:** Python dependencies (FastAPI, SQLAlchemy, PyTorch, etc.)
+- **.env:** Environment variables (DATABASE_URL, SECRET_KEY)
+
+### Frontend
+- **next.config.js:** Base path, environment variables, build config
+- **package.json:** npm dependencies (React, Next.js, Leaflet, Recharts)
+- **tsconfig.json:** TypeScript compiler options
+- **.env.local:** Local dev environment variables
+
+## Archived Files (`/_archive`)
+
+Old documentation and deprecated scripts moved here to declutter:
+- Deployment guides (old versions)
+- Nginx configs (if using Docker)
+- Old bash scripts
+- Outdated documentation
+
+## Development Workflow
+
+1. **Make changes** in `backend/` or `frontend/`
+2. **Test locally** with hot reload
+3. **Commit** to git with descriptive message
+4. **Push** to GitHub
+5. **Auto-deploy** via Render (backend) and Vercel (frontend)
+
+## API Documentation
+
+Interactive API docs available at:
+- Development: http://localhost:8000/docs
+- Production: https://mp-groundwater-backend.onrender.com/docs
+
+## Testing
+
+### Backend Tests
 ```bash
-# Frontend
-cd frontend
-npm install
-npm run dev
-
-# Backend
 cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-
-# Database
-docker-compose up db
+pytest
 ```
 
-### Production Deployment
+### Frontend Tests
 ```bash
-# Full stack with Docker Compose
-docker-compose up -d
-
-# Services start:
-# - Frontend: http://localhost:3000
-# - Backend: http://localhost:8000
-# - Database: postgresql://localhost:5432
+cd frontend
+npm test
 ```
 
----
+## Monitoring
 
-## 🔐 Security Considerations
+- **Backend logs:** Render dashboard
+- **Frontend logs:** Vercel dashboard
+- **Database:** PostgreSQL logs on Render
+- **Application health:** `/health` endpoint
 
-1. **Agreement Modal:** Users must accept terms before using the system
-2. **Data Validation:** Input sanitization on all API endpoints
-3. **CORS:** Configured for frontend-backend communication
-4. **No Authentication:** Currently open system (add auth for production)
-5. **Data Privacy:** No personal data collected; only well IDs and predictions
+## Security
 
----
-
-## 📈 Performance Optimization
-
-1. **Forecast Caching:** Generated forecasts cached in database
-2. **Database Indexing:** Well IDs and dates indexed for fast queries
-3. **Lazy Loading:** Map markers loaded progressively
-4. **Code Splitting:** Next.js automatic code splitting
-5. **Connection Pooling:** PostgreSQL connection pool in backend
-
----
-
-## 🧪 Testing
-
-### Model Evaluation
-```bash
-python ml/evaluate.py
-# Outputs: Per-well RMSE, MAE, R², NSE metrics
-```
-
-### API Testing
-- Use FastAPI's built-in `/docs` Swagger UI
-- Access: http://localhost:8000/docs
-
-### Frontend Testing
-- Manual testing via browser
-- Use React DevTools for component debugging
-
----
-
-## 📚 Documentation Files
-
-| File | Purpose |
-|------|---------|
-| **README.md** | Project overview and quick start |
-| **SETUP.md** | Detailed setup instructions |
-| **FAQ.md** | 10 common questions with detailed answers |
-| **PROJECT_STRUCTURE.md** | This file - complete architecture |
-| **CHANGES_SUMMARY.md** | Development changelog |
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/new-feature`
-3. Commit changes: `git commit -m "Add new feature"`
-4. Push to branch: `git push origin feature/new-feature`
-5. Submit pull request
-
----
-
-## 📞 Contact & Support
-
-- **Developer:** Rudra Pratap Singh Jadon
-- **Guidance:** Dr. Manish Kumar Goyal (IIT Indore), Deepak Mishra (PhD Scholar, IIT Indore)
-- **Institution:** Indian Institute of Technology, Indore
-- **Data Source:** Central Ground Water Board (CGWB)
-
----
-
-*Last Updated: January 2025*
-*Version: 1.0*
+- **API:** CORS configured for specific origins
+- **Database:** Credentials in environment variables
+- **Secrets:** Never commit to git
+- **HTTPS:** Enforced in production

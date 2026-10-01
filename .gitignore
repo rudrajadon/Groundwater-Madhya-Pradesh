@@ -53,26 +53,34 @@ frontend/build/
 *.swp
 *.swo
 *~
-.DS_Store
 
 # Docker
 docker-compose.override.yml
 
 # Logs
 *.log
-logs/
+logs/*.log
 
 # Database
 *.db
 *.sqlite
-*.mdb
 
-# ML artifacts (keep structure, ignore large files if needed)
-# ml/artifacts/*.pth (uncomment if models are too large)
+# Raw data (MDB files are large)
+raw_data/**/*.mdb
+raw_data/**/*.MDB
 
-# OS
-Thumbs.db
+# ML artifacts (large model files)
+ml/artifacts/*.pkl
+ml/artifacts/*.pt
+ml/artifacts/*.pth
+data/train_sequences.pkl
+
+# Generated files
+well_predictions_detailed.json
+
+# OS files
 .DS_Store
+Thumbs.db
 
 # Temporary files
 *.tmp
@@ -83,9 +91,9 @@ Thumbs.db
 .coverage
 htmlcov/
 .pytest_cache/
-data/train_sequences.pkl
-well_predictions_detailed.json
-*.json
-ml/artifacts/*.pkl
-ml/artifacts/*.pt
-*.ipynb
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Archive directory (old files, not needed in git)
+_archive/

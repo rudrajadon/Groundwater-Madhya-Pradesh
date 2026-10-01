@@ -1,70 +1,98 @@
 # Setup Guide
 
-Complete setup instructions for the Groundwater Forecast System.
+Complete setup instructions for the Madhya Pradesh Groundwater Monitoring System.
 
-## 📋 Prerequisites
+## Development Environment Setup
 
-### Required Software
-- **Docker** (v20.10+) and **Docker Compose** (v2.0+)
-  - OR Python 3.11+, Node.js 20+, PostgreSQL 16 with PostGIS
+### 1. System Requirements
 
-### System Requirements
-- **RAM**: 4GB minimum, 8GB recommended
-- **Disk**: 5GB free space (includes database and ML models)
-- **OS**: Linux, macOS, or Windows with WSL2
+- **Operating System:** macOS, Linux, or Windows with WSL2
+- **Node.js:** 18.x or higher
+- **Python:** 3.11 or higher
+- **PostgreSQL:** 14.x or higher with PostGIS extension
+- **Git:** For version control
+- **Docker:** (Optional) For containerized deployment
 
-## 🚀 Quick Start (Docker)
+### 2. Clone Repository
 
-### 1. Clone Repository
 ```bash
-git clone https://github.com/yourusername/groundwater-app.git
-cd groundwater-app
+git clone https://github.com/rudrajadon/Groundwater-Madhya-Pradesh.git
+cd Groundwater-Madhya-Pradesh
 ```
 
-### 2. Start Services
+### 3. Database Setup
+
+#### Install PostgreSQL with PostGIS
+
+**macOS:**
 ```bash
-cd infra
-docker-compose up -d
+brew install postgresql@14 postgis
+brew services start postgresql@14
 ```
 
-### 3. Wait for Initialization
-Services take about 30-60 seconds to become healthy:
+**Ubuntu/Debian:**
 ```bash
-# Check service status
-docker-compose ps
-
-# Watch logs
-docker-compose logs -f
+sudo apt-get install postgresql-14 postgresql-14-postgis-3
+sudo systemctl start postgresql
 ```
 
-### 4. Access Application
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
+#### Create Database
 
-## 🛠️ Manual Setup
+```bash
+# Connect to PostgreSQL
+psql postgres
 
-### Backend Setup
+# Create user and database
+CREATE USER groundwater_user WITH PASSWORD 'your_password';
+CREATE DATABASE groundwater_db OWNER groundwater_user;
+
+# Connect to the database and enable PostGIS
+\c groundwater_db
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
+
+# Grant permissions
+GRANT ALL PRIVILEGES ON DATABASE groundwater_db TO groundwater_user;
+\q
+```
+
+#### Initialize Schema
+
+```bash
+cd scripts/database
+python init_db.py
+```
+
+### 4. Backend Setup
 
 ```bash
 cd backend
 
 # Create virtual environment
-python3.11 -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m venv .venv
+
+# Activate virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Set environment variables
-export DATABASE_URL="postgresql://gwuser:changeme@localhost:5432/groundwater"
-export MODEL_ARTIFACT_DIR="../ml/artifacts"
+# Create .env file
+cat > .env << EOF
+DATABASE_URL=postgresql://groundwater_user:your_password@localhost:5432/groundwater_db
+SECRET_KEY=$(openssl rand -hex 32)
+ENVIRONMENT=development
+ALLOWED_ORIGINS=http://localhost:3000
+MODEL_ARTIFACT_DIR=../ml/artifacts
+EOF
 
-# Run server
-uvicorn app.main:app --reload --port 8000
+# Test the backend
+uvicorn app.main:app --reload
 ```
 
-### Frontend Setup
+Visit http://localhost:8000/docs to see the API documentation.
+
+### 5. Frontend Setup
 
 ```bash
 cd frontend
@@ -72,315 +100,216 @@ cd frontend
 # Install dependencies
 npm install
 
-# Set environment variables
-echo "NEXT_PUBLIC_API_BASE=http://localhost:8000" > .env.local
-
-# Development server
-npm run dev
-
-# Production build
-npm run build
-npm start
-```
-
-### Database Setup
-
-```bash
-# Install PostgreSQL with PostGIS
-brew install postgresql@16 postgis  # macOS
-# OR
-sudo apt install postgresql-16 postgis  # Ubuntu
-
-# Create database
-createdb groundwater
-psql groundwater -c "CREATE EXTENSION postgis;"
-
-# Load schema
-psql groundwater < etl/schema.sql
-
-# Load data
-cd etl
-python load_to_postgres.py
-```
-
-## 🗄️ Data Pipeline Setup
-
-### Extract Data from MS Access
-
-```bash
-cd etl
-
-# Install mdbtools (Linux/macOS)
-brew install mdbtools  # macOS
-sudo apt install mdbtools  # Ubuntu
-
-# Export all MDB files
-./export_mdb.sh
-```
-
-### Process and Load Data
-
-```bash
-# Create ETL virtual environment
-python -m venv etl_venv
-source etl_venv/bin/activate
-
-# Install ETL dependencies
-pip install -r requirements.txt
-
-# Parse coordinates from station names
-python parse_coordinates.py
-
-# Fetch rainfall data (optional - takes ~1 hour)
-python fetch_rainfall_openmeteo.py
-
-# Load everything to PostgreSQL
-python load_to_postgres.py
-```
-
-## 🐳 Docker Configuration
-
-### Environment Variables
-
-Create `infra/.env` file:
-```bash
-# Database
-POSTGRES_DB=groundwater
-POSTGRES_USER=gwuser
-POSTGRES_PASSWORD=changeme
-
-# Backend
-DATABASE_URL=postgresql://gwuser:changeme@db:5432/groundwater
-MODEL_ARTIFACT_DIR=/app/ml/artifacts
-
-# Frontend
+# Create .env.local file
+cat > .env.local << EOF
 NEXT_PUBLIC_API_BASE=http://localhost:8000
+EOF
+
+# Run development server
+npm run dev
 ```
 
-### Custom Ports
+Visit http://localhost:3000/mpgroundwater/ to see the application.
 
-Edit `infra/docker-compose.yml`:
-```yaml
-services:
-  frontend:
-    ports:
-      - "3001:3000"  # Change 3001 to your desired port
-  
-  backend:
-    ports:
-      - "8001:8000"  # Change 8001 to your desired port
+### 6. Load Data
+
+#### Load Wells
+```bash
+python scripts/data_processing/load_all_wells_to_render.py
 ```
 
-### Volume Mounting
-
-For development with hot-reload:
-```yaml
-services:
-  backend:
-    volumes:
-      - ../backend/app:/app/app
-  
-  frontend:
-    volumes:
-      - ../frontend:/app
-      - /app/node_modules
+#### Load Water Level Readings
+```bash
+python scripts/data_processing/load_readings_only.py
 ```
 
-## 🔧 Troubleshooting
+#### Calculate Trends
+```bash
+python scripts/database/update_well_trends.py
+```
 
-### Database Connection Issues
+## Production Deployment
+
+### Render.com (Backend)
+
+1. **Create PostgreSQL Database**
+   - Go to Render Dashboard → New → PostgreSQL
+   - Name: `groundwater-db`
+   - Plan: Free or Starter
+   - Note the connection string
+
+2. **Create Web Service**
+   - Go to Render Dashboard → New → Web Service
+   - Connect your GitHub repository
+   - Settings:
+     - **Name:** `mp-groundwater-backend`
+     - **Runtime:** Docker
+     - **Root Directory:** `backend`
+     - **Region:** Choose closest to your users
+     - **Branch:** main
+
+3. **Environment Variables**
+   ```
+   DATABASE_URL=<your_postgres_connection_string>
+   SECRET_KEY=<random_secret_key>
+   ENVIRONMENT=production
+   ALLOWED_ORIGINS=https://www.rudrajadon.in
+   ```
+
+4. **Deploy**
+   - Render will automatically build and deploy
+   - Note the backend URL (e.g., https://mp-groundwater-backend.onrender.com)
+
+### Vercel (Frontend)
+
+1. **Install Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Deploy**
+   ```bash
+   cd frontend
+   vercel --prod
+   ```
+
+3. **Environment Variables**
+   - Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+   - Add: `NEXT_PUBLIC_API_BASE=https://mp-groundwater-backend.onrender.com`
+   - Redeploy
+
+### Post-Deployment
+
+1. **Load Data to Production Database**
+   ```bash
+   # Update DATABASE_URL to production in scripts
+   python scripts/data_processing/load_all_wells_to_render.py
+   python scripts/data_processing/load_readings_only.py
+   python scripts/database/update_well_trends.py
+   ```
+
+2. **Test Endpoints**
+   ```bash
+   curl https://mp-groundwater-backend.onrender.com/health
+   curl https://mp-groundwater-backend.onrender.com/api/v1/wells | jq
+   ```
+
+## Machine Learning Model Setup
+
+### Training the Model
 
 ```bash
-# Check if PostgreSQL is running
-docker-compose ps db
+cd ml
 
-# Check logs
-docker-compose logs db
+# Activate Python environment
+source ../.venv/bin/activate
 
-# Connect manually
-docker-compose exec db psql -U gwuser -d groundwater
+# Run training
+python train.py --epochs 100 --batch-size 32
 
-# Test query
-SELECT COUNT(*) FROM wells;
+# Artifacts will be saved to ml/artifacts/
 ```
 
-### Frontend Not Loading
+### Using Pre-trained Model
+
+1. Ensure `ml/artifacts/` contains:
+   - `model_metadata.json`
+   - `best_model.pth`
+   - `scalers/` directory with well-specific scalers
+
+2. Backend will automatically load the model on startup
+
+## Troubleshooting
+
+### Backend Won't Start
+
+**Error: `ModuleNotFoundError: No module named 'psycopg'`**
+- Solution: Install psycopg3: `pip install psycopg[binary]`
+
+**Error: Database connection failed**
+- Check DATABASE_URL is correct
+- Ensure PostgreSQL is running
+- Verify PostGIS extension is enabled
+
+### Frontend Won't Load
+
+**Error: API requests failing**
+- Check NEXT_PUBLIC_API_BASE in .env.local
+- Ensure backend is running
+- Check browser console for CORS errors
+
+**Error: Module not found**
+- Delete node_modules and package-lock.json
+- Run `npm install` again
+
+### Data Loading Issues
+
+**Error: Foreign key constraint violation**
+- Load wells before readings
+- Ensure well IDs in readings match wells table
+
+**Error: No such column**
+- Run `python scripts/database/add_forecast_columns.py`
+- This adds missing forecast_cache and forecast_decline_m columns
+
+## Development Tips
+
+### Hot Reload
+
+Both backend and frontend support hot reload:
+- Backend: FastAPI auto-reloads on file changes
+- Frontend: Next.js hot module replacement (HMR)
+
+### Database Migrations
+
+When changing database schema:
+1. Update models in `backend/app/db.py`
+2. Create migration script in `scripts/database/`
+3. Run migration on dev and production
+
+### Adding New API Endpoints
+
+1. Create router in `backend/app/routers/`
+2. Import in `backend/app/main.py`
+3. Update API documentation
+
+### Adding New Pages
+
+1. Create page in `frontend/pages/`
+2. Add navigation link if needed
+3. Remember the base path: `/mpgroundwater`
+
+## Monitoring and Maintenance
+
+### Check Application Health
 
 ```bash
-# Check frontend logs
-docker-compose logs frontend
+# Backend health
+curl https://mp-groundwater-backend.onrender.com/health
 
-# Rebuild frontend
-docker-compose build --no-cache frontend
-docker-compose up -d frontend
-
-# Clear browser cache (Cmd+Shift+R)
+# Check database connection
+python scripts/database/diagnose_database.py
 ```
 
-### Backend Errors
+### Update Trends
+
+Run weekly to update trend labels:
+```bash
+python scripts/database/update_well_trends.py
+```
+
+### Backup Database
 
 ```bash
-# Check backend logs
-docker-compose logs backend
-
-# Verify ML model exists
-ls -lh ml/artifacts/
-
-# Test API directly
-curl http://localhost:8000/api/v1/wells | jq
+# Render automatically backs up PostgreSQL
+# Manual backup:
+pg_dump $DATABASE_URL > backup_$(date +%Y%m%d).sql
 ```
 
-### Port Already in Use
+## Additional Resources
 
-```bash
-# Find process using port
-lsof -i :3000  # Frontend
-lsof -i :8000  # Backend
-lsof -i :5432  # Database
-
-# Kill process
-kill -9 <PID>
-
-# Or change ports in docker-compose.yml
-```
-
-## 🧪 Verify Installation
-
-### Test Backend
-
-```bash
-# Health check
-curl http://localhost:8000/health
-
-# Get wells
-curl http://localhost:8000/api/v1/wells | jq '.[:5]'
-
-# Get forecast
-curl http://localhost:8000/api/v1/forecast/well/SIND-PTW%2038-PZ | jq
-```
-
-### Test Frontend
-
-1. Open http://localhost:3000
-2. Click on any well marker
-3. View forecast chart
-4. Click "Generate Report"
-5. Generate PDF
-
-### Test Database
-
-```bash
-docker-compose exec db psql -U gwuser -d groundwater -c "\dt"
-docker-compose exec db psql -U gwuser -d groundwater -c "SELECT COUNT(*) FROM wells;"
-```
-
-## 🔄 Updating
-
-### Update Code
-
-```bash
-git pull origin main
-
-# Rebuild containers
-cd infra
-docker-compose down
-docker-compose build
-docker-compose up -d
-```
-
-### Update Database Schema
-
-```bash
-# Backup existing data
-docker-compose exec db pg_dump -U gwuser groundwater > backup.sql
-
-# Apply schema changes
-docker-compose exec db psql -U gwuser -d groundwater < etl/schema.sql
-
-# Reload data if needed
-cd etl
-python load_to_postgres.py
-```
-
-### Update ML Model
-
-```bash
-# Copy new model artifacts
-cp /path/to/new/model/* ml/artifacts/
-
-# Restart backend
-docker-compose restart backend
-```
-
-## 📊 Performance Tuning
-
-### Database Optimization
-
-```sql
--- Create indexes
-CREATE INDEX idx_wells_district ON wells(district);
-CREATE INDEX idx_readings_well_date ON water_level_readings(well_id, date);
-
--- Analyze tables
-ANALYZE wells;
-ANALYZE water_level_readings;
-```
-
-### Backend Optimization
-
-```python
-# Edit backend/app/main.py
-# Adjust worker count
-uvicorn app.main:app --workers 4 --host 0.0.0.0 --port 8000
-```
-
-### Frontend Optimization
-
-```bash
-# Production build with optimizations
-cd frontend
-npm run build
-```
-
-## 🔐 Production Deployment
-
-### Security Checklist
-
-- [ ] Change default database password
-- [ ] Enable HTTPS/TLS
-- [ ] Add authentication (Clerk, Auth0, etc.)
-- [ ] Set up firewall rules
-- [ ] Enable rate limiting
-- [ ] Add CORS configuration
-- [ ] Use environment-specific configs
-- [ ] Enable logging and monitoring
-- [ ] Set up backup system
-- [ ] Use secrets management
-
-### Recommended Stack
-
-- **Hosting**: AWS, GCP, or Azure
-- **Database**: Managed PostgreSQL (RDS, Cloud SQL)
-- **Frontend**: Vercel or Netlify
-- **Backend**: Docker on ECS/GKE/AKS
-- **SSL**: Let's Encrypt
-- **CDN**: CloudFlare
-- **Monitoring**: Datadog, New Relic
-
-## 📞 Support
-
-If you encounter issues:
-1. Check [Troubleshooting](#troubleshooting) section
-2. Search [GitHub Issues](https://github.com/yourusername/groundwater-app/issues)
-3. Create a new issue with:
-   - Error messages
-   - Steps to reproduce
-   - System information
-   - Relevant logs
-
-## 📚 Next Steps
-
-- Read [API_CONTRACT.md](docs/API_CONTRACT.md) for API documentation
-- Check [RUNBOOK.md](docs/RUNBOOK.md) for detailed operations guide
-- See [CONTRIBUTING.md](CONTRIBUTING.md) to start contributing
-- Review [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for roadmap
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [PostGIS Documentation](https://postgis.net/documentation/)
+- [Render Deployment Guide](https://render.com/docs)
+- [Vercel Deployment Guide](https://vercel.com/docs)

@@ -272,21 +272,60 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
   const [legendMinimized, setLegendMinimized] = useState(false);
 
   useEffect(() => {
-    console.log('[StressMap] Fetching stress map data...');
+    console.log('[StressMap] Loading stress map data...');
     const cacheBuster = Date.now();
-    fetch(`${API_BASE}/api/v1/stress-map/geojson?min_wells=0&_=${cacheBuster}`, {
+    
+    // Load district GeoJSON from frontend public folder
+    fetch(`/mpgroundwater/geo/mp_districts_simplified.geojson?_=${cacheBuster}`, {
       cache: 'no-store'
     })
       .then(res => res.json())
-      .then(data => {
-        console.log('[StressMap] Loaded stress data:', data.features?.length, 'districts');
-        console.log('[StressMap] Sample district colors:', data.features?.slice(0, 3).map((f: any) => ({
-          district: f.properties.district,
-          risk_level: f.properties.risk_level,
-          risk_color: f.properties.risk_color
-        })));
-        setStressData(data);
-        setLoading(false);
+      .then(geojsonData => {
+        console.log('[StressMap] Loaded district GeoJSON:', geojsonData.features?.length, 'districts');
+        
+        // Now fetch stats from backend
+        return fetch(`${API_BASE}/api/v1/stress-map/geojson?min_wells=0&_=${cacheBuster}`, {
+          cache: 'no-store'
+        })
+          .then(res => res.json())
+          .then(statsData => {
+            console.log('[StressMap] Loaded district stats');
+            
+            // Merge stats into GeoJSON features
+            const districtsStats = statsData.districts || {};
+            
+            geojsonData.features.forEach((feature: any) => {
+              const districtName = feature.properties?.district?.toUpperCase();
+              const stats = districtsStats[districtName];
+              
+              if (stats) {
+                // Merge stats into feature properties
+                feature.properties = {
+                  ...feature.properties,
+                  ...stats
+                };
+              } else {
+                // No data for this district
+                feature.properties = {
+                  ...feature.properties,
+                  total_wells: 0,
+                  critical_count: 0,
+                  watch_count: 0,
+                  stable_count: 0,
+                  unknown_count: 0,
+                  critical_pct: 0.0,
+                  watch_pct: 0.0,
+                  stable_pct: 0.0,
+                  risk_level: "No Data",
+                  risk_color: "#d1d5db"
+                };
+              }
+            });
+            
+            console.log('[StressMap] Merged data, sample:', geojsonData.features[0]?.properties);
+            setStressData(geojsonData);
+            setLoading(false);
+          });
       })
       .catch(e => {
         console.error('[StressMap] Error loading stress data:', e);

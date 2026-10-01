@@ -202,14 +202,14 @@ async def get_district_stress_geojson(
     """
     Get district stress levels as GeoJSON FeatureCollection with accurate boundaries.
     
-    Returns district boundaries (from shapefile) merged with well statistics:
+    LIGHTWEIGHT VERSION: Returns minimal GeoJSON with properties only.
+    Frontend loads full geometries from its own GeoJSON file.
+    
+    Returns district statistics merged with basic district info:
     - District name
     - Well counts and trends
     - Risk level and color
     - Statistics
-    
-    Uses actual district boundary polygons from MP_DISTRICT_BDY shapefile.
-    Districts without wells are shown in gray with "No Data" status.
     
     **Query Parameters:**
     - `min_wells`: Minimum wells required (default: 0 shows all 55 MP districts)
@@ -219,7 +219,7 @@ async def get_district_stress_geojson(
     GET /api/v1/stress-map/geojson?min_wells=0
     ```
     
-    **Response Format:** GeoJSON FeatureCollection with district polygons
+    **Response Format:** Simplified JSON with district stats (not full GeoJSON polygons)
     """
     # Get well statistics by district
     stats_query = text("""
@@ -242,7 +242,7 @@ async def get_district_stress_geojson(
     stats_results = db.execute(stats_query).mappings().all()
     
     # Create a dictionary of stats by district
-    stats_by_district = {}
+    districts_data = {}
     for row in stats_results:
         district = row['district']
         total = row['total_wells']
@@ -259,7 +259,8 @@ async def get_district_stress_geojson(
         # Classify risk
         risk_level, risk_color = classify_risk_level(critical_pct, watch_pct)
         
-        stats_by_district[district] = {
+        districts_data[district] = {
+            "district": district,
             "total_wells": total,
             "critical_count": critical_count,
             "watch_count": watch_count,
@@ -272,48 +273,13 @@ async def get_district_stress_geojson(
             "risk_color": risk_color,
         }
     
-    # Load district boundaries GeoJSON (cached)
-    districts_geojson = _load_districts_geojson()
-    
-    # Merge stats with district boundaries
-    features = []
-    for feature in districts_geojson['features']:
-        district_name = feature['properties'].get('district', '').upper()
-        
-        if district_name in stats_by_district:
-            stats = stats_by_district[district_name]
-            
-            # Only include if meets minimum well requirement
-            if min_wells > 0 and stats['total_wells'] < min_wells:
-                continue
-            
-            # Add stats to properties
-            feature['properties'].update(stats)
-        else:
-            # District has no wells - show as "No Data"
-            feature['properties'].update({
-                "total_wells": 0,
-                "critical_count": 0,
-                "watch_count": 0,
-                "stable_count": 0,
-                "unknown_count": 0,
-                "critical_pct": 0.0,
-                "watch_pct": 0.0,
-                "stable_pct": 0.0,
-                "risk_level": "No Data",
-                "risk_color": "#d1d5db",  # Light gray
-            })
-        
-        features.append(GeoJSONFeature(
-            type="Feature",
-            properties=feature['properties'],
-            geometry=feature['geometry']
-        ))
-    
-    return GeoJSONFeatureCollection(
-        type="FeatureCollection",
-        features=features
-    )
+    # Return lightweight response - frontend will merge with its own GeoJSON
+    # This avoids loading the 1.9MB GeoJSON file on the backend
+    return {
+        "type": "districts_stats",
+        "districts": districts_data,
+        "note": "Frontend should merge these stats with district GeoJSON geometries"
+    }
 
 
 @router.get("/summary")

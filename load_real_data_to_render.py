@@ -10,7 +10,7 @@ from psycopg2.extras import execute_batch
 import sys
 from datetime import datetime
 
-DATABASE_URL = "postgresql://groundwater_user:bLSvm2uNjYruEANioWxLyqZqvBp8orHz@dpg-dac2r9nqj5pc739q2cq0-a.oregon-postgres.render.com/groundwater_9a4l"
+DATABASE_URL = "postgresql://groundwater_user:XCmOvmSsepDzDnCRRY9K08ALjA96JGwZ@dpg-dat0ojjncjis73cllkng-a.oregon-postgres.render.com/groundwater_l5m7"
 
 print("=" * 60)
 print("LOADING REAL DATA TO RENDER DATABASE")

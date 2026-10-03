@@ -395,50 +395,28 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
     const criticalPct = props.critical_pct;
     const watchPct = props.watch_pct;
     const stablePct = props.stable_pct;
+    const combinedPct = criticalPct + watchPct;
     
-    // Calculate risk score: critical wells are most important
-    // If >20% critical = very high risk
-    // If >10% critical = high risk
-    // If >5% critical = moderate risk
-    // Otherwise look at watch percentage
+    // Updated thresholds to match backend and show better variation:
+    // Critical: ≥3% critical OR ≥15% combined
+    // High: 1-3% critical OR 8-15% combined
+    // Moderate: 0.5-1% critical OR 5-8% combined
+    // Low: <0.5% critical AND <5% combined
     
     let fillColor;
     
-    if (criticalPct >= 20) {
-      // Deep red (20%+ critical)
+    if (criticalPct >= 3.0 || combinedPct >= 15.0) {
+      // Critical: Bright red
       fillColor = '#dc2626';
-    } else if (criticalPct >= 12) {
-      // Red-orange (12-20% critical)
-      const t = (criticalPct - 12) / 8;
-      const red = 220;
-      const green = Math.floor(38 + (220 - 38) * (1 - t));
-      const blue = 38;
-      fillColor = `rgb(${red}, ${green}, ${blue})`;
-    } else if (criticalPct >= 8) {
-      // Orange (8-12% critical)
-      fillColor = '#f59e0b';
-    } else if (criticalPct >= 5) {
-      // Light orange (5-8% critical)
-      const t = (criticalPct - 5) / 3;
-      const red = Math.floor(251 - (251 - 245) * t);
-      const green = Math.floor(191 - (191 - 158) * t);
-      const blue = Math.floor(36 - (36 - 11) * t);
-      fillColor = `rgb(${red}, ${green}, ${blue})`;
-    } else if (watchPct >= 25) {
-      // Yellow (low critical but high watch)
+    } else if (criticalPct >= 1.0 || combinedPct >= 8.0) {
+      // High: Orange-red
+      fillColor = '#f97316';
+    } else if (criticalPct >= 0.5 || combinedPct >= 5.0) {
+      // Moderate: Amber/yellow
       fillColor = '#fbbf24';
-    } else if (watchPct >= 15) {
-      // Light yellow (moderate watch)
-      fillColor = '#fde047';
-    } else if (watchPct >= 8) {
-      // Very light yellow
-      fillColor = '#fef08a';
-    } else if (stablePct >= 80) {
-      // Bright green (mostly stable)
-      fillColor = '#22c55e';
     } else {
-      // Light green (decent stability)
-      fillColor = '#86efac';
+      // Low: Green
+      fillColor = '#22c55e';
     }
     
     return {

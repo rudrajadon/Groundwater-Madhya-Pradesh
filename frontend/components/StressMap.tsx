@@ -391,27 +391,27 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
     }
     
     // Calculate gradient color based on critical and watch percentages
-    // Graduated color scheme: Orange → Yellow → Light Green → Green
+    // Original thresholds based on critical % and not-stable % (critical + watch)
     const criticalPct = props.critical_pct;
     const watchPct = props.watch_pct;
-    const combinedPct = criticalPct + watchPct;
+    const notStablePct = criticalPct + watchPct;
     
-    // Graduated thresholds for smooth visual transition:
-    // High: ≥6% combined - Orange
-    // Moderate: 3-6% combined - Yellow  
-    // Low Moderate: 1-3% combined - Light green
-    // Low: <1% combined - Green
+    // Thresholds:
+    // Critical: ≥10% critical OR ≥30% not stable
+    // High: 5-10% critical OR 20-30% not stable
+    // Moderate: 2-5% critical OR 10-20% not stable
+    // Low: <2% critical AND <10% not stable
     
     let fillColor;
     
-    if (combinedPct >= 6.0) {
-      // High: Soft orange
+    if (criticalPct >= 10.0 || notStablePct >= 30.0) {
+      // Critical: Soft orange
       fillColor = '#fb923c';
-    } else if (combinedPct >= 3.0) {
-      // Moderate: Yellow
+    } else if (criticalPct >= 5.0 || notStablePct >= 20.0) {
+      // High: Yellow
       fillColor = '#fbbf24';
-    } else if (combinedPct >= 1.0) {
-      // Low Moderate: Light green
+    } else if (criticalPct >= 2.0 || notStablePct >= 10.0) {
+      // Moderate: Light green
       fillColor = '#86efac';
     } else {
       // Low: Green
@@ -672,7 +672,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                 <div style={{ 
                   width: "16px", 
                   height: "14px", 
-                  background: "#dc2626", 
+                  background: "#fb923c", 
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
@@ -683,7 +683,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                 <div style={{ 
                   width: "16px", 
                   height: "14px", 
-                  background: "#f97316", 
+                  background: "#fbbf24", 
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
@@ -694,7 +694,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                 <div style={{ 
                   width: "16px", 
                   height: "14px", 
-                  background: "#fbbf24", 
+                  background: "#86efac", 
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>

@@ -72,14 +72,13 @@ def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str
     """
     Classify district risk level with graduated color scheme.
     
-    Creates a smooth gradient: Orange → Yellow → Light Green → Green
-    No harsh red colors - just a graduated heat map effect.
+    Original thresholds based on critical percentage and not-stable percentage:
+    - Critical: ≥10% critical OR ≥30% not stable (critical + watch)
+    - High: 5-10% critical OR 20-30% not stable
+    - Moderate: 2-5% critical OR 10-20% not stable
+    - Low: <2% critical AND <10% not stable
     
-    Risk Levels (graduated scheme):
-    - High: ≥6% combined (critical + watch) - Orange
-    - Moderate: 3-6% combined - Yellow
-    - Low Moderate: 1-3% combined - Light green
-    - Low: <1% combined - Green
+    Colors: Orange → Yellow → Light Green → Green (no red)
     
     Args:
         critical_pct: Percentage of critical wells
@@ -88,21 +87,21 @@ def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str
     Returns:
         Tuple of (risk_level, hex_color)
     """
-    combined_pct = critical_pct + watch_pct
+    not_stable_pct = critical_pct + watch_pct  # Combined critical + watch
     
-    # High: Orange (most stressed districts)
-    if combined_pct >= 6.0:
-        return ("High", "#fb923c")  # Soft orange
+    # Critical: High critical OR very high combined stress
+    if critical_pct >= 10.0 or not_stable_pct >= 30.0:
+        return ("Critical", "#fb923c")  # Soft orange
     
-    # Moderate: Yellow (moderate stress)
-    elif combined_pct >= 3.0:
-        return ("Moderate", "#fbbf24")  # Amber yellow
+    # High: Moderate critical OR high combined stress
+    elif critical_pct >= 5.0 or not_stable_pct >= 20.0:
+        return ("High", "#fbbf24")  # Amber yellow
     
-    # Low Moderate: Light green (slight stress)
-    elif combined_pct >= 1.0:
-        return ("Low Moderate", "#86efac")  # Light green
+    # Moderate: Some critical OR moderate combined stress
+    elif critical_pct >= 2.0 or not_stable_pct >= 10.0:
+        return ("Moderate", "#86efac")  # Light green
     
-    # Low: Green (minimal stress)
+    # Low: Minimal stress
     else:
         return ("Low", "#22c55e")  # Green
 

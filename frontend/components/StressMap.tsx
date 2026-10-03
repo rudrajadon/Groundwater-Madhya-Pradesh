@@ -391,29 +391,28 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
     }
     
     // Calculate gradient color based on critical and watch percentages
-    // Use actual percentages for more accurate representation
+    // Graduated color scheme: Orange → Yellow → Light Green → Green
     const criticalPct = props.critical_pct;
     const watchPct = props.watch_pct;
-    const stablePct = props.stable_pct;
     const combinedPct = criticalPct + watchPct;
     
-    // Updated thresholds to match backend and show better variation:
-    // Critical: ≥3% critical OR ≥15% combined
-    // High: 1-3% critical OR 8-15% combined
-    // Moderate: 0.5-1% critical OR 5-8% combined
-    // Low: <0.5% critical AND <5% combined
+    // Graduated thresholds for smooth visual transition:
+    // High: ≥6% combined - Orange
+    // Moderate: 3-6% combined - Yellow  
+    // Low Moderate: 1-3% combined - Light green
+    // Low: <1% combined - Green
     
     let fillColor;
     
-    if (criticalPct >= 3.0 || combinedPct >= 15.0) {
-      // Critical: Bright red
-      fillColor = '#dc2626';
-    } else if (criticalPct >= 1.0 || combinedPct >= 8.0) {
-      // High: Orange-red
-      fillColor = '#f97316';
-    } else if (criticalPct >= 0.5 || combinedPct >= 5.0) {
-      // Moderate: Amber/yellow
+    if (combinedPct >= 6.0) {
+      // High: Soft orange
+      fillColor = '#fb923c';
+    } else if (combinedPct >= 3.0) {
+      // Moderate: Yellow
       fillColor = '#fbbf24';
+    } else if (combinedPct >= 1.0) {
+      // Low Moderate: Light green
+      fillColor = '#86efac';
     } else {
       // Low: Green
       fillColor = '#22c55e';

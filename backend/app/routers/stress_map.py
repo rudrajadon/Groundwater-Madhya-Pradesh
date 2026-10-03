@@ -70,17 +70,16 @@ class GeoJSONFeatureCollection(BaseModel):
 
 def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str]:
     """
-    Classify district risk level based on well trends.
+    Classify district risk level with graduated color scheme.
     
-    Updated thresholds based on real data distribution in Madhya Pradesh:
-    - Most districts have <5% critical wells
-    - Combined critical+watch typically <25%
+    Creates a smooth gradient: Orange → Yellow → Light Green → Green
+    No harsh red colors - just a graduated heat map effect.
     
-    Risk Levels (more sensitive to show variation on map):
-    - Critical: ≥3% critical wells OR ≥15% critical+watch
-    - High: 1-3% critical wells OR 8-15% critical+watch  
-    - Moderate: 0.5-1% critical wells OR 5-8% critical+watch
-    - Low: <0.5% critical wells AND <5% critical+watch
+    Risk Levels (graduated scheme):
+    - High: ≥6% combined (critical + watch) - Orange
+    - Moderate: 3-6% combined - Yellow
+    - Low Moderate: 1-3% combined - Light green
+    - Low: <1% combined - Green
     
     Args:
         critical_pct: Percentage of critical wells
@@ -91,19 +90,19 @@ def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str
     """
     combined_pct = critical_pct + watch_pct
     
-    # Critical: Significant critical wells or high combined stress
-    if critical_pct >= 3.0 or combined_pct >= 15.0:
-        return ("Critical", "#dc2626")  # Bright red
+    # High: Orange (most stressed districts)
+    if combined_pct >= 6.0:
+        return ("High", "#fb923c")  # Soft orange
     
-    # High: Moderate critical wells or elevated combined stress  
-    elif critical_pct >= 1.0 or combined_pct >= 8.0:
-        return ("High", "#f97316")  # Orange-red
+    # Moderate: Yellow (moderate stress)
+    elif combined_pct >= 3.0:
+        return ("Moderate", "#fbbf24")  # Amber yellow
     
-    # Moderate: Some critical wells or notable combined stress
-    elif critical_pct >= 0.5 or combined_pct >= 5.0:
-        return ("Moderate", "#fbbf24")  # Amber/yellow
+    # Low Moderate: Light green (slight stress)
+    elif combined_pct >= 1.0:
+        return ("Low Moderate", "#86efac")  # Light green
     
-    # Low: Very few stressed wells
+    # Low: Green (minimal stress)
     else:
         return ("Low", "#22c55e")  # Green
 

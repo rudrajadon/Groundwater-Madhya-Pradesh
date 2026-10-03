@@ -70,15 +70,15 @@ class GeoJSONFeatureCollection(BaseModel):
 
 def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str]:
     """
-    Classify district risk level with graduated color scheme.
+    Classify district risk level with realistic thresholds for actual data.
     
-    Original thresholds based on critical percentage and not-stable percentage:
-    - Critical: ≥10% critical OR ≥30% not stable (critical + watch)
-    - High: 5-10% critical OR 20-30% not stable
-    - Moderate: 2-5% critical OR 10-20% not stable
-    - Low: <2% critical AND <10% not stable
+    Adjusted thresholds based on real groundwater conditions:
+    - Critical: ≥4% critical OR ≥12% not stable (critical + watch)
+    - High: 2-4% critical OR 8-12% not stable
+    - Moderate: 1-2% critical OR 4-8% not stable
+    - Low: <1% critical AND <4% not stable
     
-    Colors: Orange → Yellow → Light Green → Green (no red)
+    Colors: Orange → Yellow → Light Green → Green
     
     Args:
         critical_pct: Percentage of critical wells
@@ -89,16 +89,16 @@ def classify_risk_level(critical_pct: float, watch_pct: float) -> tuple[str, str
     """
     not_stable_pct = critical_pct + watch_pct  # Combined critical + watch
     
-    # Critical: High critical OR very high combined stress
-    if critical_pct >= 10.0 or not_stable_pct >= 30.0:
+    # Critical: Significant stress
+    if critical_pct >= 4.0 or not_stable_pct >= 12.0:
         return ("Critical", "#fb923c")  # Soft orange
     
-    # High: Moderate critical OR high combined stress
-    elif critical_pct >= 5.0 or not_stable_pct >= 20.0:
+    # High: Elevated stress
+    elif critical_pct >= 2.0 or not_stable_pct >= 8.0:
         return ("High", "#fbbf24")  # Amber yellow
     
-    # Moderate: Some critical OR moderate combined stress
-    elif critical_pct >= 2.0 or not_stable_pct >= 10.0:
+    # Moderate: Some stress
+    elif critical_pct >= 1.0 or not_stable_pct >= 4.0:
         return ("Moderate", "#86efac")  # Light green
     
     # Low: Minimal stress

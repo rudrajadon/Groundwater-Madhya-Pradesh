@@ -391,26 +391,26 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
     }
     
     // Calculate gradient color based on critical and watch percentages
-    // Original thresholds based on critical % and not-stable % (critical + watch)
+    // Realistic thresholds based on actual groundwater data
     const criticalPct = props.critical_pct;
     const watchPct = props.watch_pct;
     const notStablePct = criticalPct + watchPct;
     
-    // Thresholds:
-    // Critical: ≥10% critical OR ≥30% not stable
-    // High: 5-10% critical OR 20-30% not stable
-    // Moderate: 2-5% critical OR 10-20% not stable
-    // Low: <2% critical AND <10% not stable
+    // Adjusted thresholds:
+    // Critical: ≥4% critical OR ≥12% not stable
+    // High: 2-4% critical OR 8-12% not stable
+    // Moderate: 1-2% critical OR 4-8% not stable
+    // Low: <1% critical AND <4% not stable
     
     let fillColor;
     
-    if (criticalPct >= 10.0 || notStablePct >= 30.0) {
+    if (criticalPct >= 4.0 || notStablePct >= 12.0) {
       // Critical: Soft orange
       fillColor = '#fb923c';
-    } else if (criticalPct >= 5.0 || notStablePct >= 20.0) {
+    } else if (criticalPct >= 2.0 || notStablePct >= 8.0) {
       // High: Yellow
       fillColor = '#fbbf24';
-    } else if (criticalPct >= 2.0 || notStablePct >= 10.0) {
+    } else if (criticalPct >= 1.0 || notStablePct >= 4.0) {
       // Moderate: Light green
       fillColor = '#86efac';
     } else {
@@ -676,7 +676,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Critical (≥10% critical OR ≥30% not stable)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Critical (≥4% critical OR ≥12% not stable)</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -687,7 +687,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>High (5-10% critical OR 20-30% not stable)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>High (2-4% critical OR 8-12% not stable)</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -698,7 +698,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Moderate (2-5% critical OR 10-20% not stable)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Moderate (1-2% critical OR 4-8% not stable)</span>
               </div>
               
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
@@ -709,7 +709,7 @@ export default function StressMap({ onDistrictSelect, zoomToDistrict }: StressMa
                   borderRadius: "2px",
                   flexShrink: 0
                 }}></div>
-                <span style={{ fontSize: "10px", color: "#374151" }}>Low (&lt;2% critical AND &lt;10% not stable)</span>
+                <span style={{ fontSize: "10px", color: "#374151" }}>Low (&lt;1% critical AND &lt;4% not stable)</span>
               </div>
               
               <div style={{ 

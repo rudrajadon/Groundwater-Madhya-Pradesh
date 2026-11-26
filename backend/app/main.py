@@ -58,7 +58,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Indore Groundwater Forecast API", 
-    version="0.1.1",  # Bumped to force redeploy
+    version="0.1.4",  # Force clean rebuild with CPU-only PyTorch
     lifespan=lifespan
 )
 

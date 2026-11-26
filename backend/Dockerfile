@@ -12,28 +12,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy requirements
 COPY backend/requirements.txt .
 
-# Install dependencies in stages to avoid timeout
-# First install the large ML packages
+# Install CPU-only PyTorch first (much smaller than CUDA version)
 RUN pip install --no-cache-dir --timeout=1000 \
-    torch>=2.2 \
-    numpy \
-    pandas \
-    scikit-learn \
-    scipy
+    torch>=2.2.0 --index-url https://download.pytorch.org/whl/cpu
 
-# Then install the rest
-RUN pip install --no-cache-dir --timeout=1000 \
-    fastapi>=0.110 \
-    uvicorn[standard]>=0.27 \
-    sqlalchemy>=2.0 \
-    geoalchemy2>=0.14 \
-    psycopg2-binary>=2.9 \
-    pydantic>=2.6 \
-    python-dotenv \
-    joblib \
-    reportlab>=4.0 \
-    pillow>=10.0 \
-    matplotlib>=3.7
+# Then install remaining dependencies
+RUN pip install --no-cache-dir --timeout=1000 -r requirements.txt
 
 COPY backend/app ./app
 COPY ml ./ml
